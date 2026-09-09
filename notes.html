@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes | Ria's Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --danger: #ff5c5c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      width: 100%;
+      border-bottom: 1px solid var(--border);
+      background: var(--background);
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: auto;
+      padding: 22px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--text);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 55px 30px 80px;
+    }
+
+    .intro {
+      margin-bottom: 35px;
+    }
+
+    .intro h1 {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .intro h1 span {
+      color: var(--blue);
+    }
+
+    .intro p {
+      color: var(--muted);
+      max-width: 650px;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* Search */
+
+    .search-box {
+      margin-bottom: 22px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 15px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--blue);
+    }
+
+    .search-box input::placeholder {
+      color: var(--muted);
+    }
+
+    /* Filters */
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 45px;
+    }
+
+    .filter-btn {
+      padding: 9px 15px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+
+    .filter-btn:hover {
+      color: var(--text);
+      background: var(--surface-hover);
+    }
+
+    .filter-btn.active {
+      background: var(--blue);
+      color: white;
+      border-color: var(--blue);
+    }
+
+    /* Section heading */
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+      font-size: 21px;
+    }
+
+    .count {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Study Notes */
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .note-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
+      padding: 22px;
+      border-radius: 15px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+
+    .note-card:hover {
+      background: var(--surface-hover);
+      transform: translateY(-3px);
+      border-color: #343a47;
+    }
+
+    .note-icon {
+      font-size: 28px;
+      margin-bottom: 18px;
+    }
+
+    .subject {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .note-card h3 {
+      font-size: 18px;
+      margin-bottom: 9px;
+    }
+
+    .note-card p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 20px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .arrow {
+      color: var(--blue);
+      font-size: 18px;
+    }
+
+    /* My Notes */
+
+    .my-notes-section {
+      margin-top: 65px;
+    }
+
+    .new-note-btn {
+      border: none;
+      background: var(--blue);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 9px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .new-note-btn:hover {
+      background: var(--blue-hover);
+    }
+
+    .personal-notes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .personal-note {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 21px;
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .personal-note h3 {
+      font-size: 17px;
+      margin-bottom: 10px;
+      word-break: break-word;
+    }
+
+    .personal-note p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .personal-note-footer {
+      margin-top: auto;
+      padding-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .note-date {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .note-actions {
+      display: flex;
+      gap: 7px;
+    }
+
+    .action-btn {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      padding: 6px 9px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .action-btn:hover {
+      color: var(--text);
+      background: var(--surface-hover);
+    }
+
+    .delete-btn:hover {
+      color: var(--danger);
+      border-color: var(--danger);
+    }
+
+    .empty-state {
+      display: none;
+      padding: 35px;
+      border: 1px dashed var(--border);
+      border-radius: 15px;
+      text-align: center;
+      color: var(--muted);
+      grid-column: 1 / -1;
+      font-size: 14px;
+    }
+
+    /* Modal */
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 600px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .modal-header h2 {
+      font-size: 21px;
+    }
+
+    .close-btn {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: var(--text);
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--background);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 12px;
+      outline: none;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+    }
+
+    .form-group textarea {
+      min-height: 180px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .cancel-btn,
+    .save-btn {
+      padding: 10px 17px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .cancel-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .save-btn {
+      background: var(--blue);
+      border: 1px solid var(--blue);
+      color: white;
+    }
+
+    .save-btn:hover {
+      background: var(--blue-hover);
+    }
+
+    /* Responsive */
+
+    @media (max-width: 900px) {
+      .notes-grid,
+      .personal-notes {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .navbar {
+        padding: 18px 20px;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      nav {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      main {
+        padding: 40px 20px 60px;
+      }
+
+      .intro h1 {
+        font-size: 31px;
+      }
+
+      .notes-grid,
+      .personal-notes {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="navbar">
+      <a href="index.html" class="logo">
+        STE <span>Study Hub</span>
+      </a>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="reviewers.html">Reviewers</a>
+        <a href="quizzes.html">Quizzes</a>
+        <a href="notes.html" class="active">Notes</a>
+        <a href="progress.html">Progress</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="intro">
+      <h1>Your <span>Notes.</span></h1>
+      <p>
+        Quickly review the most important ideas from your lessons,
+        or write and save your own notes for later.
+      </p>
+    </section>
+
+    <!-- Search -->
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search notes..."
+      />
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <button class="filter-btn active" data-subject="All">All</button>
+      <button class="filter-btn" data-subject="Science">Science</button>
+      <button class="filter-btn" data-subject="Mathematics">Mathematics</button>
+      <button class="filter-btn" data-subject="English">English</button>
+      <button class="filter-btn" data-subject="Filipino">Filipino</button>
+      <button class="filter-btn" data-subject="AP">AP</button>
+      <button class="filter-btn" data-subject="ICT">ICT</button>
+      <button class="filter-btn" data-subject="Research">Research</button>
+      <button class="filter-btn" data-subject="ConChem">ConChem</button>
+      <button class="filter-btn" data-subject="Val Ed">Val Ed</button>
+      <button class="filter-btn" data-subject="MAPEH">MAPEH</button>
+    </div>
+
+    <!-- Study Notes -->
+    <section>
+      <div class="section-heading">
+        <h2>Study Notes</h2>
+        <span class="count" id="studyCount">10 notes</span>
+      </div>
+
+      <div class="notes-grid" id="studyNotes">
+
+        <a
+          href="notes/science.html"
+          class="note-card"
+          data-subject="Science"
+          data-title="Science Notes"
+        >
+          <div class="note-icon">🧬</div>
+          <div class="subject">Science</div>
+          <h3>Science Notes</h3>
+          <p>
+            Shortened versions of your Science reviewers with only the key
+            concepts and information.
+          </p>
+          <div class="card-footer">
+            <span>Quick Notes</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+
+        <a
+          href="notes/mathematics.html"
+          class="note-card"
+          data-subject="Mathematics"
+          data-title="Mathematics Notes"
+        >
+          <div class="note-icon">📐</div>
+          <div class="subject">Mathematics</div>
+          <h3>Mathematics Notes</h3>
+          <p>
+            Important formulas, methods, and key ideas from your Math lessons.
+          </p>
+          <div class="card-footer">
+            <span>Quick Notes</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+
+        <a
+          href="notes/english.html"
+          class="note-card"
+          data-subject="English"
+          data-title="English Notes"
+        >
+          <div class="note-icon">📖</div>
+          <div class="subject">English</div>
+          <h3>English Notes</h3>
+          <p>
+            Short summaries of important grammar rules, terms, and concepts.
+          </p>
+          <div class="card-footer">
+            <span>Quick Notes</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+
+        <a
+          href="notes/filipino.html"
+          class="note-card"
+          data-subject="Filipino"
+          data-title="Filipino Notes"
+        >
+          <div class="note-icon">🇵🇭</div>
+          <div class="subject">Filipino</div>
+          <h3>Filipino Notes</h3>
+          <p>
+            Mahahalagang konsepto, termino, at ideya mula sa mga aralin.
+          </p>
+          <div class="card-footer">
+            <span>Quick Notes</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+
+        <a
+          href="notes/ap.html"
+          class="note-card"
+          data-subject="AP"
+          data-title="Araling Panlipunan Notes"
+        >
+          <div class="note-icon">🌏</div>
+          <div class="subject">AP</div>
+          <h3>Araling Panlipunan Notes</h3>
+          <p>
+            Important people, events, concepts, and terms summarized for quick review.
+          </p>
+          <div class="card-footer">
+            <span>Quick Notes</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+
+        <a
+          href="notes/ict.html"
+          class="note-card"
+          data-subject="ICT"
+          data-title="ICT Notes"
+        >
+          <div class="note-icon">💻</div>
+          <div class="subject">ICT</div>
+          <h3>ICT Notes</h3>
+          <p>
+            Key terms, concepts, procedures, and information from your ICT lessons.
+          </p>
+          <div class="card-footer">
+            <span>Quick Notes</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+
+        <a
+          href="notes/research.html"
+          class="note-card"
+          data-subject="Research"
+          data-title="Research Notes"
+        >
+          <div class="note-icon">🔬</div>
+          <div class="subject">Research</div>
+          <h3>Research Notes</h3>
+          <p>
+            Condensed research concepts, terms, processes, and important reminders.
+          </p>
+          <div class="card-footer">
+            <span>Quick Notes</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+
+        <a
+          href="notes/conchem.html"
+          class="note-card"
+          data-subject="ConChem"
+          data-title="ConChem Notes"
+        >
+          <div class="note-icon">🧪</div>
+          <div class="subject">ConChem</div>
+          <h3>ConChem Notes</h3>
+          <p>
+            Important formulas, concepts, terms, and processes in condensed form.
+          </p>
+          <div class="card-footer">
+            <span>Quick Notes</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+
+        <a
+          href="notes/valed.html"
+          class="note-card"
+          data-subject="Val Ed"
+          data-title="Val Ed Notes"
+        >
+          <div class="note-icon">💭</div>
+          <div class="subject">Val Ed</div>
+          <h3>Val Ed Notes</h3>
+          <p>
+            Short summaries of important values, ideas, and concepts from your lessons.
+          </p>
+          <div class="card-footer">
+            <span>Quick Notes</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+
+        <a
+          href="notes/mapeh.html"
+          class="note-card"
+          data-subject="MAPEH"
+          data-title="MAPEH Notes"
+        >
+          <div class="note-icon">🎨</div>
+          <div class="subject">MAPEH</div>
+          <h3>MAPEH Notes</h3>
+          <p>
+            Quick-reference information for Music, Arts, PE, and Health lessons.
+          </p>
+          <div class="card-footer">
+            <span>Quick Notes</span>
+            <span class="arrow">→</span>
+          </div>
+        </a>
+
+        <div class="empty-state" id="studyEmpty">
+          No study notes found.
+        </div>
+
+      </div>
+    </section>
+
+    <!-- My Notes -->
+    <section class="my-notes-section">
+
+      <div class="section-heading">
+        <div>
+          <h2>My Notes</h2>
+          <span class="count" id="personalCount">0 notes</span>
+        </div>
+
+        <button class="new-note-btn" id="newNoteBtn">
+          + New Note
+        </button>
+      </div>
+
+      <div class="personal-notes" id="personalNotes">
+
+        <div class="empty-state" id="personalEmpty">
+          You haven't written any notes yet. Click <b>+ New Note</b> to create one.
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- New/Edit Note Modal -->
+
+  <div class="modal-overlay" id="modalOverlay">
+
+    <div class="modal">
+
+      <div class="modal-header">
+        <h2 id="modalTitle">New Note</h2>
+
+        <button class="close-btn" id="closeModal">
+          ×
+        </button>
+      </div>
+
+      <form id="noteForm">
+
+        <div class="form-group">
+          <label for="noteTitle">Title</label>
+
+          <input
+            type="text"
+            id="noteTitle"
+            placeholder="e.g. Biology reminders"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="noteSubject">Subject</label>
+
+          <select id="noteSubject">
+            <option value="General">General</option>
+            <option value="Science">Science</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="English">English</option>
+            <option value="Filipino">Filipino</option>
+            <option value="AP">AP</option>
+            <option value="ICT">ICT</option>
+            <option value="Research">Research</option>
+            <option value="ConChem">ConChem</option>
+            <option value="Val Ed">Val Ed</option>
+            <option value="MAPEH">MAPEH</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="noteContent">Note</label>
+
+          <textarea
+            id="noteContent"
+            placeholder="Write your notes here..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="modal-actions">
+
+          <button
+            type="button"
+            class="cancel-btn"
+            id="cancelBtn"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="save-btn"
+          >
+            Save Note
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    /* =========================
+       STUDY NOTE FILTER
+    ========================= */
+
+    const searchInput = document.getElementById("searchInput");
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const studyCards = document.querySelectorAll(".note-card");
+    const studyCount = document.getElementById("studyCount");
+    const studyEmpty = document.getElementById("studyEmpty");
+
+    let currentSubject = "All";
+
+    function filterStudyNotes() {
+
+      const search = searchInput.value.toLowerCase().trim();
+
+      let visibleCount = 0;
+
+      studyCards.forEach(card => {
+
+        const subject = card.dataset.subject;
+        const title = card.dataset.title.toLowerCase();
+        const text = card.innerText.toLowerCase();
+
+        const subjectMatch =
+          currentSubject === "All" ||
+          subject === currentSubject;
+
+        const searchMatch =
+          title.includes(search) ||
+          text.includes(search);
+
+        if (subjectMatch && searchMatch) {
+          card.style.display = "flex";
+          visibleCount++;
+        } else {
+          card.style.display = "none";
+        }
+
+      });
+
+      studyCount.textContent =
+        visibleCount + (visibleCount === 1 ? " note" : " notes");
+
+      studyEmpty.style.display =
+        visibleCount === 0 ? "block" : "none";
+    }
+
+    filterButtons.forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        filterButtons.forEach(btn =>
+          btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        currentSubject = button.dataset.subject;
+
+        filterStudyNotes();
+
+        renderPersonalNotes();
+
+      });
+
+    });
+
+    searchInput.addEventListener("input", () => {
+
+      filterStudyNotes();
+
+      renderPersonalNotes();
+
+    });
+
+
+    /* =========================
+       PERSONAL NOTES
+    ========================= */
+
+    let personalNotes =
+      JSON.parse(localStorage.getItem("riasStudyHubNotes")) || [];
+
+    let editingId = null;
+
+    const personalNotesContainer =
+      document.getElementById("personalNotes");
+
+    const personalEmpty =
+      document.getElementById("personalEmpty");
+
+    const personalCount =
+      document.getElementById("personalCount");
+
+    const modalOverlay =
+      document.getElementById("modalOverlay");
+
+    const modalTitle =
+      document.getElementById("modalTitle");
+
+    const noteForm =
+      document.getElementById("noteForm");
+
+    const noteTitle =
+      document.getElementById("noteTitle");
+
+    const noteSubject =
+      document.getElementById("noteSubject");
+
+    const noteContent =
+      document.getElementById("noteContent");
+
+
+    function saveNotes() {
+
+      localStorage.setItem(
+        "riasStudyHubNotes",
+        JSON.stringify(personalNotes)
+      );
+
+    }
+
+
+    function formatDate(timestamp) {
+
+      const date = new Date(timestamp);
+
+      return date.toLocaleString([], {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      });
+
+    }
+
+
+    function renderPersonalNotes() {
+
+      const search =
+        searchInput.value.toLowerCase().trim();
+
+      personalNotesContainer.innerHTML = "";
+
+      const filteredNotes =
+        personalNotes.filter(note => {
+
+          const matchesSearch =
+            note.title.toLowerCase().includes(search) ||
+            note.content.toLowerCase().includes(search) ||
+            note.subject.toLowerCase().includes(search);
+
+          const matchesSubject =
+            currentSubject === "All" ||
+            note.subject === currentSubject;
+
+          return matchesSearch && matchesSubject;
+
+        });
+
+
+      personalCount.textContent =
+        filteredNotes.length +
+        (filteredNotes.length === 1 ? " note" : " notes");
+
+
+      if (filteredNotes.length === 0) {
+
+        personalNotesContainer.appendChild(personalEmpty);
+
+        personalEmpty.style.display = "block";
+
+        return;
+
+      }
+
+
+      personalEmpty.style.display = "none";
+
+
+      filteredNotes.forEach(note => {
+
+        const card = document.createElement("div");
+
+        card.className = "personal-note";
+
+        card.innerHTML = `
+
+          <div class="subject">
+            ${escapeHTML(note.subject)}
+          </div>
+
+          <h3>
+            ${escapeHTML(note.title)}
+          </h3>
+
+          <p>
+            ${escapeHTML(note.content)}
+          </p>
+
+          <div class="personal-note-footer">
+
+            <span class="note-date">
+              ${formatDate(note.updatedAt)}
+            </span>
+
+            <div class="note-actions">
+
+              <button
+                class="action-btn edit-btn"
+                data-id="${note.id}"
+              >
+                Edit
+              </button>
+
+              <button
+                class="action-btn delete-btn"
+                data-id="${note.id}"
+              >
+                Delete
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+        personalNotesContainer.appendChild(card);
+
+      });
+
+
+      document.querySelectorAll(".edit-btn").forEach(button => {
+
+        button.addEventListener("click", () => {
+
+          editNote(button.dataset.id);
+
+        });
+
+      });
+
+
+      document.querySelectorAll(".delete-btn").forEach(button => {
+
+        button.addEventListener("click", () => {
+
+          deleteNote(button.dataset.id);
+
+        });
+
+      });
+
+    }
+
+
+    /* Prevent HTML from being inserted into personal notes */
+
+    function escapeHTML(text) {
+
+      const div = document.createElement("div");
+
+      div.textContent = text;
+
+      return div.innerHTML;
+
+    }
+
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    function openModal() {
+
+      modalOverlay.classList.add("show");
+
+      noteTitle.focus();
+
+    }
+
+
+    function closeModal() {
+
+      modalOverlay.classList.remove("show");
+
+      noteForm.reset();
+
+      editingId = null;
+
+      modalTitle.textContent = "New Note";
+
+    }
+
+
+    document
+      .getElementById("newNoteBtn")
+      .addEventListener("click", () => {
+
+        editingId = null;
+
+        modalTitle.textContent = "New Note";
+
+        noteForm.reset();
+
+        openModal();
+
+      });
+
+
+    document
+      .getElementById("closeModal")
+      .addEventListener("click", closeModal);
+
+
+    document
+      .getElementById("cancelBtn")
+      .addEventListener("click", closeModal);
+
+
+    modalOverlay.addEventListener("click", event => {
+
+      if (event.target === modalOverlay) {
+
+        closeModal();
+
+      }
+
+    });
+
+
+    /* =========================
+       CREATE / EDIT NOTE
+    ========================= */
+
+    noteForm.addEventListener("submit", event => {
+
+      event.preventDefault();
+
+      const title =
+        noteTitle.value.trim();
+
+      const subject =
+        noteSubject.value;
+
+      const content =
+        noteContent.value.trim();
+
+
+      if (!title || !content) {
+        return;
+      }
+
+
+      if (editingId) {
+
+        const note =
+          personalNotes.find(
+            note => note.id === editingId
+          );
+
+        if (note) {
+
+          note.title = title;
+          note.subject = subject;
+          note.content = content;
+          note.updatedAt = Date.now();
+
+        }
+
+      } else {
+
+        personalNotes.unshift({
+
+          id: Date.now().toString(),
+
+          title: title,
+
+          subject: subject,
+
+          content: content,
+
+          createdAt: Date.now(),
+
+          updatedAt: Date.now()
+
+        });
+
+      }
+
+
+      saveNotes();
+
+      closeModal();
+
+      renderPersonalNotes();
+
+    });
+
+
+    /* =========================
+       EDIT NOTE
+    ========================= */
+
+    function editNote(id) {
+
+      const note =
+        personalNotes.find(
+          note => note.id === id
+        );
+
+      if (!note) return;
+
+
+      editingId = id;
+
+      modalTitle.textContent = "Edit Note";
+
+      noteTitle.value = note.title;
+
+      noteSubject.value = note.subject;
+
+      noteContent.value = note.content;
+
+      openModal();
+
+    }
+
+
+    /* =========================
+       DELETE NOTE
+    ========================= */
+
+    function deleteNote(id) {
+
+      const note =
+        personalNotes.find(
+          note => note.id === id
+        );
+
+      if (!note) return;
+
+
+      const confirmed =
+        confirm(
+          `Delete "${note.title}"?`
+        );
+
+      if (!confirmed) return;
+
+
+      personalNotes =
+        personalNotes.filter(
+          note => note.id !== id
+        );
+
+      saveNotes();
+
+      renderPersonalNotes();
+
+    }
+
+
+    /* =========================
+       INITIAL LOAD
+    ========================= */
+
+    filterStudyNotes();
+
+    renderPersonalNotes();
+
+  </script>
+
+</body>
+</html>
