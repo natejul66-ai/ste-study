@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quizzes | Ria's Study Hub</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --background: #0f1117;
+            --surface: #171a21;
+            --surface-hover: #1c2029;
+            --border: #282d38;
+
+            --text: #f1f3f5;
+            --muted: #969daa;
+
+            --blue: #4d9fff;
+            --blue-hover: #6aafff;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+
+        header {
+            width: 100%;
+            padding: 20px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: #11141b;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--blue);
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--blue);
+        }
+
+        nav a.active {
+            color: var(--blue);
+        }
+
+        /* PAGE INTRO */
+
+        .page-intro {
+            width: 86%;
+            max-width: 1100px;
+            margin: 65px auto 40px;
+        }
+
+        .page-intro h1 {
+            font-size: clamp(36px, 6vw, 55px);
+            letter-spacing: -1.5px;
+            margin-bottom: 12px;
+        }
+
+        .page-intro h1 span {
+            color: var(--blue);
+        }
+
+        .page-intro p {
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 650px;
+        }
+
+        /* SEARCH */
+
+        .search-area {
+            width: 86%;
+            max-width: 1100px;
+            margin: 0 auto 30px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px 18px;
+
+            background: var(--surface);
+            color: var(--text);
+
+            border: 1px solid var(--border);
+            border-radius: 11px;
+
+            outline: none;
+            font-size: 15px;
+
+            transition: 0.2s;
+        }
+
+        .search-box::placeholder {
+            color: #686e7a;
+        }
+
+        .search-box:focus {
+            border-color: var(--blue);
+        }
+
+        /* SUBJECT FILTERS */
+
+        .filters {
+            width: 86%;
+            max-width: 1100px;
+            margin: 0 auto 45px;
+
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 9px 15px;
+
+            background: var(--surface);
+            color: var(--muted);
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            cursor: pointer;
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+        .filter-btn:hover {
+            color: var(--text);
+            border-color: #3a4250;
+        }
+
+        .filter-btn.active {
+            background: rgba(77, 159, 255, 0.1);
+            color: var(--blue);
+            border-color: rgba(77, 159, 255, 0.35);
+        }
+
+        /* QUIZ SECTION */
+
+        .quiz-section {
+            width: 86%;
+            max-width: 1100px;
+            margin: 0 auto 70px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-heading h2 {
+            font-size: 24px;
+        }
+
+        .quiz-count {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* QUIZ GRID */
+
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .quiz-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            padding: 24px;
+
+            text-decoration: none;
+            color: var(--text);
+
+            display: flex;
+            flex-direction: column;
+
+            min-height: 230px;
+
+            transition: 0.2s;
+        }
+
+        .quiz-card:hover {
+            background: var(--surface-hover);
+            border-color: #354052;
+            transform: translateY(-4px);
+        }
+
+        .quiz-icon {
+            font-size: 28px;
+            margin-bottom: 18px;
+        }
+
+        .quiz-subject {
+            color: var(--blue);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+
+            margin-bottom: 7px;
+        }
+
+        .quiz-card h3 {
+            font-size: 19px;
+            margin-bottom: 9px;
+        }
+
+        .quiz-card p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* QUIZ INFO */
+
+        .quiz-info {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+
+            margin-top: 15px;
+        }
+
+        .quiz-tag {
+            color: #777e8b;
+            font-size: 11px;
+
+            padding: 5px 8px;
+
+            background: var(--surface-hover);
+            border: 1px solid var(--border);
+
+            border-radius: 6px;
+        }
+
+        /* QUIZ FOOTER */
+
+        .quiz-footer {
+            margin-top: auto;
+            padding-top: 20px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quiz-type {
+            color: #686e7a;
+            font-size: 12px;
+        }
+
+        .start-arrow {
+            color: var(--blue);
+            font-size: 18px;
+        }
+
+        /* EMPTY STATE */
+
+        .empty-message {
+            display: none;
+
+            padding: 35px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            text-align: center;
+            color: var(--muted);
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 35px;
+
+            color: #686e7a;
+            font-size: 13px;
+
+            border-top: 1px solid var(--border);
+        }
+
+        /* TABLET */
+
+        @media (max-width: 850px) {
+
+            nav {
+                display: none;
+            }
+
+            .quiz-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 550px) {
+
+            .quiz-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-intro {
+                margin-top: 50px;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 7px;
+            }
+
+            .filters {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="logo">
+            STE <span>Study Hub</span>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="reviewers.html">Reviewers</a>
+            <a href="quizzes.html" class="active">Quizzes</a>
+            <a href="notes.html">Notes</a>
+            <a href="progress.html">Progress</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- PAGE INTRO -->
+
+        <section class="page-intro">
+
+            <h1>
+                Test your <span>knowledge.</span>
+            </h1>
+
+            <p>
+                Take quizzes based on your lessons,
+                check what you know, and find the topics
+                you still need to review.
+            </p>
+
+        </section>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-area">
+
+            <input
+                type="text"
+                id="searchInput"
+                class="search-box"
+                placeholder="Search quizzes..."
+            >
+
+        </div>
+
+
+        <!-- SUBJECT FILTERS -->
+
+        <div class="filters">
+
+            <button class="filter-btn active" data-subject="all">
+                All
+            </button>
+
+            <button class="filter-btn" data-subject="science">
+                Science
+            </button>
+
+            <button class="filter-btn" data-subject="mathematics">
+                Mathematics
+            </button>
+
+            <button class="filter-btn" data-subject="english">
+                English
+            </button>
+
+            <button class="filter-btn" data-subject="filipino">
+                Filipino
+            </button>
+
+            <button class="filter-btn" data-subject="ap">
+                AP
+            </button>
+
+            <button class="filter-btn" data-subject="ict">
+                ICT
+            </button>
+
+            <button class="filter-btn" data-subject="research">
+                Research
+            </button>
+
+            <button class="filter-btn" data-subject="conchem">
+                ConChem
+            </button>
+
+            <button class="filter-btn" data-subject="valed">
+                Val Ed
+            </button>
+
+            <button class="filter-btn" data-subject="mapeh">
+                MAPEH
+            </button>
+
+        </div>
+
+
+        <!-- QUIZZES -->
+
+        <section class="quiz-section">
+
+            <div class="section-heading">
+
+                <h2>All Quizzes</h2>
+
+                <span class="quiz-count" id="quizCount">
+                    10 quizzes
+                </span>
+
+            </div>
+
+
+            <div class="quiz-grid" id="quizGrid">
+
+
+                <!-- SCIENCE -->
+
+                <a
+                    href="quizzes/science.html"
+                    class="quiz-card"
+                    data-subject="science"
+                    data-title="Science Quiz"
+                >
+
+                    <div class="quiz-icon">
+                        🔬
+                    </div>
+
+                    <div class="quiz-subject">
+                        Science
+                    </div>
+
+                    <h3>
+                        Science Quiz
+                    </h3>
+
+                    <p>
+                        Test your understanding of your
+                        current Science lessons.
+                    </p>
+
+                    <div class="quiz-info">
+
+                        <span class="quiz-tag">
+                            10 Questions
+                        </span>
+
+                        <span class="quiz-tag">
+                            Not Set
+                        </span>
+
+                    </div>
+
+                    <div class="quiz-footer">
+
+                        <span class="quiz-type">
+                            Quiz
+                        </span>
+
+                        <span class="start-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- MATHEMATICS -->
+
+                <a
+                    href="quizzes/mathematics.html"
+                    class="quiz-card"
+                    data-subject="mathematics"
+                    data-title="Mathematics Quiz"
+                >
+
+                    <div class="quiz-icon">
+                        📐
+                    </div>
+
+                    <div class="quiz-subject">
+                        Mathematics
+                    </div>
+
+                    <h3>
+                        Mathematics Quiz
+                    </h3>
+
+                    <p>
+                        Practice the mathematical concepts
+                        from your current lessons.
+                    </p>
+
+                    <div class="quiz-info">
+
+                        <span class="quiz-tag">
+                            10 Questions
+                        </span>
+
+                        <span class="quiz-tag">
+                            Not Set
+                        </span>
+
+                    </div>
+
+                    <div class="quiz-footer">
+
+                        <span class="quiz-type">
+                            Quiz
+                        </span>
+
+                        <span class="start-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- ENGLISH -->
+
+                <a
+                    href="quizzes/english.html"
+                    class="quiz-card"
+                    data-subject="english"
+                    data-title="English Quiz"
+                >
+
+                    <div class="quiz-icon">
+                        📖
+                    </div>
+
+                    <div class="quiz-subject">
+                        English
+                    </div>
+
+                    <h3>
+                        English Quiz
+                    </h3>
+
+                    <p>
+                        Test your understanding of your
+                        current English lessons.
+                    </p>
+
+                    <div class="quiz-info">
+
+                        <span class="quiz-tag">
+                            10 Questions
+                        </span>
+
+                        <span class="quiz-tag">
+                            Not Set
+                        </span>
+
+                    </div>
+
+                    <div class="quiz-footer">
+
+                        <span class="quiz-type">
+                            Quiz
+                        </span>
+
+                        <span class="start-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- FILIPINO -->
+
+                <a
+                    href="quizzes/filipino.html"
+                    class="quiz-card"
+                    data-subject="filipino"
+                    data-title="Filipino Quiz"
+                >
+
+                    <div class="quiz-icon">
+                        🇵🇭
+                    </div>
+
+                    <div class="quiz-subject">
+                        Filipino
+                    </div>
+
+                    <h3>
+                        Filipino Quiz
+                    </h3>
+
+                    <p>
+                        Subukan ang iyong kaalaman sa
+                        mga kasalukuyang aralin.
+                    </p>
+
+                    <div class="quiz-info">
+
+                        <span class="quiz-tag">
+                            10 Questions
+                        </span>
+
+                        <span class="quiz-tag">
+                            Not Set
+                        </span>
+
+                    </div>
+
+                    <div class="quiz-footer">
+
+                        <span class="quiz-type">
+                            Quiz
+                        </span>
+
+                        <span class="start-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- AP -->
+
+                <a
+                    href="quizzes/ap.html"
+                    class="quiz-card"
+                    data-subject="ap"
+                    data-title="AP Quiz"
+                >
+
+                    <div class="quiz-icon">
+                        🌏
+                    </div>
+
+                    <div class="quiz-subject">
+                        AP
+                    </div>
+
+                    <h3>
+                        AP Quiz
+                    </h3>
+
+                    <p>
+                        Test your knowledge of your current
+                        Araling Panlipunan lessons.
+                    </p>
+
+                    <div class="quiz-info">
+
+                        <span class="quiz-tag">
+                            10 Questions
+                        </span>
+
+                        <span class="quiz-tag">
+                            Not Set
+                        </span>
+
+                    </div>
+
+                    <div class="quiz-footer">
+
+                        <span class="quiz-type">
+                            Quiz
+                        </span>
+
+                        <span class="start-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- ICT -->
+
+                <a
+                    href="quizzes/ict.html"
+                    class="quiz-card"
+                    data-subject="ict"
+                    data-title="ICT Quiz"
+                >
+
+                    <div class="quiz-icon">
+                        💻
+                    </div>
+
+                    <div class="quiz-subject">
+                        ICT
+                    </div>
+
+                    <h3>
+                        ICT Quiz
+                    </h3>
+
+                    <p>
+                        Check your understanding of your
+                        current ICT lessons.
+                    </p>
+
+                    <div class="quiz-info">
+
+                        <span class="quiz-tag">
+                            10 Questions
+                        </span>
+
+                        <span class="quiz-tag">
+                            Not Set
+                        </span>
+
+                    </div>
+
+                    <div class="quiz-footer">
+
+                        <span class="quiz-type">
+                            Quiz
+                        </span>
+
+                        <span class="start-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- RESEARCH -->
+
+                <a
+                    href="quizzes/research.html"
+                    class="quiz-card"
+                    data-subject="research"
+                    data-title="Research Quiz"
+                >
+
+                    <div class="quiz-icon">
+                        🔎
+                    </div>
+
+                    <div class="quiz-subject">
+                        Research
+                    </div>
+
+                    <h3>
+                        Research Quiz
+                    </h3>
+
+                    <p>
+                        Test your understanding of research
+                        concepts and methodology.
+                    </p>
+
+                    <div class="quiz-info">
+
+                        <span class="quiz-tag">
+                            10 Questions
+                        </span>
+
+                        <span class="quiz-tag">
+                            Not Set
+                        </span>
+
+                    </div>
+
+                    <div class="quiz-footer">
+
+                        <span class="quiz-type">
+                            Quiz
+                        </span>
+
+                        <span class="start-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- CONCHEM -->
+
+                <a
+                    href="quizzes/conchem.html"
+                    class="quiz-card"
+                    data-subject="conchem"
+                    data-title="ConChem Quiz"
+                >
+
+                    <div class="quiz-icon">
+                        🧪
+                    </div>
+
+                    <div class="quiz-subject">
+                        ConChem
+                    </div>
+
+                    <h3>
+                        ConChem Quiz
+                    </h3>
+
+                    <p>
+                        Practice important concepts and
+                        problem-solving skills in ConChem.
+                    </p>
+
+                    <div class="quiz-info">
+
+                        <span class="quiz-tag">
+                            10 Questions
+                        </span>
+
+                        <span class="quiz-tag">
+                            Not Set
+                        </span>
+
+                    </div>
+
+                    <div class="quiz-footer">
+
+                        <span class="quiz-type">
+                            Quiz
+                        </span>
+
+                        <span class="start-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- VAL ED -->
+
+                <a
+                    href="quizzes/valed.html"
+                    class="quiz-card"
+                    data-subject="valed"
+                    data-title="Val Ed Quiz"
+                >
+
+                    <div class="quiz-icon">
+                        💭
+                    </div>
+
+                    <div class="quiz-subject">
+                        Val Ed
+                    </div>
+
+                    <h3>
+                        Val Ed Quiz
+                    </h3>
+
+                    <p>
+                        Test your understanding of the
+                        values and concepts from your lessons.
+                    </p>
+
+                    <div class="quiz-info">
+
+                        <span class="quiz-tag">
+                            10 Questions
+                        </span>
+
+                        <span class="quiz-tag">
+                            Not Set
+                        </span>
+
+                    </div>
+
+                    <div class="quiz-footer">
+
+                        <span class="quiz-type">
+                            Quiz
+                        </span>
+
+                        <span class="start-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+                <!-- MAPEH -->
+
+                <a
+                    href="quizzes/mapeh.html"
+                    class="quiz-card"
+                    data-subject="mapeh"
+                    data-title="MAPEH Quiz"
+                >
+
+                    <div class="quiz-icon">
+                        🎨
+                    </div>
+
+                    <div class="quiz-subject">
+                        MAPEH
+                    </div>
+
+                    <h3>
+                        MAPEH Quiz
+                    </h3>
+
+                    <p>
+                        Test your knowledge across Music,
+                        Arts, PE, and Health.
+                    </p>
+
+                    <div class="quiz-info">
+
+                        <span class="quiz-tag">
+                            10 Questions
+                        </span>
+
+                        <span class="quiz-tag">
+                            Not Set
+                        </span>
+
+                    </div>
+
+                    <div class="quiz-footer">
+
+                        <span class="quiz-type">
+                            Quiz
+                        </span>
+
+                        <span class="start-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </a>
+
+
+            </div>
+
+
+            <!-- EMPTY MESSAGE -->
+
+            <div class="empty-message" id="emptyMessage">
+                No quizzes found.
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+        Made for STE.
+    </footer>
+
+
+    <!-- SEARCH + FILTER JAVASCRIPT -->
+
+    <script>
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+        const quizCards =
+            document.querySelectorAll(".quiz-card");
+
+        const filterButtons =
+            document.querySelectorAll(".filter-btn");
+
+        const quizCount =
+            document.getElementById("quizCount");
+
+        const emptyMessage =
+            document.getElementById("emptyMessage");
+
+
+        let selectedSubject = "all";
+
+
+        function updateQuizzes() {
+
+            const searchText =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+            let visibleCount = 0;
+
+
+            quizCards.forEach(card => {
+
+                const subject =
+                    card.dataset.subject;
+
+                const title =
+                    card.dataset.title.toLowerCase();
+
+                const description =
+                    card.querySelector("p")
+                        .textContent
+                        .toLowerCase();
+
+
+                const matchesSubject =
+                    selectedSubject === "all" ||
+                    subject === selectedSubject;
+
+
+                const matchesSearch =
+                    title.includes(searchText) ||
+                    description.includes(searchText) ||
+                    subject.includes(searchText);
+
+
+                if (
+                    matchesSubject &&
+                    matchesSearch
+                ) {
+
+                    card.style.display = "flex";
+
+                    visibleCount++;
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+
+            quizCount.textContent =
+                visibleCount +
+                (
+                    visibleCount === 1
+                        ? " quiz"
+                        : " quizzes"
+                );
+
+
+            emptyMessage.style.display =
+                visibleCount === 0
+                    ? "block"
+                    : "none";
+
+        }
+
+
+        searchInput.addEventListener(
+            "input",
+            updateQuizzes
+        );
+
+
+        filterButtons.forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove("active");
+                    });
+
+
+                    button.classList.add("active");
+
+
+                    selectedSubject =
+                        button.dataset.subject;
+
+
+                    updateQuizzes();
+
+                }
+            );
+
+        });
+
+
+    </script>
+
+</body>
+</html>
