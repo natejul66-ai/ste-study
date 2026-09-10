@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Properties of Trapezoids and Kites | STE Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+      --yellow: #facc15;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 17, 23, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 45px 22px 70px;
+    }
+
+    .hero {
+      margin-bottom: 35px;
+    }
+
+    .subject-label {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 720px;
+      font-size: 16px;
+    }
+
+    .completion {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 35px;
+    }
+
+    .completion-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 13px;
+    }
+
+    .completion-title {
+      font-weight: 700;
+    }
+
+    .completion-status {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .completion-status.completed {
+      color: var(--green);
+    }
+
+    .progress-bar {
+      height: 8px;
+      border-radius: 20px;
+      background: #252a34;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      transition: width 0.3s;
+    }
+
+    .complete-btn {
+      margin-top: 15px;
+      border: 1px solid var(--blue);
+      background: transparent;
+      color: var(--blue);
+      padding: 10px 16px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .complete-btn:hover {
+      background: var(--blue);
+      color: #08111f;
+    }
+
+    .complete-btn.completed {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    section {
+      margin-bottom: 42px;
+    }
+
+    .section-heading {
+      margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+      font-size: 27px;
+      margin-bottom: 5px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .card h4 {
+      color: var(--blue);
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      color: #d6d9df;
+    }
+
+    .definition {
+      border-left: 4px solid var(--blue);
+      background: #141922;
+    }
+
+    .definition strong {
+      color: var(--blue);
+    }
+
+    /* VISUAL DIAGRAMS */
+
+    .diagram-box {
+      background: #11141b;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 25px;
+      margin: 20px 0;
+      overflow-x: auto;
+    }
+
+    .diagram-title {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    svg {
+      display: block;
+      margin: auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .shape {
+      fill: #171d28;
+      stroke: var(--blue);
+      stroke-width: 4;
+    }
+
+    .parallel {
+      stroke: var(--green);
+      stroke-width: 5;
+    }
+
+    .congruent {
+      stroke: var(--yellow);
+      stroke-width: 5;
+    }
+
+    .diagonal {
+      stroke: #d8dee9;
+      stroke-width: 3;
+      stroke-dasharray: 9 7;
+    }
+
+    .label {
+      fill: var(--text);
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .small-label {
+      fill: var(--muted);
+      font-size: 14px;
+    }
+
+    .green-text {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .yellow-text {
+      color: var(--yellow);
+      font-weight: 700;
+    }
+
+    .blue-text {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    /* PROPERTY GRID */
+
+    .property-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .property {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 18px;
+    }
+
+    .property-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 50%;
+      background: #202735;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .property h4 {
+      margin-bottom: 7px;
+    }
+
+    .property p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .property strong {
+      color: var(--text);
+    }
+
+    /* FORMULAS */
+
+    .formula {
+      background: #101722;
+      border: 1px solid #263b55;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      margin: 18px 0;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .example {
+      background: #141a22;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+
+    .example-title {
+      color: var(--yellow);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      min-width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #08111f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* COMPARISON */
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .comparison th,
+    .comparison td {
+      border: 1px solid var(--border);
+      padding: 13px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .comparison th {
+      background: #202530;
+      color: var(--blue);
+    }
+
+    .comparison td {
+      background: #141820;
+      color: #d6d9df;
+    }
+
+    /* VIDEO */
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .video-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 22px;
+    }
+
+    .video-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .video-card h3 {
+      margin-bottom: 7px;
+    }
+
+    .video-card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 17px;
+    }
+
+    .video-link {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 9px;
+      background: var(--blue);
+      color: #08111f;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .video-link:hover {
+      background: var(--blue-hover);
+    }
+
+    /* QUICK REVIEW */
+
+    .quick-list {
+      display: grid;
+      gap: 11px;
+    }
+
+    .quick-item {
+      padding: 14px 16px;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #d6d9df;
+    }
+
+    .quick-item strong {
+      color: var(--blue);
+    }
+
+    @media (max-width: 750px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+        gap: 14px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .property-grid,
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 32px 16px 60px;
+      }
+
+      .card {
+        padding: 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      STE <span>Study Hub</span>
+    </a>
+
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../reviewer.html" class="active">Reviewers</a>
+      <a href="../quizzes.html">Quizzes</a>
+      <a href="../notes.html">Notes</a>
+      <a href="../progress.html">Progress</a>
+    </nav>
+  </div>
+</header>
+
+
+<main class="container">
+
+  <!-- HERO -->
+
+  <div class="hero">
+    <div class="subject-label">Mathematics Reviewer</div>
+
+    <h1>
+      Properties of <span>Trapezoids and Kites</span>
+    </h1>
+
+    <p>
+      Learn the parts, properties, relationships, and important theorems
+      involving trapezoids, isosceles trapezoids, and kites.
+    </p>
+  </div>
+
+
+  <!-- COMPLETION -->
+
+  <div class="completion">
+
+    <div class="completion-top">
+      <div>
+        <div class="completion-title">Reviewer Progress</div>
+        <div class="completion-status" id="completionStatus">
+          Not completed
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <button class="complete-btn" id="completeBtn">
+      Mark as Complete
+    </button>
+
+  </div>
+
+
+  <!-- INTRODUCTION -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>1. What is a Trapezoid?</h2>
+      <p>Start by identifying its basic structure.</p>
+    </div>
+
+    <div class="card definition">
+      <p>
+        A <strong>trapezoid</strong> is a quadrilateral with
+        <strong>at least one pair of parallel sides</strong>.
+        The parallel sides are called the <strong>bases</strong>,
+        while the non-parallel sides are called the <strong>legs</strong>.
+      </p>
+    </div>
+
+    <div class="diagram-box">
+
+      <div class="diagram-title">
+        Parts of a Trapezoid
+      </div>
+
+      <svg width="600" height="330" viewBox="0 0 600 330">
+
+        <!-- trapezoid -->
+        <polygon
+          points="150,90 450,90 520,250 80,250"
+          class="shape"
+        />
+
+        <!-- parallel bases -->
+        <line x1="150" y1="90" x2="450" y2="90" class="parallel" />
+        <line x1="80" y1="250" x2="520" y2="250" class="parallel" />
+
+        <!-- labels -->
+        <text x="285" y="72" class="label">Base₁</text>
+        <text x="285" y="285" class="label">Base₂</text>
+
+        <text x="112" y="175" class="small-label" transform="rotate(-23 112 175)">
+          Leg
+        </text>
+
+        <text x="462" y="175" class="small-label" transform="rotate(23 462 175)">
+          Leg
+        </text>
+
+        <text x="255" y="155" class="small-label">
+          1 pair of parallel sides
+        </text>
+
+      </svg>
+
+    </div>
+
+  </section>
+
+
+  <!-- TRAPEZOID PROPERTIES -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>2. Properties of Trapezoids</h2>
+      <p>These properties belong specifically to a general trapezoid.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="property-grid">
+
+        <div class="property">
+          <div class="property-number">1</div>
+          <h4>One Pair of Parallel Sides</h4>
+          <p>
+            A trapezoid has at least one pair of opposite sides that are
+            <strong>parallel</strong>. These are called the bases.
+          </p>
+        </div>
+
+        <div class="property">
+          <div class="property-number">2</div>
+          <h4>Four Sides</h4>
+          <p>
+            A trapezoid is a <strong>quadrilateral</strong>, so it has
+            four sides, four vertices, and four angles.
+          </p>
+        </div>
+
+        <div class="property">
+          <div class="property-number">3</div>
+          <h4>Consecutive Angles</h4>
+          <p>
+            The two interior angles along the same leg are
+            <strong>supplementary</strong>, meaning they add up to
+            <strong>180°</strong>.
+          </p>
+        </div>
+
+        <div class="property">
+          <div class="property-number">4</div>
+          <h4>Height</h4>
+          <p>
+            The height is the <strong>perpendicular distance</strong>
+            between the two bases.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="diagram-box">
+
+      <div class="diagram-title">
+        Consecutive Interior Angles
+      </div>
+
+      <svg width="600" height="330" viewBox="0 0 600 330">
+
+        <polygon
+          points="150,80 450,80 510,250 90,250"
+          class="shape"
+        />
+
+        <line x1="150" y1="80" x2="450" y2="80" class="parallel" />
+        <line x1="90" y1="250" x2="510" y2="250" class="parallel" />
+
+        <text x="130" y="75" class="label">A</text>
+        <text x="455" y="75" class="label">B</text>
+        <text x="520" y="265" class="label">C</text>
+        <text x="70" y="265" class="label">D</text>
+
+        <text x="130" y="190" class="small-label">
+          ∠A + ∠D = 180°
+        </text>
+
+        <text x="360" y="190" class="small-label">
+          ∠B + ∠C = 180°
+        </text>
+
+      </svg>
+
+    </div>
+
+  </section>
+
+
+  <!-- ISOSCELES TRAPEZOID -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>3. Isosceles Trapezoid</h2>
+      <p>
+        A special type of trapezoid with additional properties.
+      </p>
+    </div>
+
+    <div class="card definition">
+
+      <p>
+        An <strong>isosceles trapezoid</strong> is a trapezoid whose
+        <strong>non-parallel sides, or legs, are congruent</strong>.
+      </p>
+
+    </div>
+
+
+    <div class="diagram-box">
+
+      <div class="diagram-title">
+        Isosceles Trapezoid
+      </div>
+
+      <svg width="600" height="350" viewBox="0 0 600 350">
+
+        <polygon
+          points="180,80 420,80 500,260 100,260"
+          class="shape"
+        />
+
+        <!-- congruent legs -->
+        <line x1="180" y1="80" x2="100" y2="260" class="congruent" />
+        <line x1="420" y1="80" x2="500" y2="260" class="congruent" />
+
+        <!-- parallel bases -->
+        <line x1="180" y1="80" x2="420" y2="80" class="parallel" />
+        <line x1="100" y1="260" x2="500" y2="260" class="parallel" />
+
+        <text x="285" y="60" class="label">Base₁</text>
+        <text x="285" y="295" class="label">Base₂</text>
+
+        <text x="55" y="170" class="small-label">
+          Congruent
+        </text>
+
+        <text x="495" y="170" class="small-label">
+          Congruent
+        </text>
+
+        <text x="250" y="170" class="small-label">
+          Legs are congruent
+        </text>
+
+      </svg>
+
+    </div>
+
+
+    <div class="section-heading">
+      <h3>Properties of Isosceles Trapezoids</h3>
+      <p>
+        These are properties of the special isosceles trapezoid,
+        not necessarily every trapezoid.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <div class="property-grid">
+
+        <div class="property">
+          <div class="property-number">1</div>
+          <h4>Congruent Legs</h4>
+          <p>
+            The two non-parallel sides, called the legs, are
+            <strong>congruent</strong>.
+          </p>
+          <p class="blue-text">AD ≅ BC</p>
+        </div>
+
+        <div class="property">
+          <div class="property-number">2</div>
+          <h4>Congruent Base Angles</h4>
+          <p>
+            The angles sharing the same base are
+            <strong>congruent</strong>.
+          </p>
+          <p class="blue-text">∠A ≅ ∠B</p>
+          <p class="blue-text">∠D ≅ ∠C</p>
+        </div>
+
+        <div class="property">
+          <div class="property-number">3</div>
+          <h4>Supplementary Consecutive Angles</h4>
+          <p>
+            Angles along the same leg are supplementary and add up
+            to <strong>180°</strong>.
+          </p>
+        </div>
+
+        <div class="property">
+          <div class="property-number">4</div>
+          <h4>Congruent Diagonals</h4>
+          <p>
+            The diagonals of an isosceles trapezoid are
+            <strong>congruent</strong>.
+          </p>
+          <p class="blue-text">AC ≅ BD</p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="diagram-box">
+
+      <div class="diagram-title">
+        Congruent Diagonals
+      </div>
+
+      <svg width="600" height="350" viewBox="0 0 600 350">
+
+        <polygon
+          points="180,80 420,80 500,260 100,260"
+          class="shape"
+        />
+
+        <!-- diagonals -->
+        <line x1="180" y1="80" x2="500" y2="260" class="diagonal" />
+        <line x1="420" y1="80" x2="100" y2="260" class="diagonal" />
+
+        <text x="320" y="150" class="label">AC</text>
+        <text x="230" y="150" class="label">BD</text>
+
+        <text x="205" y="320" class="small-label">
+          AC ≅ BD
+        </text>
+
+      </svg>
+
+    </div>
+
+  </section>
+
+
+  <!-- MIDSEGMENT -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>4. Trapezoid Midsegment</h2>
+      <p>
+        A segment connecting the midpoints of the two legs.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <p>
+        The <strong>midsegment</strong> of a trapezoid connects the
+        midpoints of its legs. It is parallel to both bases and its
+        length is half the sum of the two bases.
+      </p>
+
+      <div class="formula">
+        Midsegment = (Base₁ + Base₂) ÷ 2
+      </div>
+
+    </div>
+
+
+    <div class="diagram-box">
+
+      <div class="diagram-title">
+        Trapezoid Midsegment
+      </div>
+
+      <svg width="600" height="380" viewBox="0 0 600 380">
+
+        <polygon
+          points="170,60 430,60 510,290 90,290"
+          class="shape"
+        />
+
+        <!-- midsegment -->
+        <line x1="130" y1="175" x2="470" y2="175" class="parallel" />
+
+        <!-- midpoint markers -->
+        <circle cx="130" cy="175" r="7" fill="#4d9fff" />
+        <circle cx="470" cy="175" r="7" fill="#4d9fff" />
+
+        <text x="280" y="45" class="label">Base₁</text>
+        <text x="280" y="325" class="label">Base₂</text>
+
+        <text x="245" y="160" class="label">
+          Midsegment
+        </text>
+
+        <text x="205" y="210" class="small-label">
+          Parallel to both bases
+        </text>
+
+      </svg>
+
+    </div>
+
+
+    <div class="example">
+
+      <div class="example-title">
+        Example
+      </div>
+
+      <p>
+        A trapezoid has bases measuring 12 cm and 20 cm.
+        Find the length of its midsegment.
+      </p>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-number">1</div>
+          <p>
+            Add the two bases:
+            <strong>12 + 20 = 32</strong>
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <p>
+            Divide by 2:
+            <strong>32 ÷ 2 = 16</strong>
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <p>
+            Therefore, the midsegment is
+            <strong>16 cm</strong>.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- KITE -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>5. Kite</h2>
+      <p>
+        A quadrilateral with two distinct pairs of adjacent congruent sides.
+      </p>
+    </div>
+
+    <div class="card definition">
+
+      <p>
+        A <strong>kite</strong> is a quadrilateral with
+        <strong>two pairs of adjacent congruent sides</strong>.
+        The congruent sides are next to each other, not opposite each other.
+      </p>
+
+    </div>
+
+
+    <div class="diagram-box">
+
+      <div class="diagram-title">
+        Parts of a Kite
+      </div>
+
+      <svg width="600" height="380" viewBox="0 0 600 380">
+
+        <!-- kite -->
+        <polygon
+          points="300,40 470,190 300,330 130,190"
+          class="shape"
+        />
+
+        <!-- congruent sides -->
+        <line x1="300" y1="40" x2="470" y2="190" class="congruent" />
+        <line x1="300" y1="40" x2="130" y2="190" class="congruent" />
+
+        <line x1="470" y1="190" x2="300" y2="330" class="parallel" />
+        <line x1="130" y1="190" x2="300" y2="330" class="parallel" />
+
+        <text x="288" y="28" class="label">A</text>
+        <text x="482" y="195" class="label">B</text>
+        <text x="288" y="355" class="label">C</text>
+        <text x="110" y="195" class="label">D</text>
+
+        <text x="190" y="105" class="small-label">
+          AB ≅ AD
+        </text>
+
+        <text x="355" y="105" class="small-label">
+          Adjacent sides
+        </text>
+
+        <text x="190" y="285" class="small-label">
+          CB ≅ CD
+        </text>
+
+      </svg>
+
+    </div>
+
+  </section>
+
+
+  <!-- KITE PROPERTIES -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>6. Properties of Kites</h2>
+      <p>
+        Keep these properties separate from trapezoid properties.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <div class="property-grid">
+
+        <div class="property">
+          <div class="property-number">1</div>
+          <h4>Two Pairs of Adjacent Congruent Sides</h4>
+          <p>
+            A kite has two pairs of sides that are
+            <strong>congruent and adjacent</strong>.
+          </p>
+          <p class="blue-text">AB ≅ AD</p>
+          <p class="blue-text">CB ≅ CD</p>
+        </div>
+
+        <div class="property">
+          <div class="property-number">2</div>
+          <h4>One Pair of Opposite Congruent Angles</h4>
+          <p>
+            A kite has one pair of opposite angles that are
+            <strong>congruent</strong>.
+          </p>
+          <p class="blue-text">∠B ≅ ∠D</p>
+        </div>
+
+        <div class="property">
+          <div class="property-number">3</div>
+          <h4>Perpendicular Diagonals</h4>
+          <p>
+            The diagonals of a kite intersect at
+            <strong>right angles</strong>.
+          </p>
+          <p class="blue-text">AC ⟂ BD</p>
+        </div>
+
+        <div class="property">
+          <div class="property-number">4</div>
+          <h4>One Diagonal Bisects the Other</h4>
+          <p>
+            One diagonal divides the other diagonal into
+            <strong>two congruent segments</strong>.
+          </p>
+        </div>
+
+        <div class="property">
+          <div class="property-number">5</div>
+          <h4>Angle Bisector</h4>
+          <p>
+            One diagonal bisects a pair of opposite angles of the kite.
+          </p>
+        </div>
+
+        <div class="property">
+          <div class="property-number">6</div>
+          <h4>Important Reminder</h4>
+          <p>
+            A kite does <strong>not generally have opposite congruent
+            sides</strong>. Its congruent sides are adjacent.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="diagram-box">
+
+      <div class="diagram-title">
+        Kite Diagonals
+      </div>
+
+      <svg width="600" height="400" viewBox="0 0 600 400">
+
+        <polygon
+          points="300,40 470,200 300,350 130,200"
+          class="shape"
+        />
+
+        <!-- diagonals -->
+        <line x1="300" y1="40" x2="300" y2="350" class="diagonal" />
+        <line x1="130" y1="200" x2="470" y2="200" class="diagonal" />
+
+        <!-- intersection -->
+        <circle cx="300" cy="200" r="8" fill="#4d9fff" />
+
+        <!-- right angle marker -->
+        <polyline
+          points="300,175 325,175 325,200"
+          fill="none"
+          stroke="#4ade80"
+          stroke-width="3"
+        />
+
+        <text x="310" y="120" class="label">AC</text>
+        <text x="390" y="190" class="label">BD</text>
+
+        <text x="330" y="225" class="small-label">
+          90°
+        </text>
+
+        <text x="195" y="385" class="small-label">
+          AC ⟂ BD
+        </text>
+
+      </svg>
+
+    </div>
+
+  </section>
+
+
+  <!-- KITE VISUAL EXPLANATION -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>7. Kite: What to Look For</h2>
+      <p>
+        Use the shape's appearance to identify its properties.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <div class="quick-list">
+
+        <div class="quick-item">
+          <strong>Look at the sides:</strong>
+          Find two pairs of adjacent congruent sides.
+        </div>
+
+        <div class="quick-item">
+          <strong>Look at the angles:</strong>
+          One pair of opposite angles is congruent.
+        </div>
+
+        <div class="quick-item">
+          <strong>Look at the diagonals:</strong>
+          They intersect perpendicularly.
+        </div>
+
+        <div class="quick-item">
+          <strong>Look at the diagonal:</strong>
+          One diagonal bisects the other.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- AREA -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>8. Area of a Trapezoid</h2>
+      <p>
+        Another important formula to remember.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <p>
+        To find the area of a trapezoid, use the two bases and the height.
+      </p>
+
+      <div class="formula">
+        A = ½(b₁ + b₂)h
+      </div>
+
+      <p>
+        Where:
+        <strong>b₁</strong> = first base,
+        <strong>b₂</strong> = second base,
+        and <strong>h</strong> = height.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- PROBLEM SOLVING -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>9. How to Solve Geometry Problems</h2>
+      <p>
+        A simple process to follow when given a diagram.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-number">1</div>
+          <p>
+            <strong>Identify the shape.</strong>
+            Is it a trapezoid, isosceles trapezoid, or kite?
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <p>
+            <strong>Mark the known information.</strong>
+            Look for parallel, congruent, or perpendicular markings.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <p>
+            <strong>Choose the correct property.</strong>
+            Do not use a kite property on a trapezoid.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <p>
+            <strong>Set up the relationship.</strong>
+            For example, supplementary angles add to 180°.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">5</div>
+          <p>
+            <strong>Solve and check.</strong>
+            Make sure the answer makes sense with the diagram.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- COMPARISON -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>10. Quick Comparison</h2>
+      <p>
+        Remember which properties belong to which shape.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <table class="comparison">
+
+        <tr>
+          <th>Property</th>
+          <th>Trapezoid</th>
+          <th>Isosceles Trapezoid</th>
+          <th>Kite</th>
+        </tr>
+
+        <tr>
+          <td>One pair of parallel sides</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>Not generally</td>
+        </tr>
+
+        <tr>
+          <td>Congruent legs</td>
+          <td>Not necessarily</td>
+          <td>Yes</td>
+          <td>Not the defining property</td>
+        </tr>
+
+        <tr>
+          <td>Congruent adjacent sides</td>
+          <td>Not necessarily</td>
+          <td>Legs are congruent</td>
+          <td>Yes</td>
+        </tr>
+
+        <tr>
+          <td>Congruent base angles</td>
+          <td>Not necessarily</td>
+          <td>Yes</td>
+          <td>Not generally</td>
+        </tr>
+
+        <tr>
+          <td>Congruent diagonals</td>
+          <td>Not necessarily</td>
+          <td>Yes</td>
+          <td>Not generally</td>
+        </tr>
+
+        <tr>
+          <td>Perpendicular diagonals</td>
+          <td>Not generally</td>
+          <td>Not generally</td>
+          <td>Yes</td>
+        </tr>
+
+        <tr>
+          <td>Midsegment</td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>No</td>
+        </tr>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- TWO YOUTUBE VIDEOS -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>11. Watch the Lessons</h2>
+      <p>
+        Separate videos for trapezoids and kites.
+      </p>
+    </div>
+
+    <div class="video-grid">
+
+      <!-- TRAPEZOID VIDEO -->
+
+      <div class="video-card">
+
+        <div class="video-icon">📐</div>
+
+        <h3>Trapezoids - WOW MATH</h3>
+
+        <p>
+          Watch the lesson about trapezoids and their properties.
+        </p>
+
+        <!-- Replace # with your Trapezoid YouTube link -->
+        <a
+          href="https://youtu.be/9bmylcUweI4?si=S18v601-rmuM-JQk "
+          target="_blank"
+          rel="noopener noreferrer"
+          class="video-link"
+        >
+          ▶ Watch Trapezoid Lesson
+        </a>
+
+      </div>
+          <div class="section-heading">
+    </div>
+
+    <div class="video-grid">
+
+      <!-- TRAPEZOID VIDEO -->
+
+      <div class="video-card">
+
+        <div class="video-icon">📐</div>
+
+        <h3>Isoscles Trapezoids - Organic Chemistry</h3>
+
+        <p>
+          Watch the lesson about  isoscles trapezoids and their properties.
+        </p>
+
+        <!-- Replace # with your Trapezoid YouTube link -->
+        <a
+          href="https://youtu.be/AlyWS8bG3kE?si=VKc0eTyqcF6Lee4q"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="video-link"
+        >
+          ▶ Watch  Isoscles Trapezoid Lesson
+        </a>
+
+      </div>
+
+
+      <!-- KITE VIDEO -->
+
+      <div class="video-card">
+
+        <div class="video-icon">🔷</div>
+
+        <h3>Kites - WOW MATH</h3>
+
+        <p>
+          Watch the lesson about kites and their properties.
+        </p>
+
+        <!-- Replace # with your Kite YouTube link -->
+        <a
+          href="https://youtu.be/GL3Y5nJDMgw?si=W-M9KeovCoU2UKs0 "
+          target="_blank"
+          rel="noopener noreferrer"
+          class="video-link"
+        >
+          ▶ Watch Kite Lesson
+        </a>
+
+      </div>
+      <div class="video-card">
+
+        <div class="video-icon">🔷</div>
+
+        <h3>Kites - Organic Chemistry Tutor</h3>
+
+        <p>
+                    Watch the lesson about kites and their properties.
+ 
+        </p>
+
+        <!-- Replace # with your Kite YouTube link -->
+        <a
+          href="https://youtu.be/UTgF6lSAMa8?si=ZWA_fhaq_CqscYFY"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="video-link"
+        >
+          ▶ Watch Kite Lesson
+        </a>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- QUICK REVIEW -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>12. Quick Review</h2>
+      <p>
+        The most important things to remember before a quiz.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <div class="quick-list">
+
+        <div class="quick-item">
+          <strong>Trapezoid:</strong>
+          Has at least one pair of parallel sides.
+        </div>
+
+        <div class="quick-item">
+          <strong>Trapezoid angles:</strong>
+          Consecutive interior angles along a leg add to 180°.
+        </div>
+
+        <div class="quick-item">
+          <strong>Isosceles trapezoid:</strong>
+          Its legs are congruent.
+        </div>
+
+        <div class="quick-item">
+          <strong>Isosceles trapezoid:</strong>
+          Its base angles are congruent.
+        </div>
+
+        <div class="quick-item">
+          <strong>Isosceles trapezoid:</strong>
+          Its diagonals are congruent.
+        </div>
+
+        <div class="quick-item">
+          <strong>Kite:</strong>
+          Has two pairs of adjacent congruent sides.
+        </div>
+
+        <div class="quick-item">
+          <strong>Kite:</strong>
+          Has one pair of opposite congruent angles.
+        </div>
+
+        <div class="quick-item">
+          <strong>Kite:</strong>
+          Its diagonals are perpendicular.
+        </div>
+
+        <div class="quick-item">
+          <strong>Kite:</strong>
+          One diagonal bisects the other.
+        </div>
+
+        <div class="quick-item">
+          <strong>Important:</strong>
+          A kite's congruent sides are adjacent, not generally opposite.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<script>
+
+  const reviewerId = "mathematics";
+
+  const completeBtn = document.getElementById("completeBtn");
+  const completionStatus =
+    document.getElementById("completionStatus");
+  const progressFill =
+    document.getElementById("progressFill");
+
+
+  function getProgress() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem("riasStudyHubProgress")
+      ) || {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    } catch (error) {
+
+      return {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    }
+
+  }
+
+
+  function saveProgress(progress) {
+
+    localStorage.setItem(
+      "riasStudyHubProgress",
+      JSON.stringify(progress)
+    );
+
+  }
+
+
+  function updateCompletionUI() {
+
+    const progress = getProgress();
+
+    const completed =
+      progress.reviewers &&
+      progress.reviewers[reviewerId] === true;
+
+
+    if (completed) {
+
+      completionStatus.textContent = "Completed ✓";
+      completionStatus.classList.add("completed");
+
+      completeBtn.textContent = "Completed ✓";
+      completeBtn.classList.add("completed");
+
+      progressFill.style.width = "100%";
+
+    } else {
+
+      completionStatus.textContent = "Not completed";
+      completionStatus.classList.remove("completed");
+
+      completeBtn.textContent = "Mark as Complete";
+      completeBtn.classList.remove("completed");
+
+      progressFill.style.width = "0%";
+
+    }
+
+  }
+
+
+  completeBtn.addEventListener("click", function () {
+
+    const progress = getProgress();
+
+    if (!progress.reviewers) {
+      progress.reviewers = {};
+    }
+
+    const currentlyCompleted =
+      progress.reviewers[reviewerId] === true;
+
+    progress.reviewers[reviewerId] =
+      !currentlyCompleted;
+
+    saveProgress(progress);
+
+    updateCompletionUI();
+
+  });
+
+
+  updateCompletionUI();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Kaligirang Pangkasaysayan ng mga Tekstong Pampanitikan noong 1986 | STE Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+      --yellow: #facc15;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 17, 23, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 45px 22px 70px;
+    }
+
+    .hero {
+      margin-bottom: 35px;
+    }
+
+    .subject-label {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 16px;
+    }
+
+    .completion {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 35px;
+    }
+
+    .completion-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 13px;
+    }
+
+    .completion-title {
+      font-weight: 700;
+    }
+
+    .completion-status {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .completion-status.completed {
+      color: var(--green);
+    }
+
+    .progress-bar {
+      height: 8px;
+      border-radius: 20px;
+      background: #252a34;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      transition: width 0.3s;
+    }
+
+    .complete-btn {
+      margin-top: 15px;
+      border: 1px solid var(--blue);
+      background: transparent;
+      color: var(--blue);
+      padding: 10px 16px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .complete-btn:hover {
+      background: var(--blue);
+      color: #08111f;
+    }
+
+    .complete-btn.completed {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    section {
+      margin-bottom: 42px;
+    }
+
+    .section-heading {
+      margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+      font-size: 27px;
+      margin-bottom: 5px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .card h4 {
+      color: var(--blue);
+      font-size: 16px;
+      margin-bottom: 7px;
+    }
+
+    .card p {
+      color: #d6d9df;
+    }
+
+    .definition {
+      border-left: 4px solid var(--blue);
+      background: #141922;
+    }
+
+    .definition strong {
+      color: var(--blue);
+    }
+
+    /* CONCEPT FLOW */
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .flow-item {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .flow-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .flow-item strong {
+      display: block;
+      color: var(--blue);
+      margin-bottom: 5px;
+    }
+
+    .flow-item p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* TIMELINE */
+
+    .timeline {
+      position: relative;
+      margin: 20px 0;
+      padding-left: 35px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 17px;
+      margin-bottom: 14px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -31px;
+      top: 22px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 3px solid var(--background);
+    }
+
+    .timeline-date {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .timeline-item h3 {
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+
+    .timeline-item p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* THEME GRID */
+
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .theme {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 19px;
+    }
+
+    .theme-icon {
+      font-size: 27px;
+      margin-bottom: 7px;
+    }
+
+    .theme h3 {
+      color: var(--blue);
+      margin-bottom: 6px;
+      font-size: 17px;
+    }
+
+    .theme p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* EVIDENCE */
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .evidence {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 20px;
+    }
+
+    .evidence-icon {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .evidence h3 {
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+
+    .evidence ul {
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .evidence li {
+      margin-bottom: 5px;
+    }
+
+    /* CONNECTION */
+
+    .connection {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .connection-box {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .connection-box h3 {
+      color: var(--blue);
+      font-size: 17px;
+      margin-bottom: 7px;
+    }
+
+    .connection-box p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .arrow {
+      color: var(--blue);
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    /* ANALYSIS */
+
+    .steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 15px;
+    }
+
+    .step-number {
+      min-width: 29px;
+      height: 29px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #08111f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .step strong {
+      color: var(--text);
+    }
+
+    .step p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* EXAMPLE */
+
+    .example {
+      background: #141a22;
+      border: 1px solid #263b55;
+      border-radius: 13px;
+      padding: 20px;
+    }
+
+    .example-title {
+      color: var(--yellow);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .answer {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 10px;
+      background: #101722;
+      border-left: 3px solid var(--green);
+    }
+
+    .answer strong {
+      color: var(--green);
+    }
+
+    /* IMPORTANT DISTINCTION */
+
+    .distinction {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .distinction-box {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .distinction-box h3 {
+      color: var(--blue);
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .distinction-box p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* QUICK REVIEW */
+
+    .quick-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .quick-item {
+      padding: 14px 16px;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #d6d9df;
+      font-size: 14px;
+    }
+
+    .quick-item strong {
+      color: var(--blue);
+    }
+
+    /* VIDEO */
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .video-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 22px;
+    }
+
+    .video-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .video-card h3 {
+      margin-bottom: 7px;
+    }
+
+    .video-card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 17px;
+    }
+
+    .video-link {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 9px;
+      background: var(--blue);
+      color: #08111f;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .video-link:hover {
+      background: var(--blue-hover);
+    }
+
+    @media (max-width: 800px) {
+      .flow {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .connection {
+        grid-template-columns: 1fr;
+      }
+
+      .arrow {
+        transform: rotate(90deg);
+        text-align: center;
+      }
+
+      .distinction {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+        gap: 14px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .theme-grid,
+      .evidence-grid,
+      .video-grid,
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 32px 16px 60px;
+      }
+
+      .card {
+        padding: 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <a href="../index.html" class="logo">
+      STE <span>Study Hub</span>
+    </a>
+
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../reviewer.html" class="active">Reviewers</a>
+      <a href="../quizzes.html">Quizzes</a>
+      <a href="../notes.html">Notes</a>
+      <a href="../progress.html">Progress</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <!-- HERO -->
+
+  <div class="hero">
+
+    <div class="subject-label">
+      Filipino Reviewer
+    </div>
+
+    <h1>
+      Kaligirang Pangkasaysayan ng mga
+      <span>Tekstong Pampanitikan noong 1986</span>
+    </h1>
+
+    <p>
+      Unawain kung paano nakaapekto ang mahahalagang pangyayari noong
+      1986 sa mga paksa, pananaw, at posibleng tema ng mga tekstong
+      pampanitikan.
+    </p>
+
+  </div>
+
+
+  <!-- COMPLETION -->
+
+  <div class="completion">
+
+    <div class="completion-top">
+
+      <div>
+        <div class="completion-title">
+          Reviewer Progress
+        </div>
+
+        <div class="completion-status" id="completionStatus">
+          Not completed
+        </div>
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <button class="complete-btn" id="completeBtn">
+      Mark as Complete
+    </button>
+
+  </div>
+
+
+  <!-- 1 -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>1. Ano ang Tekstong Pampanitikan?</h2>
+      <p>
+        Unang alamin kung ano ang mismong pinag-aaralan.
+      </p>
+    </div>
+
+    <div class="card definition">
+
+      <p>
+        Ang <strong>tekstong pampanitikan</strong> ay akdang gumagamit
+        ng malikhaing paraan ng pagpapahayag upang maipakita ang
+        mga kaisipan, damdamin, karanasan, pananaw, at realidad ng
+        tao at lipunan.
+      </p>
+
+    </div>
+
+    <div class="flow">
+
+      <div class="flow-item">
+        <div class="flow-icon">📖</div>
+        <strong>Akda</strong>
+        <p>
+          Tekstong binabasa at sinusuri.
+        </p>
+      </div>
+
+      <div class="flow-item">
+        <div class="flow-icon">💭</div>
+        <strong>Kaisipan</strong>
+        <p>
+          Ideya o pananaw na ipinahahayag.
+        </p>
+      </div>
+
+      <div class="flow-item">
+        <div class="flow-icon">❤️</div>
+        <strong>Damdamin</strong>
+        <p>
+          Saloobin at karanasang maaaring makita sa akda.
+        </p>
+      </div>
+
+      <div class="flow-item">
+        <div class="flow-icon">🏛️</div>
+        <strong>Lipunan</strong>
+        <p>
+          Kalagayang maaaring maging konteksto ng akda.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- 2 -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>2. Kaligirang Pangkasaysayan</h2>
+      <p>
+        Bakit mahalaga ang kasaysayan sa pag-unawa sa panitikan?
+      </p>
+    </div>
+
+    <div class="card">
+
+      <p>
+        Ang <strong>kaligirang pangkasaysayan</strong> ay tumutukoy sa
+        mga pangyayari, kalagayan, kaisipan, at karanasan ng isang
+        lipunan na maaaring nakaimpluwensiya sa pagkakalikha at
+        pag-unawa sa isang akdang pampanitikan.
+      </p>
+
+      <br />
+
+      <p>
+        Kapag alam natin ang kalagayan ng lipunan noong panahong
+        naisulat o lumaganap ang isang akda, mas madali nating
+        mauunawaan kung bakit maaaring lumitaw ang ilang
+        <strong>tema, pananaw, simbolismo, at damdamin</strong> dito.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- 3 -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>3. Panitikan at ang Konteksto ng 1986</h2>
+      <p>
+        Ang kasaysayan ang konteksto, ngunit panitikan pa rin ang sentro.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <p>
+        Ang taong <strong>1986</strong> ay mahalagang bahagi ng
+        kasaysayan ng Pilipinas. Ang mga pagbabago at karanasan
+        ng lipunan sa panahong ito ay maaaring maging mahalagang
+        konteksto sa pagsusuri ng mga tekstong pampanitikan.
+      </p>
+
+      <br />
+
+      <p>
+        Sa pagsusuri, hindi ibig sabihin na ang bawat akda ay
+        awtomatikong tungkol sa isang partikular na pangyayari.
+        Sa halip, ginagamit ang kasaysayan upang
+        <strong>masuri kung paano maaaring maiugnay ang karanasan
+        ng lipunan sa mga tema at kaisipang makikita sa akda.</strong>
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- 4 -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>4. Mahahalagang Pangyayari noong 1986</h2>
+      <p>
+        Mga pangyayaring maaaring magsilbing konteksto sa pagsusuri ng panitikan.
+      </p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+
+        <div class="timeline-date">
+          Pebrero 1986
+        </div>
+
+        <h3>Halalan sa Pilipinas</h3>
+
+        <p>
+          Naganap ang isang mahalagang halalan na naging bahagi
+          ng malawak na tensiyong pampolitika at panlipunan sa bansa.
+        </p>
+
+      </div>
+
+
+      <div class="timeline-item">
+
+        <div class="timeline-date">
+          Pebrero 22–25, 1986
+        </div>
+
+        <h3>EDSA People Power Revolution</h3>
+
+        <p>
+          Naganap ang malawakang mapayapang pagkilos ng mga Pilipino
+          sa EDSA, na naging mahalagang bahagi ng pagbabago sa
+          kalagayang pampolitika ng bansa.
+        </p>
+
+      </div>
+
+
+      <div class="timeline-item">
+
+        <div class="timeline-date">
+          1986 at pagkatapos nito
+        </div>
+
+        <h3>Panahon ng Pagbabago</h3>
+
+        <p>
+          Ang mga pagbabagong naganap ay nagbigay ng bagong
+          konteksto para sa pagtalakay sa kalayaan, demokrasya,
+          pagbabago, pagkakaisa, at iba pang usaping panlipunan
+          sa mga akda.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- 5 -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>5. Mga Posibleng Tema sa Panitikan</h2>
+      <p>
+        Mga temang maaaring maiugnay sa karanasan ng lipunan noong 1986.
+      </p>
+    </div>
+
+    <div class="theme-grid">
+
+      <div class="theme">
+        <div class="theme-icon">🕊️</div>
+        <h3>Kalayaan</h3>
+        <p>
+          Maaaring tumukoy sa hangarin ng mga tao para sa kalayaan
+          sa pagpapahayag, pagkilos, at pagpili.
+        </p>
+      </div>
+
+      <div class="theme">
+        <div class="theme-icon">🏛️</div>
+        <h3>Demokrasya</h3>
+        <p>
+          Maaaring talakayin ang pakikilahok ng mamamayan at
+          kahalagahan ng boses ng mga Pilipino.
+        </p>
+      </div>
+
+      <div class="theme">
+        <div class="theme-icon">🔄</div>
+        <h3>Pagbabago</h3>
+        <p>
+          Maaaring ipakita ang pagnanais para sa pagbabago sa
+          sarili, pamahalaan, o lipunan.
+        </p>
+      </div>
+
+      <div class="theme">
+        <div class="theme-icon">🤝</div>
+        <h3>Pagkakaisa</h3>
+        <p>
+          Maaaring ipakita kung paano nagiging mahalaga ang
+          pagtutulungan ng mga tao sa panahon ng pagbabago.
+        </p>
+      </div>
+
+      <div class="theme">
+        <div class="theme-icon">✊</div>
+        <h3>Pakikibaka</h3>
+        <p>
+          Maaaring tumukoy sa pagsusumikap ng mga tauhan o
+          mamamayan upang makamit ang isang layunin.
+        </p>
+      </div>
+
+      <div class="theme">
+        <div class="theme-icon">🌅</div>
+        <h3>Pag-asa</h3>
+        <p>
+          Maaaring ipakita ang pag-asang magkaroon ng mas mabuting
+          kinabukasan pagkatapos ng mahirap na panahon.
+        </p>
+      </div>
+
+      <div class="theme">
+        <div class="theme-icon">⚖️</div>
+        <h3>Karapatang Pantao</h3>
+        <p>
+          Maaaring tumalakay sa dignidad, karapatan, at kalayaan
+          ng mga indibidwal.
+        </p>
+      </div>
+
+      <div class="theme">
+        <div class="theme-icon">🇵🇭</div>
+        <h3>Pagmamahal sa Bayan</h3>
+        <p>
+          Maaaring ipakita ang pagpapahalaga sa bansa at sa
+          kapakanan ng kapwa Pilipino.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- 6 -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>6. Pangyayari → Tema → Akda</h2>
+      <p>
+        Ito ang pinakamahalagang koneksyon sa lesson.
+      </p>
+    </div>
+
+    <div class="connection">
+
+      <div class="connection-box">
+        <h3>Pangyayari</h3>
+        <p>
+          Mahahalagang karanasan at pagbabago sa lipunan noong 1986.
+        </p>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <div class="connection-box">
+        <h3>Tema</h3>
+        <p>
+          Kaisipang maaaring lumitaw dahil sa karanasang panlipunan.
+        </p>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <div class="connection-box">
+        <h3>Tekstong Pampanitikan</h3>
+        <p>
+          Akdang nagpapahayag o maaaring magsalamin sa mga kaisipan
+          at karanasan.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- 7 -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>7. Halimbawa ng Pag-uugnay</h2>
+      <p>
+        Paano gagawin ang pagsusuri?
+      </p>
+    </div>
+
+    <div class="example">
+
+      <div class="example-title">
+        Halimbawa
+      </div>
+
+      <p>
+        Isipin na may tekstong pampanitikan tungkol sa isang
+        pangkat ng mga ordinaryong mamamayan na nagtutulungan
+        upang ipaglaban ang kanilang paniniwala at umaasa sa
+        isang mas mabuting kinabukasan.
+      </p>
+
+      <div class="steps" style="margin-top: 18px;">
+
+        <div class="step">
+          <div class="step-number">1</div>
+          <p>
+            <strong>Tukuyin ang tema.</strong><br />
+            Maaaring makita ang tema ng pagkakaisa, pakikibaka,
+            kalayaan, o pag-asa.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <p>
+            <strong>Iugnay sa konteksto.</strong><br />
+            Maaaring ihambing ang tema sa karanasan ng lipunan
+            noong 1986.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <p>
+            <strong>Humanap ng ebidensya.</strong><br />
+            Tingnan ang mismong akda at gumamit ng mapagkakatiwalaang
+            historikal o oral na ebidensya.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="answer">
+
+        <strong>Halimbawa ng konklusyon:</strong>
+
+        <p style="margin-top: 7px;">
+          Maaaring maiugnay ang tema ng pagkakaisa sa kalagayang
+          panlipunan noong 1986 dahil ipinapakita nito kung paano
+          maaaring maging mahalaga ang sama-samang pagkilos sa
+          panahon ng pagbabago.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- 8 -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>8. Historikal na Ebidensya</h2>
+      <p>
+        Mga impormasyong nagmumula sa mga tala at dokumento ng kasaysayan.
+      </p>
+    </div>
+
+    <div class="evidence-grid">
+
+      <div class="evidence">
+
+        <div class="evidence-icon">📜</div>
+
+        <h3>Historikal na Ebidensya</h3>
+
+        <ul>
+          <li>Mga dokumento</li>
+          <li>Opisyal na tala</li>
+          <li>Mga ulat at rekord</li>
+          <li>Mga larawan at materyales mula sa panahon</li>
+          <li>Iba pang mapagkakatiwalaang historical sources</li>
+        </ul>
+
+      </div>
+
+
+      <div class="evidence">
+
+        <div class="evidence-icon">🎙️</div>
+
+        <h3>Oral na Ebidensya</h3>
+
+        <ul>
+          <li>Panayam</li>
+          <li>Testimonya</li>
+          <li>Personal na salaysay</li>
+          <li>Alaala ng mga nakaranas ng pangyayari</li>
+          <li>Oral histories</li>
+        </ul>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- 9 -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>9. Historikal vs. Oral na Ebidensya</h2>
+      <p>
+        Magkaiba ang pinagmulan, ngunit parehong maaaring makatulong sa pagsusuri.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <div class="distinction">
+
+        <div class="distinction-box">
+
+          <h3>Historikal</h3>
+
+          <p>
+            Nakabatay sa mga dokumento, rekord, at iba pang
+            historical materials.
+          </p>
+
+        </div>
+
+        <div class="distinction-box">
+
+          <h3>Oral</h3>
+
+          <p>
+            Nakabatay sa mga salaysay, panayam, testimonya,
+            at personal na karanasan.
+          </p>
+
+        </div>
+
+        <div class="distinction-box">
+
+          <h3>Pareho</h3>
+
+          <p>
+            Parehong maaaring gamitin upang mas maunawaan ang
+            historical context ng isang akda.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- 10 -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>10. Paano Suriin ang Isang Tekstong Pampanitikan?</h2>
+      <p>
+        Sundin ang proseso kapag iniuugnay ang akda sa kasaysayan.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-number">1</div>
+          <p>
+            <strong>Basahin at unawain ang akda.</strong><br />
+            Alamin kung ano ang nangyayari at ano ang ipinahahayag.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <p>
+            <strong>Tukuyin ang tema.</strong><br />
+            Ano ang pangunahing kaisipan o mensahe?
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <p>
+            <strong>Hanapin ang ebidensya sa teksto.</strong><br />
+            Anong bahagi ng akda ang sumusuporta sa iyong interpretasyon?
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <p>
+            <strong>Isaalang-alang ang historical context.</strong><br />
+            Ano ang kalagayan ng lipunan noong panahong iyon?
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">5</div>
+          <p>
+            <strong>Gumamit ng ebidensya.</strong><br />
+            Suportahan ang ugnayan gamit ang historikal o oral na ebidensya.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">6</div>
+          <p>
+            <strong>Bumuo ng konklusyon.</strong><br />
+            Ipaliwanag kung paano nagkakaugnay ang pangyayari,
+            tema, at akda.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- 11 -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>11. Mahalagang Paalala sa Pagsusuri</h2>
+      <p>
+        Huwag basta mag-assume ng koneksyon.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <div class="quick-list">
+
+        <div class="quick-item">
+          <strong>Hindi lahat ng akda ay direktang tungkol sa 1986.</strong>
+          Ang historical context ay ginagamit upang makatulong
+          sa interpretasyon.
+        </div>
+
+        <div class="quick-item">
+          <strong>Tema ≠ Pangyayari.</strong>
+          Ang pangyayari ay bahagi ng historical context,
+          habang ang tema ay kaisipang ipinahahayag ng akda.
+        </div>
+
+        <div class="quick-item">
+          <strong>Kailangan ng ebidensya.</strong>
+          Huwag gumawa ng koneksyon nang walang suporta mula sa
+          teksto o historical/oral sources.
+        </div>
+
+        <div class="quick-item">
+          <strong>Isaalang-alang ang konteksto.</strong>
+          Ang panahon, lipunan, at karanasan ng mga tao ay maaaring
+          makatulong sa pag-unawa sa panitikan.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- 12 -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>12. Quick Review</h2>
+      <p>
+        Mga kailangang tandaan.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <div class="quick-list">
+
+        <div class="quick-item">
+          <strong>Tekstong Pampanitikan:</strong>
+          Malikhaing akdang nagpapahayag ng kaisipan, damdamin,
+          karanasan, at pananaw.
+        </div>
+
+        <div class="quick-item">
+          <strong>Kaligirang Pangkasaysayan:</strong>
+          Mga pangyayari at kalagayang panlipunan na nagbibigay
+          ng konteksto sa isang akda.
+        </div>
+
+        <div class="quick-item">
+          <strong>1986:</strong>
+          Isang mahalagang panahon ng pagbabago sa kasaysayan
+          ng Pilipinas.
+        </div>
+
+        <div class="quick-item">
+          <strong>Posibleng tema:</strong>
+          Kalayaan, demokrasya, pagbabago, pagkakaisa,
+          pakikibaka, pag-asa, karapatang pantao, at pagmamahal
+          sa bayan.
+        </div>
+
+        <div class="quick-item">
+          <strong>Historikal na ebidensya:</strong>
+          Dokumento, rekord, ulat, larawan, at iba pang historical materials.
+        </div>
+
+        <div class="quick-item">
+          <strong>Oral na ebidensya:</strong>
+          Panayam, testimonya, personal na salaysay, at oral histories.
+        </div>
+
+        <div class="quick-item">
+          <strong>Pinakamahalagang proseso:</strong>
+          Pangyayari → Tema → Ebidensya → Pagsusuri → Konklusyon.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- VIDEO -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>13. Watch the Lesson</h2>
+      <p>
+        Maglagay ng YouTube lesson dito kapag mayroon ka nang napili.
+      </p>
+    </div>
+
+    <div class="video-grid">
+
+      <div class="video-card">
+
+        <div class="video-icon">📚</div>
+
+        <h3>Kaligirang Pangkasaysayan at Panitikan</h3>
+
+        <p>
+          YouTube lesson tungkol sa historical context at
+          tekstong pampanitikan noong 1986.
+        </p>
+
+        <!-- Replace # with your YouTube link -->
+        <a
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="video-link"
+        >
+          ▶ Watch Filipino Lesson
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<script>
+
+  const reviewerId = "filipino";
+
+  const completeBtn =
+    document.getElementById("completeBtn");
+
+  const completionStatus =
+    document.getElementById("completionStatus");
+
+  const progressFill =
+    document.getElementById("progressFill");
+
+
+  function getProgress() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem("riasStudyHubProgress")
+      ) || {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    } catch (error) {
+
+      return {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    }
+
+  }
+
+
+  function saveProgress(progress) {
+
+    localStorage.setItem(
+      "riasStudyHubProgress",
+      JSON.stringify(progress)
+    );
+
+  }
+
+
+  function updateCompletionUI() {
+
+    const progress = getProgress();
+
+    const completed =
+      progress.reviewers &&
+      progress.reviewers[reviewerId] === true;
+
+
+    if (completed) {
+
+      completionStatus.textContent = "Completed ✓";
+      completionStatus.classList.add("completed");
+
+      completeBtn.textContent = "Completed ✓";
+      completeBtn.classList.add("completed");
+
+      progressFill.style.width = "100%";
+
+    } else {
+
+      completionStatus.textContent = "Not completed";
+      completionStatus.classList.remove("completed");
+
+      completeBtn.textContent = "Mark as Complete";
+      completeBtn.classList.remove("completed");
+
+      progressFill.style.width = "0%";
+
+    }
+
+  }
+
+
+  completeBtn.addEventListener("click", function () {
+
+    const progress = getProgress();
+
+    if (!progress.reviewers) {
+      progress.reviewers = {};
+    }
+
+    const currentlyCompleted =
+      progress.reviewers[reviewerId] === true;
+
+    progress.reviewers[reviewerId] =
+      !currentlyCompleted;
+
+    saveProgress(progress);
+
+    updateCompletionUI();
+
+  });
+
+
+  updateCompletionUI();
+
+</script>
+
+</body>
+</html>

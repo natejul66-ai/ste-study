@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fossils and Dating | STE Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --success: #4d9fff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      border-bottom: 1px solid var(--border);
+      background: var(--background);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    .container {
+      width: min(950px, 90%);
+      margin: 0 auto;
+      padding: 55px 0 80px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 25px;
+      transition: 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--blue);
+    }
+
+    .hero {
+      margin-bottom: 35px;
+    }
+
+    .subject {
+      display: inline-block;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: clamp(30px, 5vw, 45px);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 780px;
+    }
+
+    .completion-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px 22px;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .completion-info h3 {
+      font-size: 16px;
+      margin-bottom: 3px;
+    }
+
+    .completion-info p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    #completeButton {
+      border: none;
+      background: var(--blue);
+      color: #fff;
+      padding: 11px 18px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+
+    #completeButton:hover {
+      background: var(--blue-hover);
+      transform: translateY(-1px);
+    }
+
+    #completeButton.completed {
+      background: transparent;
+      color: var(--blue);
+      border: 1px solid var(--blue);
+      cursor: pointer;
+    }
+
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 28px;
+      margin-bottom: 22px;
+    }
+
+    .section h2 {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    .section h3 {
+      font-size: 17px;
+      margin: 24px 0 8px;
+      color: var(--text);
+    }
+
+    .section p {
+      color: #c8ccd4;
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .section ul,
+    .section ol {
+      padding-left: 23px;
+      color: #c8ccd4;
+      font-size: 15px;
+    }
+
+    .section li {
+      margin-bottom: 7px;
+    }
+
+    .highlight {
+      border-left: 3px solid var(--blue);
+      background: #141820;
+      padding: 15px 17px;
+      border-radius: 0 9px 9px 0;
+      margin: 17px 0;
+      color: #d8dce3;
+    }
+
+    .highlight strong {
+      color: var(--blue);
+    }
+
+    .definition-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 18px;
+    }
+
+    .definition {
+      background: #14171e;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 17px;
+    }
+
+    .definition h3 {
+      margin: 0 0 7px;
+      color: var(--blue);
+      font-size: 16px;
+    }
+
+    .definition p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .comparison th,
+    .comparison td {
+      border: 1px solid var(--border);
+      padding: 13px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .comparison th {
+      background: #14171e;
+      color: var(--blue);
+    }
+
+    .comparison td {
+      color: #c8ccd4;
+    }
+
+    .formula {
+      background: #11151c;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+      margin: 18px 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .example {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 15px;
+    }
+
+    .example strong {
+      color: var(--blue);
+    }
+
+    .tip-list {
+      list-style: none;
+      padding: 0 !important;
+    }
+
+    .tip-list li {
+      padding: 10px 13px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tip-list li:last-child {
+      border-bottom: none;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 35px;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        padding: 0 5%;
+      }
+
+      nav {
+        gap: 13px;
+      }
+
+      nav a {
+        font-size: 12px;
+      }
+
+      .container {
+        width: 92%;
+        padding-top: 35px;
+      }
+
+      .completion-card {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      #completeButton {
+        width: 100%;
+      }
+
+      .section {
+        padding: 21px;
+      }
+
+      .definition-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .logo {
+        font-size: 17px;
+      }
+
+      nav {
+        gap: 9px;
+      }
+
+      nav a {
+        font-size: 11px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="../index.html" class="logo">STE <span>Study Hub</span></a>
+
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../reviewer.html" class="active">Reviewers</a>
+      <a href="../quizzes.html">Quizzes</a>
+      <a href="../notes.html">Notes</a>
+      <a href="../progress.html">Progress</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <a href="../reviewer.html" class="back-link">← Back to Reviewers</a>
+
+    <section class="hero">
+      <div class="subject">Science</div>
+
+      <h1>Fossils and Relative and Absolute Dating</h1>
+
+      <p>
+        Learn how scientists use fossils, rock-layer principles, and simplified
+        half-life evidence to determine the age of rocks and fossils.
+      </p>
+    </section>
+
+    <div class="completion-card">
+      <div class="completion-info">
+        <h3 id="completionTitle">Reviewer not completed</h3>
+        <p id="completionText">
+          Mark this reviewer as complete when you finish studying it.
+        </p>
+      </div>
+
+      <button id="completeButton" onclick="toggleCompletion()">
+        Mark as Complete
+      </button>
+    </div>
+
+    <!-- INTRODUCTION -->
+    <section class="section">
+      <h2>1. What Is Dating in Geology?</h2>
+
+      <p>
+        In geology, <strong>dating</strong> means determining the age of rocks,
+        fossils, or other geological materials.
+      </p>
+
+      <p>
+        Scientists use evidence from rocks and fossils to understand when
+        geological events happened and how Earth's history developed.
+      </p>
+
+      <div class="definition-grid">
+        <div class="definition">
+          <h3>Relative Dating</h3>
+          <p>
+            Determines whether something is older or younger than something
+            else without giving an exact numerical age.
+          </p>
+        </div>
+
+        <div class="definition">
+          <h3>Absolute / Numerical Dating</h3>
+          <p>
+            Determines an approximate numerical age, usually using radioactive
+            decay and half-life.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOSSILS -->
+    <section class="section">
+      <h2>2. Fossils</h2>
+
+      <p>
+        A <strong>fossil</strong> is the preserved remains, impression, or
+        evidence of an organism that lived in the past.
+      </p>
+
+      <p>
+        Fossils are commonly found in sedimentary rocks. They can provide
+        important information about organisms that lived long ago and the
+        environments in which they lived.
+      </p>
+
+      <h3>Why Are Fossils Useful?</h3>
+
+      <ul>
+        <li>They provide evidence of ancient life.</li>
+        <li>They help scientists compare the ages of rock layers.</li>
+        <li>They can help identify environments that existed in the past.</li>
+        <li>Certain fossils can be used as indicators of geological age.</li>
+      </ul>
+
+      <div class="highlight">
+        <strong>Key idea:</strong>
+        Fossils are not just preserved organisms. They are also evidence that
+        helps scientists reconstruct Earth's history.
+      </div>
+    </section>
+
+    <!-- RELATIVE DATING -->
+    <section class="section">
+      <h2>3. Relative Dating</h2>
+
+      <p>
+        <strong>Relative dating</strong> places rocks, fossils, or geological
+        events in chronological order.
+      </p>
+
+      <p>
+        It tells us which material is <strong>older</strong> or
+        <strong>younger</strong>, but it does not necessarily tell us the
+        exact number of years ago it formed.
+      </p>
+
+      <h3>Example</h3>
+
+      <div class="example">
+        If Rock Layer A is below Rock Layer B, and the layers have not been
+        disturbed, Layer A is generally <strong>older</strong> than Layer B.
+      </div>
+    </section>
+
+    <!-- PRINCIPLE OF SUPERPOSITION -->
+    <section class="section">
+      <h2>4. Principle of Superposition</h2>
+
+      <p>
+        The <strong>principle of superposition</strong> states that in an
+        undisturbed sequence of sedimentary rock layers, the oldest layer is
+        generally at the bottom and the youngest layer is at the top.
+      </p>
+
+      <div class="highlight">
+        <strong>Remember:</strong>
+        Bottom = generally older<br />
+        Top = generally younger
+      </div>
+
+      <h3>Example</h3>
+
+      <p>
+        Imagine four undisturbed rock layers:
+      </p>
+
+      <ol>
+        <li>Layer D at the top</li>
+        <li>Layer C</li>
+        <li>Layer B</li>
+        <li>Layer A at the bottom</li>
+      </ol>
+
+      <p>
+        The relative order from oldest to youngest is:
+        <strong>A → B → C → D</strong>.
+      </p>
+    </section>
+
+    <!-- OTHER ROCK PRINCIPLES -->
+    <section class="section">
+      <h2>5. Other Principles Used in Relative Dating</h2>
+
+      <h3>Original Horizontality</h3>
+
+      <p>
+        Sedimentary layers are generally deposited in approximately horizontal
+        layers. If layers are tilted or folded, a geological event likely
+        affected them after deposition.
+      </p>
+
+      <h3>Cross-Cutting Relationships</h3>
+
+      <p>
+        A geological feature that cuts through another rock or feature is
+        generally <strong>younger</strong> than what it cuts.
+      </p>
+
+      <div class="example">
+        <strong>Example:</strong>
+        If a crack or igneous intrusion cuts through several rock layers, the
+        cutting feature formed after those layers.
+      </div>
+
+      <h3>Fossil Succession</h3>
+
+      <p>
+        Fossil organisms appear and disappear from the geological record in a
+        recognizable sequence. Scientists can use these fossil patterns to
+        compare the relative ages of rock layers.
+      </p>
+    </section>
+
+    <!-- INDEX FOSSILS -->
+    <section class="section">
+      <h2>6. Index Fossils</h2>
+
+      <p>
+        An <strong>index fossil</strong> is a fossil that is useful for
+        identifying and comparing the relative ages of rock layers.
+      </p>
+
+      <p>
+        Good index fossils generally come from organisms that were widespread
+        but existed for a relatively short period of geological time.
+      </p>
+
+      <h3>Why Are They Useful?</h3>
+
+      <ul>
+        <li>They can help match rock layers from different locations.</li>
+        <li>They help determine relative age.</li>
+        <li>They provide clues about when a rock layer formed.</li>
+      </ul>
+
+      <div class="highlight">
+        <strong>Important:</strong>
+        An index fossil is mainly used for comparing relative ages. It does
+        not automatically give an exact numerical age.
+      </div>
+    </section>
+
+    <!-- ABSOLUTE DATING -->
+    <section class="section">
+      <h2>7. Absolute or Numerical Dating</h2>
+
+      <p>
+        <strong>Absolute dating</strong>, also called
+        <strong>numerical dating</strong>, attempts to determine an age in
+        years or another numerical unit.
+      </p>
+
+      <p>
+        One important method uses radioactive isotopes and their predictable
+        rates of decay.
+      </p>
+
+      <h3>Radioactive Decay</h3>
+
+      <p>
+        Some unstable atoms naturally change into more stable forms over time.
+        This process is called <strong>radioactive decay</strong>.
+      </p>
+
+      <p>
+        Scientists can use the amount of radioactive material remaining and
+        the products of decay to estimate the age of certain materials.
+      </p>
+    </section>
+
+    <!-- HALF LIFE -->
+    <section class="section">
+      <h2>8. Half-Life</h2>
+
+      <p>
+        A <strong>half-life</strong> is the amount of time required for half of
+        a radioactive sample to decay.
+      </p>
+
+      <p>
+        After every half-life, the amount of the original radioactive material
+        is reduced by half.
+      </p>
+
+      <div class="formula">
+        After 1 half-life → 1/2 remains
+        <br />
+        After 2 half-lives → 1/4 remains
+        <br />
+        After 3 half-lives → 1/8 remains
+        <br />
+        After 4 half-lives → 1/16 remains
+      </div>
+
+      <div class="example">
+        <strong>Example:</strong>
+        Suppose a sample starts with 100 units of radioactive material and
+        one half-life has passed.
+        <br /><br />
+        100 ÷ 2 = <strong>50 units remain</strong>.
+        <br /><br />
+        After another half-life:
+        <br />
+        50 ÷ 2 = <strong>25 units remain</strong>.
+      </div>
+
+      <div class="highlight">
+        <strong>Memory trick:</strong>
+        Half-life means the sample becomes <strong>half</strong> of its
+        previous amount, not zero.
+      </div>
+    </section>
+
+    <!-- HALF LIFE TABLE -->
+    <section class="section">
+      <h2>9. Simplified Half-Life Evidence</h2>
+
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Half-Lives Passed</th>
+            <th>Fraction Remaining</th>
+            <th>Percentage Remaining</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>100%</td>
+          </tr>
+
+          <tr>
+            <td>1</td>
+            <td>1/2</td>
+            <td>50%</td>
+          </tr>
+
+          <tr>
+            <td>2</td>
+            <td>1/4</td>
+            <td>25%</td>
+          </tr>
+
+          <tr>
+            <td>3</td>
+            <td>1/8</td>
+            <td>12.5%</td>
+          </tr>
+
+          <tr>
+            <td>4</td>
+            <td>1/16</td>
+            <td>6.25%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="example">
+        <strong>Quick example:</strong>
+        If 25% of the original radioactive material remains, approximately
+        <strong>2 half-lives</strong> have passed.
+      </div>
+    </section>
+
+    <!-- COMPARISON -->
+    <section class="section">
+      <h2>10. Relative vs. Absolute Dating</h2>
+
+      <table class="comparison">
+        <thead>
+          <tr>
+            <th>Relative Dating</th>
+            <th>Absolute / Numerical Dating</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Determines older vs. younger.</td>
+            <td>Estimates a numerical age.</td>
+          </tr>
+
+          <tr>
+            <td>Uses rock-layer relationships and fossils.</td>
+            <td>Can use radioactive decay and half-life.</td>
+          </tr>
+
+          <tr>
+            <td>Does not necessarily give an exact number of years.</td>
+            <td>Provides an age expressed numerically.</td>
+          </tr>
+
+          <tr>
+            <td>Useful for establishing chronological order.</td>
+            <td>Useful for estimating when something formed or lived.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="highlight">
+        <strong>Easy way to remember:</strong>
+        Relative = <strong>which came first?</strong><br />
+        Numerical = <strong>about how old is it?</strong>
+      </div>
+    </section>
+
+    <!-- HOW THEY WORK TOGETHER -->
+    <section class="section">
+      <h2>11. How Scientists Use Both Methods</h2>
+
+      <p>
+        Relative and numerical dating can complement each other.
+      </p>
+
+      <p>
+        Scientists may first use rock layers and fossils to determine the
+        relative order of geological events. Numerical dating can then provide
+        an estimated age for particular rocks or materials when appropriate.
+      </p>
+
+      <div class="example">
+        <strong>Example:</strong>
+        Fossils can show that one rock layer is younger than another. A
+        numerical dating method may then provide an estimated age for a
+        suitable material associated with one of those layers.
+      </div>
+    </section>
+
+    <!-- QUICK REVIEW -->
+    <section class="section">
+      <h2>12. Quick Review</h2>
+
+      <ul class="tip-list">
+        <li>
+          <strong>Fossil:</strong> preserved remains, impressions, or evidence
+          of ancient life.
+        </li>
+
+        <li>
+          <strong>Relative dating:</strong> determines whether something is
+          older or younger.
+        </li>
+
+        <li>
+          <strong>Numerical dating:</strong> estimates an age using numerical
+          values.
+        </li>
+
+        <li>
+          <strong>Superposition:</strong> in undisturbed sedimentary layers,
+          lower layers are generally older.
+        </li>
+
+        <li>
+          <strong>Cross-cutting:</strong> a feature cutting another feature
+          is generally younger than what it cuts.
+        </li>
+
+        <li>
+          <strong>Index fossil:</strong> useful for comparing the relative ages
+          of rock layers.
+        </li>
+
+        <li>
+          <strong>Radioactive decay:</strong> the natural transformation of
+          unstable atoms.
+        </li>
+
+        <li>
+          <strong>Half-life:</strong> the time required for half of a
+          radioactive sample to decay.
+        </li>
+      </ul>
+    </section>
+
+    <p class="footer-note">
+      Finish the reviewer, then mark it as complete to update your progress.
+    </p>
+
+  </main>
+
+  <script>
+    const reviewerId = "science";
+
+    let progress = JSON.parse(
+      localStorage.getItem("riasStudyHubProgress")
+    ) || {
+      reviewers: {},
+      quizzes: {},
+      notes: {}
+    };
+
+    // Make sure the required sections exist.
+    if (!progress.reviewers) {
+      progress.reviewers = {};
+    }
+
+    if (!progress.quizzes) {
+      progress.quizzes = {};
+    }
+
+    if (!progress.notes) {
+      progress.notes = {};
+    }
+
+    function updateCompletionStatus() {
+      const button = document.getElementById("completeButton");
+      const title = document.getElementById("completionTitle");
+      const text = document.getElementById("completionText");
+
+      if (progress.reviewers[reviewerId]) {
+        button.textContent = "Completed ✓";
+        button.classList.add("completed");
+
+        title.textContent = "Reviewer completed";
+        text.textContent =
+          "This reviewer has been marked as completed.";
+      } else {
+        button.textContent = "Mark as Complete";
+        button.classList.remove("completed");
+
+        title.textContent = "Reviewer not completed";
+        text.textContent =
+          "Mark this reviewer as complete when you finish studying it.";
+      }
+    }
+
+    function toggleCompletion() {
+      progress.reviewers[reviewerId] =
+        !progress.reviewers[reviewerId];
+
+      localStorage.setItem(
+        "riasStudyHubProgress",
+        JSON.stringify(progress)
+      );
+
+      updateCompletionStatus();
+    }
+
+    updateCompletionStatus();
+  </script>
+
+</body>
+</html>

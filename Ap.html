@@ -1,0 +1,2163 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Demand at Suplay sa Pamilihan | STE Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+      --yellow: #facc15;
+      --red: #fb7185;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 17, 23, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 45px 22px 70px;
+    }
+
+    .hero {
+      margin-bottom: 35px;
+    }
+
+    .subject-label {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 16px;
+    }
+
+    .completion {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 35px;
+    }
+
+    .completion-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 13px;
+    }
+
+    .completion-title {
+      font-weight: 700;
+    }
+
+    .completion-status {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .completion-status.completed {
+      color: var(--green);
+    }
+
+    .progress-bar {
+      height: 8px;
+      border-radius: 20px;
+      background: #252a34;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      transition: width 0.3s;
+    }
+
+    .complete-btn {
+      margin-top: 15px;
+      border: 1px solid var(--blue);
+      background: transparent;
+      color: var(--blue);
+      padding: 10px 16px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .complete-btn:hover {
+      background: var(--blue);
+      color: #08111f;
+    }
+
+    .complete-btn.completed {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    section {
+      margin-bottom: 42px;
+    }
+
+    .section-heading {
+      margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+      font-size: 27px;
+      margin-bottom: 5px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .card h4 {
+      color: var(--blue);
+      font-size: 16px;
+      margin-bottom: 7px;
+    }
+
+    .card p {
+      color: #d6d9df;
+    }
+
+    .definition {
+      border-left: 4px solid var(--blue);
+      background: #141922;
+    }
+
+    .definition strong {
+      color: var(--blue);
+    }
+
+    /* PROPERTY GRID */
+
+    .property-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .property {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 18px;
+    }
+
+    .property-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 50%;
+      background: #202735;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .property p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .property strong {
+      color: var(--text);
+    }
+
+    /* DIAGRAMS */
+
+    .diagram-box {
+      background: #11141b;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 25px;
+      margin: 20px 0;
+      overflow-x: auto;
+    }
+
+    .diagram-title {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    svg {
+      display: block;
+      margin: auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .axis {
+      stroke: #68707e;
+      stroke-width: 2;
+    }
+
+    .grid-line {
+      stroke: #282d38;
+      stroke-width: 1;
+    }
+
+    .demand-line {
+      stroke: var(--blue);
+      stroke-width: 5;
+      fill: none;
+    }
+
+    .supply-line {
+      stroke: var(--green);
+      stroke-width: 5;
+      fill: none;
+    }
+
+    .shortage-line {
+      stroke: var(--red);
+      stroke-width: 6;
+    }
+
+    .surplus-line {
+      stroke: var(--yellow);
+      stroke-width: 6;
+    }
+
+    .equilibrium-dot {
+      fill: var(--yellow);
+    }
+
+    .svg-label {
+      fill: var(--text);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .svg-muted {
+      fill: var(--muted);
+      font-size: 13px;
+    }
+
+    .svg-blue {
+      fill: var(--blue);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .svg-green {
+      fill: var(--green);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .svg-red {
+      fill: var(--red);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .svg-yellow {
+      fill: var(--yellow);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* SCHEDULE */
+
+    .schedule {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .schedule th,
+    .schedule td {
+      border: 1px solid var(--border);
+      padding: 13px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .schedule th {
+      background: #202530;
+      color: var(--blue);
+    }
+
+    .schedule td {
+      background: #141820;
+      color: #d6d9df;
+    }
+
+    .equilibrium-cell {
+      color: var(--green) !important;
+      font-weight: 700;
+    }
+
+    .shortage-cell {
+      color: var(--red) !important;
+      font-weight: 700;
+    }
+
+    .surplus-cell {
+      color: var(--yellow) !important;
+      font-weight: 700;
+    }
+
+    /* FORMULA */
+
+    .formula {
+      background: #101722;
+      border: 1px solid #263b55;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      margin: 18px 0;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    /* STEPS */
+
+    .steps {
+      display: grid;
+      gap: 13px;
+      margin-top: 15px;
+    }
+
+    .step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .step-number {
+      min-width: 29px;
+      height: 29px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #08111f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* THREE STATES */
+
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .state {
+      padding: 20px;
+      border-radius: 13px;
+      background: #141820;
+      border: 1px solid var(--border);
+    }
+
+    .state h3 {
+      margin-bottom: 8px;
+    }
+
+    .state p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .state.equilibrium h3 {
+      color: var(--green);
+    }
+
+    .state.shortage h3 {
+      color: var(--red);
+    }
+
+    .state.surplus h3 {
+      color: var(--yellow);
+    }
+
+    /* CAUSE EFFECT */
+
+    .cause-effect {
+      display: grid;
+      gap: 12px;
+    }
+
+    .cause {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      padding: 16px;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+    }
+
+    .cause strong {
+      color: var(--blue);
+    }
+
+    .arrow {
+      color: var(--blue);
+      font-size: 20px;
+    }
+
+    /* VIDEO */
+
+    .video-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 22px;
+    }
+
+    .video-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .video-card h3 {
+      margin-bottom: 7px;
+    }
+
+    .video-card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 17px;
+    }
+
+    .video-link {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 9px;
+      background: var(--blue);
+      color: #08111f;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .video-link:hover {
+      background: var(--blue-hover);
+    }
+
+    /* QUICK REVIEW */
+
+    .quick-list {
+      display: grid;
+      gap: 11px;
+    }
+
+    .quick-item {
+      padding: 14px 16px;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #d6d9df;
+    }
+
+    .quick-item strong {
+      color: var(--blue);
+    }
+
+    @media (max-width: 750px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+        gap: 14px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .property-grid,
+      .state-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 32px 16px 60px;
+      }
+
+      .card {
+        padding: 19px;
+      }
+
+      .cause {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+    }
+    /* =========================
+   VIDEO LIBRARY
+========================= */
+
+.video-library {
+  margin-top: 55px;
+}
+
+.section-heading {
+  margin-bottom: 20px;
+}
+
+.section-label {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.section-heading h2 {
+  margin: 6px 0 5px;
+  font-size: 25px;
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Folder */
+
+.folder {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Folder top */
+
+.folder-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 22px;
+  background: var(--surface-hover);
+  border-bottom: 1px solid var(--border);
+}
+
+.folder-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(77, 159, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+}
+
+.folder-header h3 {
+  margin: 0 0 4px;
+  font-size: 17px;
+}
+
+.folder-header span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Video list */
+
+.video-list {
+  padding: 8px;
+}
+
+.video-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 16px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  transition: 0.2s ease;
+}
+
+.video-item:hover {
+  background: var(--surface-hover);
+}
+
+.video-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: rgba(77, 159, 255, 0.12);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.video-info {
+  flex: 1;
+}
+
+.video-info h4 {
+  margin: 0 0 4px;
+  font-size: 14px;
+}
+
+.video-info p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.video-arrow {
+  color: var(--muted);
+  font-size: 18px;
+  transition: 0.2s ease;
+}
+
+.video-item:hover .video-arrow {
+  color: var(--blue);
+  transform: translate(2px, -2px);
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .folder-header {
+    padding: 17px;
+  }
+
+  .video-item {
+    padding: 14px 9px;
+  }
+
+  .video-info p {
+    font-size: 11px;
+  }
+
+  .video-arrow {
+    font-size: 16px;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <a href="../index.html" class="logo">
+      STE <span>Study Hub</span>
+    </a>
+
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../reviewer.html" class="active">Reviewers</a>
+      <a href="../quizzes.html">Quizzes</a>
+      <a href="../notes.html">Notes</a>
+      <a href="../progress.html">Progress</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <!-- HERO -->
+
+  <div class="hero">
+
+    <div class="subject-label">AP Reviewer</div>
+
+    <h1>
+      Demand at Suplay sa <span>Pamilihan</span>
+    </h1>
+
+    <p>
+      Alamin kung paano ginagamit ang schedules at graphs upang
+      matukoy ang equilibrium, shortage, at surplus, at kung paano
+      nakaaapekto ang presyo at availability sa mga pagpili ng mamimili.
+    </p>
+
+  </div>
+
+
+  <!-- COMPLETION -->
+
+  <div class="completion">
+
+    <div class="completion-top">
+
+      <div>
+        <div class="completion-title">
+          Reviewer Progress
+        </div>
+
+        <div class="completion-status" id="completionStatus">
+          Not completed
+        </div>
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <button class="complete-btn" id="completeBtn">
+      Mark as Complete
+    </button>
+
+  </div>
+
+
+  <!-- DEMAND -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>1. Demand</h2>
+      <p>Gaano karami ang gustong bilhin ng mga mamimili?</p>
+    </div>
+
+    <div class="card definition">
+
+      <p>
+        Ang <strong>demand</strong> ay tumutukoy sa dami ng produkto o
+        serbisyo na <strong>nais at kayang bilhin ng mga mamimili</strong>
+        sa iba't ibang presyo sa isang takdang panahon.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Batas ng Demand</h3>
+
+      <p>
+        Kapag <strong>tumataas ang presyo</strong>, karaniwang
+        <strong>bumababa ang quantity demanded</strong>.
+        Kapag <strong>bumababa ang presyo</strong>, karaniwang
+        <strong>tumataas ang quantity demanded</strong>.
+      </p>
+
+    </div>
+
+    <div class="diagram-box">
+
+      <div class="diagram-title">
+        Demand Curve
+      </div>
+
+      <svg width="600" height="350" viewBox="0 0 600 350">
+
+        <!-- grid -->
+        <line x1="100" y1="60" x2="100" y2="290" class="axis" />
+        <line x1="100" y1="290" x2="540" y2="290" class="axis" />
+
+        <line x1="100" y1="110" x2="540" y2="110" class="grid-line" />
+        <line x1="100" y1="160" x2="540" y2="160" class="grid-line" />
+        <line x1="100" y1="210" x2="540" y2="210" class="grid-line" />
+        <line x1="100" y1="260" x2="540" y2="260" class="grid-line" />
+
+        <!-- demand -->
+        <line x1="150" y1="80" x2="500" y2="270" class="demand-line" />
+
+        <text x="30" y="75" class="svg-label">
+          Presyo
+        </text>
+
+        <text x="455" y="320" class="svg-label">
+          Quantity
+        </text>
+
+        <text x="425" y="245" class="svg-blue">
+          Demand
+        </text>
+
+        <text x="75" y="95" class="svg-muted">
+          Mataas
+        </text>
+
+        <text x="65" y="280" class="svg-muted">
+          Mababa
+        </text>
+
+      </svg>
+
+    </div>
+
+  </section>
+
+
+  <!-- SUPPLY -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>2. Suplay</h2>
+      <p>Gaano karami ang handang ipagbili ng mga prodyuser?</p>
+    </div>
+
+    <div class="card definition">
+
+      <p>
+        Ang <strong>suplay</strong> ay tumutukoy sa dami ng produkto o
+        serbisyo na <strong>nais at kayang ipagbili ng mga prodyuser</strong>
+        sa iba't ibang presyo sa isang takdang panahon.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Batas ng Suplay</h3>
+
+      <p>
+        Kapag <strong>tumataas ang presyo</strong>, karaniwang
+        <strong>tumataas ang quantity supplied</strong>.
+        Kapag <strong>bumababa ang presyo</strong>, karaniwang
+        <strong>bumababa ang quantity supplied</strong>.
+      </p>
+
+    </div>
+
+    <div class="diagram-box">
+
+      <div class="diagram-title">
+        Supply Curve
+      </div>
+
+      <svg width="600" height="350" viewBox="0 0 600 350">
+
+        <line x1="100" y1="60" x2="100" y2="290" class="axis" />
+        <line x1="100" y1="290" x2="540" y2="290" class="axis" />
+
+        <line x1="100" y1="110" x2="540" y2="110" class="grid-line" />
+        <line x1="100" y1="160" x2="540" y2="160" class="grid-line" />
+        <line x1="100" y1="210" x2="540" y2="210" class="grid-line" />
+        <line x1="100" y1="260" x2="540" y2="260" class="grid-line" />
+
+        <!-- supply -->
+        <line x1="150" y1="270" x2="500" y2="80" class="supply-line" />
+
+        <text x="30" y="75" class="svg-label">
+          Presyo
+        </text>
+
+        <text x="455" y="320" class="svg-label">
+          Quantity
+        </text>
+
+        <text x="420" y="105" class="svg-green">
+          Suplay
+        </text>
+
+      </svg>
+
+    </div>
+
+  </section>
+
+
+  <!-- SCHEDULE -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>3. Demand at Supply Schedule</h2>
+      <p>
+        Gamitin ang table upang makita kung saan nagkakapantay ang
+        quantity demanded at quantity supplied.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <table class="schedule">
+
+        <tr>
+          <th>Presyo</th>
+          <th>Quantity Demanded</th>
+          <th>Quantity Supplied</th>
+          <th>Kalagayan</th>
+        </tr>
+
+        <tr>
+          <td>₱10</td>
+          <td>80</td>
+          <td>20</td>
+          <td class="shortage-cell">Shortage</td>
+        </tr>
+
+        <tr>
+          <td>₱20</td>
+          <td>70</td>
+          <td>40</td>
+          <td class="shortage-cell">Shortage</td>
+        </tr>
+
+        <tr>
+          <td>₱30</td>
+          <td>60</td>
+          <td>60</td>
+          <td class="equilibrium-cell">Equilibrium</td>
+        </tr>
+
+        <tr>
+          <td>₱40</td>
+          <td>40</td>
+          <td>70</td>
+          <td class="surplus-cell">Surplus</td>
+        </tr>
+
+        <tr>
+          <td>₱50</td>
+          <td>20</td>
+          <td>80</td>
+          <td class="surplus-cell">Surplus</td>
+        </tr>
+
+      </table>
+
+    </div>
+
+    <div class="card">
+
+      <h3>How to Read the Schedule</h3>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-number">1</div>
+          <p>
+            Hanapin ang <strong>presyo</strong>.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <p>
+            Tingnan ang <strong>quantity demanded</strong>.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <p>
+            Tingnan ang <strong>quantity supplied</strong>.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <p>
+            Ihambing ang dalawa.
+            Kapag pareho, <strong>equilibrium</strong>.
+            Kapag mas mataas ang demand, <strong>shortage</strong>.
+            Kapag mas mataas ang supply, <strong>surplus</strong>.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- EQUILIBRIUM -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>4. Equilibrium</h2>
+      <p>
+        Ang punto kung saan nagkakapantay ang demand at supply.
+      </p>
+    </div>
+
+    <div class="card definition">
+
+      <p>
+        Ang <strong>equilibrium</strong> ay nangyayari kapag ang
+        <strong>quantity demanded ay katumbas ng quantity supplied</strong>.
+      </p>
+
+      <div class="formula">
+        Quantity Demanded = Quantity Supplied
+      </div>
+
+      <p>
+        Ang presyo sa puntong ito ay tinatawag na
+        <strong>equilibrium price</strong>, habang ang dami ay
+        <strong>equilibrium quantity</strong>.
+      </p>
+
+    </div>
+
+
+    <div class="diagram-box">
+
+      <div class="diagram-title">
+        Equilibrium Point
+      </div>
+
+      <svg width="650" height="400" viewBox="0 0 650 400">
+
+        <line x1="100" y1="60" x2="100" y2="330" class="axis" />
+        <line x1="100" y1="330" x2="590" y2="330" class="axis" />
+
+        <line x1="100" y1="120" x2="590" y2="120" class="grid-line" />
+        <line x1="100" y1="180" x2="590" y2="180" class="grid-line" />
+        <line x1="100" y1="240" x2="590" y2="240" class="grid-line" />
+        <line x1="100" y1="300" x2="590" y2="300" class="grid-line" />
+
+        <!-- demand -->
+        <line x1="150" y1="80" x2="540" y2="300" class="demand-line" />
+
+        <!-- supply -->
+        <line x1="150" y1="300" x2="540" y2="80" class="supply-line" />
+
+        <!-- equilibrium -->
+        <circle cx="345" cy="190" r="9" class="equilibrium-dot" />
+
+        <line
+          x1="345"
+          y1="190"
+          x2="345"
+          y2="330"
+          stroke="#facc15"
+          stroke-width="2"
+          stroke-dasharray="7 6"
+        />
+
+        <line
+          x1="100"
+          y1="190"
+          x2="345"
+          y2="190"
+          stroke="#facc15"
+          stroke-width="2"
+          stroke-dasharray="7 6"
+        />
+
+        <text x="25" y="75" class="svg-label">
+          Presyo
+        </text>
+
+        <text x="500" y="365" class="svg-label">
+          Quantity
+        </text>
+
+        <text x="380" y="125" class="svg-blue">
+          Demand
+        </text>
+
+        <text x="380" y="260" class="svg-green">
+          Supply
+        </text>
+
+        <text x="355" y="180" class="svg-yellow">
+          Equilibrium
+        </text>
+
+        <text x="355" y="350" class="svg-yellow">
+          Equilibrium Quantity
+        </text>
+
+        <text x="115" y="180" class="svg-yellow">
+          Equilibrium Price
+        </text>
+
+      </svg>
+
+    </div>
+
+  </section>
+
+
+  <!-- SHORTAGE -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>5. Shortage</h2>
+      <p>
+        Kapag mas marami ang gustong bumili kaysa sa available na produkto.
+      </p>
+    </div>
+
+    <div class="card definition">
+
+      <p>
+        Ang <strong>shortage</strong> ay nangyayari kapag ang
+        <strong>quantity demanded ay mas mataas kaysa quantity supplied</strong>
+        sa isang partikular na presyo.
+      </p>
+
+      <div class="formula">
+        Qd &gt; Qs = Shortage
+      </div>
+
+    </div>
+
+
+    <div class="diagram-box">
+
+      <div class="diagram-title">
+        Shortage sa Graph
+      </div>
+
+      <svg width="650" height="400" viewBox="0 0 650 400">
+
+        <line x1="100" y1="60" x2="100" y2="330" class="axis" />
+        <line x1="100" y1="330" x2="590" y2="330" class="axis" />
+
+        <line x1="100" y1="120" x2="590" y2="120" class="grid-line" />
+        <line x1="100" y1="180" x2="590" y2="180" class="grid-line" />
+        <line x1="100" y1="240" x2="590" y2="240" class="grid-line" />
+        <line x1="100" y1="300" x2="590" y2="300" class="grid-line" />
+
+        <line x1="150" y1="80" x2="540" y2="300" class="demand-line" />
+        <line x1="150" y1="300" x2="540" y2="80" class="supply-line" />
+
+        <!-- price -->
+        <line
+          x1="100"
+          y1="245"
+          x2="590"
+          y2="245"
+          stroke="#fb7185"
+          stroke-width="2"
+          stroke-dasharray="7 6"
+        />
+
+        <!-- shortage line -->
+        <line
+          x1="235"
+          y1="245"
+          x2="410"
+          y2="245"
+          class="shortage-line"
+        />
+
+        <text x="25" y="75" class="svg-label">
+          Presyo
+        </text>
+
+        <text x="505" y="365" class="svg-label">
+          Quantity
+        </text>
+
+        <text x="410" y="135" class="svg-blue">
+          Demand
+        </text>
+
+        <text x="410" y="280" class="svg-green">
+          Supply
+        </text>
+
+        <text x="275" y="230" class="svg-red">
+          SHORTAGE
+        </text>
+
+        <text x="220" y="270" class="svg-muted">
+          Qs
+        </text>
+
+        <text x="405" y="270" class="svg-muted">
+          Qd
+        </text>
+
+      </svg>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Kapag may Shortage</h3>
+
+      <p>
+        Mas maraming mamimili ang gustong bumili kaysa sa dami ng
+        produktong available. Dahil dito, maaaring magkaroon ng
+        competition sa produkto at maaaring magkaroon ng pressure
+        para tumaas ang presyo.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- SURPLUS -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>6. Surplus</h2>
+      <p>
+        Kapag mas marami ang available na produkto kaysa sa gustong bilhin.
+      </p>
+    </div>
+
+    <div class="card definition">
+
+      <p>
+        Ang <strong>surplus</strong> ay nangyayari kapag ang
+        <strong>quantity supplied ay mas mataas kaysa quantity demanded</strong>
+        sa isang partikular na presyo.
+      </p>
+
+      <div class="formula">
+        Qs &gt; Qd = Surplus
+      </div>
+
+    </div>
+
+
+    <div class="diagram-box">
+
+      <div class="diagram-title">
+        Surplus sa Graph
+      </div>
+
+      <svg width="650" height="400" viewBox="0 0 650 400">
+
+        <line x1="100" y1="60" x2="100" y2="330" class="axis" />
+        <line x1="100" y1="330" x2="590" y2="330" class="axis" />
+
+        <line x1="100" y1="120" x2="590" y2="120" class="grid-line" />
+        <line x1="100" y1="180" x2="590" y2="180" class="grid-line" />
+        <line x1="100" y1="240" x2="590" y2="240" class="grid-line" />
+        <line x1="100" y1="300" x2="590" y2="300" class="grid-line" />
+
+        <line x1="150" y1="80" x2="540" y2="300" class="demand-line" />
+        <line x1="150" y1="300" x2="540" y2="80" class="supply-line" />
+
+        <!-- price -->
+        <line
+          x1="100"
+          y1="135"
+          x2="590"
+          y2="135"
+          stroke="#facc15"
+          stroke-width="2"
+          stroke-dasharray="7 6"
+        />
+
+        <!-- surplus line -->
+        <line
+          x1="270"
+          y1="135"
+          x2="445"
+          y2="135"
+          class="surplus-line"
+        />
+
+        <text x="25" y="75" class="svg-label">
+          Presyo
+        </text>
+
+        <text x="505" y="365" class="svg-label">
+          Quantity
+        </text>
+
+        <text x="410" y="130" class="svg-blue">
+          Demand
+        </text>
+
+        <text x="410" y="285" class="svg-green">
+          Supply
+        </text>
+
+        <text x="320" y="120" class="svg-yellow">
+          SURPLUS
+        </text>
+
+        <text x="255" y="160" class="svg-muted">
+          Qd
+        </text>
+
+        <text x="450" y="160" class="svg-muted">
+          Qs
+        </text>
+
+      </svg>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Kapag may Surplus</h3>
+
+      <p>
+        Mas maraming produkto ang available kaysa sa gustong bilhin
+        ng mga mamimili. Maaaring magkaroon ng pressure na bumaba
+        ang presyo upang mahikayat ang mas maraming mamimili.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- THREE CONDITIONS -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>7. Tatlong Kalagayan ng Pamilihan</h2>
+      <p>
+        Madaling tandaan gamit ang paghahambing ng Qd at Qs.
+      </p>
+    </div>
+
+    <div class="state-grid">
+
+      <div class="state equilibrium">
+
+        <h3>Equilibrium</h3>
+
+        <p>
+          Qd = Qs
+        </p>
+
+        <p>
+          Pantay ang quantity demanded at quantity supplied.
+        </p>
+
+      </div>
+
+      <div class="state shortage">
+
+        <h3>Shortage</h3>
+
+        <p>
+          Qd &gt; Qs
+        </p>
+
+        <p>
+          Mas maraming gustong bumili kaysa sa available.
+        </p>
+
+      </div>
+
+      <div class="state surplus">
+
+        <h3>Surplus</h3>
+
+        <p>
+          Qs &gt; Qd
+        </p>
+
+        <p>
+          Mas maraming available kaysa sa gustong bilhin.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PRICE -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>8. Presyo at Pamilihan</h2>
+      <p>
+        Ang presyo ay nakatutulong sa pag-aayos ng demand at supply.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <div class="cause-effect">
+
+        <div class="cause">
+          <strong>Presyo ↑</strong>
+          <span class="arrow">→</span>
+          <span>Karaniwang demand ↓ at supply ↑</span>
+        </div>
+
+        <div class="cause">
+          <strong>Presyo ↓</strong>
+          <span class="arrow">→</span>
+          <span>Karaniwang demand ↑ at supply ↓</span>
+        </div>
+
+        <div class="cause">
+          <strong>Shortage</strong>
+          <span class="arrow">→</span>
+          <span>Mas maraming gustong bumili kaysa available</span>
+        </div>
+
+        <div class="cause">
+          <strong>Surplus</strong>
+          <span class="arrow">→</span>
+          <span>Mas maraming available kaysa gustong bumili</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONSUMER CHOICES -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>9. Presyo, Availability, at Consumer Choices</h2>
+      <p>
+        Paano naaapektuhan ng pamilihan ang desisyon ng mamimili?
+      </p>
+    </div>
+
+    <div class="card">
+
+      <div class="steps">
+
+        <div class="step">
+
+          <div class="step-number">1</div>
+
+          <p>
+            Kapag <strong>mataas ang presyo</strong>, maaaring bawasan
+            ng mamimili ang pagbili o humanap ng alternatibong produkto.
+          </p>
+
+        </div>
+
+        <div class="step">
+
+          <div class="step-number">2</div>
+
+          <p>
+            Kapag <strong>mababa ang presyo</strong>, maaaring mas maraming
+            mamimili ang mahikayat na bumili.
+          </p>
+
+        </div>
+
+        <div class="step">
+
+          <div class="step-number">3</div>
+
+          <p>
+            Kapag may <strong>shortage</strong>, maaaring mahirapan ang
+            mamimili na makakuha ng produkto.
+          </p>
+
+        </div>
+
+        <div class="step">
+
+          <div class="step-number">4</div>
+
+          <p>
+            Kapag may <strong>surplus</strong>, mas maraming produkto ang
+            available para sa mga mamimili.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- GRAPH READING -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>10. Paano Basahin ang Demand at Supply Graph?</h2>
+      <p>
+        Gamitin ang mga hakbang na ito kapag may graph sa exam.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-number">1</div>
+
+          <p>
+            Tingnan ang <strong>vertical axis</strong>.
+            Karaniwang ipinapakita nito ang <strong>presyo</strong>.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+
+          <p>
+            Tingnan ang <strong>horizontal axis</strong>.
+            Karaniwang ipinapakita nito ang <strong>quantity</strong>.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+
+          <p>
+            Hanapin ang <strong>Demand</strong> curve.
+            Karaniwan itong pababa mula kaliwa papunta sa kanan.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+
+          <p>
+            Hanapin ang <strong>Supply</strong> curve.
+            Karaniwan itong pataas mula kaliwa papunta sa kanan.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">5</div>
+
+          <p>
+            Hanapin ang <strong>intersection</strong> ng dalawang curve.
+            Ito ang equilibrium point.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">6</div>
+
+          <p>
+            Kung ang presyo ay nasa ibaba ng equilibrium,
+            tingnan kung may <strong>shortage</strong>.
+            Kung nasa itaas, tingnan kung may <strong>surplus</strong>.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- EXAMPLE -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>11. Practice Example</h2>
+      <p>
+        Subukan mong tukuyin ang kalagayan ng pamilihan.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <h3>Situation</h3>
+
+      <p>
+        Sa presyong ₱30, ang quantity demanded ay 60 units
+        at ang quantity supplied ay 60 units.
+      </p>
+
+      <div class="formula">
+        Qd = Qs = 60
+      </div>
+
+      <p>
+        Dahil magkapantay ang quantity demanded at quantity supplied,
+        ang market condition ay <strong>equilibrium</strong>.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>Another Situation</h3>
+
+      <p>
+        Sa presyong ₱10, ang quantity demanded ay 80 units
+        habang ang quantity supplied ay 20 units.
+      </p>
+
+      <div class="formula">
+        Qd = 80 &nbsp;&gt;&nbsp; Qs = 20
+      </div>
+
+      <p>
+        Dahil mas mataas ang quantity demanded kaysa quantity supplied,
+        mayroong <strong>shortage</strong>.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>One More</h3>
+
+      <p>
+        Sa presyong ₱50, ang quantity demanded ay 20 units
+        habang ang quantity supplied ay 80 units.
+      </p>
+
+      <div class="formula">
+        Qs = 80 &nbsp;&gt;&nbsp; Qd = 20
+      </div>
+
+      <p>
+        Dahil mas mataas ang quantity supplied kaysa quantity demanded,
+        mayroong <strong>surplus</strong>.
+      </p>
+
+    </div>
+
+  </section>
+<!-- VIDEO LIBRARY -->
+<section class="video-library">
+
+  <div class="section-heading">
+    <div>
+      <span class="section-label">LEARNING VIDEOS</span>
+
+      <h2>📁 Video Library</h2>
+
+      <p>
+        Watch these videos to better understand demand, supply,
+        equilibrium, shortage, and surplus.
+      </p>
+    </div>
+  </div>
+
+
+  <div class="folder">
+
+    <!-- FOLDER HEADER -->
+
+    <div class="folder-header">
+
+      <div class="folder-icon">
+        📁
+      </div>
+
+      <div>
+        <h3>Demand & Supply Videos</h3>
+        <span>6 videos • AP Economics</span>
+      </div>
+
+    </div>
+
+
+    <!-- ALL 6 VIDEOS MUST BE INSIDE THIS -->
+
+    <div class="video-list">
+
+      <!-- VIDEO 1 -->
+
+      <a
+        class="video-item"
+        href="https://youtu.be/gQz-I0Q457A?si=ptpfGa3XMepQNgl3"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <div class="video-icon">
+          ▶
+        </div>
+
+        <div class="video-info">
+
+          <h4>Supply and Demand</h4>
+
+          <p>
+            Basic relationship between demand, supply, price,
+            shortage, market equilibrium, and surplus.
+          </p>
+
+        </div>
+
+        <span class="video-arrow">
+          ↗
+        </span>
+
+      </a>
+
+
+      <!-- VIDEO 2 -->
+
+      <a
+        class="video-item"
+        href="https://www.youtube.com/watch?v=E3EGZW8Hac4"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <div class="video-icon">
+          ▶
+        </div>
+
+        <div class="video-info">
+
+          <h4>Demand, Supply & Equilibrium</h4>
+
+          <p>
+            Understand how demand and supply meet at the
+            equilibrium point.
+          </p>
+
+        </div>
+
+        <span class="video-arrow">
+          ↗
+        </span>
+
+      </a>
+
+
+      <!-- VIDEO 3 -->
+
+      <a
+        class="video-item"
+        href="https://youtu.be/PEMkfgrifDw?si=tgAcP-5Qyeu0BKtV"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <div class="video-icon">
+          ▶
+        </div>
+
+        <div class="video-info">
+
+          <h4>Market Equilibrium</h4>
+
+          <p>
+            Learn how price and quantity are determined where
+            demand and supply intersect.
+          </p>
+
+        </div>
+
+        <span class="video-arrow">
+          ↗
+        </span>
+
+      </a>
+
+
+      <!-- VIDEO 4 -->
+
+      <a
+        class="video-item"
+        href="https://www.youtube.com/watch?v=sLkUlcsBy0g"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <div class="video-icon">
+          ▶
+        </div>
+
+        <div class="video-info">
+
+          <h4>Shortage & Surplus</h4>
+
+          <p>
+            Review what happens when quantity demanded and
+            quantity supplied are not equal.
+          </p>
+
+        </div>
+
+        <span class="video-arrow">
+          ↗
+        </span>
+
+      </a>
+
+
+      <!-- VIDEO 5 -->
+
+      <a
+        class="video-item"
+        href="https://youtu.be/TSA1--F8jSc?si=1Vns8C42_A51us9T"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <div class="video-icon">
+          ▶
+        </div>
+
+        <div class="video-info">
+
+          <h4>Calculation Shortage & Surplus</h4>
+
+          <p>
+            A short explanation on how to calculate shortage
+            and surplus. Check comment for correction.
+          </p>
+
+        </div>
+
+        <span class="video-arrow">
+          ↗
+        </span>
+
+      </a>
+
+
+      <!-- VIDEO 6 -->
+
+      <a
+        class="video-item"
+        href="https://youtu.be/vUyRQ066tw0?si=6tZhPxsl9j50rz80"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <div class="video-icon">
+          ▶
+        </div>
+
+        <div class="video-info">
+
+          <h4>Calculation of Equilibrium</h4>
+
+          <p>
+            A short explanation on how to calculate equilibrium.
+          </p>
+
+        </div>
+
+        <span class="video-arrow">
+          ↗
+        </span>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+  <!-- QUICK REVIEW -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>12. Quick Review</h2>
+      <p>
+        Mga pangunahing konseptong dapat tandaan.
+      </p>
+    </div>
+
+    <div class="card">
+
+      <div class="quick-list">
+
+        <div class="quick-item">
+          <strong>Demand:</strong>
+          Dami ng produkto na nais at kayang bilhin ng mamimili.
+        </div>
+
+        <div class="quick-item">
+          <strong>Supply:</strong>
+          Dami ng produkto na nais at kayang ipagbili ng prodyuser.
+        </div>
+
+        <div class="quick-item">
+          <strong>Equilibrium:</strong>
+          Qd = Qs.
+        </div>
+
+        <div class="quick-item">
+          <strong>Shortage:</strong>
+          Qd &gt; Qs.
+        </div>
+
+        <div class="quick-item">
+          <strong>Surplus:</strong>
+          Qs &gt; Qd.
+        </div>
+
+        <div class="quick-item">
+          <strong>Equilibrium Price:</strong>
+          Presyo kung saan nagkakapantay ang quantity demanded at quantity supplied.
+        </div>
+
+        <div class="quick-item">
+          <strong>Equilibrium Quantity:</strong>
+          Dami ng produkto sa equilibrium point.
+        </div>
+
+        <div class="quick-item">
+          <strong>Demand Curve:</strong>
+          Karaniwang pababa mula kaliwa papunta sa kanan.
+        </div>
+
+        <div class="quick-item">
+          <strong>Supply Curve:</strong>
+          Karaniwang pataas mula kaliwa papunta sa kanan.
+        </div>
+
+        <div class="quick-item">
+          <strong>Consumer Choice:</strong>
+          Ang presyo at availability ay maaaring makaapekto sa desisyon ng mamimili.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<script>
+
+  const reviewerId = "ap";
+
+  const completeBtn =
+    document.getElementById("completeBtn");
+
+  const completionStatus =
+    document.getElementById("completionStatus");
+
+  const progressFill =
+    document.getElementById("progressFill");
+
+
+  function getProgress() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem("riasStudyHubProgress")
+      ) || {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    } catch (error) {
+
+      return {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    }
+
+  }
+
+
+  function saveProgress(progress) {
+
+    localStorage.setItem(
+      "riasStudyHubProgress",
+      JSON.stringify(progress)
+    );
+
+  }
+
+
+  function updateCompletionUI() {
+
+    const progress = getProgress();
+
+    const completed =
+      progress.reviewers &&
+      progress.reviewers[reviewerId] === true;
+
+
+    if (completed) {
+
+      completionStatus.textContent = "Completed ✓";
+      completionStatus.classList.add("completed");
+
+      completeBtn.textContent = "Completed ✓";
+      completeBtn.classList.add("completed");
+
+      progressFill.style.width = "100%";
+
+    } else {
+
+      completionStatus.textContent = "Not completed";
+      completionStatus.classList.remove("completed");
+
+      completeBtn.textContent = "Mark as Complete";
+      completeBtn.classList.remove("completed");
+
+      progressFill.style.width = "0%";
+
+    }
+
+  }
+
+
+  completeBtn.addEventListener("click", function () {
+
+    const progress = getProgress();
+
+    if (!progress.reviewers) {
+      progress.reviewers = {};
+    }
+
+    const currentlyCompleted =
+      progress.reviewers[reviewerId] === true;
+
+    progress.reviewers[reviewerId] =
+      !currentlyCompleted;
+
+    saveProgress(progress);
+
+    updateCompletionUI();
+
+  });
+
+
+  updateCompletionUI();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress | Ria's Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+
+    header {
+      height: 70px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 7%;
+      background: var(--background);
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    nav a.active {
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    /* MAIN */
+
+    main {
+      width: 86%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 55px 0 80px;
+    }
+
+    .intro {
+      margin-bottom: 35px;
+    }
+
+    .intro h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .intro h1 span {
+      color: var(--blue);
+    }
+
+    .intro p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 650px;
+    }
+
+    /* OVERALL PROGRESS */
+
+    .overall {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 25px;
+    }
+
+    .overall-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .overall h2 {
+      font-size: 20px;
+    }
+
+    .percentage {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: var(--background);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      border-radius: 20px;
+      transition: width 0.4s ease;
+    }
+
+    .overall-info {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* STATS */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 35px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 23px;
+    }
+
+    .stat-icon {
+      font-size: 23px;
+      margin-bottom: 15px;
+    }
+
+    .stat-number {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* SECTION */
+
+    .section-title {
+      font-size: 21px;
+      margin-bottom: 18px;
+    }
+
+    /* SUBJECTS */
+
+    .subjects {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 35px;
+    }
+
+    .subject-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 21px;
+    }
+
+    .subject-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 13px;
+    }
+
+    .subject-name {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .subject-percent {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .subject-bar {
+      height: 8px;
+      width: 100%;
+      background: var(--background);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .subject-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      border-radius: 20px;
+      transition: width 0.4s ease;
+    }
+
+    .subject-details {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* TERM */
+
+    .term-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 35px;
+    }
+
+    .term-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .term-header h3 {
+      font-size: 18px;
+    }
+
+    .term-header span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .term-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .check {
+      width: 22px;
+      height: 22px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .term-item-text {
+      flex: 1;
+    }
+
+    .term-item-title {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .term-item-subtitle {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* ACTIVITY */
+
+    .activity {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .activity-item {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    .activity-main {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .activity-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--background);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+    }
+
+    .activity-title {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .activity-time {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .empty {
+      padding: 35px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+
+      header {
+        padding: 0 5%;
+      }
+
+      nav {
+        gap: 14px;
+      }
+
+      nav a {
+        font-size: 12px;
+      }
+
+      main {
+        width: 90%;
+        padding-top: 40px;
+      }
+
+      .intro h1 {
+        font-size: 30px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .subjects {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        height: auto;
+        padding: 18px 5%;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .overall {
+        padding: 22px;
+      }
+
+      .overall-top {
+        align-items: flex-start;
+      }
+
+      .percentage {
+        font-size: 27px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <a href="index.html" class="logo">
+    Ria's <span>Study Hub</span>
+  </a>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="reviewer.html">Reviewers</a>
+    <a href="quizzes.html">Quizzes</a>
+    <a href="notes.html">Notes</a>
+    <a href="progress.html" class="active">Progress</a>
+  </nav>
+
+</header>
+
+
+<main>
+
+  <section class="intro">
+    <h1>Your <span>Progress.</span></h1>
+    <p>
+      Keep track of what you've studied, what you've completed,
+      and how far you've come.
+    </p>
+  </section>
+
+
+  <!-- OVERALL -->
+
+  <section class="overall">
+
+    <div class="overall-top">
+      <h2>Overall Progress</h2>
+      <div class="percentage" id="overallPercentage">0%</div>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="overallFill"></div>
+    </div>
+
+    <div class="overall-info" id="overallInfo">
+      0 of 0 study activities completed
+    </div>
+
+  </section>
+
+
+  <!-- STATS -->
+
+  <section class="stats">
+
+    <div class="stat-card">
+      <div class="stat-icon">📖</div>
+      <div class="stat-number" id="reviewerCount">0</div>
+      <div class="stat-label">Reviewers Completed</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">📝</div>
+      <div class="stat-number" id="quizCount">0</div>
+      <div class="stat-label">Quizzes Completed</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">💭</div>
+      <div class="stat-number" id="noteCount">0</div>
+      <div class="stat-label">Personal Notes</div>
+    </div>
+
+  </section>
+
+
+  <!-- SUBJECT PROGRESS -->
+
+  <h2 class="section-title">Subject Progress</h2>
+
+  <section class="subjects">
+
+    <div class="subject-card" data-subject="Science">
+      <div class="subject-top">
+        <div class="subject-name">Science</div>
+        <div class="subject-percent">0%</div>
+      </div>
+      <div class="subject-bar">
+        <div class="subject-fill"></div>
+      </div>
+      <div class="subject-details">No activities completed</div>
+    </div>
+
+
+    <div class="subject-card" data-subject="Mathematics">
+      <div class="subject-top">
+        <div class="subject-name">Mathematics</div>
+        <div class="subject-percent">0%</div>
+      </div>
+      <div class="subject-bar">
+        <div class="subject-fill"></div>
+      </div>
+      <div class="subject-details">No activities completed</div>
+    </div>
+
+
+    <div class="subject-card" data-subject="English">
+      <div class="subject-top">
+        <div class="subject-name">English</div>
+        <div class="subject-percent">0%</div>
+      </div>
+      <div class="subject-bar">
+        <div class="subject-fill"></div>
+      </div>
+      <div class="subject-details">No activities completed</div>
+    </div>
+
+
+    <div class="subject-card" data-subject="Filipino">
+      <div class="subject-top">
+        <div class="subject-name">Filipino</div>
+        <div class="subject-percent">0%</div>
+      </div>
+      <div class="subject-bar">
+        <div class="subject-fill"></div>
+      </div>
+      <div class="subject-details">No activities completed</div>
+    </div>
+
+
+    <div class="subject-card" data-subject="AP">
+      <div class="subject-top">
+        <div class="subject-name">Araling Panlipunan</div>
+        <div class="subject-percent">0%</div>
+      </div>
+      <div class="subject-bar">
+        <div class="subject-fill"></div>
+      </div>
+      <div class="subject-details">No activities completed</div>
+    </div>
+
+
+    <div class="subject-card" data-subject="ICT">
+      <div class="subject-top">
+        <div class="subject-name">ICT</div>
+        <div class="subject-percent">0%</div>
+      </div>
+      <div class="subject-bar">
+        <div class="subject-fill"></div>
+      </div>
+      <div class="subject-details">No activities completed</div>
+    </div>
+
+
+    <div class="subject-card" data-subject="Research">
+      <div class="subject-top">
+        <div class="subject-name">Research</div>
+        <div class="subject-percent">0%</div>
+      </div>
+      <div class="subject-bar">
+        <div class="subject-fill"></div>
+      </div>
+      <div class="subject-details">No activities completed</div>
+    </div>
+
+
+    <div class="subject-card" data-subject="ConChem">
+      <div class="subject-top">
+        <div class="subject-name">ConChem</div>
+        <div class="subject-percent">0%</div>
+      </div>
+      <div class="subject-bar">
+        <div class="subject-fill"></div>
+      </div>
+      <div class="subject-details">No activities completed</div>
+    </div>
+
+
+    <div class="subject-card" data-subject="Val Ed">
+      <div class="subject-top">
+        <div class="subject-name">Val Ed</div>
+        <div class="subject-percent">0%</div>
+      </div>
+      <div class="subject-bar">
+        <div class="subject-fill"></div>
+      </div>
+      <div class="subject-details">No activities completed</div>
+    </div>
+
+
+    <div class="subject-card" data-subject="MAPEH">
+      <div class="subject-top">
+        <div class="subject-name">MAPEH</div>
+        <div class="subject-percent">0%</div>
+      </div>
+      <div class="subject-bar">
+        <div class="subject-fill"></div>
+      </div>
+      <div class="subject-details">No activities completed</div>
+    </div>
+
+  </section>
+
+
+  <!-- TERM 2 -->
+
+  <h2 class="section-title">Term 2</h2>
+
+  <section class="term-card">
+
+    <div class="term-header">
+      <h3>Week 1</h3>
+      <span id="weekProgress">0% complete</span>
+    </div>
+
+    <div class="term-item">
+      <div class="check"></div>
+      <div class="term-item-text">
+        <div class="term-item-title">Reviewers</div>
+        <div class="term-item-subtitle">
+          Complete your Term 2 Week 1 reviewers
+        </div>
+      </div>
+    </div>
+
+    <div class="term-item">
+      <div class="check"></div>
+      <div class="term-item-text">
+        <div class="term-item-title">Quizzes</div>
+        <div class="term-item-subtitle">
+          Test your knowledge after reviewing
+        </div>
+      </div>
+    </div>
+
+    <div class="term-item">
+      <div class="check"></div>
+      <div class="term-item-text">
+        <div class="term-item-title">Notes</div>
+        <div class="term-item-subtitle">
+          Make personal notes for important lessons
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ACTIVITY -->
+
+  <h2 class="section-title">Recent Activity</h2>
+
+  <section class="activity" id="activity">
+
+    <div class="empty">
+      No activity yet. Start studying to see your progress here.
+    </div>
+
+  </section>
+
+</main>
+
+
+<script>
+
+  /*
+    PROGRESS DATA
+
+    This is intentionally simple for now.
+    Later, the reviewer and quiz pages can automatically
+    update these values.
+  */
+
+  const progressData = {
+    reviewers: 0,
+    quizzes: 0,
+    notes: 0,
+    totalActivities: 0,
+    completedActivities: 0,
+
+    subjects: {
+      Science: 0,
+      Mathematics: 0,
+      English: 0,
+      Filipino: 0,
+      AP: 0,
+      ICT: 0,
+      Research: 0,
+      ConChem: 0,
+      "Val Ed": 0,
+      MAPEH: 0
+    }
+  };
+
+
+  function updateProgress() {
+
+    const completed = progressData.completedActivities;
+    const total = progressData.totalActivities;
+
+    let percentage = 0;
+
+    if (total > 0) {
+      percentage = Math.round((completed / total) * 100);
+    }
+
+    document.getElementById("overallPercentage").textContent =
+      percentage + "%";
+
+    document.getElementById("overallFill").style.width =
+      percentage + "%";
+
+    document.getElementById("overallInfo").textContent =
+      completed + " of " + total + " study activities completed";
+
+
+    document.getElementById("reviewerCount").textContent =
+      progressData.reviewers;
+
+    document.getElementById("quizCount").textContent =
+      progressData.quizzes;
+
+    document.getElementById("noteCount").textContent =
+      progressData.notes;
+
+
+    /*
+      SUBJECT PROGRESS
+    */
+
+    document.querySelectorAll(".subject-card").forEach(card => {
+
+      const subject = card.dataset.subject;
+      const value = progressData.subjects[subject] || 0;
+
+      card.querySelector(".subject-percent").textContent =
+        value + "%";
+
+      card.querySelector(".subject-fill").style.width =
+        value + "%";
+
+      card.querySelector(".subject-details").textContent =
+        value === 0
+          ? "No activities completed"
+          : value + "% of activities completed";
+
+    });
+
+  }
+
+
+  /*
+    LOCAL STORAGE
+
+    This allows the page to remember progress
+    on the same browser/device.
+  */
+
+  const savedProgress =
+    localStorage.getItem("riasStudyHubProgress");
+
+  if (savedProgress) {
+
+    try {
+
+      const saved = JSON.parse(savedProgress);
+
+      Object.assign(progressData, saved);
+
+      if (saved.subjects) {
+        Object.assign(
+          progressData.subjects,
+          saved.subjects
+        );
+      }
+
+    } catch (error) {
+
+      console.log("Could not load saved progress.");
+
+    }
+
+  }
+
+
+  updateProgress();
+
+</script>
+
+</body>
+</html>
