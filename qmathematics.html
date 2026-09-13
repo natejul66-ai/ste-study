@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Mathematics Quiz | STE Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+      --red: #f87171;
+      --yellow: #facc15;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 17, 23, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 45px 22px 70px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 25px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .back-link:hover {
+      color: var(--blue);
+    }
+
+    .hero {
+      margin-bottom: 30px;
+    }
+
+    .subject-label {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 720px;
+      font-size: 16px;
+    }
+
+    .quiz-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 25px;
+    }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 17px;
+      text-align: center;
+    }
+
+    .info-card strong {
+      display: block;
+      font-size: 20px;
+      color: var(--blue);
+      margin-bottom: 3px;
+    }
+
+    .info-card span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .progress-container {
+      margin-bottom: 25px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #252a34;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      transition: width 0.3s;
+    }
+
+    .quiz-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    .question-number {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 10px;
+    }
+
+    .question {
+      font-size: 21px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .scenario {
+      background: #11151d;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--blue);
+      border-radius: 10px;
+      padding: 17px;
+      margin-bottom: 22px;
+      color: #d6d9df;
+      font-size: 15px;
+    }
+
+    .diagram {
+      background: #11151d;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin: 18px 0 22px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .diagram strong {
+      color: var(--text);
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option {
+      position: relative;
+    }
+
+    .option input {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .option label {
+      display: block;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 15px 17px;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #dfe2e7;
+    }
+
+    .option label:hover {
+      border-color: var(--blue);
+      background: var(--surface-hover);
+    }
+
+    .option input:checked + label {
+      border-color: var(--blue);
+      background: #152033;
+      color: var(--text);
+    }
+
+    .option-letter {
+      display: inline-flex;
+      width: 28px;
+      height: 28px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #222936;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+      margin-right: 10px;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .nav-btn {
+      padding: 11px 18px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .nav-btn.primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #08111f;
+    }
+
+    .nav-btn.primary:hover {
+      background: var(--blue-hover);
+      color: #08111f;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .result {
+      display: none;
+      margin-top: 25px;
+    }
+
+    .result-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+    }
+
+    .result-title {
+      font-size: 27px;
+      margin-bottom: 8px;
+    }
+
+    .score {
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--blue);
+      margin: 12px 0;
+    }
+
+    .result-message {
+      color: var(--muted);
+      margin-bottom: 25px;
+    }
+
+    .result-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .result-stat {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .result-stat strong {
+      display: block;
+      font-size: 20px;
+    }
+
+    .result-stat span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .review {
+      display: none;
+      margin-top: 25px;
+    }
+
+    .review h2 {
+      margin-bottom: 17px;
+      font-size: 23px;
+    }
+
+    .review-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 20px;
+      margin-bottom: 14px;
+    }
+
+    .review-item.correct {
+      border-left: 4px solid var(--green);
+    }
+
+    .review-item.incorrect {
+      border-left: 4px solid var(--red);
+    }
+
+    .review-question {
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .review-answer {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .review-answer strong {
+      color: var(--text);
+    }
+
+    .correct-text {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .incorrect-text {
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    .explanation {
+      background: #11151d;
+      border-radius: 9px;
+      padding: 13px;
+      margin-top: 12px;
+      color: #cbd0d8;
+      font-size: 14px;
+    }
+
+    .retry-btn {
+      border: 1px solid var(--blue);
+      background: transparent;
+      color: var(--blue);
+      padding: 11px 18px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .retry-btn:hover {
+      background: var(--blue);
+      color: #08111f;
+    }
+
+    @media (max-width: 700px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+        gap: 14px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .quiz-info,
+      .result-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-card {
+        padding: 20px;
+      }
+
+      .question {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <a href="index.html" class="logo">
+      STE <span>Study Hub</span>
+    </a>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="reviewer.html">Reviewers</a>
+      <a href="quizzes.html" class="active">Quizzes</a>
+      <a href="notes.html">Notes</a>
+      <a href="progress.html">Progress</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <a href="quizzes.html" class="back-link">
+    ← Back to Quizzes
+  </a>
+
+
+  <div class="hero">
+
+    <div class="subject-label">
+      Mathematics
+    </div>
+
+    <h1>
+      Trapezoids <span>& Kites</span>
+    </h1>
+
+    <p>
+      A reasoning-heavy assessment on trapezoids, isosceles trapezoids,
+      midsegments, area, kites, diagonals, and geometric relationships.
+    </p>
+
+  </div>
+
+
+  <div class="quiz-info">
+
+    <div class="info-card">
+      <strong>15</strong>
+      <span>Questions</span>
+    </div>
+
+    <div class="info-card">
+      <strong>Extremely Easy</strong>
+      <span>Difficulty</span>
+    </div>
+
+    <div class="info-card">
+      <strong>Logic</strong>
+      <span>Question Type</span>
+    </div>
+
+  </div>
+
+
+  <div class="progress-container">
+
+    <div class="progress-top">
+      <span id="progressText">Question 1 of 15</span>
+      <span id="answeredText">0 answered</span>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+  </div>
+
+
+  <div id="quizArea">
+
+    <div class="quiz-card">
+
+      <div class="question-number" id="questionNumber">
+        Question 1
+      </div>
+
+      <div class="question" id="questionText"></div>
+
+      <div id="scenarioBox"></div>
+
+      <div class="options" id="options"></div>
+
+      <div class="navigation">
+
+        <button
+          class="nav-btn"
+          id="prevBtn"
+          onclick="previousQuestion()"
+        >
+          ← Previous
+        </button>
+
+        <button
+          class="nav-btn primary"
+          id="nextBtn"
+          onclick="nextQuestion()"
+        >
+          Next →
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="result" id="result">
+
+    <div class="result-card">
+
+      <div class="result-title">
+        Quiz Complete
+      </div>
+
+      <div class="score" id="scoreDisplay">
+        0/15
+      </div>
+
+      <div class="result-message" id="resultMessage"></div>
+
+      <div class="result-stats">
+
+        <div class="result-stat">
+          <strong id="correctDisplay">0</strong>
+          <span>Correct</span>
+        </div>
+
+        <div class="result-stat">
+          <strong id="incorrectDisplay">0</strong>
+          <span>Incorrect</span>
+        </div>
+
+        <div class="result-stat">
+          <strong id="percentageDisplay">0%</strong>
+          <span>Percentage</span>
+        </div>
+
+      </div>
+
+      <button class="retry-btn" onclick="retakeQuiz()">
+        Retake Quiz
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="review" id="review">
+
+    <h2>
+      Answer Review
+    </h2>
+
+    <div id="reviewList"></div>
+
+  </div>
+
+</main>
+
+
+<script>
+
+const questions = [
+
+  {
+    question:
+      "ABCD is a trapezoid with AB ∥ CD. The angles along leg AD are ∠A = 3x + 10° and ∠D = 5x − 30°. What is the value of x?",
+
+    options: [
+      "20",
+      "25",
+      "30",
+      "35"
+    ],
+
+    answer: 1,
+
+    explanation:
+      "Because AB ∥ CD, ∠A and ∠D are consecutive interior angles along the same leg. They are supplementary: (3x + 10) + (5x − 30) = 180. Thus 8x − 20 = 180, so x = 25."
+  },
+
+
+  {
+    question:
+      "An isosceles trapezoid has base angles ∠A and ∠B on the same base. Their measures are 2x + 15° and 3x − 20°. What is the measure of each of these two base angles?",
+
+    options: [
+      "75°",
+      "80°",
+      "85°",
+      "90°"
+    ],
+
+    answer: 2,
+
+    explanation:
+      "The base angles of an isosceles trapezoid are congruent. Therefore 2x + 15 = 3x − 20, giving x = 35. Substituting gives 85° for both angles."
+  },
+
+
+  {
+    question:
+      "A trapezoid has bases measuring (2x + 4) cm and (x + 8) cm. Its midsegment measures 24 cm. What is the longer base?",
+
+    options: [
+      "20 cm",
+      "24 cm",
+      "28 cm",
+      "32 cm"
+    ],
+
+    answer: 2,
+
+    explanation:
+      "The midsegment equals half the sum of the bases: 24 = [(2x + 4) + (x + 8)] / 2. Therefore 48 = 3x + 12, so x = 12. The bases are 28 cm and 20 cm. The longer base is 28 cm."
+  },
+
+
+  {
+    question:
+      "A trapezoid has bases of 14 cm and 26 cm. A slanted leg measures 13 cm, but the perpendicular height is 12 cm. What is the area of the trapezoid?",
+
+    options: [
+      "156 cm²",
+      "180 cm²",
+      "240 cm²",
+      "312 cm²"
+    ],
+
+    answer: 2,
+
+    explanation:
+      "The area formula is A = ½(b₁ + b₂)h. The height must be the perpendicular distance between the bases, which is 12 cm. Therefore A = ½(14 + 26)(12) = 240 cm². The 13 cm slanted leg is not the height."
+  },
+
+
+  {
+    question:
+      "In an isosceles trapezoid, the diagonals are AC and BD. If AC = 3x + 7 and BD = 5x − 17, what is the length of either diagonal?",
+
+    options: [
+      "31",
+      "37",
+      "43",
+      "49"
+    ],
+
+    answer: 2,
+
+    explanation:
+      "The diagonals of an isosceles trapezoid are congruent. Therefore 3x + 7 = 5x − 17. Solving gives x = 12. Either diagonal is 3(12) + 7 = 43."
+  },
+
+
+  {
+    question:
+      "A kite has ∠B = 4x + 10° and ∠D = 6x − 30°. These are the pair of opposite angles known to be congruent in the kite. What is ∠B?",
+
+    options: [
+      "80°",
+      "85°",
+      "90°",
+      "95°"
+    ],
+
+    answer: 2,
+
+    explanation:
+      "The specified opposite angles of a kite are congruent. Set 4x + 10 = 6x − 30. This gives x = 20. Therefore ∠B = 4(20) + 10 = 90°."
+  },
+
+
+  {
+    question:
+      "In kite ABCD, diagonal AC bisects diagonal BD. The two pieces of BD measure 3x + 2 and 5x − 10. What is the total length of BD?",
+
+    options: [
+      "20",
+      "30",
+      "40",
+      "50"
+    ],
+
+    answer: 2,
+
+    explanation:
+      "Since AC bisects BD, the two segments of BD are congruent. Thus 3x + 2 = 5x − 10, giving x = 6. Each half is 20, so BD = 40."
+  },
+
+
+  {
+    question:
+      "A kite has perpendicular diagonals measuring 18 cm and 24 cm. A student uses the trapezoid area formula instead of the kite formula. What is the correct area of the kite?",
+
+    options: [
+      "108 cm²",
+      "216 cm²",
+      "324 cm²",
+      "432 cm²"
+    ],
+
+    answer: 1,
+
+    explanation:
+      "For a kite with perpendicular diagonals, A = ½d₁d₂. Therefore A = ½(18)(24) = 216 cm². The trapezoid area formula does not apply because this is a kite."
+  },
+
+
+  {
+    question:
+      "A quadrilateral has one pair of parallel sides. Its two non-parallel sides are congruent. Which classification is most appropriate?",
+
+    options: [
+      "General trapezoid only",
+      "Isosceles trapezoid",
+      "Kite",
+      "Rectangle"
+    ],
+
+    answer: 1,
+
+    explanation:
+      "A trapezoid with congruent non-parallel sides, or legs, is an isosceles trapezoid. The congruent legs provide information beyond the definition of a general trapezoid."
+  },
+
+
+  {
+    question:
+      "A quadrilateral has two pairs of adjacent congruent sides. However, no information is given about parallel sides or perpendicular diagonals. Which conclusion is definitely justified?",
+
+    options: [
+      "It must be a parallelogram.",
+      "It must be a rectangle.",
+      "It satisfies the defining side condition of a kite.",
+      "Its diagonals must be congruent."
+    ],
+
+    answer: 2,
+
+    explanation:
+      "Two pairs of adjacent congruent sides are the defining side condition of a kite. Nothing in the situation guarantees a parallelogram, rectangle, or congruent diagonals."
+  },
+
+
+  {
+    question:
+      "A student sees a drawing of a quadrilateral that looks like a kite because its top two sides appear equal and its bottom two sides appear equal. No congruence markings or measurements are provided. What is the best mathematical conclusion?",
+
+    options: [
+      "It is definitely a kite.",
+      "It is definitely an isosceles trapezoid.",
+      "The appearance alone is insufficient to prove it is a kite.",
+      "It must have perpendicular diagonals."
+    ],
+
+    answer: 2,
+
+    explanation:
+      "Geometry diagrams are not necessarily drawn to scale. Without markings, measurements, or stated relationships proving two pairs of adjacent congruent sides, the shape cannot be classified as a kite solely from its appearance."
+  },
+
+
+  {
+    question:
+      "A trapezoid has bases of 16 cm and 24 cm. A segment inside the trapezoid is parallel to both bases and connects the midpoints of the legs. Which statement must be true?",
+
+    options: [
+      "The segment measures 8 cm.",
+      "The segment measures 20 cm.",
+      "The segment measures 24 cm.",
+      "The segment measures 40 cm."
+    ],
+
+    answer: 1,
+
+    explanation:
+      "A trapezoid midsegment equals half the sum of the two bases: (16 + 24) / 2 = 20 cm. The fact that the segment connects the midpoints of the legs confirms that it is the midsegment."
+  },
+
+
+  {
+    question:
+      "An isosceles trapezoid has a perimeter of 64 cm. Its two congruent legs each measure 12 cm. The two bases are in a ratio of 3:2. What is the length of the midsegment?",
+
+    options: [
+      "16 cm",
+      "18 cm",
+      "20 cm",
+      "24 cm"
+    ],
+
+    answer: 2,
+
+    explanation:
+      "The two legs total 24 cm, so the two bases total 64 − 24 = 40 cm. The midsegment is half the sum of the bases: 40 / 2 = 20 cm. The ratio information is not even necessary once the base sum is known."
+  },
+
+
+  {
+    question:
+      "The same isosceles trapezoid from the previous problem has a height of 9 cm. Its bases are in a 3:2 ratio. What is its area?",
+
+    options: [
+      "160 cm²",
+      "180 cm²",
+      "200 cm²",
+      "240 cm²"
+    ],
+
+    answer: 1,
+
+    explanation:
+      "From the previous information, the bases total 40 cm. Therefore A = ½(b₁ + b₂)h = ½(40)(9) = 180 cm². The individual base lengths are 24 cm and 16 cm, but only their sum is needed for the area."
+  },
+
+
+  {
+    question:
+      "ABCD is a trapezoid with AB ∥ CD. A student claims that because AC and BD are drawn with apparently equal lengths, ABCD must be an isosceles trapezoid. Which response is mathematically strongest?",
+
+    options: [
+      "Correct, because every trapezoid has congruent diagonals.",
+      "Correct, because equal-looking diagonals prove the legs are equal.",
+      "Not necessarily; a diagram's appearance does not establish congruence unless the equality is given or proven.",
+      "Incorrect, because an isosceles trapezoid can never have congruent diagonals."
+    ],
+
+    answer: 2,
+
+    explanation:
+      "A general trapezoid does not automatically have congruent diagonals. If AC ≅ BD is actually given or proven, then the converse theorem can establish an isosceles trapezoid under the appropriate trapezoid conditions. But equal-looking drawings are not mathematical proof."
+  }
+
+];
+
+
+let currentQuestion = 0;
+let answers = new Array(questions.length).fill(null);
+let submitted = false;
+
+
+function loadQuestion() {
+
+  const q = questions[currentQuestion];
+
+  document.getElementById("questionNumber").textContent =
+    `Question ${currentQuestion + 1}`;
+
+  document.getElementById("questionText").textContent =
+    q.question;
+
+  const scenarioBox =
+    document.getElementById("scenarioBox");
+
+  scenarioBox.innerHTML = "";
+
+  const options =
+    document.getElementById("options");
+
+  options.innerHTML = "";
+
+  q.options.forEach((option, index) => {
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "option";
+
+    const input = document.createElement("input");
+
+    input.type = "radio";
+    input.name = "question";
+    input.id = `option-${index}`;
+    input.value = index;
+
+    if (answers[currentQuestion] === index) {
+      input.checked = true;
+    }
+
+    input.addEventListener("change", function() {
+      answers[currentQuestion] = index;
+      updateProgress();
+    });
+
+    const label = document.createElement("label");
+    label.htmlFor = `option-${index}`;
+
+    label.innerHTML =
+      `<span class="option-letter">${String.fromCharCode(65 + index)}</span>${option}`;
+
+    wrapper.appendChild(input);
+    wrapper.appendChild(label);
+
+    options.appendChild(wrapper);
+
+  });
+
+
+  document.getElementById("prevBtn").disabled =
+    currentQuestion === 0;
+
+  const nextBtn =
+    document.getElementById("nextBtn");
+
+  if (currentQuestion === questions.length - 1) {
+    nextBtn.textContent = "Submit Quiz";
+  } else {
+    nextBtn.textContent = "Next →";
+  }
+
+  updateProgress();
+
+}
+
+
+function updateProgress() {
+
+  const answered =
+    answers.filter(answer => answer !== null).length;
+
+  document.getElementById("progressText").textContent =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+
+  document.getElementById("answeredText").textContent =
+    `${answered} answered`;
+
+  const percentage =
+    ((currentQuestion + 1) / questions.length) * 100;
+
+  document.getElementById("progressFill").style.width =
+    `${percentage}%`;
+
+}
+
+
+function nextQuestion() {
+
+  if (answers[currentQuestion] === null) {
+
+    alert("Please select an answer before continuing.");
+
+    return;
+
+  }
+
+  if (currentQuestion === questions.length - 1) {
+
+    submitQuiz();
+
+    return;
+
+  }
+
+  currentQuestion++;
+
+  loadQuestion();
+
+}
+
+
+function previousQuestion() {
+
+  if (currentQuestion === 0) {
+    return;
+  }
+
+  currentQuestion--;
+
+  loadQuestion();
+
+}
+
+
+function submitQuiz() {
+
+  let correct = 0;
+
+  questions.forEach((question, index) => {
+
+    if (answers[index] === question.answer) {
+      correct++;
+    }
+
+  });
+
+
+  const incorrect =
+    questions.length - correct;
+
+  const percentage =
+    Math.round((correct / questions.length) * 100);
+
+
+  document.getElementById("quizArea").style.display =
+    "none";
+
+  document.getElementById("result").style.display =
+    "block";
+
+  document.getElementById("review").style.display =
+    "block";
+
+
+  document.getElementById("scoreDisplay").textContent =
+    `${correct}/${questions.length}`;
+
+  document.getElementById("correctDisplay").textContent =
+    correct;
+
+  document.getElementById("incorrectDisplay").textContent =
+    incorrect;
+
+  document.getElementById("percentageDisplay").textContent =
+    `${percentage}%`;
+
+
+  let message;
+
+  if (percentage === 100) {
+    message =
+      "Perfect score. You successfully handled the traps, theorem selection, and multi-step reasoning.";
+  } else if (percentage >= 90) {
+    message =
+      "Excellent. Your geometric reasoning is very strong.";
+  } else if (percentage >= 80) {
+    message =
+      "Strong performance. Review the questions where a property was easy to confuse.";
+  } else if (percentage >= 70) {
+    message =
+      "Good foundation, but revisit which properties are actually guaranteed by the given information.";
+  } else {
+    message =
+      "Review the trapezoid and kite properties carefully, especially the conditions required before applying each theorem.";
+  }
+
+  document.getElementById("resultMessage").textContent =
+    message;
+
+
+  saveQuizProgress(
+    correct,
+    questions.length,
+    percentage
+  );
+
+  buildReview();
+
+  submitted = true;
+
+}
+
+
+function buildReview() {
+
+  const reviewList =
+    document.getElementById("reviewList");
+
+  reviewList.innerHTML = "";
+
+  questions.forEach((question, index) => {
+
+    const item =
+      document.createElement("div");
+
+    const isCorrect =
+      answers[index] === question.answer;
+
+    item.className =
+      `review-item ${isCorrect ? "correct" : "incorrect"}`;
+
+
+    const userAnswer =
+      answers[index] !== null
+        ? question.options[answers[index]]
+        : "No answer";
+
+    const correctAnswer =
+      question.options[question.answer];
+
+
+    item.innerHTML = `
+
+      <div class="review-question">
+        ${index + 1}. ${question.question}
+      </div>
+
+      <div class="review-answer">
+        Your answer:
+        <strong class="${isCorrect ? "correct-text" : "incorrect-text"}">
+          ${userAnswer}
+        </strong>
+      </div>
+
+      <div class="review-answer">
+        Correct answer:
+        <strong class="correct-text">
+          ${correctAnswer}
+        </strong>
+      </div>
+
+      <div class="explanation">
+        <strong>Reasoning:</strong>
+        ${question.explanation}
+      </div>
+
+    `;
+
+    reviewList.appendChild(item);
+
+  });
+
+}
+
+
+function saveQuizProgress(score, total, percentage) {
+
+  let progress;
+
+  try {
+
+    progress =
+      JSON.parse(
+        localStorage.getItem("riasStudyHubProgress")
+      ) || {};
+
+  } catch (error) {
+
+    progress = {};
+
+  }
+
+
+  if (!progress.reviewers) {
+    progress.reviewers = {};
+  }
+
+  if (!progress.quizzes) {
+    progress.quizzes = {};
+  }
+
+  if (!progress.notes) {
+    progress.notes = {};
+  }
+
+
+  progress.quizzes.mathematics = {
+
+    completed: true,
+
+    score: score,
+
+    total: total,
+
+    percentage: percentage,
+
+    date: new Date().toISOString()
+
+  };
+
+
+  localStorage.setItem(
+    "riasStudyHubProgress",
+    JSON.stringify(progress)
+  );
+
+}
+
+
+function retakeQuiz() {
+
+  currentQuestion = 0;
+
+  answers =
+    new Array(questions.length).fill(null);
+
+  submitted = false;
+
+
+  document.getElementById("quizArea").style.display =
+    "block";
+
+  document.getElementById("result").style.display =
+    "none";
+
+  document.getElementById("review").style.display =
+    "none";
+
+
+  loadQuestion();
+
+}
+
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
