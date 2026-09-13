@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Values Education | Ria's Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      height: 70px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      background: var(--background);
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    .container {
+      width: 88%;
+      max-width: 1000px;
+      margin: auto;
+      padding: 55px 0 80px;
+    }
+
+    .hero {
+      margin-bottom: 30px;
+    }
+
+    .subject {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 15px;
+    }
+
+    .hero-description {
+      color: var(--muted);
+      max-width: 780px;
+      font-size: 16px;
+    }
+
+    /* COMPLETION */
+
+    .completion {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 30px 0 40px;
+    }
+
+    .completion-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 13px;
+    }
+
+    .completion-title {
+      font-weight: 700;
+    }
+
+    .completion-status {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .completion-status.completed {
+      color: var(--green);
+    }
+
+    .progress-bar {
+      height: 8px;
+      border-radius: 20px;
+      background: #252a34;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      transition: width 0.3s;
+    }
+
+    .complete-btn {
+      margin-top: 15px;
+      border: 1px solid var(--blue);
+      background: transparent;
+      color: var(--blue);
+      padding: 10px 16px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .complete-btn:hover {
+      background: var(--blue);
+      color: #08111f;
+    }
+
+    .complete-btn.completed {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    section {
+      margin-bottom: 42px;
+    }
+
+    section h2 {
+      font-size: 25px;
+      margin-bottom: 13px;
+    }
+
+    section h2 span {
+      color: var(--blue);
+    }
+
+    section p {
+      color: #d1d5db;
+      margin-bottom: 13px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 22px;
+      margin-top: 16px;
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 9px;
+    }
+
+    .card p {
+      margin-bottom: 8px;
+    }
+
+    ul,
+    ol {
+      margin: 12px 0 12px 22px;
+      color: #d1d5db;
+    }
+
+    li {
+      margin-bottom: 7px;
+    }
+
+    strong {
+      color: var(--text);
+    }
+
+    .definition {
+      border-left: 3px solid var(--blue);
+      background: var(--surface);
+      border-radius: 0 12px 12px 0;
+      padding: 18px 20px;
+      margin-top: 16px;
+    }
+
+    .definition p {
+      margin: 0;
+    }
+
+    .highlight {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 18px;
+    }
+
+    .principle {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .principle .number {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .principle h3 {
+      margin-bottom: 7px;
+      font-size: 18px;
+    }
+
+    .principle p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .decision-guide {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .decision-box {
+      width: min(100%, 650px);
+      padding: 18px;
+      text-align: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+    }
+
+    .decision-box.main {
+      border-color: var(--blue);
+    }
+
+    .arrow {
+      color: var(--blue);
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .check {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 17px;
+    }
+
+    .check-title {
+      color: var(--blue);
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .check p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .scenario {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 22px;
+      margin-top: 15px;
+    }
+
+    .scenario h3 {
+      font-size: 17px;
+      margin-bottom: 9px;
+    }
+
+    .answer {
+      border-top: 1px solid var(--border);
+      margin-top: 15px;
+      padding-top: 14px;
+    }
+
+    .answer strong {
+      color: var(--blue);
+    }
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 18px;
+      background: var(--surface);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .comparison th,
+    .comparison td {
+      border: 1px solid var(--border);
+      padding: 13px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .comparison th {
+      color: var(--blue);
+      background: var(--surface-hover);
+    }
+
+    .quick-review {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 13px;
+      margin-top: 18px;
+    }
+
+    .quick-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 17px;
+    }
+
+    .quick-item strong {
+      color: var(--blue);
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .quick-item p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .back-link:hover {
+      color: var(--blue-hover);
+    }
+
+    @media (max-width: 750px) {
+      header {
+        padding: 0 5%;
+      }
+
+      nav {
+        gap: 12px;
+      }
+
+      nav a {
+        font-size: 12px;
+      }
+
+      .container {
+        width: 90%;
+        padding-top: 40px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .principles,
+      .check-grid,
+      .quick-review {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      header {
+        height: auto;
+        padding: 18px 5%;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a href="../index.html" class="logo">
+    STE <span>Study Hub</span>
+  </a>
+
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../reviewer.html" class="active">Reviewers</a>
+    <a href="../quizzes.html">Quizzes</a>
+    <a href="../notes.html">Notes</a>
+    <a href="../progress.html">Progress</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <div class="hero">
+    <div class="subject">Values Education</div>
+
+    <h1>
+      Pagsunod ng Pamilya sa mga Batas na Ayon sa
+      <span class="highlight">Likas na Batas Moral</span>
+    </h1>
+
+    <p class="hero-description">
+      Matututuhan kung paano sinusuri ang mga batas, patakaran, at gawain
+      ayon sa dignidad ng tao, kapayapaan, katarungan, at kabutihang panlahat.
+    </p>
+  </div>
+
+
+  <!-- COMPLETION -->
+
+  <div class="completion">
+
+    <div class="completion-top">
+      <div>
+        <div class="completion-title">Reviewer Progress</div>
+
+        <div class="completion-status" id="completionStatus">
+          Not completed
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <button class="complete-btn" id="completeBtn">
+      Mark as Complete
+    </button>
+
+  </div>
+
+
+  <!-- 1 -->
+
+  <section>
+    <h2>1. Ano ang <span>Likas na Batas Moral?</span></h2>
+
+    <p>
+      Ang <strong>Likas na Batas Moral</strong> ay mga pangunahing prinsipyo
+      ng kabutihan at wastong pagkilos na maaaring makilala ng tao sa
+      pamamagitan ng kanyang <strong>isip at konsensiya</strong>.
+    </p>
+
+    <div class="definition">
+      <p>
+        <strong>Sa madaling salita:</strong>
+        Tinutulungan tayo ng Likas na Batas Moral na makilala kung ang isang
+        kilos ay <span class="highlight">mabuti o masama</span> at kung ito ay
+        nararapat gawin.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Mahahalagang Katangian</h3>
+
+      <ul>
+        <li>Nakabatay sa <strong>kabutihan ng tao</strong>.</li>
+        <li>Ginagamit ang <strong>isip at konsensiya</strong> sa paghusga sa kilos.</li>
+        <li>Isinasaalang-alang ang <strong>dignidad at karapatan</strong> ng bawat tao.</li>
+        <li>Nakatuon sa wastong pakikitungo sa kapwa at sa lipunan.</li>
+        <li>May kaugnayan sa <strong>kapayapaan, katarungan, at kabutihang panlahat</strong>.</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- 2 -->
+
+  <section>
+    <h2>2. Batas at <span>Pananagutan ng Pamilya</span></h2>
+
+    <p>
+      Ang pamilya ay may mahalagang papel sa paghubog ng mga taong marunong
+      rumespeto sa batas at kumilos nang responsable.
+    </p>
+
+    <div class="card">
+      <h3>Ano ang pananagutan ng pamilya?</h3>
+
+      <ul>
+        <li>Turuan ang mga kasapi ng pamilya na sumunod sa makatarungan at makabuluhang mga alituntunin.</li>
+        <li>Itaguyod ang paggalang sa dignidad ng bawat miyembro.</li>
+        <li>Magkaroon ng patas at makatuwirang mga patakaran sa tahanan.</li>
+        <li>Turuan ang mga anak na maging responsable sa kanilang mga kilos.</li>
+        <li>Magbigay ng magandang halimbawa sa pagsunod sa mga batas at patakaran.</li>
+      </ul>
+    </div>
+
+    <div class="definition">
+      <p>
+        Ang pagsunod sa batas ay hindi lamang tungkol sa pag-iwas sa parusa.
+        Ito ay tungkol din sa <strong>pananagutan at paggalang sa kapwa</strong>.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- 3 -->
+
+  <section>
+    <h2>3. <span>Pagsunod sa Batas</span></h2>
+
+    <p>
+      Ang pagsunod sa batas ay mahalaga upang mapanatili ang kaayusan at
+      protektahan ang mga karapatan ng mga tao.
+    </p>
+
+    <div class="card">
+      <h3>Responsableng Pagsunod</h3>
+
+      <p>
+        Ang isang responsableng tao ay sumusunod sa mga lehitimo at makatarungang
+        batas dahil nauunawaan niya ang layunin ng mga ito.
+      </p>
+
+      <ul>
+        <li>Isinasaalang-alang ang kapakanan ng ibang tao.</li>
+        <li>Nirerespeto ang mga karapatan ng kapwa.</li>
+        <li>Iniiwasan ang mga kilos na maaaring makapinsala sa iba.</li>
+        <li>Ginagamit ang tamang paraan upang ipahayag ang pagtutol sa isang patakaran kung kinakailangan.</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- 4 -->
+
+  <section>
+    <h2>4. Kailan Masasabing <span>Mabuti ang Isang Batas?</span></h2>
+
+    <p>
+      Hindi sapat na mayroong isang patakaran upang masabing ito ay mabuti.
+      Kailangang tingnan ang layunin, epekto, at paraan ng pagpapatupad nito.
+    </p>
+
+    <div class="card">
+      <h3>Mga Tanong na Maaaring Itanong</h3>
+
+      <ol>
+        <li>Ginagalang ba nito ang <strong>dignidad ng tao</strong>?</li>
+        <li>Nakakatulong ba ito sa <strong>kapayapaan</strong>?</li>
+        <li>Patas ba ito at may <strong>katarungan</strong>?</li>
+        <li>Nakatutulong ba ito sa <strong>kabutihang panlahat</strong>?</li>
+        <li>Makatuwiran ba ang layunin at paraan ng pagpapatupad nito?</li>
+      </ol>
+    </div>
+  </section>
+
+
+  <!-- 5-8 -->
+
+  <section>
+    <h2>5–8. Apat na Mahahalagang <span>Batayan</span></h2>
+
+    <div class="principles">
+
+      <div class="principle">
+        <div class="number">01</div>
+        <h3>Dignidad ng Tao</h3>
+        <p>
+          Ang bawat tao ay dapat tratuhin nang may respeto at hindi basta
+          ginagamit o minamaliit.
+        </p>
+      </div>
+
+      <div class="principle">
+        <div class="number">02</div>
+        <h3>Kapayapaan</h3>
+        <p>
+          Ang isang mabuting patakaran ay tumutulong sa maayos na ugnayan
+          at mapayapang pakikitungo sa kapwa.
+        </p>
+      </div>
+
+      <div class="principle">
+        <div class="number">03</div>
+        <h3>Katarungan</h3>
+        <p>
+          Ang mga tao ay dapat tratuhin nang patas at bigyan ng nararapat
+          na karapatan at pananagutan.
+        </p>
+      </div>
+
+      <div class="principle">
+        <div class="number">04</div>
+        <h3>Kabutihang Panlahat</h3>
+        <p>
+          Isinasaalang-alang ang kapakanan ng buong pamilya, komunidad,
+          o lipunan, hindi lamang ng isang tao.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 9 -->
+
+  <section>
+    <h2>9. Paano Suriin ang Isang <span>Patakaran o Gawain?</span></h2>
+
+    <p>
+      Kapag may isang batas, patakaran, o gawain na kailangang suriin,
+      gamitin ang sumusunod na proseso.
+    </p>
+
+    <div class="check-grid">
+
+      <div class="check">
+        <div class="check-title">1. Tukuyin</div>
+        <p>
+          Ano ang batas, patakaran, o kilos na sinusuri?
+        </p>
+      </div>
+
+      <div class="check">
+        <div class="check-title">2. Alamin ang Layunin</div>
+        <p>
+          Bakit ginawa o ginagawa ang patakaran?
+        </p>
+      </div>
+
+      <div class="check">
+        <div class="check-title">3. Tingnan ang Epekto</div>
+        <p>
+          Sino ang makikinabang at sino ang maaaring maapektuhan?
+        </p>
+      </div>
+
+      <div class="check">
+        <div class="check-title">4. Suriin ang Pagiging Makatarungan</div>
+        <p>
+          Pantay at makatuwiran ba ang pagpapatupad nito?
+        </p>
+      </div>
+
+      <div class="check">
+        <div class="check-title">5. Suriin ang Dignidad</div>
+        <p>
+          Nirerespeto ba nito ang bawat taong kasangkot?
+        </p>
+      </div>
+
+      <div class="check">
+        <div class="check-title">6. Suriin ang Kabutihang Panlahat</div>
+        <p>
+          Nakakatulong ba ito sa mas nakararami?
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 10 -->
+
+  <section>
+    <h2>10. Visual Decision Guide: <span>Tama ba ang Batas o Gawain?</span></h2>
+
+    <div class="decision-guide">
+
+      <div class="decision-box main">
+        <strong>May batas, patakaran, o gawain</strong>
+      </div>
+
+      <div class="arrow">↓</div>
+
+      <div class="decision-box">
+        <strong>Ginagalang ba ang dignidad ng tao?</strong>
+      </div>
+
+      <div class="arrow">↓</div>
+
+      <div class="decision-box">
+        <strong>Nakakatulong ba sa kapayapaan?</strong>
+      </div>
+
+      <div class="arrow">↓</div>
+
+      <div class="decision-box">
+        <strong>Patas at makatarungan ba?</strong>
+      </div>
+
+      <div class="arrow">↓</div>
+
+      <div class="decision-box">
+        <strong>Nakakatulong ba sa kabutihang panlahat?</strong>
+      </div>
+
+      <div class="arrow">↓</div>
+
+      <div class="decision-box main">
+        <strong>Responsable at makatarungang pagkilos</strong>
+      </div>
+
+    </div>
+
+    <div class="definition">
+      <p>
+        <strong>Tandaan:</strong>
+        Kung may problemang nakikita sa isang patakaran, huwag agad humusga.
+        Suriin muna ang <span class="highlight">layunin, epekto, pagiging patas,
+        dignidad ng tao, at kabutihang panlahat</span>.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- 11 -->
+
+  <section>
+    <h2>11. Mga <span>Sitwasyon sa Pamilya</span></h2>
+
+    <div class="scenario">
+      <h3>Sitwasyon 1: Gawain sa Bahay</h3>
+
+      <p>
+        Gumawa ang pamilya ng iskedyul kung saan ang bawat miyembro ay may
+        sariling gawain sa bahay.
+      </p>
+
+      <div class="answer">
+        <strong>Pagsusuri:</strong>
+
+        <p>
+          Mabuting patakaran ito kung ang mga gawain ay naaayon sa kakayahan
+          at kalagayan ng bawat miyembro at hindi ipinapasa nang hindi patas
+          sa isang tao lamang.
+        </p>
+
+        <p>
+          <strong>Batayan:</strong> Katarungan at kabutihang panlahat.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="scenario">
+      <h3>Sitwasyon 2: Magalang na Pakikipag-usap</h3>
+
+      <p>
+        Nagkaroon ng patakaran ang pamilya na bawal mang-insulto o manigaw
+        kapag may hindi pagkakaunawaan.
+      </p>
+
+      <div class="answer">
+        <strong>Pagsusuri:</strong>
+
+        <p>
+          Nakakatulong ito sa paggalang sa dignidad ng bawat miyembro at sa
+          pagpapanatili ng mapayapang relasyon sa pamilya.
+        </p>
+
+        <p>
+          <strong>Batayan:</strong> Dignidad ng tao at kapayapaan.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="scenario">
+      <h3>Sitwasyon 3: Patakarang Hindi Pantay</h3>
+
+      <p>
+        Pinapayagan ang isang miyembro ng pamilya na hindi tumupad sa kanyang
+        responsibilidad habang ang iba ay kailangang gumawa ng lahat ng gawain.
+      </p>
+
+      <div class="answer">
+        <strong>Pagsusuri:</strong>
+
+        <p>
+          Maaaring maging hindi makatarungan ang ganitong patakaran kung
+          walang makatuwirang dahilan para sa pagkakaiba ng responsibilidad.
+          Kailangang tingnan ang kalagayan at kakayahan ng bawat miyembro.
+        </p>
+
+        <p>
+          <strong>Batayan:</strong> Katarungan.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 12 -->
+
+  <section>
+    <h2>12. <span>Worked Examples</span></h2>
+
+    <div class="card">
+      <h3>Halimbawa A</h3>
+
+      <p>
+        <strong>Patakaran:</strong> Lahat ng miyembro ng pamilya ay kailangang
+        maglinis ng kanilang sariling gamit.
+      </p>
+
+      <table class="comparison">
+        <tr>
+          <th>Batayan</th>
+          <th>Pagsusuri</th>
+        </tr>
+
+        <tr>
+          <td>Dignidad</td>
+          <td>Hindi minamaliit ang sinuman.</td>
+        </tr>
+
+        <tr>
+          <td>Kapayapaan</td>
+          <td>Maaaring makatulong upang maiwasan ang alitan tungkol sa kalinisan.</td>
+        </tr>
+
+        <tr>
+          <td>Katarungan</td>
+          <td>May responsibilidad ang bawat miyembro.</td>
+        </tr>
+
+        <tr>
+          <td>Kabutihang Panlahat</td>
+          <td>Nakakatulong sa maayos na tahanan.</td>
+        </tr>
+      </table>
+
+      <div class="definition">
+        <p>
+          <strong>Konklusyon:</strong>
+          Ang patakaran ay maaaring ituring na mabuti kung ito ay makatuwiran,
+          patas, at isinasaalang-alang ang kakayahan at kalagayan ng bawat
+          miyembro.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <h3>Halimbawa B</h3>
+
+      <p>
+        <strong>Patakaran:</strong> Kapag may hindi pagkakasundo, dapat
+        pakinggan muna ng bawat isa ang panig ng kabilang tao bago magdesisyon.
+      </p>
+
+      <p>
+        <strong>Pagsusuri:</strong>
+        Itinataguyod nito ang paggalang, maayos na komunikasyon, kapayapaan,
+        at mas makatarungang pagdedesisyon.
+      </p>
+
+      <p>
+        <strong>Konklusyon:</strong>
+        Ang patakaran ay naaayon sa mga prinsipyong nagtataguyod ng
+        dignidad, kapayapaan, katarungan, at kabutihang panlahat.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- 13 -->
+
+  <section>
+    <h2>13. <span>Quick Review</span></h2>
+
+    <div class="quick-review">
+
+      <div class="quick-item">
+        <strong>Likas na Batas Moral</strong>
+        <p>
+          Mga pangunahing prinsipyo ng kabutihan na maaaring makilala
+          sa pamamagitan ng isip at konsensiya.
+        </p>
+      </div>
+
+      <div class="quick-item">
+        <strong>Dignidad ng Tao</strong>
+        <p>
+          Pagkilala at paggalang sa halaga ng bawat tao.
+        </p>
+      </div>
+
+      <div class="quick-item">
+        <strong>Kapayapaan</strong>
+        <p>
+          Maayos at mapayapang pakikitungo sa kapwa.
+        </p>
+      </div>
+
+      <div class="quick-item">
+        <strong>Katarungan</strong>
+        <p>
+          Pagiging patas at pagbibigay sa bawat isa ng nararapat.
+        </p>
+      </div>
+
+      <div class="quick-item">
+        <strong>Kabutihang Panlahat</strong>
+        <p>
+          Kapakanan ng buong pangkat o komunidad, hindi lamang ng isang tao.
+        </p>
+      </div>
+
+      <div class="quick-item">
+        <strong>Pagsusuri ng Batas</strong>
+        <p>
+          Tingnan ang layunin, epekto, dignidad, kapayapaan, katarungan,
+          at kabutihang panlahat.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- FINAL SUMMARY -->
+
+  <section>
+    <h2>14. <span>Key Takeaway</span></h2>
+
+    <div class="definition">
+      <p>
+        Ang pagsunod ng pamilya sa mga batas at patakaran ay dapat nakabatay
+        sa paggalang sa <strong>dignidad ng tao</strong>, pagtataguyod ng
+        <strong>kapayapaan</strong>, pagiging makatarungan, at paghahangad ng
+        <strong>kabutihang panlahat</strong>.
+      </p>
+
+      <p style="margin-top: 12px;">
+        Sa pagsusuri ng isang batas o gawain, mahalagang gamitin ang isip,
+        konsensiya, at responsableng paghatol upang malaman kung ito ay
+        makatuwiran at nakatutulong sa kapwa.
+      </p>
+    </div>
+  </section>
+
+
+  <a href="../reviewer.html" class="back-link">
+    ← Back to Reviewers
+  </a>
+
+</main>
+
+
+<script>
+
+  const reviewerId = "valed";
+
+  const completeBtn =
+    document.getElementById("completeBtn");
+
+  const completionStatus =
+    document.getElementById("completionStatus");
+
+  const progressFill =
+    document.getElementById("progressFill");
+
+
+  function getProgress() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem("riasStudyHubProgress")
+      ) || {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    } catch (error) {
+
+      return {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    }
+
+  }
+
+
+  function saveProgress(progress) {
+
+    localStorage.setItem(
+      "riasStudyHubProgress",
+      JSON.stringify(progress)
+    );
+
+  }
+
+
+  function updateCompletionUI() {
+
+    const progress = getProgress();
+
+    const completed =
+      progress.reviewers &&
+      progress.reviewers[reviewerId] === true;
+
+
+    if (completed) {
+
+      completionStatus.textContent = "Completed ✓";
+      completionStatus.classList.add("completed");
+
+      completeBtn.textContent = "Completed ✓";
+      completeBtn.classList.add("completed");
+
+      progressFill.style.width = "100%";
+
+    } else {
+
+      completionStatus.textContent = "Not completed";
+      completionStatus.classList.remove("completed");
+
+      completeBtn.textContent = "Mark as Complete";
+      completeBtn.classList.remove("completed");
+
+      progressFill.style.width = "0%";
+
+    }
+
+  }
+
+
+  completeBtn.addEventListener("click", function () {
+
+    const progress = getProgress();
+
+    if (!progress.reviewers) {
+      progress.reviewers = {};
+    }
+
+    const currentlyCompleted =
+      progress.reviewers[reviewerId] === true;
+
+    progress.reviewers[reviewerId] =
+      !currentlyCompleted;
+
+    saveProgress(progress);
+
+    updateCompletionUI();
+
+  });
+
+
+  updateCompletionUI();
+
+</script>
+
+</body>
+</html>

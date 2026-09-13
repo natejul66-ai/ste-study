@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>MAPEH | STE Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+      --yellow: #facc15;
+      --purple: #a78bfa;
+      --red: #f87171;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 17, 23, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 45px 22px 70px;
+    }
+
+    .hero {
+      margin-bottom: 35px;
+    }
+
+    .subject-label {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 16px;
+    }
+
+    section {
+      margin-bottom: 42px;
+    }
+
+    .section-heading {
+      margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+      font-size: 27px;
+      margin-bottom: 5px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .card h4 {
+      color: var(--blue);
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      color: #d6d9df;
+      margin-bottom: 12px;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .definition {
+      border-left: 4px solid var(--blue);
+      background: #141922;
+    }
+
+    .definition strong {
+      color: var(--blue);
+    }
+
+    .info-box {
+      background: #111722;
+      border: 1px solid #263b55;
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 15px;
+    }
+
+    .info-box strong {
+      color: var(--blue);
+    }
+
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .topic-card {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 20px;
+    }
+
+    .topic-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #202735;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .topic-card h3 {
+      font-size: 18px;
+      margin-bottom: 7px;
+    }
+
+    .topic-card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .quick-list {
+      display: grid;
+      gap: 11px;
+    }
+
+    .quick-item {
+      padding: 14px 16px;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #d6d9df;
+    }
+
+    .quick-item strong {
+      color: var(--blue);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 15px;
+      margin-top: 18px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 45px 1fr;
+      gap: 15px;
+      align-items: start;
+    }
+
+    .timeline-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: #202735;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .timeline-content {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 15px 17px;
+    }
+
+    .timeline-content h3 {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .timeline-content p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .comparison th,
+    .comparison td {
+      border: 1px solid var(--border);
+      padding: 12px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .comparison th {
+      background: #202530;
+      color: var(--blue);
+    }
+
+    .comparison td {
+      background: #141820;
+      color: #d6d9df;
+    }
+
+    .highlight {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .warning {
+      border-left: 4px solid var(--yellow);
+      background: var(--surface);
+      padding: 18px;
+      border-radius: 0 12px 12px 0;
+      margin: 18px 0;
+    }
+
+    .warning strong {
+      color: var(--yellow);
+    }
+
+    .responsibility-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .responsibility {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 18px;
+    }
+
+    .responsibility h3 {
+      color: var(--blue);
+      font-size: 17px;
+      margin-bottom: 7px;
+    }
+
+    .responsibility p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .classification {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .classification-card {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 18px;
+    }
+
+    .classification-card h3 {
+      color: var(--blue);
+      font-size: 17px;
+      margin-bottom: 7px;
+    }
+
+    .classification-card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .completion {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 30px 0 40px;
+    }
+
+    .completion-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 13px;
+    }
+
+    .completion-title {
+      font-weight: 700;
+    }
+
+    .completion-status {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .completion-status.completed {
+      color: var(--green);
+    }
+
+    .progress-bar {
+      height: 8px;
+      border-radius: 20px;
+      background: #252a34;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      transition: width 0.3s;
+    }
+
+    .complete-btn {
+      margin-top: 15px;
+      border: 1px solid var(--blue);
+      background: transparent;
+      color: var(--blue);
+      padding: 10px 16px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .complete-btn:hover {
+      background: var(--blue);
+      color: #08111f;
+    }
+
+    .complete-btn.completed {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 25px 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 750px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+        gap: 14px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .container {
+        padding: 32px 16px 60px;
+      }
+
+      .card {
+        padding: 19px;
+      }
+
+      .topic-grid,
+      .responsibility-grid,
+      .classification {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        grid-template-columns: 40px 1fr;
+        gap: 10px;
+      }
+
+      .comparison {
+        font-size: 12px;
+      }
+
+      .comparison th,
+      .comparison td {
+        padding: 9px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <a href="../index.html" class="logo">
+      STE <span>Study Hub</span>
+    </a>
+
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../reviewers.html" class="active">Reviewers</a>
+      <a href="../quizzes.html">Quizzes</a>
+      <a href="../notes.html">Notes</a>
+      <a href="../progress.html">Progress</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+
+    <div class="subject-label">
+      MAPEH Reviewer
+    </div>
+
+    <h1>
+      Music, Arts, PE & Health:
+      <span>Cultural Foundations & Family Wellness</span>
+    </h1>
+
+    <p>
+      Review the classical foundations of Western music and Greco-Roman arts
+      in a Filipino cultural context, together with responsible parenthood,
+      informed family planning, and family wellness.
+    </p>
+
+  </div>
+  <div class="completion">
+
+    <div class="completion-top">
+
+      <div>
+        <div class="completion-title">
+          Reviewer Progress
+        </div>
+
+        <div
+          class="completion-status"
+          id="completionStatus">
+          Not completed
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="progress-bar">
+      <div
+        class="progress-fill"
+        id="progressFill">
+      </div>
+    </div>
+
+
+    <button
+      class="complete-btn"
+      id="completeBtn">
+      Mark as Complete
+    </button>
+
+  </div>
+
+
+  <!-- OVERVIEW -->
+  <section>
+
+    <div class="section-heading">
+      <h2>MAPEH Lesson Overview</h2>
+      <p>Two major areas covered in this reviewer.</p>
+    </div>
+
+    <div class="topic-grid">
+
+      <div class="topic-card">
+        <div class="topic-number">01</div>
+
+        <h3>Music and Arts</h3>
+
+        <p>
+          Classical Foundations: Western Music and Greco-Roman Arts in
+          Filipino Cultural Context.
+        </p>
+      </div>
+
+
+      <div class="topic-card">
+        <div class="topic-number">02</div>
+
+        <h3>PE and Health</h3>
+
+        <p>
+          Responsible Parenthood and Family Planning for Family Wellness.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MUSIC AND ARTS -->
+  <section>
+
+    <div class="section-heading">
+      <h2>1. Music and Arts</h2>
+      <p>
+        Classical Foundations: Western Music and Greco-Roman Arts in
+        Filipino Cultural Context
+      </p>
+    </div>
+
+
+    <div class="card definition">
+
+      <p>
+        The study of classical foundations helps learners understand how
+        Western musical and artistic traditions developed and how these
+        traditions can be connected to Filipino cultural references.
+      </p>
+
+      <p>
+        The lesson emphasizes <strong>listening, observation, comparison,
+        cultural connection, and guided creative work</strong>.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>Western Classical Music</h3>
+
+      <p>
+        Western classical music refers to a broad tradition of music that
+        developed primarily in Europe and includes different historical
+        periods, styles, forms, and approaches to composition.
+      </p>
+
+      <div class="info-box">
+
+        <strong>Key idea:</strong>
+
+        <p>
+          When studying classical music, focus on what you hear, such as
+          melody, rhythm, dynamics, instruments, texture, and overall
+          character.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="section-heading">
+      <h2>Key Musical Elements</h2>
+      <p>Elements that help you listen to and describe music.</p>
+    </div>
+
+
+    <div class="topic-grid">
+
+      <div class="topic-card">
+        <div class="topic-number">01</div>
+        <h3>Melody</h3>
+        <p>
+          The organized sequence of musical notes that forms a recognizable
+          musical idea.
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-number">02</div>
+        <h3>Rhythm</h3>
+        <p>
+          The pattern of sounds and silences and how musical beats are
+          organized.
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-number">03</div>
+        <h3>Dynamics</h3>
+        <p>
+          Changes in the loudness or softness of music.
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-number">04</div>
+        <h3>Texture</h3>
+        <p>
+          How different melodic or musical lines interact with one another.
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-number">05</div>
+        <h3>Timbre</h3>
+        <p>
+          The quality or tone color that makes one instrument or voice sound
+          different from another.
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-number">06</div>
+        <h3>Form</h3>
+        <p>
+          The overall structure or organization of a musical composition.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- GRECO ROMAN -->
+  <section>
+
+    <div class="section-heading">
+      <h2>2. Greco-Roman Arts</h2>
+      <p>Foundations of ancient Greek and Roman artistic traditions.</p>
+    </div>
+
+
+    <div class="card">
+
+      <h3>Greek Art</h3>
+
+      <p>
+        Ancient Greek art is known for its interest in human figures,
+        proportion, balance, harmony, and idealized representations of
+        people and the natural world.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>Roman Art</h3>
+
+      <p>
+        Roman art was strongly influenced by Greek traditions while also
+        developing its own approaches to architecture, sculpture, painting,
+        and public art.
+      </p>
+
+    </div>
+
+
+    <div class="topic-grid">
+
+      <div class="topic-card">
+        <div class="topic-number">01</div>
+        <h3>Sculpture</h3>
+        <p>
+          Three-dimensional artworks representing people, gods, historical
+          figures, or other subjects.
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-number">02</div>
+        <h3>Architecture</h3>
+        <p>
+          Buildings and structures characterized by deliberate design,
+          proportion, function, and decoration.
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-number">03</div>
+        <h3>Mosaics</h3>
+        <p>
+          Images or patterns created by arranging small pieces of materials
+          such as stone or tile.
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-number">04</div>
+        <h3>Pottery</h3>
+        <p>
+          Ceramic objects that can provide information about ancient life,
+          beliefs, activities, and artistic practices.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FILIPINO CONTEXT -->
+  <section>
+
+    <div class="section-heading">
+      <h2>3. Filipino Cultural Context</h2>
+      <p>Connecting classical foundations with Filipino culture.</p>
+    </div>
+
+
+    <div class="card definition">
+
+      <p>
+        Studying Western classical foundations does not mean treating them
+        separately from Filipino culture. Learners can examine how artistic
+        ideas, musical practices, forms, and visual elements can be observed,
+        adapted, or interpreted within Filipino cultural contexts.
+      </p>
+
+    </div>
+
+
+    <div class="topic-grid">
+
+      <div class="topic-card">
+        <div class="topic-number">01</div>
+        <h3>Observe</h3>
+        <p>
+          Identify noticeable features in a musical or visual artwork.
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-number">02</div>
+        <h3>Listen</h3>
+        <p>
+          Pay attention to musical elements such as rhythm, melody, dynamics,
+          and instruments.
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-number">03</div>
+        <h3>Compare</h3>
+        <p>
+          Look for similarities and differences between classical traditions
+          and Filipino cultural references.
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-number">04</div>
+        <h3>Create</h3>
+        <p>
+          Apply observed ideas through guided creative activities.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="warning">
+      <strong>Remember:</strong>
+      Cultural comparison is about understanding relationships and
+      differences, not deciding that one culture is automatically better
+      than another.
+    </div>
+
+  </section>
+
+
+  <!-- MUSIC AND ARTS QUICK REVIEW -->
+  <section>
+
+    <div class="section-heading">
+      <h2>4. Music and Arts Quick Review</h2>
+      <p>Important concepts to remember.</p>
+    </div>
+
+
+    <div class="quick-list">
+
+      <div class="quick-item">
+        <strong>Western Classical Music:</strong>
+        A broad European musical tradition containing many periods, styles,
+        forms, and techniques.
+      </div>
+
+      <div class="quick-item">
+        <strong>Melody:</strong>
+        An organized sequence of musical notes.
+      </div>
+
+      <div class="quick-item">
+        <strong>Rhythm:</strong>
+        The organization of beats, sounds, and silences.
+      </div>
+
+      <div class="quick-item">
+        <strong>Dynamics:</strong>
+        Changes in musical loudness or softness.
+      </div>
+
+      <div class="quick-item">
+        <strong>Greco-Roman Art:</strong>
+        Artistic traditions associated with ancient Greece and Rome.
+      </div>
+
+      <div class="quick-item">
+        <strong>Filipino Cultural Context:</strong>
+        Connecting classical ideas to Filipino cultural references and
+        experiences.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- HEALTH -->
+  <section>
+
+    <div class="section-heading">
+      <h2>5. PE and Health</h2>
+      <p>
+        Responsible Parenthood and Family Planning for Family Wellness
+      </p>
+    </div>
+
+
+    <div class="card definition">
+
+      <p>
+        <strong>Responsible parenthood</strong> involves recognizing the
+        responsibilities involved in raising and caring for children while
+        supporting the overall wellness of the family.
+      </p>
+
+      <p>
+        Family planning involves making informed decisions concerning the
+        timing and spacing of children and considering the needs,
+        responsibilities, and circumstances of the family.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- RESPONSIBLE PARENTHOOD -->
+  <section>
+
+    <div class="section-heading">
+      <h2>6. Responsible Parenthood</h2>
+      <p>Understanding parental responsibilities and family wellness.</p>
+    </div>
+
+
+    <div class="responsibility-grid">
+
+      <div class="responsibility">
+        <h3>Physical Needs</h3>
+        <p>
+          Providing appropriate care, protection, nutrition, shelter, and
+          attention to children's basic needs.
+        </p>
+      </div>
+
+      <div class="responsibility">
+        <h3>Emotional Support</h3>
+        <p>
+          Providing care, guidance, respect, and a supportive family
+          environment.
+        </p>
+      </div>
+
+      <div class="responsibility">
+        <h3>Education</h3>
+        <p>
+          Supporting children's learning, development, and responsible
+          decision-making.
+        </p>
+      </div>
+
+      <div class="responsibility">
+        <h3>Financial Responsibility</h3>
+        <p>
+          Considering the family's resources and responsibilities when
+          making important decisions.
+        </p>
+      </div>
+
+      <div class="responsibility">
+        <h3>Protection</h3>
+        <p>
+          Helping maintain a safe environment and protecting family members
+          from preventable harm.
+        </p>
+      </div>
+
+      <div class="responsibility">
+        <h3>Guidance</h3>
+        <p>
+          Teaching values, responsibility, respect, and healthy
+          decision-making.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FAMILY PLANNING -->
+  <section>
+
+    <div class="section-heading">
+      <h2>7. Family Planning</h2>
+      <p>Making informed and responsible family decisions.</p>
+    </div>
+
+
+    <div class="card">
+
+      <p>
+        Family planning is the process of making informed decisions about
+        whether and when to have children and about the spacing of
+        pregnancies.
+      </p>
+
+      <p>
+        It considers health, personal circumstances, family resources,
+        responsibilities, and informed decision-making.
+      </p>
+
+    </div>
+
+
+    <div class="info-box">
+
+      <strong>Key principle:</strong>
+
+      <p>
+        Family planning should involve accurate information, responsible
+        decision-making, respect, and consideration of the well-being of
+        everyone involved.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- CLASSIFICATIONS -->
+  <section>
+
+    <div class="section-heading">
+      <h2>8. Broad Classifications of Family Planning</h2>
+      <p>Know the broad categories and what they mean.</p>
+    </div>
+
+
+    <div class="classification">
+
+      <div class="classification-card">
+        <h3>Natural Methods</h3>
+
+        <p>
+          Approaches that use awareness of fertility patterns and naturally
+          occurring reproductive signs.
+        </p>
+      </div>
+
+
+      <div class="classification-card">
+        <h3>Barrier Methods</h3>
+
+        <p>
+          Methods designed to prevent sperm from reaching an egg by creating
+          a physical barrier.
+        </p>
+      </div>
+
+
+      <div class="classification-card">
+        <h3>Hormonal Methods</h3>
+
+        <p>
+          Methods that use hormones to prevent pregnancy through effects on
+          reproductive processes.
+        </p>
+      </div>
+
+
+      <div class="classification-card">
+        <h3>Intrauterine Methods</h3>
+
+        <p>
+          Methods involving a device placed inside the uterus by a qualified
+          healthcare professional.
+        </p>
+      </div>
+
+
+      <div class="classification-card">
+        <h3>Permanently Intended Methods</h3>
+
+        <p>
+          Medical procedures intended to provide permanent contraception.
+        </p>
+      </div>
+
+
+      <div class="classification-card">
+        <h3>Emergency Contraception</h3>
+
+        <p>
+          Options used after unprotected sex or contraceptive failure to
+          reduce the chance of pregnancy.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="warning">
+
+      <strong>Health reminder:</strong>
+
+      <p>
+        Specific family-planning choices involve individual health
+        considerations. Reliable health information and qualified healthcare
+        professionals should be used when making personal medical decisions.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- RESPONSIBLE DECISION MAKING -->
+  <section>
+
+    <div class="section-heading">
+      <h2>9. Informed Family Decisions</h2>
+      <p>What responsible decision-making involves.</p>
+    </div>
+
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+
+        <div class="timeline-number">01</div>
+
+        <div class="timeline-content">
+          <h3>Gather Accurate Information</h3>
+          <p>
+            Learn from reliable and evidence-based health sources.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="timeline-item">
+
+        <div class="timeline-number">02</div>
+
+        <div class="timeline-content">
+          <h3>Consider Responsibilities</h3>
+          <p>
+            Think about the responsibilities involved in caring for a family.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="timeline-item">
+
+        <div class="timeline-number">03</div>
+
+        <div class="timeline-content">
+          <h3>Consider Family Wellness</h3>
+          <p>
+            Consider the physical, emotional, social, and financial
+            well-being of the family.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="timeline-item">
+
+        <div class="timeline-number">04</div>
+
+        <div class="timeline-content">
+          <h3>Make Responsible Choices</h3>
+          <p>
+            Decisions should be informed, responsible, respectful, and
+            appropriate to the family's circumstances.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FAMILY WELLNESS -->
+  <section>
+
+    <div class="section-heading">
+      <h2>10. Family Wellness</h2>
+      <p>How responsible decisions can support the whole family.</p>
+    </div>
+
+
+    <div class="topic-grid">
+
+      <div class="topic-card">
+        <div class="topic-number">01</div>
+        <h3>Physical Wellness</h3>
+        <p>
+          Supporting health, safety, nutrition, and access to appropriate
+          healthcare.
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-number">02</div>
+        <h3>Emotional Wellness</h3>
+        <p>
+          Maintaining supportive relationships, communication, and emotional
+          care.
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-number">03</div>
+        <h3>Social Wellness</h3>
+        <p>
+          Building healthy relationships and encouraging cooperation within
+          the family and community.
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-number">04</div>
+        <h3>Financial Wellness</h3>
+        <p>
+          Managing available resources responsibly while considering family
+          needs and responsibilities.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- HEALTH QUICK REVIEW -->
+  <section>
+
+    <div class="section-heading">
+      <h2>11. Health Quick Review</h2>
+      <p>Key concepts for your review.</p>
+    </div>
+
+
+    <div class="quick-list">
+
+      <div class="quick-item">
+        <strong>Responsible Parenthood:</strong>
+        Recognizing and fulfilling the responsibilities involved in raising
+        and caring for children.
+      </div>
+
+      <div class="quick-item">
+        <strong>Family Planning:</strong>
+        Making informed decisions about whether and when to have children
+        and about pregnancy spacing.
+      </div>
+
+      <div class="quick-item">
+        <strong>Informed Decision:</strong>
+        A decision based on accurate information and consideration of
+        relevant circumstances.
+      </div>
+
+      <div class="quick-item">
+        <strong>Family Wellness:</strong>
+        The overall well-being of family members, including physical,
+        emotional, social, and financial aspects.
+      </div>
+
+      <div class="quick-item">
+        <strong>Responsible Choice:</strong>
+        A decision that considers consequences, responsibilities, respect,
+        and well-being.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FINAL REVIEW -->
+  <section>
+
+    <div class="section-heading">
+      <h2>12. Final Review</h2>
+      <p>What you should be able to explain after studying.</p>
+    </div>
+
+
+    <div class="card">
+
+      <h3>Music and Arts</h3>
+
+      <ul>
+        <li>Explain the basic foundations of Western classical music.</li>
+        <li>Identify important musical elements.</li>
+        <li>Describe major characteristics of Greco-Roman art.</li>
+        <li>Connect classical traditions with Filipino cultural references.</li>
+        <li>Use observation and listening to analyze artworks and music.</li>
+        <li>Apply ideas through guided creative work.</li>
+      </ul>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>PE and Health</h3>
+
+      <ul>
+        <li>Explain responsible parenthood.</li>
+        <li>Identify important parental responsibilities.</li>
+        <li>Explain the purpose of family planning.</li>
+        <li>Recognize broad classifications of family-planning methods.</li>
+        <li>Explain the importance of informed decision-making.</li>
+        <li>Connect responsible decisions with family wellness.</li>
+      </ul>
+
+    </div>
+
+  </section>
+
+
+  <!-- COMPLETION -->
+
+</main>
+
+
+<footer>
+  MAPEH Reviewer • STE Study Hub
+</footer>
+
+
+<script>
+  const reviewerId = "mapeh";
+
+  const completeBtn =
+    document.getElementById("completeBtn");
+
+  const completionStatus =
+    document.getElementById("completionStatus");
+
+  const progressFill =
+    document.getElementById("progressFill");
+
+
+  function getProgress() {
+    try {
+      return JSON.parse(
+        localStorage.getItem("riasStudyHubProgress")
+      ) || {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    } catch (error) {
+
+      return {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    }
+  }
+
+
+  function saveProgress(progress) {
+    localStorage.setItem(
+      "riasStudyHubProgress",
+      JSON.stringify(progress)
+    );
+  }
+
+
+  function updateCompletionUI() {
+
+    const progress = getProgress();
+
+    const completed =
+      progress.reviewers &&
+      progress.reviewers[reviewerId] === true;
+
+
+    if (completed) {
+
+      completionStatus.textContent =
+        "Completed ✓";
+
+      completionStatus.classList.add(
+        "completed"
+      );
+
+      completeBtn.textContent =
+        "Completed ✓";
+
+      completeBtn.classList.add(
+        "completed"
+      );
+
+      progressFill.style.width =
+        "100%";
+
+    } else {
+
+      completionStatus.textContent =
+        "Not completed";
+
+      completionStatus.classList.remove(
+        "completed"
+      );
+
+      completeBtn.textContent =
+        "Mark as Complete";
+
+      completeBtn.classList.remove(
+        "completed"
+      );
+
+      progressFill.style.width =
+        "0%";
+    }
+  }
+
+
+  completeBtn.addEventListener(
+    "click",
+    function () {
+
+      const progress = getProgress();
+
+      if (!progress.reviewers) {
+        progress.reviewers = {};
+      }
+
+      const currentlyCompleted =
+        progress.reviewers[reviewerId] === true;
+
+      progress.reviewers[reviewerId] =
+        !currentlyCompleted;
+
+      saveProgress(progress);
+
+      updateCompletionUI();
+    }
+  );
+
+
+  updateCompletionUI();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Evaluating Argumentative Texts | STE Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+      --yellow: #facc15;
+      --red: #fb7185;
+      --purple: #a78bfa;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 17, 23, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 45px 22px 70px;
+    }
+
+    .hero {
+      margin-bottom: 35px;
+    }
+
+    .subject-label {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 800px;
+      font-size: 16px;
+    }
+
+    .completion {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 35px;
+    }
+
+    .completion-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 13px;
+    }
+
+    .completion-title {
+      font-weight: 700;
+    }
+
+    .completion-status {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .completion-status.completed {
+      color: var(--green);
+    }
+
+    .progress-bar {
+      height: 8px;
+      border-radius: 20px;
+      background: #252a34;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      transition: width 0.3s;
+    }
+
+    .complete-btn {
+      margin-top: 15px;
+      border: 1px solid var(--blue);
+      background: transparent;
+      color: var(--blue);
+      padding: 10px 16px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .complete-btn:hover {
+      background: var(--blue);
+      color: #08111f;
+    }
+
+    .complete-btn.completed {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    section {
+      margin-bottom: 45px;
+    }
+
+    .section-heading {
+      margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+      font-size: 27px;
+      margin-bottom: 5px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .card h4 {
+      color: var(--blue);
+      margin-bottom: 7px;
+    }
+
+    .card p {
+      color: #d6d9df;
+    }
+
+    .definition {
+      border-left: 4px solid var(--blue);
+      background: #141922;
+    }
+
+    .definition strong {
+      color: var(--blue);
+    }
+
+    /* ARGUMENT MAP */
+
+    .argument-map {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .argument-box {
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 18px;
+      background: #141820;
+      position: relative;
+    }
+
+    .argument-box.claim {
+      border-color: var(--blue);
+    }
+
+    .argument-box.reason {
+      border-color: var(--yellow);
+    }
+
+    .argument-box.evidence {
+      border-color: var(--green);
+    }
+
+    .argument-box.counterclaim {
+      border-color: var(--red);
+    }
+
+    .argument-box.rebuttal {
+      border-color: var(--purple);
+    }
+
+    .argument-label {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 5px;
+    }
+
+    .claim .argument-label {
+      color: var(--blue);
+    }
+
+    .reason .argument-label {
+      color: var(--yellow);
+    }
+
+    .evidence .argument-label {
+      color: var(--green);
+    }
+
+    .counterclaim .argument-label {
+      color: var(--red);
+    }
+
+    .rebuttal .argument-label {
+      color: var(--purple);
+    }
+
+    .argument-box p {
+      font-size: 14px;
+    }
+
+    .arrow {
+      text-align: center;
+      color: var(--muted);
+      font-size: 20px;
+    }
+
+    /* PROPERTY GRID */
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .concept {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 19px;
+    }
+
+    .concept-number {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #202735;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .concept p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .concept strong {
+      color: var(--text);
+    }
+
+    /* TEXT EXAMPLE */
+
+    .passage {
+      background: #11141b;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 22px;
+      margin-top: 18px;
+    }
+
+    .passage-title {
+      color: var(--blue);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .passage p {
+      color: #d6d9df;
+      margin-bottom: 12px;
+    }
+
+    .highlight-claim {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .highlight-reason {
+      color: var(--yellow);
+      font-weight: 700;
+    }
+
+    .highlight-evidence {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .highlight-counter {
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    .highlight-rebuttal {
+      color: var(--purple);
+      font-weight: 700;
+    }
+
+    /* VISUAL CONNECTION */
+
+    .connection {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      align-items: stretch;
+      margin-top: 20px;
+    }
+
+    .connection-box {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .connection-box .icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .connection-box h4 {
+      margin-bottom: 5px;
+    }
+
+    .connection-box p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .connection-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      font-size: 22px;
+    }
+
+    /* CHECKLIST */
+
+    .checklist {
+      display: grid;
+      gap: 12px;
+    }
+
+    .check-item {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 14px 16px;
+      color: #d6d9df;
+    }
+
+    .check-item strong {
+      color: var(--blue);
+    }
+
+    /* TABLE */
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .comparison th,
+    .comparison td {
+      border: 1px solid var(--border);
+      padding: 13px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .comparison th {
+      background: #202530;
+      color: var(--blue);
+    }
+
+    .comparison td {
+      background: #141820;
+      color: #d6d9df;
+    }
+
+    /* VIDEO */
+
+    .video-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 22px;
+    }
+
+    .video-icon {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .video-card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 17px;
+    }
+
+    .video-link {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 9px;
+      background: var(--blue);
+      color: #08111f;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .video-link:hover {
+      background: var(--blue-hover);
+    }
+
+    @media (max-width: 750px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+        gap: 14px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .concept-grid,
+      .connection {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 32px 16px 60px;
+      }
+
+      .card {
+        padding: 19px;
+      }
+
+      .comparison {
+        font-size: 12px;
+      }
+
+      .comparison th,
+      .comparison td {
+        padding: 9px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <a href="../index.html" class="logo">
+      STE <span>Study Hub</span>
+    </a>
+
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../reviewer.html" class="active">Reviewers</a>
+      <a href="../quizzes.html">Quizzes</a>
+      <a href="../notes.html">Notes</a>
+      <a href="../progress.html">Progress</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <!-- HERO -->
+
+  <div class="hero">
+
+    <div class="subject-label">
+      English Reviewer
+    </div>
+
+    <h1>
+      Evaluating <span>Argumentative Texts</span>
+    </h1>
+
+    <p>
+      Learn how to identify the structure of an argument,
+      find its main idea, recognize supporting details, and
+      evaluate how those details support the author's central claim.
+    </p>
+
+  </div>
+
+
+  <!-- COMPLETION -->
+
+  <div class="completion">
+
+    <div class="completion-top">
+
+      <div>
+        <div class="completion-title">
+          Reviewer Progress
+        </div>
+
+        <div class="completion-status" id="completionStatus">
+          Not completed
+        </div>
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <button class="complete-btn" id="completeBtn">
+      Mark as Complete
+    </button>
+
+  </div>
+
+
+  <!-- WHAT IS ARGUMENTATIVE TEXT -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>1. What Is an Argumentative Text?</h2>
+
+      <p>
+        Understand the purpose before identifying its parts.
+      </p>
+
+    </div>
+
+    <div class="card definition">
+
+      <p>
+        An <strong>argumentative text</strong> is a type of writing
+        in which an author presents a position or claim about a
+        debatable issue and supports that position with
+        <strong>reasons and evidence</strong>.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Important Reminder</h3>
+
+      <p>
+        An argument is not simply someone being angry or trying
+        to win a fight. In academic writing, an argument is a
+        structured position supported by reasoning and evidence.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- MAIN STRUCTURE -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>2. Structure of an Argument</h2>
+
+      <p>
+        These are the major parts you should be able to identify.
+      </p>
+
+    </div>
+
+
+    <div class="argument-map">
+
+      <div class="argument-box claim">
+
+        <div class="argument-label">
+          Claim
+        </div>
+
+        <p>
+          The author's main position or argument.
+          It tells the reader what the author wants them
+          to believe or accept.
+        </p>
+
+      </div>
+
+
+      <div class="arrow">
+        ↓
+      </div>
+
+
+      <div class="argument-box reason">
+
+        <div class="argument-label">
+          Reasons
+        </div>
+
+        <p>
+          The explanations for why the author believes
+          the claim is valid.
+        </p>
+
+      </div>
+
+
+      <div class="arrow">
+        ↓
+      </div>
+
+
+      <div class="argument-box evidence">
+
+        <div class="argument-label">
+          Evidence
+        </div>
+
+        <p>
+          Facts, statistics, examples, research findings,
+          expert opinions, or other specific information
+          used to support the reasons.
+        </p>
+
+      </div>
+
+
+      <div class="arrow">
+        ↓
+      </div>
+
+
+      <div class="argument-box counterclaim">
+
+        <div class="argument-label">
+          Counterclaim
+        </div>
+
+        <p>
+          A position or argument that disagrees with
+          the author's claim.
+        </p>
+
+      </div>
+
+
+      <div class="arrow">
+        ↓
+      </div>
+
+
+      <div class="argument-box rebuttal">
+
+        <div class="argument-label">
+          Rebuttal
+        </div>
+
+        <p>
+          The author's response to the counterclaim,
+          explaining why the original position remains stronger.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CLAIM -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>3. Claim</h2>
+
+      <p>
+        The central position of the argument.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <h3>What is a claim?</h3>
+
+      <p>
+        A <strong>claim</strong> is a statement that expresses
+        the position the author is arguing for.
+        It should be something that can be supported or challenged.
+      </p>
+
+      <div class="concept-grid" style="margin-top: 18px;">
+
+        <div class="concept">
+
+          <div class="concept-number">✓</div>
+
+          <h4>Arguable Claim</h4>
+
+          <p>
+            "Schools should provide students with more opportunities
+            for physical activity."
+          </p>
+
+        </div>
+
+        <div class="concept">
+
+          <div class="concept-number">×</div>
+
+          <h4>Not Really a Claim</h4>
+
+          <p>
+            "The school gym has a basketball court."
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MAIN IDEA -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>4. Main Idea and Central Idea</h2>
+
+      <p>
+        Find what the entire argumentative text is mainly saying.
+      </p>
+
+    </div>
+
+    <div class="card definition">
+
+      <p>
+        The <strong>main idea</strong> or <strong>central idea</strong>
+        is the most important point the text communicates.
+        In an argumentative text, the central idea is often closely
+        connected to the author's main claim.
+      </p>
+
+    </div>
+
+
+    <div class="connection">
+
+      <div class="connection-box">
+
+        <div class="icon">💡</div>
+
+        <h4>Central Idea</h4>
+
+        <p>
+          What is the text mainly arguing?
+        </p>
+
+      </div>
+
+      <div class="connection-arrow">
+        →
+      </div>
+
+      <div class="connection-box">
+
+        <div class="icon">📌</div>
+
+        <h4>Claim</h4>
+
+        <p>
+          What position does the author take?
+        </p>
+
+      </div>
+
+      <div class="connection-arrow">
+        →
+      </div>
+
+      <div class="connection-box">
+
+        <div class="icon">🔎</div>
+
+        <h4>Support</h4>
+
+        <p>
+          What details prove or explain it?
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- REASONS -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>5. Reasons</h2>
+
+      <p>
+        Reasons explain why the author makes the claim.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <p>
+        A <strong>reason</strong> answers the question:
+        <strong>"Why should I believe this claim?"</strong>
+      </p>
+
+      <div class="passage">
+
+        <div class="passage-title">
+          Example
+        </div>
+
+        <p>
+          <span class="highlight-claim">
+            Schools should provide more opportunities for physical activity
+          </span>
+          <br><br>
+
+          <span class="highlight-reason">
+            because regular physical activity can help students stay active
+            and improve their overall well-being.
+          </span>
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- EVIDENCE -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>6. Supporting Evidence</h2>
+
+      <p>
+        Evidence gives the argument something concrete to stand on.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <h3>What counts as evidence?</h3>
+
+      <div class="concept-grid">
+
+        <div class="concept">
+
+          <div class="concept-number">1</div>
+
+          <h4>Facts</h4>
+
+          <p>
+            Information that can be checked or verified.
+          </p>
+
+        </div>
+
+        <div class="concept">
+
+          <div class="concept-number">2</div>
+
+          <h4>Statistics</h4>
+
+          <p>
+            Numerical information that supports a point.
+          </p>
+
+        </div>
+
+        <div class="concept">
+
+          <div class="concept-number">3</div>
+
+          <h4>Examples</h4>
+
+          <p>
+            Specific situations that illustrate the argument.
+          </p>
+
+        </div>
+
+        <div class="concept">
+
+          <div class="concept-number">4</div>
+
+          <h4>Expert Evidence</h4>
+
+          <p>
+            Information or opinions from qualified sources.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>Evidence must actually support the reason.</h3>
+
+      <p>
+        A detail is not automatically good evidence just because
+        it sounds convincing. It should be
+        <strong>relevant</strong> to the point being made and
+        should actually help support the argument.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONNECTION -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>7. Connecting Supporting Details to the Central Idea</h2>
+
+      <p>
+        This is one of the most important skills in this lesson.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <div class="argument-map">
+
+        <div class="argument-box claim">
+
+          <div class="argument-label">
+            Central Claim
+          </div>
+
+          <p>
+            Students should have regular opportunities
+            for physical activity at school.
+          </p>
+
+        </div>
+
+        <div class="arrow">
+          ↓
+        </div>
+
+        <div class="argument-box reason">
+
+          <div class="argument-label">
+            Reason
+          </div>
+
+          <p>
+            Physical activity supports students' overall well-being.
+          </p>
+
+        </div>
+
+        <div class="arrow">
+          ↓
+        </div>
+
+        <div class="argument-box evidence">
+
+          <div class="argument-label">
+            Supporting Detail
+          </div>
+
+          <p>
+            A study reports that students who regularly participate
+            in physical activity can experience benefits associated
+            with physical and mental well-being.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>Ask yourself:</h3>
+
+      <div class="checklist">
+
+        <div class="check-item">
+          <strong>1.</strong>
+          What is the author's main claim?
+        </div>
+
+        <div class="check-item">
+          <strong>2.</strong>
+          What reason supports that claim?
+        </div>
+
+        <div class="check-item">
+          <strong>3.</strong>
+          What evidence supports the reason?
+        </div>
+
+        <div class="check-item">
+          <strong>4.</strong>
+          How does the evidence connect back to the claim?
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- COUNTERCLAIM -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>8. Counterclaim</h2>
+
+      <p>
+        Recognizing the other side of an argument.
+      </p>
+
+    </div>
+
+    <div class="card definition">
+
+      <p>
+        A <strong>counterclaim</strong> is a position that
+        challenges or disagrees with the author's main claim.
+      </p>
+
+    </div>
+
+    <div class="passage">
+
+      <div class="passage-title">
+        Example
+      </div>
+
+      <p>
+        <span class="highlight-claim">
+          Students should have more opportunities for physical activity.
+        </span>
+      </p>
+
+      <p>
+        <span class="highlight-counter">
+          Some people argue that additional physical activity
+          could reduce the time available for academic lessons.
+        </span>
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- REBUTTAL -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>9. Rebuttal</h2>
+
+      <p>
+        Responding to the counterclaim.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <p>
+        A <strong>rebuttal</strong> responds to the counterclaim
+        and explains why the author's position is still reasonable.
+        A strong rebuttal should use reasoning or evidence rather
+        than simply saying that the opposing side is wrong.
+      </p>
+
+    </div>
+
+    <div class="passage">
+
+      <div class="passage-title">
+        Example
+      </div>
+
+      <p>
+        <span class="highlight-counter">
+          Some people argue that additional physical activity
+          could reduce academic learning time.
+        </span>
+      </p>
+
+      <p>
+        <span class="highlight-rebuttal">
+          However, schools can schedule physical activity without
+          removing essential lessons, allowing students to receive
+          both academic instruction and opportunities for movement.
+        </span>
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- TEXT STRUCTURE -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>10. Overall Structure of an Argumentative Text</h2>
+
+      <p>
+        Think of the text as a chain of connected parts.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <div class="connection">
+
+        <div class="connection-box">
+
+          <div class="icon">🎯</div>
+
+          <h4>Claim</h4>
+
+          <p>
+            Main position
+          </p>
+
+        </div>
+
+        <div class="connection-arrow">
+          →
+        </div>
+
+        <div class="connection-box">
+
+          <div class="icon">💭</div>
+
+          <h4>Reasons</h4>
+
+          <p>
+            Why the claim makes sense
+          </p>
+
+        </div>
+
+        <div class="connection-arrow">
+          →
+        </div>
+
+        <div class="connection-box">
+
+          <div class="icon">📊</div>
+
+          <h4>Evidence</h4>
+
+          <p>
+            Specific support
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="connection" style="margin-top: 15px;">
+
+        <div class="connection-box">
+
+          <div class="icon">⚖️</div>
+
+          <h4>Counterclaim</h4>
+
+          <p>
+            Opposing position
+          </p>
+
+        </div>
+
+        <div class="connection-arrow">
+          →
+        </div>
+
+        <div class="connection-box">
+
+          <div class="icon">🛡️</div>
+
+          <h4>Rebuttal</h4>
+
+          <p>
+            Response to opposition
+          </p>
+
+        </div>
+
+        <div class="connection-arrow">
+          →
+        </div>
+
+        <div class="connection-box">
+
+          <div class="icon">✅</div>
+
+          <h4>Conclusion</h4>
+
+          <p>
+            Reinforces the main position
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- WORKED EXAMPLE -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>11. Worked Example</h2>
+
+      <p>
+        Practice identifying each part of an argument.
+      </p>
+
+    </div>
+
+    <div class="passage">
+
+      <div class="passage-title">
+        Sample Argument
+      </div>
+
+      <p>
+        <span class="highlight-claim">
+          Schools should provide students with a short reading period
+          every school day.
+        </span>
+      </p>
+
+      <p>
+        <span class="highlight-reason">
+          Reading regularly can help students develop stronger
+          reading habits and become more comfortable with texts.
+        </span>
+      </p>
+
+      <p>
+        <span class="highlight-evidence">
+          For example, a school could set aside fifteen minutes
+          each day for independent reading and monitor students'
+          participation and reading progress.
+        </span>
+      </p>
+
+      <p>
+        <span class="highlight-counter">
+          Some may argue that a daily reading period would take
+          time away from other classroom activities.
+        </span>
+      </p>
+
+      <p>
+        <span class="highlight-rebuttal">
+          However, a short scheduled reading period could be planned
+          as part of the school day without replacing essential
+          academic instruction.
+        </span>
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>Identify the Parts</h3>
+
+      <table class="comparison">
+
+        <tr>
+          <th>Part</th>
+          <th>What to Find</th>
+        </tr>
+
+        <tr>
+          <td>Claim</td>
+          <td>Schools should provide a short daily reading period.</td>
+        </tr>
+
+        <tr>
+          <td>Reason</td>
+          <td>Regular reading can develop stronger reading habits.</td>
+        </tr>
+
+        <tr>
+          <td>Evidence</td>
+          <td>A possible 15-minute daily reading program.</td>
+        </tr>
+
+        <tr>
+          <td>Counterclaim</td>
+          <td>It could take time away from other activities.</td>
+        </tr>
+
+        <tr>
+          <td>Rebuttal</td>
+          <td>The period could be scheduled without replacing essential instruction.</td>
+        </tr>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- EVALUATING -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>12. How to Evaluate an Argument</h2>
+
+      <p>
+        Don't just identify the parts. Check whether they actually work.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <div class="concept-grid">
+
+        <div class="concept">
+
+          <div class="concept-number">1</div>
+
+          <h4>Find the Claim</h4>
+
+          <p>
+            What does the author want you to believe?
+          </p>
+
+        </div>
+
+        <div class="concept">
+
+          <div class="concept-number">2</div>
+
+          <h4>Find the Reasons</h4>
+
+          <p>
+            Why does the author believe the claim?
+          </p>
+
+        </div>
+
+        <div class="concept">
+
+          <div class="concept-number">3</div>
+
+          <h4>Check the Evidence</h4>
+
+          <p>
+            Is the evidence relevant and specific?
+          </p>
+
+        </div>
+
+        <div class="concept">
+
+          <div class="concept-number">4</div>
+
+          <h4>Check the Connection</h4>
+
+          <p>
+            Does the evidence actually support the reason and claim?
+          </p>
+
+        </div>
+
+        <div class="concept">
+
+          <div class="concept-number">5</div>
+
+          <h4>Find the Counterclaim</h4>
+
+          <p>
+            What might someone who disagrees say?
+          </p>
+
+        </div>
+
+        <div class="concept">
+
+          <div class="concept-number">6</div>
+
+          <h4>Evaluate the Rebuttal</h4>
+
+          <p>
+            Does the author respond logically to the opposing view?
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SIGNAL WORDS -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>13. Signal Words</h2>
+
+      <p>
+        These words can help you locate parts of an argument.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <table class="comparison">
+
+        <tr>
+          <th>Purpose</th>
+          <th>Common Signal Words</th>
+        </tr>
+
+        <tr>
+          <td>Introducing a reason</td>
+          <td>because, since, one reason, first, secondly</td>
+        </tr>
+
+        <tr>
+          <td>Introducing evidence</td>
+          <td>for example, for instance, according to, studies show</td>
+        </tr>
+
+        <tr>
+          <td>Introducing a counterclaim</td>
+          <td>some may argue, critics say, others believe</td>
+        </tr>
+
+        <tr>
+          <td>Introducing a rebuttal</td>
+          <td>however, although, nevertheless, on the other hand</td>
+        </tr>
+
+        <tr>
+          <td>Drawing a conclusion</td>
+          <td>therefore, thus, in conclusion, overall</td>
+        </tr>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+  <!-- IMPORTANT DISTINCTIONS -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>14. Don't Mix These Up</h2>
+
+      <p>
+        These distinctions are commonly tested.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <div class="checklist">
+
+        <div class="check-item">
+          <strong>Claim:</strong>
+          What the author argues.
+        </div>
+
+        <div class="check-item">
+          <strong>Reason:</strong>
+          Why the author argues it.
+        </div>
+
+        <div class="check-item">
+          <strong>Evidence:</strong>
+          The specific information supporting the reason.
+        </div>
+
+        <div class="check-item">
+          <strong>Counterclaim:</strong>
+          The opposing position.
+        </div>
+
+        <div class="check-item">
+          <strong>Rebuttal:</strong>
+          The response to the opposing position.
+        </div>
+
+        <div class="check-item">
+          <strong>Main/Central Idea:</strong>
+          The most important overall point of the text.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- QUICK REVIEW -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>15. Quick Review</h2>
+
+      <p>
+        The essentials to remember before the quiz.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <div class="checklist">
+
+        <div class="check-item">
+          <strong>Argumentative text:</strong>
+          Presents a position supported by reasons and evidence.
+        </div>
+
+        <div class="check-item">
+          <strong>Claim:</strong>
+          The author's main position.
+        </div>
+
+        <div class="check-item">
+          <strong>Reasons:</strong>
+          Explain why the claim should be accepted.
+        </div>
+
+        <div class="check-item">
+          <strong>Evidence:</strong>
+          Specific information that supports the reasons.
+        </div>
+
+        <div class="check-item">
+          <strong>Central idea:</strong>
+          The main point of the entire text.
+        </div>
+
+        <div class="check-item">
+          <strong>Counterclaim:</strong>
+          An opposing position.
+        </div>
+
+        <div class="check-item">
+          <strong>Rebuttal:</strong>
+          A response that addresses the counterclaim.
+        </div>
+
+        <div class="check-item">
+          <strong>Evaluation:</strong>
+          Check whether the reasons and evidence actually support the claim.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- VIDEO -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>16. Watch a Lesson</h2>
+
+      <p>
+        You can add an English argumentative-text video here.
+      </p>
+
+    </div>
+
+    <div class="video-card">
+
+      <div class="video-icon">
+        📺
+      </div>
+
+      <h3>Argumentative Texts</h3>
+
+      <p>
+        Watch a lesson about claims, reasons, evidence,
+        counterclaims, and evaluating arguments.
+      </p>
+
+      <!-- Replace # with your YouTube link -->
+      <a
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="video-link"
+      >
+        ▶ Watch English Lesson
+      </a>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<script>
+
+  const reviewerId = "english";
+
+  const completeBtn =
+    document.getElementById("completeBtn");
+
+  const completionStatus =
+    document.getElementById("completionStatus");
+
+  const progressFill =
+    document.getElementById("progressFill");
+
+
+  function getProgress() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem("riasStudyHubProgress")
+      ) || {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    } catch (error) {
+
+      return {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    }
+
+  }
+
+
+  function saveProgress(progress) {
+
+    localStorage.setItem(
+      "riasStudyHubProgress",
+      JSON.stringify(progress)
+    );
+
+  }
+
+
+  function updateCompletionUI() {
+
+    const progress = getProgress();
+
+    const completed =
+      progress.reviewers &&
+      progress.reviewers[reviewerId] === true;
+
+
+    if (completed) {
+
+      completionStatus.textContent = "Completed ✓";
+
+      completionStatus.classList.add("completed");
+
+      completeBtn.textContent = "Completed ✓";
+
+      completeBtn.classList.add("completed");
+
+      progressFill.style.width = "100%";
+
+    } else {
+
+      completionStatus.textContent = "Not completed";
+
+      completionStatus.classList.remove("completed");
+
+      completeBtn.textContent = "Mark as Complete";
+
+      completeBtn.classList.remove("completed");
+
+      progressFill.style.width = "0%";
+
+    }
+
+  }
+
+
+  completeBtn.addEventListener("click", function () {
+
+    const progress = getProgress();
+
+    if (!progress.reviewers) {
+      progress.reviewers = {};
+    }
+
+    const currentlyCompleted =
+      progress.reviewers[reviewerId] === true;
+
+    progress.reviewers[reviewerId] =
+      !currentlyCompleted;
+
+    saveProgress(progress);
+
+    updateCompletionUI();
+
+  });
+
+
+  updateCompletionUI();
+
+</script>
+
+</body>
+</html>
