@@ -1,0 +1,4099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Periodic Table | Chemistry | STE Study Hub</title>
+
+  <style>
+
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+
+      --green: #4ade80;
+      --red: #f87171;
+      --yellow: #facc15;
+
+      --alkali: #f87171;
+      --alkaline: #facc15;
+      --transition: #4d9fff;
+      --post-transition: #4ade80;
+      --metalloid: #a78bfa;
+      --nonmetal: #2dd4bf;
+      --halogen: #fb923c;
+      --noble: #f472b6;
+      --lanthanide: #c084fc;
+      --actinide: #e879f9;
+    }
+
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+
+    /* =========================
+       HEADER
+       ========================= */
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 17, 23, 0.95);
+
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      backdrop-filter: blur(10px);
+    }
+
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+
+      padding: 18px 22px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 20px;
+    }
+
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+
+      color: var(--text);
+      text-decoration: none;
+
+      white-space: nowrap;
+    }
+
+
+    .logo span {
+      color: var(--blue);
+    }
+
+
+    nav {
+      display: flex;
+      gap: 22px;
+
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+
+    nav a {
+      color: var(--muted);
+
+      text-decoration: none;
+
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+
+    /* =========================
+       MAIN
+       ========================= */
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+
+      padding: 45px 22px 70px;
+    }
+
+
+    /* =========================
+       COMPLETION
+       ========================= */
+
+    .completion {
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+      border-radius: 15px;
+
+      padding: 20px;
+
+      margin-bottom: 35px;
+    }
+
+
+    .completion-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      margin-bottom: 13px;
+    }
+
+
+    .completion-title {
+      font-weight: 700;
+    }
+
+
+    .completion-status {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+
+    .completion-status.completed {
+      color: var(--green);
+    }
+
+
+    .progress-bar {
+      height: 8px;
+
+      border-radius: 20px;
+
+      background: #252a34;
+
+      overflow: hidden;
+    }
+
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+
+      background: var(--blue);
+
+      transition: width 0.3s;
+    }
+
+
+    .complete-btn {
+      margin-top: 15px;
+
+      border: 1px solid var(--blue);
+
+      background: transparent;
+      color: var(--blue);
+
+      padding: 10px 16px;
+
+      border-radius: 9px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+
+    .complete-btn.completed {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+
+    /* =========================
+       HERO
+       ========================= */
+
+    .hero {
+      margin-bottom: 35px;
+    }
+
+
+    .subject-label {
+      color: var(--blue);
+
+      font-size: 13px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: 1px;
+
+      margin-bottom: 8px;
+    }
+
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.2;
+
+      margin-bottom: 12px;
+    }
+
+
+    h1 span {
+      color: var(--blue);
+    }
+
+
+    .hero p {
+      color: var(--muted);
+
+      max-width: 780px;
+
+      font-size: 16px;
+    }
+
+
+    /* =========================
+       SECTIONS
+       ========================= */
+
+    section {
+      margin-bottom: 42px;
+    }
+
+
+    .section-heading {
+      margin-bottom: 20px;
+    }
+
+
+    .section-heading h2 {
+      font-size: 27px;
+
+      margin-bottom: 5px;
+    }
+
+
+    .section-heading p {
+      color: var(--muted);
+
+      font-size: 14px;
+    }
+
+
+    /* =========================
+       GENERAL CARDS
+       ========================= */
+
+    .card {
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+
+      border-radius: 15px;
+
+      padding: 24px;
+
+      margin-bottom: 18px;
+    }
+
+
+    .card h3 {
+      font-size: 20px;
+
+      margin-bottom: 12px;
+    }
+
+
+    .card h4 {
+      color: var(--blue);
+
+      font-size: 16px;
+
+      margin-bottom: 6px;
+    }
+
+
+    .card p {
+      color: #d6d9df;
+    }
+
+
+    .definition {
+      border-left: 4px solid var(--blue);
+
+      background: #141922;
+    }
+
+
+    .definition strong {
+      color: var(--blue);
+    }
+
+
+    .info-box {
+      background: #111722;
+
+      border: 1px solid #263b55;
+
+      border-radius: 12px;
+
+      padding: 18px;
+
+      margin-top: 15px;
+    }
+
+
+    .info-box strong {
+      color: var(--blue);
+    }
+
+
+    /* =========================
+       PERIODIC TABLE
+       ========================= */
+
+    .table-card {
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+
+      border-radius: 15px;
+
+      padding: 20px;
+
+      overflow: hidden;
+    }
+
+
+    .table-note {
+      color: var(--muted);
+
+      font-size: 13px;
+
+      margin-bottom: 18px;
+    }
+
+
+    .periodic-scroll {
+      overflow-x: auto;
+
+      padding-bottom: 12px;
+    }
+
+
+    /*
+      The JavaScript will place the
+      118 elements into this grid.
+    */
+
+    .periodic-table {
+      display: grid;
+
+      grid-template-columns:
+        repeat(18, minmax(65px, 1fr));
+
+      grid-template-rows:
+        repeat(7, 100px);
+
+      gap: 4px;
+
+      min-width: 1190px;
+    }
+
+
+    .group-number {
+      height: 24px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      color: var(--blue);
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+
+    .period-number {
+      height: 24px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      color: var(--blue);
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+
+    .element {
+      position: relative;
+
+      min-width: 65px;
+      height: 100px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 7px;
+
+      padding: 7px;
+
+      display: flex;
+      flex-direction: column;
+
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+
+      transition: 0.15s;
+    }
+
+
+    .element:hover {
+      transform: translateY(-2px);
+
+      border-color: var(--blue);
+    }
+
+
+    .element-number {
+      position: absolute;
+
+      top: 5px;
+      left: 6px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+
+    .element-symbol {
+      font-size: 22px;
+
+      font-weight: 700;
+
+      line-height: 1.1;
+
+      margin-bottom: 2px;
+    }
+
+
+    .element-name {
+      font-size: 9px;
+
+      color: #d6d9df;
+
+      line-height: 1.2;
+    }
+
+
+    .element-mass {
+      font-size: 8px;
+
+      color: var(--muted);
+
+      margin-top: 2px;
+    }
+
+
+    /* Element categories */
+
+    .alkali {
+      background: rgba(248, 113, 113, 0.11);
+
+      border-color: rgba(248, 113, 113, 0.35);
+    }
+
+
+    .alkaline-earth {
+      background: rgba(250, 204, 21, 0.11);
+
+      border-color: rgba(250, 204, 21, 0.35);
+    }
+
+
+    .transition {
+      background: rgba(77, 159, 255, 0.11);
+
+      border-color: rgba(77, 159, 255, 0.35);
+    }
+
+
+    .post-transition {
+      background: rgba(74, 222, 128, 0.11);
+
+      border-color: rgba(74, 222, 128, 0.35);
+    }
+
+
+    .metalloid {
+      background: rgba(167, 139, 250, 0.11);
+
+      border-color: rgba(167, 139, 250, 0.35);
+    }
+
+
+    .reactive-nonmetal {
+      background: rgba(45, 212, 191, 0.11);
+
+      border-color: rgba(45, 212, 191, 0.35);
+    }
+
+
+    .halogen {
+      background: rgba(251, 146, 60, 0.11);
+
+      border-color: rgba(251, 146, 60, 0.35);
+    }
+
+
+    .noble-gas {
+      background: rgba(244, 114, 182, 0.11);
+
+      border-color: rgba(244, 114, 182, 0.35);
+    }
+
+
+    .lanthanide {
+      background: rgba(192, 132, 252, 0.11);
+
+      border-color: rgba(192, 132, 252, 0.35);
+    }
+
+
+    .actinide {
+      background: rgba(232, 121, 249, 0.11);
+
+      border-color: rgba(232, 121, 249, 0.35);
+    }
+
+
+    /* =========================
+       F BLOCK
+       ========================= */
+
+    .f-block {
+      margin-top: 18px;
+
+      display: flex;
+      flex-direction: column;
+
+      gap: 5px;
+    }
+
+
+    .f-row {
+      display: grid;
+
+      grid-template-columns:
+        105px repeat(15, minmax(65px, 1fr));
+
+      gap: 4px;
+
+      min-width: 1190px;
+    }
+
+
+    .f-label {
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+
+      background: #11151d;
+
+      border: 1px solid var(--border);
+
+      border-radius: 7px;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      color: var(--blue);
+    }
+
+
+    .f-label small {
+      color: var(--muted);
+
+      font-size: 8px;
+
+      margin-top: 2px;
+    }
+
+
+    .f-element {
+      position: relative;
+
+      min-width: 65px;
+      height: 90px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 7px;
+
+      padding: 6px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+    }
+
+
+    .f-element .element-number {
+      font-size: 8px;
+    }
+
+
+    .f-element .element-symbol {
+      font-size: 19px;
+    }
+
+
+    .f-element .element-name {
+      font-size: 8px;
+    }
+
+
+    .f-element .element-mass {
+      font-size: 7px;
+    }
+
+
+    /* =========================
+       LEGEND
+       ========================= */
+
+    .legend {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 10px;
+
+      margin-top: 20px;
+    }
+
+
+    .legend-item {
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      padding: 11px;
+
+      background: #141820;
+
+      border: 1px solid var(--border);
+
+      border-radius: 9px;
+
+      font-size: 12px;
+
+      color: #d6d9df;
+    }
+
+
+    .legend-color {
+      width: 15px;
+      height: 15px;
+
+      flex-shrink: 0;
+
+      border-radius: 4px;
+    }
+
+
+    .legend-color.alkali-color {
+      background: var(--alkali);
+    }
+
+
+    .legend-color.alkaline-color {
+      background: var(--alkaline);
+    }
+
+
+    .legend-color.transition-color {
+      background: var(--transition);
+    }
+
+
+    .legend-color.post-color {
+      background: var(--post-transition);
+    }
+
+
+    .legend-color.metalloid-color {
+      background: var(--metalloid);
+    }
+
+
+    .legend-color.nonmetal-color {
+      background: var(--nonmetal);
+    }
+
+
+    .legend-color.halogen-color {
+      background: var(--halogen);
+    }
+
+
+    .legend-color.noble-color {
+      background: var(--noble);
+    }
+
+
+    .legend-color.lanthanide-color {
+      background: var(--lanthanide);
+    }
+
+
+    .legend-color.actinide-color {
+      background: var(--actinide);
+    }
+
+
+    /* =========================
+       GROUPS
+       ========================= */
+
+    .group-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 16px;
+    }
+
+
+    .group-card {
+      background: #141820;
+
+      border: 1px solid var(--border);
+
+      border-radius: 13px;
+
+      padding: 18px;
+    }
+
+
+    .group-card h3 {
+      margin-bottom: 6px;
+
+      font-size: 17px;
+    }
+
+
+    .group-card p {
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+
+    .group-number-badge {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      width: 30px;
+      height: 30px;
+
+      border-radius: 50%;
+
+      background: #202735;
+
+      color: var(--blue);
+
+      font-size: 11px;
+      font-weight: 700;
+
+      margin-bottom: 9px;
+    }
+
+
+    /* =========================
+       MEMORY SECTION
+       ========================= */
+
+    .memory-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 16px;
+    }
+
+
+    .memory-card {
+      background: #141820;
+
+      border: 1px solid var(--border);
+
+      border-radius: 13px;
+
+      padding: 18px;
+    }
+
+
+    .memory-card h3 {
+      font-size: 18px;
+
+      margin-bottom: 8px;
+    }
+
+
+    .memory-card p {
+      color: var(--muted);
+
+      font-size: 14px;
+
+      margin-bottom: 10px;
+    }
+
+
+    .mnemonic {
+      background: #111722;
+
+      border-left: 3px solid var(--blue);
+
+      border-radius: 7px;
+
+      padding: 12px 14px;
+
+      margin-top: 10px;
+
+      color: #d6d9df;
+
+      font-size: 13px;
+    }
+
+
+    .mnemonic strong {
+      color: var(--blue);
+    }
+
+
+    /* =========================
+       SYMBOL TABLE
+       ========================= */
+
+    .symbol-list {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 12px;
+    }
+
+
+    .symbol-row {
+      background: #141820;
+
+      border: 1px solid var(--border);
+
+      border-radius: 10px;
+
+      padding: 14px 16px;
+    }
+
+
+    .symbol-row strong {
+      color: var(--blue);
+    }
+
+
+    .symbol-row span {
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+
+    /* =========================
+       ATOMIC MASS SECTION
+       ========================= */
+
+    .mass-strategy {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 16px;
+
+      margin-bottom: 18px;
+    }
+
+
+    .mass-strategy-card {
+      background: #141820;
+
+      border: 1px solid var(--border);
+
+      border-radius: 13px;
+
+      padding: 18px;
+    }
+
+
+    .mass-strategy-card h3 {
+      color: var(--blue);
+
+      font-size: 17px;
+
+      margin-bottom: 7px;
+    }
+
+
+    .mass-strategy-card p {
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+
+    .mass-anchor-table {
+      width: 100%;
+
+      border-collapse: collapse;
+
+      margin-top: 15px;
+    }
+
+
+    .mass-anchor-table th,
+    .mass-anchor-table td {
+      border: 1px solid var(--border);
+
+      padding: 11px;
+
+      text-align: left;
+
+      font-size: 13px;
+    }
+
+
+    .mass-anchor-table th {
+      background: #202530;
+
+      color: var(--blue);
+    }
+
+
+    .mass-anchor-table td {
+      background: #141820;
+
+      color: #d6d9df;
+    }
+
+
+    .mass-anchor-table td:last-child {
+      color: var(--yellow);
+
+      font-weight: 700;
+    }
+
+
+    /* =========================
+       QUICK REVIEW
+       ========================= */
+
+    .quick-list {
+      display: grid;
+
+      gap: 11px;
+    }
+
+
+    .quick-item {
+      padding: 14px 16px;
+
+      background: #141820;
+
+      border: 1px solid var(--border);
+
+      border-radius: 10px;
+
+      color: #d6d9df;
+    }
+
+
+    .quick-item strong {
+      color: var(--blue);
+    }
+
+
+    /* =========================
+       VIDEOS
+       ========================= */
+
+    /*
+      DO NOT CHANGE THIS VIDEO CSS.
+      This matches the ConChem reviewer.
+    */
+
+    .videos {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 20px;
+    }
+
+
+    .video-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+    }
+
+
+    .video-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+
+    .video-info {
+      padding: 17px;
+    }
+
+
+    .video-info h3 {
+      margin: 0 0 5px;
+      font-size: 16px;
+    }
+
+
+    .video-info p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+
+    /* =========================
+       FINAL TEST
+       ========================= */
+
+    .test-card {
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+
+      border-radius: 15px;
+
+      padding: 22px;
+
+      overflow: hidden;
+    }
+
+
+    .test-instructions {
+      margin-bottom: 22px;
+    }
+
+
+    .test-instructions h3 {
+      font-size: 20px;
+
+      margin-bottom: 7px;
+    }
+
+
+    .test-instructions p {
+      color: var(--muted);
+
+      font-size: 14px;
+    }
+
+
+    .test-instructions strong {
+      color: var(--blue);
+    }
+
+
+    .test-rules {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 12px;
+
+      margin-top: 18px;
+    }
+
+
+    .test-rule {
+      background: #141820;
+
+      border: 1px solid var(--border);
+
+      border-radius: 11px;
+
+      padding: 13px;
+    }
+
+
+    .test-rule strong {
+      display: block;
+
+      margin-bottom: 3px;
+    }
+
+
+    .test-rule span {
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    /* Test table */
+
+    .test-table-scroll {
+      overflow-x: auto;
+
+      padding-bottom: 15px;
+    }
+
+
+   .test-table {
+  display: grid;
+  grid-template-columns:
+    38px repeat(18, 72px);
+  grid-template-rows:
+    24px repeat(7, 105px);
+  gap: 4px;
+  width: max-content;
+}
+
+
+    .test-period {
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+
+      color: var(--blue);
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+
+    .test-cell {
+      position: relative;
+
+      min-width: 72px;
+      min-height: 105px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 7px;
+
+      padding: 5px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: flex-end;
+
+      gap: 4px;
+    }
+
+
+    .test-cell:hover {
+      border-color: var(--blue);
+    }
+
+
+    .test-number {
+      position: absolute;
+
+      top: 5px;
+      left: 6px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+
+    .symbol-input {
+      width: 100%;
+
+      height: 30px;
+
+      border: 1px solid #303643;
+
+      border-radius: 5px;
+
+      outline: none;
+
+      background: #0b0e13;
+
+      color: var(--text);
+
+      text-align: center;
+
+      font-size: 16px;
+
+      font-weight: 700;
+    }
+
+
+    .mass-input {
+      width: 100%;
+
+      height: 23px;
+
+      border: 1px solid #303643;
+
+      border-radius: 5px;
+
+      outline: none;
+
+      background: #0b0e13;
+
+      color: var(--text);
+
+      text-align: center;
+
+      font-size: 10px;
+    }
+
+
+    .symbol-input:focus,
+    .mass-input:focus {
+      border-color: var(--blue);
+
+      box-shadow:
+        0 0 0 2px rgba(77,159,255,0.12);
+    }
+
+
+    .test-cell.correct {
+      border-color: var(--green);
+    }
+
+
+    .test-cell.incorrect {
+      border-color: var(--red);
+    }
+
+
+    .test-cell.correct .symbol-input,
+    .test-cell.correct .mass-input {
+      border-color: var(--green);
+    }
+
+
+    .test-cell.incorrect .symbol-input,
+    .test-cell.incorrect .mass-input {
+      border-color: var(--red);
+    }
+
+
+    /* Test f-block */
+
+    .test-f-block {
+      margin-top: 15px;
+
+      display: grid;
+
+      gap: 5px;
+    }
+
+
+    .test-f-row {
+      display: grid;
+
+      grid-template-columns:
+        105px repeat(15, 72px);
+
+      gap: 4px;
+
+      width: max-content;
+    }
+
+
+    .test-f-label {
+      min-height: 105px;
+
+      background: #11151d;
+
+      border: 1px solid var(--border);
+
+      border-radius: 7px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      align-items: center;
+
+      text-align: center;
+
+      color: var(--blue);
+
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+
+    .test-f-label small {
+      color: var(--muted);
+
+      font-size: 8px;
+
+      margin-top: 3px;
+    }
+
+
+    .test-f-cell {
+      position: relative;
+
+      width: 72px;
+      height: 105px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 7px;
+
+      padding: 5px;
+
+      background: rgba(192,132,252,0.08);
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: flex-end;
+
+      gap: 4px;
+    }
+
+
+    .test-f-cell.actinide-test {
+      background: rgba(232,121,249,0.08);
+    }
+
+
+    /* =========================
+       TEST BUTTONS
+       ========================= */
+
+    .test-actions {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      margin-top: 22px;
+    }
+
+
+    .test-btn {
+      border: none;
+
+      border-radius: 8px;
+
+      padding: 10px 16px;
+
+      font-weight: 700;
+
+      font-size: 13px;
+
+      cursor: pointer;
+    }
+
+
+    .test-btn.primary {
+      background: var(--blue);
+
+      color: #08111f;
+    }
+
+
+    .test-btn.primary:hover {
+      background: var(--blue-hover);
+    }
+
+
+    .test-btn.secondary {
+      background: #242a35;
+
+      color: var(--text);
+    }
+
+
+    .test-btn.secondary:hover {
+      background: #2d3441;
+    }
+
+
+    /* =========================
+       TEST RESULT
+       ========================= */
+
+    .test-result {
+      margin-top: 18px;
+
+      padding: 18px;
+
+      background: #111722;
+
+      border: 1px solid var(--border);
+
+      border-radius: 12px;
+
+      text-align: center;
+    }
+
+
+    .score-main {
+      font-size: 24px;
+
+      font-weight: 700;
+
+      color: var(--blue);
+    }
+
+
+    .score-details {
+      color: var(--muted);
+
+      font-size: 13px;
+
+      margin-top: 4px;
+    }
+
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    footer {
+      border-top: 1px solid var(--border);
+
+      padding: 25px 22px;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 750px) {
+
+      .header-inner {
+        flex-direction: column;
+
+        align-items: flex-start;
+      }
+
+
+      nav {
+        justify-content: flex-start;
+
+        gap: 14px;
+      }
+
+
+      h1 {
+        font-size: 30px;
+      }
+
+
+      .container {
+        padding: 32px 16px 60px;
+      }
+
+
+      .card {
+        padding: 19px;
+      }
+
+
+      .legend {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+
+      .group-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .memory-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .symbol-list {
+        grid-template-columns: 1fr;
+      }
+
+
+      .mass-strategy {
+        grid-template-columns: 1fr;
+      }
+
+
+      .test-rules {
+        grid-template-columns: 1fr;
+      }
+
+
+      /*
+        Keep videos identical to ConChem's
+        2-column desktop UI, but stack them
+        on smaller screens for readability.
+      */
+
+      .videos {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+     ========================= -->
+
+<header>
+
+  <div class="header-inner">
+
+    <a href="index.html" class="logo">
+      STE <span>Study Hub</span>
+    </a>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="reviewer.html" class="active">Reviewers</a>
+      <a href="quizzes.html">Quizzes</a>
+      <a href="notes.html">Notes</a>
+      <a href="progress.html">Progress</a>
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main class="container">
+
+
+  <!-- =========================
+       COMPLETION
+       ========================= -->
+
+
+
+
+  <!-- =========================
+       HERO / INTRODUCTION
+       ========================= -->
+
+  <div class="hero">
+
+    <div class="subject-label">
+      Conchem 
+    </div>
+
+    <h1>
+      The <span>Periodic Table</span>
+    </h1>
+
+    <p>
+      A complete reviewer for understanding the organization,
+      groups, element symbols, atomic masses, periodic trends,
+      and memorization strategies of the periodic table.
+    </p>
+
+  </div>
+
+  <div class="completion">
+
+    <div class="completion-top">
+
+      <div>
+
+        <div class="completion-title">
+          Reviewer Progress
+        </div>
+
+        <div
+          class="completion-status"
+          id="completionStatus"
+        >
+          Not completed
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="progress-bar">
+
+      <div
+        class="progress-fill"
+        id="progressFill"
+      ></div>
+
+    </div>
+
+
+    <button
+      class="complete-btn"
+      id="completeBtn"
+    >
+      Mark as Complete
+    </button>
+
+  </div>
+  <!-- =========================
+       INTRODUCTION
+       ========================= -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>Introduction</h2>
+
+      <p>
+        Understand how the periodic table is organized before
+        memorizing individual elements.
+      </p>
+
+    </div>
+
+
+    <div class="card definition">
+
+      <h3>What Is the Periodic Table?</h3>
+
+      <p>
+        The periodic table is an organized arrangement of the
+        chemical elements according to their atomic numbers,
+        electron configurations, and recurring chemical properties.
+        It contains all 118 currently recognized elements.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>How the Table Is Organized</h3>
+
+      <p>
+        The periodic table contains <strong>7 periods</strong>
+        arranged horizontally and <strong>18 groups</strong>
+        arranged vertically. Elements in the same group generally
+        have similar valence-electron configurations and therefore
+        often show similar chemical behavior.
+      </p>
+
+      <div class="info-box">
+
+        <strong>Remember:</strong>
+
+        Atomic number increases from left to right across a period
+        and generally increases from top to bottom through the table.
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       COMPLETE PERIODIC TABLE
+       ========================= -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>Complete Periodic Table</h2>
+
+      <p>
+        All 118 elements arranged according to their standard
+        periodic-table positions.
+      </p>
+
+    </div>
+
+
+    <div class="table-card">
+
+      <p class="table-note">
+        Scroll horizontally on smaller screens to view the complete
+        18-group table.
+      </p>
+
+
+      <div class="periodic-scroll">
+
+        <!--
+          JavaScript will populate this element
+          with the complete 18 × 7 periodic table.
+        -->
+
+        <div
+          class="periodic-table"
+          id="periodicTable"
+        ></div>
+
+
+        <!--
+          JavaScript will populate the
+          lanthanide and actinide rows.
+        -->
+
+        <div
+          class="f-block"
+          id="fBlock"
+        ></div>
+
+      </div>
+
+
+      <!-- =========================
+           LEGEND
+           ========================= -->
+
+      <div class="legend">
+
+        <div class="legend-item">
+          <span class="legend-color alkali-color"></span>
+          Alkali Metals
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-color alkaline-color"></span>
+          Alkaline Earth Metals
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-color transition-color"></span>
+          Transition Metals
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-color post-color"></span>
+          Post-Transition Metals
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-color metalloid-color"></span>
+          Metalloids
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-color nonmetal-color"></span>
+          Reactive Nonmetals
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-color halogen-color"></span>
+          Halogens
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-color noble-color"></span>
+          Noble Gases
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-color lanthanide-color"></span>
+          Lanthanides
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-color actinide-color"></span>
+          Actinides
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       GROUPS
+       ========================= -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>Periodic Table Groups</h2>
+
+      <p>
+        Learn what each major group represents and how to recognize it.
+      </p>
+
+    </div>
+
+
+    <div class="group-grid">
+
+      <div class="group-card">
+
+        <div class="group-number-badge">1</div>
+
+        <h3>Alkali Metals</h3>
+
+        <p>
+          Very reactive metals with one valence electron.
+          Hydrogen is positioned here but is a nonmetal.
+        </p>
+
+      </div>
+
+
+      <div class="group-card">
+
+        <div class="group-number-badge">2</div>
+
+        <h3>Alkaline Earth Metals</h3>
+
+        <p>
+          Reactive metals with two valence electrons.
+        </p>
+
+      </div>
+
+
+      <div class="group-card">
+
+        <div class="group-number-badge">3–12</div>
+
+        <h3>Transition Metals</h3>
+
+        <p>
+          The central block of metals containing elements such as
+          iron, copper, silver, gold, and mercury.
+        </p>
+
+      </div>
+
+
+      <div class="group-card">
+
+        <div class="group-number-badge">13</div>
+
+        <h3>Boron Group</h3>
+
+        <p>
+          Contains boron, aluminum, gallium, indium, thallium,
+          and nihonium.
+        </p>
+
+      </div>
+
+
+      <div class="group-card">
+
+        <div class="group-number-badge">14</div>
+
+        <h3>Carbon Group</h3>
+
+        <p>
+          Contains carbon, silicon, germanium, tin, lead,
+          and flerovium.
+        </p>
+
+      </div>
+
+
+      <div class="group-card">
+
+        <div class="group-number-badge">15</div>
+
+        <h3>Nitrogen Group</h3>
+
+        <p>
+          Also called the pnictogens. Nitrogen and phosphorus
+          are important members of this group.
+        </p>
+
+      </div>
+
+
+      <div class="group-card">
+
+        <div class="group-number-badge">16</div>
+
+        <h3>Oxygen Group</h3>
+
+        <p>
+          Also called the chalcogens. Oxygen and sulfur are
+          common members.
+        </p>
+
+      </div>
+
+
+      <div class="group-card">
+
+        <div class="group-number-badge">17</div>
+
+        <h3>Halogens</h3>
+
+        <p>
+          Highly reactive nonmetals that commonly form salts
+          with metals.
+        </p>
+
+      </div>
+
+
+      <div class="group-card">
+
+        <div class="group-number-badge">18</div>
+
+        <h3>Noble Gases</h3>
+
+        <p>
+          Very unreactive gases with filled outer electron shells.
+        </p>
+
+      </div>
+
+
+      <div class="group-card">
+
+        <div class="group-number-badge">f</div>
+
+        <h3>Lanthanides and Actinides</h3>
+
+        <p>
+          The two rows normally displayed below the main table.
+          They belong to periods 6 and 7 respectively.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       HOW TO MEMORIZE
+       ========================= -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>How to Memorize the Periodic Table</h2>
+
+      <p>
+        Use patterns, chunks, symbols, and repetition instead of
+        trying to memorize all 118 elements at once.
+      </p>
+
+    </div>
+
+
+    <div class="memory-grid">
+
+
+      <div class="memory-card">
+
+        <h3>1. Learn in Chunks</h3>
+
+        <p>
+          Divide the periodic table into smaller sections.
+          Start with the first 20 elements, then learn the
+          major groups and transition-metal rows.
+        </p>
+
+        <div class="mnemonic">
+
+          <strong>First 20:</strong>
+
+          H, He, Li, Be, B, C, N, O, F, Ne,
+          Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca
+
+        </div>
+
+      </div>
+
+
+      <div class="memory-card">
+
+        <h3>2. Memorize Symbols by Sound</h3>
+
+        <p>
+          Say the symbols aloud in sequence. This helps connect
+          the visual symbol with its pronunciation.
+        </p>
+
+        <div class="mnemonic">
+
+          <strong>Group 1:</strong>
+
+          H → Li → Na → K → Rb → Cs → Fr
+
+          <br><br>
+
+          <strong>Mnemonic:</strong>
+
+          Happy Little Nannies Keep Rabbits Calm Forever
+
+        </div>
+
+      </div>
+
+
+      <div class="memory-card">
+
+        <h3>3. Use Group Patterns</h3>
+
+        <p>
+          Elements in the same group have related electron
+          configurations and often show similar properties.
+        </p>
+
+        <div class="mnemonic">
+
+          <strong>Group 17:</strong>
+
+          F → Cl → Br → I → At → Ts
+
+          <br><br>
+
+          Funny Clowns Bring Ice At Tuesday School
+
+        </div>
+
+      </div>
+
+
+      <div class="memory-card">
+
+        <h3>4. Learn Periods as Sequences</h3>
+
+        <p>
+          Instead of randomly memorizing symbols, memorize
+          each horizontal period as a sequence.
+        </p>
+
+        <div class="mnemonic">
+
+          <strong>Period 2:</strong>
+
+          Li → Be → B → C → N → O → F → Ne
+
+          <br><br>
+
+          Little Betty Bought Cookies Near Orange Flowers Nearby
+
+        </div>
+
+      </div>
+
+
+      <div class="memory-card">
+
+        <h3>5. Watch for Strange Symbols</h3>
+
+        <p>
+          Some symbols do not directly match the English name.
+          These deserve extra attention.
+        </p>
+
+        <div class="mnemonic">
+
+          <strong>Important examples:</strong>
+
+          Na = Sodium
+
+          <br>
+          K = Potassium
+
+          <br>
+          Fe = Iron
+
+          <br>
+          Cu = Copper
+
+          <br>
+          Ag = Silver
+
+          <br>
+          Au = Gold
+
+          <br>
+          Hg = Mercury
+
+          <br>
+          Pb = Lead
+
+        </div>
+
+      </div>
+
+
+      <div class="memory-card">
+
+        <h3>6. Practice From a Blank Table</h3>
+
+        <p>
+          After studying the table, remove the answers and try
+          rebuilding it from memory. This is more effective than
+          repeatedly looking at the completed table.
+        </p>
+
+        <div class="mnemonic">
+
+          <strong>Study cycle:</strong>
+
+          Look → Cover → Recall → Check → Repeat
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       SYMBOL MNEMONICS
+       ========================= -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>Symbol Mnemonics</h2>
+
+      <p>
+        Useful sequences for recalling element symbols.
+      </p>
+
+    </div>
+
+
+    <div class="symbol-list">
+
+
+      <div class="symbol-row">
+
+        <strong>Group 1:</strong>
+
+        <span>
+          H, Li, Na, K, Rb, Cs, Fr
+        </span>
+
+        <div class="mnemonic">
+          Happy Little Nannies Keep Rabbits Calm Forever
+        </div>
+
+      </div>
+
+
+      <div class="symbol-row">
+
+        <strong>Group 2:</strong>
+
+        <span>
+          Be, Mg, Ca, Sr, Ba, Ra
+        </span>
+
+        <div class="mnemonic">
+          Be My Calm Sister, Baby Rachel
+        </div>
+
+      </div>
+
+
+      <div class="symbol-row">
+
+        <strong>Group 17:</strong>
+
+        <span>
+          F, Cl, Br, I, At, Ts
+        </span>
+
+        <div class="mnemonic">
+          Funny Clowns Bring Ice At Tuesday School
+        </div>
+
+      </div>
+
+
+      <div class="symbol-row">
+
+        <strong>Group 18:</strong>
+
+        <span>
+          He, Ne, Ar, Kr, Xe, Rn, Og
+        </span>
+
+        <div class="mnemonic">
+          He Never Argues; Kind Xerxes Runs Often
+        </div>
+
+      </div>
+
+
+      <div class="symbol-row">
+
+        <strong>Period 2:</strong>
+
+        <span>
+          Li, Be, B, C, N, O, F, Ne
+        </span>
+
+        <div class="mnemonic">
+          Little Betty Bought Cookies Near Orange Flowers Nearby
+        </div>
+
+      </div>
+
+
+      <div class="symbol-row">
+
+        <strong>Period 3:</strong>
+
+        <span>
+          Na, Mg, Al, Si, P, S, Cl, Ar
+        </span>
+
+        <div class="mnemonic">
+          Naughty Magicians Always Sing Popular Songs Clearly Always
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ATOMIC MASSES
+       ========================= -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>Memorizing Atomic Masses</h2>
+
+      <p>
+        Learn the common classroom values first, then work toward
+        the more precise atomic masses.
+      </p>
+
+    </div>
+
+
+    <div class="card definition">
+
+      <h3>Do Not Memorize 118 Decimal Numbers at Once</h3>
+
+      <p>
+        Start with rounded values commonly used in chemistry
+        calculations. Once those are familiar, gradually learn
+        more precise values for elements that frequently appear
+        in your exercises.
+      </p>
+
+    </div>
+
+
+    <div class="mass-strategy">
+
+
+      <div class="mass-strategy-card">
+
+        <h3>Step 1</h3>
+
+        <p>
+          Memorize the first 20 elements and their approximate
+          atomic masses.
+        </p>
+
+      </div>
+
+
+      <div class="mass-strategy-card">
+
+        <h3>Step 2</h3>
+
+        <p>
+          Learn the masses of frequently used elements such as
+          Na, Mg, Al, Cl, K, Ca, Fe, Cu, Zn, Ag, and Au.
+        </p>
+
+      </div>
+
+
+      <div class="mass-strategy-card">
+
+        <h3>Step 3</h3>
+
+        <p>
+          Use the completed periodic table above as your
+          reference, then test yourself using the blank table.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>Mass Anchors to Memorize First</h3>
+
+      <table class="mass-anchor-table">
+
+        <thead>
+
+          <tr>
+            <th>Element</th>
+            <th>Symbol</th>
+            <th>Approx. Atomic Mass</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Hydrogen</td>
+            <td>H</td>
+            <td>1</td>
+          </tr>
+
+          <tr>
+            <td>Helium</td>
+            <td>He</td>
+            <td>4</td>
+          </tr>
+
+          <tr>
+            <td>Lithium</td>
+            <td>Li</td>
+            <td>7</td>
+          </tr>
+
+          <tr>
+            <td>Beryllium</td>
+            <td>Be</td>
+            <td>9</td>
+          </tr>
+
+          <tr>
+            <td>Boron</td>
+            <td>B</td>
+            <td>11</td>
+          </tr>
+
+          <tr>
+            <td>Carbon</td>
+            <td>C</td>
+            <td>12</td>
+          </tr>
+
+          <tr>
+            <td>Nitrogen</td>
+            <td>N</td>
+            <td>14</td>
+          </tr>
+
+          <tr>
+            <td>Oxygen</td>
+            <td>O</td>
+            <td>16</td>
+          </tr>
+
+          <tr>
+            <td>Fluorine</td>
+            <td>F</td>
+            <td>19</td>
+          </tr>
+
+          <tr>
+            <td>Neon</td>
+            <td>Ne</td>
+            <td>20</td>
+          </tr>
+
+          <tr>
+            <td>Sodium</td>
+            <td>Na</td>
+            <td>23</td>
+          </tr>
+
+          <tr>
+            <td>Magnesium</td>
+            <td>Mg</td>
+            <td>24</td>
+          </tr>
+
+          <tr>
+            <td>Aluminum</td>
+            <td>Al</td>
+            <td>27</td>
+          </tr>
+
+          <tr>
+            <td>Silicon</td>
+            <td>Si</td>
+            <td>28</td>
+          </tr>
+
+          <tr>
+            <td>Phosphorus</td>
+            <td>P</td>
+            <td>31</td>
+          </tr>
+
+          <tr>
+            <td>Sulfur</td>
+            <td>S</td>
+            <td>32</td>
+          </tr>
+
+          <tr>
+            <td>Chlorine</td>
+            <td>Cl</td>
+            <td>35.5</td>
+          </tr>
+
+          <tr>
+            <td>Argon</td>
+            <td>Ar</td>
+            <td>40</td>
+          </tr>
+
+          <tr>
+            <td>Potassium</td>
+            <td>K</td>
+            <td>39</td>
+          </tr>
+
+          <tr>
+            <td>Calcium</td>
+            <td>Ca</td>
+            <td>40</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>Important Atomic Mass Rule</h3>
+
+      <p>
+        Atomic mass is not the same thing as atomic number.
+        The atomic number tells you the number of protons in
+        an atom, while atomic mass represents the weighted
+        average mass of the element's naturally occurring isotopes.
+      </p>
+
+      <div class="info-box">
+
+        <strong>Example:</strong>
+
+        Sodium has atomic number 11 but an atomic mass of about
+        22.99, commonly rounded to 23.0 for calculations.
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       QUICK REVIEW
+       ========================= -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>Quick Review</h2>
+
+      <p>
+        Key facts to remember before taking the final test.
+      </p>
+
+    </div>
+
+
+    <div class="quick-list">
+
+      <div class="quick-item">
+        <strong>118</strong> recognized chemical elements are
+        currently included in the periodic table.
+      </div>
+
+      <div class="quick-item">
+        <strong>18 groups</strong> run vertically.
+      </div>
+
+      <div class="quick-item">
+        <strong>7 periods</strong> run horizontally.
+      </div>
+
+      <div class="quick-item">
+        <strong>Group 1</strong> contains the alkali metals,
+        with hydrogen treated separately as a nonmetal.
+      </div>
+
+      <div class="quick-item">
+        <strong>Group 17</strong> contains the halogens.
+      </div>
+
+      <div class="quick-item">
+        <strong>Group 18</strong> contains the noble gases.
+      </div>
+
+      <div class="quick-item">
+        <strong>Lanthanides</strong> occupy elements 57–71.
+      </div>
+
+      <div class="quick-item">
+        <strong>Actinides</strong> occupy elements 89–103.
+      </div>
+
+      <div class="quick-item">
+        <strong>Atomic number</strong> identifies the element
+        and equals the number of protons in a neutral atom.
+      </div>
+
+      <div class="quick-item">
+        <strong>Atomic mass</strong> is the weighted average mass
+        of an element's naturally occurring isotopes.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       VIDEOS
+       ========================= -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>Video Lessons</h2>
+
+      <p>
+        Additional explanations to help reinforce the periodic table.
+      </p>
+
+    </div>
+
+
+    <div class="videos">
+
+
+      <div class="video-card">
+
+        <div class="video-frame">
+
+          <iframe
+            src="https://www.youtube.com/embed/CtTmUlp3bBo"
+            title="Periodic Table Explained"
+            allowfullscreen>
+          </iframe>
+
+        </div>
+
+        <div class="video-info">
+
+          <h3>
+            Periodic Table Explained
+          </h3>
+
+          <p>
+            Review the organization and structure of the periodic table.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="video-card">
+
+        <div class="video-frame">
+
+          <iframe
+            src="https://www.youtube.com/embed/0RRVV4Diomg"
+            title="Periodic Table Basics"
+            allowfullscreen>
+          </iframe>
+
+        </div>
+
+        <div class="video-info">
+
+          <h3>
+            Periodic Table Basics
+          </h3>
+
+          <p>
+            Learn how groups, periods, and element categories work.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="video-card">
+
+        <div class="video-frame">
+
+          <iframe
+            src="https://youtu.be/ds-s59DrvIk?si=c01sG7AzIuujsWxw"
+            title="Periodic Table Trends"
+            allowfullscreen>
+          </iframe>
+
+        </div>
+
+        <div class="video-info">
+
+          <h3>
+            Periodic Table Trends
+          </h3>
+
+          <p>
+            Understand patterns and trends across the periodic table. if can't access, copy this link (https://youtu.be/ds-s59DrvIk?si=c01sG7AzIuujsWxw) 
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="video-card">
+
+        <div class="video-frame">
+
+          <iframe
+            src="https://www.youtube.com/embed/5cbvLh3M0fA"
+            title="How to Memorize the Periodic Table"
+            allowfullscreen>
+          </iframe>
+
+        </div>
+
+        <div class="video-info">
+
+          <h3>
+            How to Memorize the Periodic Table
+          </h3>
+
+          <p>
+            Practical techniques for remembering elements and symbols. If can't access, copy this link. (https://youtu.be/ouOIhbiP5wk?si=6vtVbi306_Da9_pK) 
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="video-card">
+
+        <div class="video-frame">
+
+          <iframe
+            src="https://youtu.be/okolv1y6IlE?si=yafACu69sC-yJyCz"
+            title="Periodic Table Review"
+            allowfullscreen>
+          </iframe>
+
+        </div>
+
+        <div class="video-info">
+
+          <h3>
+            Periodic Table Review
+          </h3>
+
+          <p>
+            Use this lesson as a final review before testing yourself. If can't access, copy this link (https://youtu.be/okolv1y6IlE?si=yafACu69sC-yJyCz) 
+          </p>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FINAL TEST
+       ========================= -->
+
+  <section>
+
+    <div class="section-heading">
+
+      <h2>Final Periodic Table Test</h2>
+
+      <p>
+        Rebuild the periodic table from memory.
+      </p>
+
+    </div>
+
+
+    <div class="test-card">
+
+
+      <div class="test-instructions">
+
+        <h3>Complete the Table</h3>
+
+        <p>
+          Enter the <strong>element symbol</strong> and
+          <strong>atomic mass</strong> for every element.
+          The table keeps the real 18-group periodic-table layout.
+        </p>
+
+
+        <div class="test-rules">
+
+          <div class="test-rule">
+
+            <strong>Symbols</strong>
+
+            <span>
+              Example: Na, Cl, Fe
+            </span>
+
+          </div>
+
+
+          <div class="test-rule">
+
+            <strong>Atomic Mass</strong>
+
+            <span>
+              Rounded classroom values are accepted.
+            </span>
+
+          </div>
+
+
+          <div class="test-rule">
+
+            <strong>Scoring</strong>
+
+            <span>
+              1 point for each correct symbol and mass.
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!--
+        JavaScript will generate the actual
+        18-group blank test here.
+      -->
+
+      <div class="test-table-scroll">
+
+        <div
+          class="test-table"
+          id="periodicTestTable"
+        ></div>
+
+
+        <!--
+          JavaScript will generate the
+          lanthanide and actinide test rows.
+        -->
+
+        <div
+          class="test-f-block"
+          id="periodicTestFBlock"
+        ></div>
+
+      </div>
+
+
+      <!-- =========================
+           TEST CONTROLS
+           ========================= -->
+
+      <div class="test-actions">
+
+        <button
+          class="test-btn primary"
+          id="checkPeriodicTest"
+        >
+          Check Answers
+        </button>
+
+
+        <button
+          class="test-btn secondary"
+          id="showPeriodicAnswers"
+        >
+          Show Answers
+        </button>
+
+
+        <button
+          class="test-btn secondary"
+          id="resetPeriodicTest"
+        >
+          Reset
+        </button>
+
+      </div>
+
+
+      <!-- =========================
+           TEST RESULT
+           ========================= -->
+
+      <div
+        class="test-result"
+        id="periodicTestResult"
+      >
+
+        <div class="score-main">
+          Ready
+        </div>
+
+        <div class="score-details">
+          Complete the table and check your answers.
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+     ========================= -->
+
+<footer>
+
+  STE Study Hub • Periodic Table Reviewer
+
+</footer>
+
+
+<!--
+  JavaScript will be linked separately.
+
+  Example:
+
+  <script src="periodic-table.js"></script>
+
+-->
+
+</body>
+<script type="text/javascript" charset="utf-8">
+  /* =========================================================
+   STE STUDY HUB
+   PERIODIC TABLE REVIEWER
+   JavaScript
+   ========================================================= */
+
+
+/* =========================================================
+   ELEMENT DATA
+   period = main-table period
+   group  = main-table group
+   category = CSS category class
+   mass = standard atomic weight or common bracketed mass
+   ========================================================= */
+
+const elements = [
+
+  // Period 1
+  {n:1,s:"H",name:"Hydrogen",mass:1.008,period:1,group:1,category:"reactive-nonmetal"},
+  {n:2,s:"He",name:"Helium",mass:4.003,period:1,group:18,category:"noble-gas"},
+
+  // Period 2
+  {n:3,s:"Li",name:"Lithium",mass:6.94,period:2,group:1,category:"alkali"},
+  {n:4,s:"Be",name:"Beryllium",mass:9.012,period:2,group:2,category:"alkaline-earth"},
+  {n:5,s:"B",name:"Boron",mass:10.81,period:2,group:13,category:"metalloid"},
+  {n:6,s:"C",name:"Carbon",mass:12.011,period:2,group:14,category:"reactive-nonmetal"},
+  {n:7,s:"N",name:"Nitrogen",mass:14.007,period:2,group:15,category:"reactive-nonmetal"},
+  {n:8,s:"O",name:"Oxygen",mass:15.999,period:2,group:16,category:"reactive-nonmetal"},
+  {n:9,s:"F",name:"Fluorine",mass:18.998,period:2,group:17,category:"halogen"},
+  {n:10,s:"Ne",name:"Neon",mass:20.180,period:2,group:18,category:"noble-gas"},
+
+  // Period 3
+  {n:11,s:"Na",name:"Sodium",mass:22.990,period:3,group:1,category:"alkali"},
+  {n:12,s:"Mg",name:"Magnesium",mass:24.305,period:3,group:2,category:"alkaline-earth"},
+  {n:13,s:"Al",name:"Aluminum",mass:26.982,period:3,group:13,category:"post-transition"},
+  {n:14,s:"Si",name:"Silicon",mass:28.085,period:3,group:14,category:"metalloid"},
+  {n:15,s:"P",name:"Phosphorus",mass:30.974,period:3,group:15,category:"reactive-nonmetal"},
+  {n:16,s:"S",name:"Sulfur",mass:32.06,period:3,group:16,category:"reactive-nonmetal"},
+  {n:17,s:"Cl",name:"Chlorine",mass:35.45,period:3,group:17,category:"halogen"},
+  {n:18,s:"Ar",name:"Argon",mass:39.948,period:3,group:18,category:"noble-gas"},
+
+  // Period 4
+  {n:19,s:"K",name:"Potassium",mass:39.098,period:4,group:1,category:"alkali"},
+  {n:20,s:"Ca",name:"Calcium",mass:40.078,period:4,group:2,category:"alkaline-earth"},
+  {n:21,s:"Sc",name:"Scandium",mass:44.956,period:4,group:3,category:"transition"},
+  {n:22,s:"Ti",name:"Titanium",mass:47.867,period:4,group:4,category:"transition"},
+  {n:23,s:"V",name:"Vanadium",mass:50.942,period:4,group:5,category:"transition"},
+  {n:24,s:"Cr",name:"Chromium",mass:51.996,period:4,group:6,category:"transition"},
+  {n:25,s:"Mn",name:"Manganese",mass:54.938,period:4,group:7,category:"transition"},
+  {n:26,s:"Fe",name:"Iron",mass:55.845,period:4,group:8,category:"transition"},
+  {n:27,s:"Co",name:"Cobalt",mass:58.933,period:4,group:9,category:"transition"},
+  {n:28,s:"Ni",name:"Nickel",mass:58.693,period:4,group:10,category:"transition"},
+  {n:29,s:"Cu",name:"Copper",mass:63.546,period:4,group:11,category:"transition"},
+  {n:30,s:"Zn",name:"Zinc",mass:65.38,period:4,group:12,category:"transition"},
+  {n:31,s:"Ga",name:"Gallium",mass:69.723,period:4,group:13,category:"post-transition"},
+  {n:32,s:"Ge",name:"Germanium",mass:72.630,period:4,group:14,category:"metalloid"},
+  {n:33,s:"As",name:"Arsenic",mass:74.922,period:4,group:15,category:"metalloid"},
+  {n:34,s:"Se",name:"Selenium",mass:78.971,period:4,group:16,category:"reactive-nonmetal"},
+  {n:35,s:"Br",name:"Bromine",mass:79.904,period:4,group:17,category:"halogen"},
+  {n:36,s:"Kr",name:"Krypton",mass:83.798,period:4,group:18,category:"noble-gas"},
+
+  // Period 5
+  {n:37,s:"Rb",name:"Rubidium",mass:85.468,period:5,group:1,category:"alkali"},
+  {n:38,s:"Sr",name:"Strontium",mass:87.62,period:5,group:2,category:"alkaline-earth"},
+  {n:39,s:"Y",name:"Yttrium",mass:88.906,period:5,group:3,category:"transition"},
+  {n:40,s:"Zr",name:"Zirconium",mass:91.224,period:5,group:4,category:"transition"},
+  {n:41,s:"Nb",name:"Niobium",mass:92.906,period:5,group:5,category:"transition"},
+  {n:42,s:"Mo",name:"Molybdenum",mass:95.95,period:5,group:6,category:"transition"},
+  {n:43,s:"Tc",name:"Technetium",mass:98,period:5,group:7,category:"transition"},
+  {n:44,s:"Ru",name:"Ruthenium",mass:101.07,period:5,group:8,category:"transition"},
+  {n:45,s:"Rh",name:"Rhodium",mass:102.906,period:5,group:9,category:"transition"},
+  {n:46,s:"Pd",name:"Palladium",mass:106.42,period:5,group:10,category:"transition"},
+  {n:47,s:"Ag",name:"Silver",mass:107.868,period:5,group:11,category:"transition"},
+  {n:48,s:"Cd",name:"Cadmium",mass:112.414,period:5,group:12,category:"transition"},
+  {n:49,s:"In",name:"Indium",mass:114.818,period:5,group:13,category:"post-transition"},
+  {n:50,s:"Sn",name:"Tin",mass:118.710,period:5,group:14,category:"post-transition"},
+  {n:51,s:"Sb",name:"Antimony",mass:121.760,period:5,group:15,category:"metalloid"},
+  {n:52,s:"Te",name:"Tellurium",mass:127.60,period:5,group:16,category:"metalloid"},
+  {n:53,s:"I",name:"Iodine",mass:126.904,period:5,group:17,category:"halogen"},
+  {n:54,s:"Xe",name:"Xenon",mass:131.293,period:5,group:18,category:"noble-gas"},
+
+  // Period 6
+  {n:55,s:"Cs",name:"Cesium",mass:132.905,period:6,group:1,category:"alkali"},
+  {n:56,s:"Ba",name:"Barium",mass:137.327,period:6,group:2,category:"alkaline-earth"},
+
+  // La placeholder in group 3
+  {n:57,s:"La",name:"Lanthanum",mass:138.905,period:6,group:3,category:"lanthanide"},
+
+  {n:72,s:"Hf",name:"Hafnium",mass:178.49,period:6,group:4,category:"transition"},
+  {n:73,s:"Ta",name:"Tantalum",mass:180.948,period:6,group:5,category:"transition"},
+  {n:74,s:"W",name:"Tungsten",mass:183.84,period:6,group:6,category:"transition"},
+  {n:75,s:"Re",name:"Rhenium",mass:186.207,period:6,group:7,category:"transition"},
+  {n:76,s:"Os",name:"Osmium",mass:190.23,period:6,group:8,category:"transition"},
+  {n:77,s:"Ir",name:"Iridium",mass:192.217,period:6,group:9,category:"transition"},
+  {n:78,s:"Pt",name:"Platinum",mass:195.084,period:6,group:10,category:"transition"},
+  {n:79,s:"Au",name:"Gold",mass:196.967,period:6,group:11,category:"transition"},
+  {n:80,s:"Hg",name:"Mercury",mass:200.592,period:6,group:12,category:"transition"},
+  {n:81,s:"Tl",name:"Thallium",mass:204.38,period:6,group:13,category:"post-transition"},
+  {n:82,s:"Pb",name:"Lead",mass:207.2,period:6,group:14,category:"post-transition"},
+  {n:83,s:"Bi",name:"Bismuth",mass:208.980,period:6,group:15,category:"post-transition"},
+  {n:84,s:"Po",name:"Polonium",mass:209,period:6,group:16,category:"post-transition"},
+  {n:85,s:"At",name:"Astatine",mass:210,period:6,group:17,category:"halogen"},
+  {n:86,s:"Rn",name:"Radon",mass:222,period:6,group:18,category:"noble-gas"},
+
+  // Period 7
+  {n:87,s:"Fr",name:"Francium",mass:223,period:7,group:1,category:"alkali"},
+  {n:88,s:"Ra",name:"Radium",mass:226,period:7,group:2,category:"alkaline-earth"},
+
+  // Ac placeholder in group 3
+  {n:89,s:"Ac",name:"Actinium",mass:227,period:7,group:3,category:"actinide"},
+
+  {n:104,s:"Rf",name:"Rutherfordium",mass:267,period:7,group:4,category:"transition"},
+  {n:105,s:"Db",name:"Dubnium",mass:268,period:7,group:5,category:"transition"},
+  {n:106,s:"Sg",name:"Seaborgium",mass:269,period:7,group:6,category:"transition"},
+  {n:107,s:"Bh",name:"Bohrium",mass:270,period:7,group:7,category:"transition"},
+  {n:108,s:"Hs",name:"Hassium",mass:277,period:7,group:8,category:"transition"},
+  {n:109,s:"Mt",name:"Meitnerium",mass:278,period:7,group:9,category:"transition"},
+  {n:110,s:"Ds",name:"Darmstadtium",mass:281,period:7,group:10,category:"transition"},
+  {n:111,s:"Rg",name:"Roentgenium",mass:282,period:7,group:11,category:"transition"},
+  {n:112,s:"Cn",name:"Copernicium",mass:285,period:7,group:12,category:"transition"},
+  {n:113,s:"Nh",name:"Nihonium",mass:286,period:7,group:13,category:"post-transition"},
+  {n:114,s:"Fl",name:"Flerovium",mass:289,period:7,group:14,category:"post-transition"},
+  {n:115,s:"Mc",name:"Moscovium",mass:290,period:7,group:15,category:"post-transition"},
+  {n:116,s:"Lv",name:"Livermorium",mass:293,period:7,group:16,category:"post-transition"},
+  {n:117,s:"Ts",name:"Tennessine",mass:294,period:7,group:17,category:"halogen"},
+  {n:118,s:"Og",name:"Oganesson",mass:294,period:7,group:18,category:"noble-gas"}
+];
+
+
+/* =========================================================
+   LANTHANIDES
+   ========================================================= */
+
+const lanthanides = [
+  {n:57,s:"La",name:"Lanthanum",mass:138.905,category:"lanthanide"},
+  {n:58,s:"Ce",name:"Cerium",mass:140.116,category:"lanthanide"},
+  {n:59,s:"Pr",name:"Praseodymium",mass:140.908,category:"lanthanide"},
+  {n:60,s:"Nd",name:"Neodymium",mass:144.242,category:"lanthanide"},
+  {n:61,s:"Pm",name:"Promethium",mass:145,category:"lanthanide"},
+  {n:62,s:"Sm",name:"Samarium",mass:150.36,category:"lanthanide"},
+  {n:63,s:"Eu",name:"Europium",mass:151.964,category:"lanthanide"},
+  {n:64,s:"Gd",name:"Gadolinium",mass:157.25,category:"lanthanide"},
+  {n:65,s:"Tb",name:"Terbium",mass:158.925,category:"lanthanide"},
+  {n:66,s:"Dy",name:"Dysprosium",mass:162.500,category:"lanthanide"},
+  {n:67,s:"Ho",name:"Holmium",mass:164.930,category:"lanthanide"},
+  {n:68,s:"Er",name:"Erbium",mass:167.259,category:"lanthanide"},
+  {n:69,s:"Tm",name:"Thulium",mass:168.934,category:"lanthanide"},
+  {n:70,s:"Yb",name:"Ytterbium",mass:173.045,category:"lanthanide"},
+  {n:71,s:"Lu",name:"Lutetium",mass:174.967,category:"lanthanide"}
+];
+
+
+/* =========================================================
+   ACTINIDES
+   ========================================================= */
+
+const actinides = [
+  {n:89,s:"Ac",name:"Actinium",mass:227,category:"actinide"},
+  {n:90,s:"Th",name:"Thorium",mass:232.038,category:"actinide"},
+  {n:91,s:"Pa",name:"Protactinium",mass:231.036,category:"actinide"},
+  {n:92,s:"U",name:"Uranium",mass:238.029,category:"actinide"},
+  {n:93,s:"Np",name:"Neptunium",mass:237,category:"actinide"},
+  {n:94,s:"Pu",name:"Plutonium",mass:244,category:"actinide"},
+  {n:95,s:"Am",name:"Americium",mass:243,category:"actinide"},
+  {n:96,s:"Cm",name:"Curium",mass:247,category:"actinide"},
+  {n:97,s:"Bk",name:"Berkelium",mass:247,category:"actinide"},
+  {n:98,s:"Cf",name:"Californium",mass:251,category:"actinide"},
+  {n:99,s:"Es",name:"Einsteinium",mass:252,category:"actinide"},
+  {n:100,s:"Fm",name:"Fermium",mass:257,category:"actinide"},
+  {n:101,s:"Md",name:"Mendelevium",mass:258,category:"actinide"},
+  {n:102,s:"No",name:"Nobelium",mass:259,category:"actinide"},
+  {n:103,s:"Lr",name:"Lawrencium",mass:262,category:"actinide"}
+];
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function formatMass(mass) {
+  return Number.isInteger(mass)
+    ? `[${mass}]`
+    : Number(mass).toFixed(3).replace(/0+$/, "").replace(/\.$/, "");
+}
+
+
+function createElementHTML(element) {
+
+  return `
+    <div
+      class="element ${element.category}"
+      data-number="${element.n}"
+      data-symbol="${element.s}"
+    >
+
+      <span class="element-number">
+        ${element.n}
+      </span>
+
+      <span class="element-symbol">
+        ${element.s}
+      </span>
+
+      <span class="element-name">
+        ${element.name}
+      </span>
+
+      <span class="element-mass">
+        ${formatMass(element.mass)}
+      </span>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   BUILD COMPLETE PERIODIC TABLE
+   ========================================================= */
+
+function buildPeriodicTable() {
+
+  const table = document.getElementById("periodicTable");
+
+  if (!table) return;
+
+  table.innerHTML = "";
+
+  /*
+    The grid uses 18 columns.
+    We explicitly place every element
+    using its period and group.
+  */
+
+  elements.forEach(element => {
+
+    const cell = document.createElement("div");
+
+    cell.innerHTML = createElementHTML(element);
+
+    const elementNode = cell.firstElementChild;
+
+    elementNode.style.gridColumn = element.group;
+    elementNode.style.gridRow = element.period;
+
+    table.appendChild(elementNode);
+
+  });
+}
+
+
+/* =========================================================
+   BUILD F-BLOCK
+   ========================================================= */
+
+function buildFBlock() {
+
+  const container = document.getElementById("fBlock");
+
+  if (!container) return;
+
+  container.innerHTML = `
+
+    <div class="f-row">
+
+      <div class="f-label">
+        Lanthanides
+        <small>57–71</small>
+      </div>
+
+      ${lanthanides.map(element => createElementHTML(element)).join("")}
+
+    </div>
+
+
+    <div class="f-row">
+
+      <div class="f-label">
+        Actinides
+        <small>89–103</small>
+      </div>
+
+      ${actinides.map(element => createElementHTML(element)).join("")}
+
+    </div>
+
+  `;
+}
+
+
+/* =========================================================
+   BUILD GROUP NUMBERS
+   ========================================================= */
+
+function addGroupLabels() {
+
+  const table = document.getElementById("periodicTable");
+
+  if (!table) return;
+
+  const labels = document.createElement("div");
+
+  labels.style.gridColumn = "1 / 19";
+  labels.style.gridRow = "1";
+  labels.style.display = "grid";
+  labels.style.gridTemplateColumns = "repeat(18, 1fr)";
+  labels.style.pointerEvents = "none";
+  labels.style.height = "0";
+
+  /*
+    The actual element grid already occupies
+    the same coordinates, so group numbers are
+    provided through the small labels below the
+    main table header area.
+  */
+
+}
+
+
+/* =========================================================
+   FINAL TEST
+   ========================================================= */
+
+function createTestCell(element) {
+
+  return `
+    <div
+      class="test-cell ${element.category}"
+      data-answer-symbol="${element.s.toLowerCase()}"
+      data-answer-mass="${element.mass}"
+      data-number="${element.n}"
+    >
+
+      <span class="test-number">
+        ${element.n}
+      </span>
+
+      <input
+        class="symbol-input"
+        type="text"
+        maxlength="3"
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="Symbol for element ${element.n}"
+      >
+
+      <input
+        class="mass-input"
+        type="number"
+        step="any"
+        inputmode="decimal"
+        autocomplete="off"
+        aria-label="Atomic mass for element ${element.n}"
+      >
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   BUILD FINAL TEST MAIN TABLE
+   ========================================================= */
+
+function buildPeriodicTest() {
+
+  const table = document.getElementById("periodicTestTable");
+
+  if (!table) return;
+
+  table.innerHTML = "";
+
+  /*
+    Group labels
+  */
+
+  for (let group = 1; group <= 18; group++) {
+
+    const label = document.createElement("div");
+
+    label.className = "group-number";
+
+    label.textContent = group;
+
+    label.style.gridColumn = group + 1;
+    label.style.gridRow = 1;
+
+    table.appendChild(label);
+
+  }
+
+
+  /*
+    Period labels
+  */
+
+  for (let period = 1; period <= 7; period++) {
+
+    const label = document.createElement("div");
+
+    label.className = "test-period";
+
+    label.textContent = period;
+
+    label.style.gridColumn = 1;
+    label.style.gridRow = period + 1;
+
+    table.appendChild(label);
+
+  }
+
+
+  /*
+    Elements
+  */
+
+  elements.forEach(element => {
+
+    const wrapper = document.createElement("div");
+
+    wrapper.innerHTML = createTestCell(element);
+
+    const cell = wrapper.firstElementChild;
+
+    /*
+      +1 because column 1 is reserved
+      for period labels.
+
+      +1 because row 1 is reserved
+      for group labels.
+    */
+
+    cell.style.gridColumn = element.group + 1;
+    cell.style.gridRow = element.period + 1;
+
+    table.appendChild(cell);
+
+  });
+
+}
+
+
+/* =========================================================
+   BUILD FINAL TEST F-BLOCK
+   ========================================================= */
+
+function createFTestCell(element) {
+
+  return `
+    <div
+      class="test-f-cell ${element.category === "actinide" ? "actinide-test" : ""}"
+      data-answer-symbol="${element.s.toLowerCase()}"
+      data-answer-mass="${element.mass}"
+      data-number="${element.n}"
+    >
+
+      <span class="test-number">
+        ${element.n}
+      </span>
+
+      <input
+        class="symbol-input"
+        type="text"
+        maxlength="3"
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="Symbol for element ${element.n}"
+      >
+
+      <input
+        class="mass-input"
+        type="number"
+        step="any"
+        inputmode="decimal"
+        autocomplete="off"
+        aria-label="Atomic mass for element ${element.n}"
+      >
+
+    </div>
+  `;
+}
+
+
+function buildPeriodicTestFBlock() {
+
+  const container = document.getElementById("periodicTestFBlock");
+
+  if (!container) return;
+
+  container.innerHTML = `
+
+    <div class="test-f-row">
+
+      <div class="test-f-label">
+        Lanthanides
+        <small>57–71</small>
+      </div>
+
+      ${lanthanides.map(createFTestCell).join("")}
+
+    </div>
+
+
+    <div class="test-f-row">
+
+      <div class="test-f-label">
+        Actinides
+        <small>89–103</small>
+      </div>
+
+      ${actinides.map(createFTestCell).join("")}
+
+    </div>
+
+  `;
+}
+
+
+/* =========================================================
+   NORMALIZE SYMBOL
+   ========================================================= */
+
+function normalizeSymbol(value) {
+
+  return value
+    .trim()
+    .toLowerCase();
+
+}
+
+
+/* =========================================================
+   MASS CHECK
+   ========================================================= */
+
+function massIsCorrect(input, expected) {
+
+  const value = parseFloat(input);
+
+  if (!Number.isFinite(value)) {
+    return false;
+  }
+
+  /*
+    Standard atomic masses:
+    accept approximately ±0.05.
+
+    Radioactive elements represented by
+    bracketed mass numbers:
+    accept ±0.5.
+  */
+
+  if (Number.isInteger(expected)) {
+
+    return Math.abs(value - expected) <= 0.5;
+
+  }
+
+  return Math.abs(value - expected) <= 0.05;
+
+}
+
+
+/* =========================================================
+   CHECK FINAL TEST
+   ========================================================= */
+
+function checkPeriodicTest() {
+
+  const cells = document.querySelectorAll(
+    ".test-cell, .test-f-cell"
+  );
+
+  let symbolScore = 0;
+  let massScore = 0;
+
+  let totalSymbols = cells.length;
+  let totalMasses = cells.length;
+
+
+  cells.forEach(cell => {
+
+    const symbolInput =
+      cell.querySelector(".symbol-input");
+
+    const massInput =
+      cell.querySelector(".mass-input");
+
+    const expectedSymbol =
+      cell.dataset.answerSymbol;
+
+    const expectedMass =
+      parseFloat(cell.dataset.answerMass);
+
+
+    const symbolCorrect =
+      normalizeSymbol(symbolInput.value) === expectedSymbol;
+
+
+    const massCorrect =
+      massIsCorrect(massInput.value, expectedMass);
+
+
+    cell.classList.remove(
+      "correct",
+      "incorrect"
+    );
+
+
+    if (symbolCorrect) {
+
+      symbolScore++;
+
+    }
+
+
+    if (massCorrect) {
+
+      massScore++;
+
+    }
+
+
+    if (symbolCorrect && massCorrect) {
+
+      cell.classList.add("correct");
+
+    } else {
+
+      cell.classList.add("incorrect");
+
+    }
+
+  });
+
+
+  const totalScore =
+    symbolScore + massScore;
+
+  const totalPossible =
+    totalSymbols + totalMasses;
+
+
+  const percentage =
+    Math.round(
+      (totalScore / totalPossible) * 100
+    );
+
+
+  const result =
+    document.getElementById("periodicTestResult");
+
+
+  if (result) {
+
+    result.innerHTML = `
+
+      <div class="score-main">
+        ${totalScore} / ${totalPossible}
+      </div>
+
+      <div class="score-details">
+        Symbols: ${symbolScore} / ${totalSymbols}
+        &nbsp; • &nbsp;
+        Atomic Masses: ${massScore} / ${totalMasses}
+        &nbsp; • &nbsp;
+        ${percentage}%
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   SHOW ANSWERS
+   ========================================================= */
+
+function showPeriodicAnswers() {
+
+  const cells = document.querySelectorAll(
+    ".test-cell, .test-f-cell"
+  );
+
+
+  cells.forEach(cell => {
+
+    const symbolInput =
+      cell.querySelector(".symbol-input");
+
+    const massInput =
+      cell.querySelector(".mass-input");
+
+
+    symbolInput.value =
+      cell.dataset.answerSymbol
+        .charAt(0)
+        .toUpperCase() +
+      cell.dataset.answerSymbol.slice(1);
+
+
+    const expectedMass =
+      parseFloat(cell.dataset.answerMass);
+
+
+    massInput.value =
+      Number.isInteger(expectedMass)
+        ? expectedMass
+        : expectedMass;
+
+
+    cell.classList.remove(
+      "incorrect"
+    );
+
+    cell.classList.add(
+      "correct"
+    );
+
+  });
+
+
+  const result =
+    document.getElementById("periodicTestResult");
+
+
+  if (result) {
+
+    result.innerHTML = `
+
+      <div class="score-main">
+        Answers Revealed
+      </div>
+
+      <div class="score-details">
+        Reset the table and try again from memory.
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   RESET FINAL TEST
+   ========================================================= */
+
+function resetPeriodicTest() {
+
+  const inputs =
+    document.querySelectorAll(
+      ".symbol-input, .mass-input"
+    );
+
+
+  inputs.forEach(input => {
+
+    input.value = "";
+
+  });
+
+
+  const cells =
+    document.querySelectorAll(
+      ".test-cell, .test-f-cell"
+    );
+
+
+  cells.forEach(cell => {
+
+    cell.classList.remove(
+      "correct",
+      "incorrect"
+    );
+
+  });
+
+
+  const result =
+    document.getElementById(
+      "periodicTestResult"
+    );
+
+
+  if (result) {
+
+    result.innerHTML = `
+
+      <div class="score-main">
+        Ready
+      </div>
+
+      <div class="score-details">
+        Complete the table and check your answers.
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   COMPLETION SYSTEM
+   ========================================================= */
+
+const reviewerId = "periodic-table";
+
+
+function getProgress() {
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(
+        "riasStudyHubProgress"
+      )
+    ) || {
+
+      reviewers: {},
+      quizzes: {},
+      notes: {}
+
+    };
+
+  } catch (error) {
+
+    return {
+
+      reviewers: {},
+      quizzes: {},
+      notes: {}
+
+    };
+
+  }
+
+}
+
+
+function saveProgress(progress) {
+
+  localStorage.setItem(
+    "riasStudyHubProgress",
+    JSON.stringify(progress)
+  );
+
+}
+
+
+function updateCompletionUI() {
+
+  const progress = getProgress();
+
+  const completed =
+    progress.reviewers &&
+    progress.reviewers[reviewerId] === true;
+
+
+  const completionStatus =
+    document.getElementById(
+      "completionStatus"
+    );
+
+
+  const completeBtn =
+    document.getElementById(
+      "completeBtn"
+    );
+
+
+  const progressFill =
+    document.getElementById(
+      "progressFill"
+    );
+
+
+  if (
+    !completionStatus ||
+    !completeBtn ||
+    !progressFill
+  ) {
+
+    return;
+
+  }
+
+
+  if (completed) {
+
+    completionStatus.textContent =
+      "Completed ✓";
+
+    completionStatus.classList.add(
+      "completed"
+    );
+
+    completeBtn.textContent =
+      "Completed ✓";
+
+    completeBtn.classList.add(
+      "completed"
+    );
+
+    progressFill.style.width =
+      "100%";
+
+  } else {
+
+    completionStatus.textContent =
+      "Not completed";
+
+    completionStatus.classList.remove(
+      "completed"
+    );
+
+    completeBtn.textContent =
+      "Mark as Complete";
+
+    completeBtn.classList.remove(
+      "completed"
+    );
+
+    progressFill.style.width =
+      "0%";
+
+  }
+
+}
+
+
+/* =========================================================
+   COMPLETION BUTTON
+   ========================================================= */
+
+function initializeCompletion() {
+
+  const completeBtn =
+    document.getElementById(
+      "completeBtn"
+    );
+
+
+  if (!completeBtn) return;
+
+
+  completeBtn.addEventListener(
+    "click",
+    function () {
+
+      const progress =
+        getProgress();
+
+
+      if (!progress.reviewers) {
+
+        progress.reviewers = {};
+
+      }
+
+
+      const currentlyCompleted =
+        progress.reviewers[reviewerId] === true;
+
+
+      progress.reviewers[reviewerId] =
+        !currentlyCompleted;
+
+
+      saveProgress(progress);
+
+      updateCompletionUI();
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   KEYBOARD SHORTCUTS
+   ========================================================= */
+
+function initializeKeyboardNavigation() {
+
+  document.addEventListener(
+    "keydown",
+    function (event) {
+
+      /*
+        Ctrl + Enter checks the test.
+      */
+
+      if (
+        event.ctrlKey &&
+        event.key === "Enter"
+      ) {
+
+        checkPeriodicTest();
+
+      }
+
+
+      /*
+        Escape clears focus from
+        the current test field.
+      */
+
+      if (event.key === "Escape") {
+
+        document.activeElement.blur();
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   INITIALIZE EVERYTHING
+   ========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function () {
+
+    buildPeriodicTable();
+
+    buildFBlock();
+
+    buildPeriodicTest();
+
+    buildPeriodicTestFBlock();
+
+    initializeCompletion();
+
+    updateCompletionUI();
+
+    initializeKeyboardNavigation();
+
+
+    const checkButton =
+      document.getElementById(
+        "checkPeriodicTest"
+      );
+
+
+    const showButton =
+      document.getElementById(
+        "showPeriodicAnswers"
+      );
+
+
+    const resetButton =
+      document.getElementById(
+        "resetPeriodicTest"
+      );
+
+
+    if (checkButton) {
+
+      checkButton.addEventListener(
+        "click",
+        checkPeriodicTest
+      );
+
+    }
+
+
+    if (showButton) {
+
+      showButton.addEventListener(
+        "click",
+        showPeriodicAnswers
+      );
+
+    }
+
+
+    if (resetButton) {
+
+      resetButton.addEventListener(
+        "click",
+        resetPeriodicTest
+      );
+
+    }
+
+  }
+);
+</script>
+</html>
