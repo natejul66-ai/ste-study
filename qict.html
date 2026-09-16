@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ICT Quiz | STE Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+      --red: #f87171;
+      --yellow: #facc15;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 17, 23, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 45px 22px 70px;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    .back-link:hover {
+      color: var(--blue);
+    }
+
+    .hero {
+      margin-bottom: 35px;
+    }
+
+    .subject-label {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 720px;
+      font-size: 16px;
+    }
+
+    .quiz-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 25px;
+    }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .info-card strong {
+      display: block;
+      font-size: 24px;
+      color: var(--blue);
+      margin-bottom: 3px;
+    }
+
+    .info-card span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .progress-container {
+      margin: 30px 0 20px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 9px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .progress-bar {
+      height: 8px;
+      border-radius: 20px;
+      background: #252a34;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      transition: width 0.3s;
+    }
+
+    .quiz-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 28px;
+    }
+
+    .question-number {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      margin-bottom: 10px;
+    }
+
+    .question {
+      font-size: 23px;
+      line-height: 1.45;
+      margin-bottom: 20px;
+    }
+
+    .scenario-box {
+      display: none;
+      background: #111722;
+      border: 1px solid #263b55;
+      border-left: 4px solid var(--blue);
+      border-radius: 10px;
+      padding: 17px;
+      margin-bottom: 20px;
+      color: #d6d9df;
+      font-size: 14px;
+    }
+
+    .scenario-box strong {
+      color: var(--blue);
+    }
+
+    .options {
+      display: grid;
+      gap: 11px;
+    }
+
+    .option {
+      position: relative;
+    }
+
+    .option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .option label {
+      display: block;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 15px 17px;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #dfe2e7;
+    }
+
+    .option label:hover {
+      background: var(--surface-hover);
+      border-color: #3b4658;
+    }
+
+    .option input:checked + label {
+      border-color: var(--blue);
+      background: #172235;
+      color: white;
+    }
+
+    .option-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      background: #252b36;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .nav-btn {
+      border: 1px solid var(--border);
+      background: #242a35;
+      color: var(--text);
+      padding: 11px 18px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      background: #2d3441;
+    }
+
+    .nav-btn.primary {
+      background: var(--blue);
+      color: #08111f;
+      border-color: var(--blue);
+    }
+
+    .nav-btn.primary:hover {
+      background: var(--blue-hover);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .result-section {
+      margin-top: 25px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .result-score {
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--blue);
+      margin: 10px 0;
+    }
+
+    .result-message {
+      color: var(--muted);
+      max-width: 650px;
+      margin: 0 auto 22px;
+    }
+
+    .review-section {
+      margin-top: 25px;
+    }
+
+    .review-section h2 {
+      margin-bottom: 18px;
+    }
+
+    .review-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 20px;
+      margin-bottom: 14px;
+    }
+
+    .review-item.correct {
+      border-left: 4px solid var(--green);
+    }
+
+    .review-item.incorrect {
+      border-left: 4px solid var(--red);
+    }
+
+    .review-question {
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .review-answer {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .review-answer.correct-answer {
+      color: var(--green);
+    }
+
+    .review-answer.user-answer {
+      color: var(--red);
+    }
+
+    .review-explanation {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .retry-btn {
+      border: none;
+      background: var(--blue);
+      color: #08111f;
+      padding: 11px 20px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .retry-btn:hover {
+      background: var(--blue-hover);
+    }
+
+    @media (max-width: 700px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+        gap: 14px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .quiz-info {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 32px 16px 60px;
+      }
+
+      .quiz-card {
+        padding: 20px;
+      }
+
+      .question {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <a href="index.html" class="logo">
+      STE <span>Study Hub</span>
+    </a>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="reviewer.html">Reviewers</a>
+      <a href="quizzes.html" class="active">Quizzes</a>
+      <a href="notes.html">Notes</a>
+      <a href="progress.html">Progress</a>
+    </nav>
+
+  </div>
+</header>
+
+<main class="container">
+
+  <a href="quizzes.html" class="back-link">
+    ← Back to Quizzes
+  </a>
+
+  <section class="hero">
+
+    <div class="subject-label">
+      ICT
+    </div>
+
+    <h1>
+      CSS: <span>Challenge Quiz</span>
+    </h1>
+
+    <p>
+      A difficult situational quiz covering CSS syntax, selectors,
+      specificity, box model, units, pseudo-classes, styling,
+      and debugging.
+    </p>
+
+    <div class="quiz-info">
+
+      <div class="info-card">
+        <strong>21</strong>
+        <span>Questions</span>
+      </div>
+
+      <div class="info-card">
+        <strong>Easy</strong>
+        <span>Difficulty</span>
+      </div>
+
+      <div class="info-card">
+        <strong>CSS</strong>
+        <span>Topic</span>
+      </div>
+
+    </div>
+
+  </section>
+
+  <div class="progress-container">
+
+    <div class="progress-top">
+      <span id="questionCounter">Question 1 of 21</span>
+      <span id="answeredCounter">0 answered</span>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+  </div>
+
+  <div id="quizArea">
+
+    <div class="quiz-card">
+
+      <div class="question-number" id="questionNumber">
+        Question 1
+      </div>
+
+      <h2 class="question" id="questionText"></h2>
+
+      <div class="scenario-box" id="scenarioBox"></div>
+
+      <div class="options" id="options"></div>
+
+      <div class="navigation">
+
+        <button
+          class="nav-btn"
+          id="prevBtn"
+          onclick="previousQuestion()"
+        >
+          Previous
+        </button>
+
+        <button
+          class="nav-btn primary"
+          id="nextBtn"
+          onclick="nextQuestion()"
+        >
+          Next
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <section
+    id="resultSection"
+    class="result-section hidden"
+  >
+
+    <div class="subject-label">
+      Quiz Complete
+    </div>
+
+    <div class="result-score" id="resultScore">
+      0/21
+    </div>
+
+    <p class="result-message" id="resultMessage"></p>
+
+    <button
+      class="retry-btn"
+      onclick="retakeQuiz()"
+    >
+      Retake Quiz
+    </button>
+
+  </section>
+
+  <section
+    id="reviewSection"
+    class="review-section hidden"
+  >
+
+    <h2>Answer Review</h2>
+
+    <div id="reviewContent"></div>
+
+  </section>
+
+</main>
+
+<script>
+
+const questions = [
+
+  {
+    scenario:
+      "A page contains: <code>&lt;p class=\"note\" id=\"important\"&gt;Hello&lt;/p&gt;</code>. The stylesheet contains <code>p { color: blue; }</code>, <code>.note { color: green; }</code>, and <code>#important { color: red; }</code>.",
+
+    question:
+      "Assuming there are no other rules affecting the element, what color will the paragraph receive?",
+
+    options: [
+      "Blue, because the element selector is applied first.",
+      "Green, because classes override IDs in normal CSS.",
+      "Red, because the ID selector has greater specificity.",
+      "The browser will ignore all three rules."
+    ],
+
+    answer: 2,
+
+    explanation:
+      "All three selectors match, but the ID selector has greater specificity than a class or element selector, so the text becomes red."
+  },
+
+  {
+    scenario:
+      "A student writes the following rule: <code>.card { padding: 20px; }</code>. They then complain that the cards are not farther apart from one another.",
+
+    question:
+      "Which change directly addresses the student's intended problem if they want space OUTSIDE each card?",
+
+    options: [
+      "Change padding to margin.",
+      "Change padding to border.",
+      "Change padding to width.",
+      "Change padding to font-size."
+    ],
+
+    answer: 0,
+
+    explanation:
+      "Padding creates space inside the element, while margin creates space outside the element."
+  },
+
+  {
+    scenario:
+      "Consider this CSS: <code>p { color: blue; } .warning { color: red; }</code>. The HTML is <code>&lt;p class=\"warning\"&gt;Stop&lt;/p&gt;</code>.",
+
+    question:
+      "Why does the paragraph become red rather than blue?",
+
+    options: [
+      "The class selector is more specific than the element selector.",
+      "CSS always uses the last property regardless of selector.",
+      "The browser automatically treats warning as an ID.",
+      "The paragraph selector becomes invalid when a class is present."
+    ],
+
+    answer: 0,
+
+    explanation:
+      "Both rules match, but the class selector has greater specificity than the element selector."
+  },
+
+  {
+    scenario:
+      "A webpage has a button with <code>button:hover { background: lightblue; }</code>. The button appears blue normally but changes color only while the pointer is positioned over it.",
+
+    question:
+      "What is the most accurate description of what is happening?",
+
+    options: [
+      "The button's HTML element is permanently replaced.",
+      "The :hover pseudo-class applies a style based on the element's current state.",
+      "The browser creates a new button whenever the pointer moves.",
+      "The CSS declaration becomes inline CSS temporarily."
+    ],
+
+    answer: 1,
+
+    explanation:
+      ":hover is a pseudo-class that targets an element while the pointer is over it."
+  },
+
+  {
+    scenario:
+      "A student writes: <code>p { color blue; }</code>. The selector is correct, but the browser does not apply the color as expected.",
+
+    question:
+      "Which part of the declaration is incorrectly written?",
+
+    options: [
+      "The selector p.",
+      "The property color.",
+      "The missing colon between the property and value.",
+      "The absence of a second selector."
+    ],
+
+    answer: 2,
+
+    explanation:
+      "A CSS declaration needs the form property: value;. The correct version is color: blue;"
+  },
+
+  {
+    scenario:
+      "A box has <code>width: 300px;</code> and <code>padding: 20px;</code>. Assume the default content-box box-sizing model.",
+
+    question:
+      "Ignoring borders and margins, what is the approximate total horizontal space occupied by the box?",
+
+    options: [
+      "300px",
+      "320px",
+      "340px",
+      "360px"
+    ],
+
+    answer: 2,
+
+    explanation:
+      "With content-box, the declared width applies to content only. 300px + 20px left padding + 20px right padding = 340px."
+  },
+
+  {
+    scenario:
+      "A designer wants a heading to be centered horizontally. They write <code>text-align: center;</code>.",
+
+    question:
+      "What does this property directly control?",
+
+    options: [
+      "The vertical position of the entire heading box.",
+      "The horizontal alignment of inline content such as text inside the element.",
+      "The width of the heading element.",
+      "The distance between the heading and the browser window."
+    ],
+
+    answer: 1,
+
+    explanation:
+      "text-align controls the horizontal alignment of text and other inline-level content within the element."
+  },
+
+  {
+    scenario:
+      "A CSS file contains <code>#title { font-size: 30px; }</code>, while the HTML contains <code>&lt;h1 class=\"title\"&gt;Welcome&lt;/h1&gt;</code>.",
+
+    question:
+      "Why does the 30px rule fail to target this heading?",
+
+    options: [
+      "CSS IDs must use a period.",
+      "The HTML has a class named title, not an ID named title.",
+      "h1 elements cannot have classes.",
+      "font-size cannot be used with headings."
+    ],
+
+    answer: 1,
+
+    explanation:
+      "The selector #title searches for id=\"title\". The HTML instead contains class=\"title\", which would be selected with .title."
+  },
+
+  {
+    scenario:
+      "A developer wants the same style applied to every element on a page, regardless of tag, class, or ID.",
+
+    question:
+      "Which selector most directly matches this requirement?",
+
+    options: [
+      ".all",
+      "#all",
+      "*",
+      "body"
+    ],
+
+    answer: 2,
+
+    explanation:
+      "The universal selector * targets all elements."
+  },
+
+  {
+    scenario:
+      "A student uses <code>width: 50%;</code> on a card inside a larger container. They expect the card to become exactly half as wide as the entire browser window.",
+
+    question:
+      "What is the more accurate interpretation of the percentage value?",
+
+    options: [
+      "It is generally relative to the relevant containing block rather than automatically the entire viewport.",
+      "It is always exactly 50 pixels.",
+      "It is always relative to the root font size.",
+      "It can only be used on text."
+    ],
+
+    answer: 0,
+
+    explanation:
+      "Percentage dimensions are generally calculated relative to a containing block or relevant parent dimension, depending on the property."
+  },
+
+  {
+    scenario:
+      "The root element has a font size of 16px. An element has <code>font-size: 2rem;</code>.",
+
+    question:
+      "Assuming the root font size is indeed 16px, what font size does 2rem represent?",
+
+    options: [
+      "2px",
+      "16px",
+      "24px",
+      "32px"
+    ],
+
+    answer: 3,
+
+    explanation:
+      "1rem corresponds to the root element's font size. Therefore 2rem = 2 × 16px = 32px."
+  },
+
+  {
+    scenario:
+      "A developer wants a section to have a height equal to approximately half of the browser viewport's height, regardless of the section's parent dimensions.",
+
+    question:
+      "Which unit is most directly suited to that requirement?",
+
+    options: [
+      "50px",
+      "50%",
+      "50vh",
+      "50rem"
+    ],
+
+    answer: 2,
+
+    explanation:
+      "vh is based on viewport height, so 50vh represents approximately half of the viewport's height."
+  },
+
+  {
+    scenario:
+      "A student writes this rule: <code>button { background: blue; } button:active { background: red; }</code>.",
+
+    question:
+      "When is the red background expected to apply according to the reviewer?",
+
+    options: [
+      "Whenever the pointer is near the button.",
+      "While the button is being activated.",
+      "Only after the browser is refreshed.",
+      "Whenever the button contains text."
+    ],
+
+    answer: 1,
+
+    explanation:
+      ":active applies styles while an element is being activated, such as during the relevant interaction."
+  },
+
+  {
+    scenario:
+      "A student creates an external stylesheet named <code>styles.css</code> but connects it with <code>&lt;link rel=\"stylesheet\" href=\"style.css\"&gt;</code>.",
+
+    question:
+      "What is the most likely problem?",
+
+    options: [
+      "The rel value must be JavaScript.",
+      "The CSS file extension is not allowed.",
+      "The href filename does not match the actual stylesheet filename.",
+      "External CSS cannot be linked with link."
+    ],
+
+    answer: 2,
+
+    explanation:
+      "If the actual file is styles.css but href points to style.css, the browser will look for a different file."
+  },
+
+  {
+    scenario:
+      "A developer places this inside an HTML file: <code>&lt;style&gt; p { color: blue; } &lt;/style&gt;</code>.",
+
+    question:
+      "Which method of applying CSS is being demonstrated?",
+
+    options: [
+      "Inline CSS.",
+      "Internal CSS.",
+      "External CSS.",
+      "JavaScript styling."
+    ],
+
+    answer: 1,
+
+    explanation:
+      "CSS written inside a style element within the HTML document is internal CSS."
+  },
+
+  {
+    scenario:
+      "A student writes <code>.box { margin: 20px; padding: 10px; }</code> and then claims both properties create exactly the same type of spacing.",
+
+    question:
+      "Which statement correctly distinguishes them?",
+
+    options: [
+      "Margin is inside the border while padding is outside.",
+      "Padding is inside the border while margin is outside the border.",
+      "Both are always outside the border.",
+      "Both are always part of the content area."
+    ],
+
+    answer: 1,
+
+    explanation:
+      "Padding is the space between content and border. Margin is the space outside the border."
+  },
+
+  {
+    scenario:
+      "A developer wants comments in CSS that are ignored by the browser's visual styling but remain visible in the source code.",
+
+    question:
+      "Which syntax is valid for a CSS comment?",
+
+    options: [
+      "// explanation",
+      "<!-- explanation -->",
+      "/* explanation */",
+      "# explanation"
+    ],
+
+    answer: 2,
+
+    explanation:
+      "CSS comments use /* and */. The other syntaxes belong to different languages or contexts."
+  },
+
+  {
+    scenario:
+      "A page contains many paragraphs, but only paragraphs with class=\"important\" should become red. The student writes <code>p { color: red; }</code>.",
+
+    question:
+      "Which selector should replace it to target only the intended paragraphs?",
+
+    options: [
+      "#important",
+      ".important",
+      "*important",
+      "p.important-id"
+    ],
+
+    answer: 1,
+
+    explanation:
+      "A class selector uses a period. .important targets elements whose class includes important."
+  },
+
+  {
+    scenario:
+      "A card has a border, and the text inside it appears farther from that border than expected. The developer wants to reduce the space between the text and the border without changing the space between the card and neighboring elements.",
+
+    question:
+      "Which property should be adjusted first?",
+
+    options: [
+      "margin",
+      "padding",
+      "border-radius",
+      "text-align"
+    ],
+
+    answer: 1,
+
+    explanation:
+      "The space between content and border is padding. Margin controls space outside the border."
+  },
+
+  {
+    scenario:
+      "A developer writes the following CSS:\n\n<code>.box { color: blue; }</code>\n\nThey then add a second rule:\n\n<code>#special { color: red; }</code>\n\nThe element is <code>&lt;p id=\"special\" class=\"box\"&gt;Text&lt;/p&gt;</code>.",
+
+    question:
+      "Which color should normally appear, assuming no later rule changes the result?",
+
+    options: [
+      "Blue, because the class appears first.",
+      "Red, because the ID selector is more specific.",
+      "Blue and red simultaneously.",
+      "Neither, because an element cannot have both an ID and class."
+    ],
+
+    answer: 1,
+
+    explanation:
+      "The element matches both selectors, but the ID selector has greater specificity, so red wins."
+  },
+
+  {
+    scenario:
+      "A student wants a reusable style for several different HTML elements. They initially create <code>#card</code> and then assign id=\"card\" to several elements.",
+
+    question:
+      "Based on the reviewer, which approach is more appropriate for a style intended to be reused across multiple elements?",
+
+    options: [
+      "Use a class selector such as .card.",
+      "Use the universal selector for every style.",
+      "Use the same ID repeatedly because IDs are designed for groups.",
+      "Use :hover instead of a selector."
+    ],
+
+    answer: 0,
+
+    explanation:
+      "Classes are intended to identify groups of elements that can share styling. The reviewer specifically describes .box as selecting elements with class=\"box\"."
+  }
+
+];
+
+let currentQuestion = 0;
+let answers = new Array(questions.length).fill(null);
+let submitted = false;
+
+
+function loadQuestion() {
+
+  const question = questions[currentQuestion];
+
+  document.getElementById("questionNumber").textContent =
+    `Question ${currentQuestion + 1}`;
+
+  document.getElementById("questionCounter").textContent =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+
+  document.getElementById("questionText").textContent =
+    question.question;
+
+  const scenarioBox =
+    document.getElementById("scenarioBox");
+
+  if (question.scenario) {
+
+    scenarioBox.style.display = "block";
+
+    scenarioBox.innerHTML =
+      `<strong>Scenario:</strong><br>${question.scenario}`;
+
+  } else {
+
+    scenarioBox.style.display = "none";
+
+    scenarioBox.innerHTML = "";
+
+  }
+
+
+  const optionsContainer =
+    document.getElementById("options");
+
+  optionsContainer.innerHTML = "";
+
+
+  const letters = ["A", "B", "C", "D"];
+
+
+  question.options.forEach((option, index) => {
+
+    const wrapper =
+      document.createElement("div");
+
+    wrapper.className = "option";
+
+
+    const input =
+      document.createElement("input");
+
+    input.type = "radio";
+    input.name = "question";
+    input.id = `option-${index}`;
+    input.value = index;
+
+    if (answers[currentQuestion] === index) {
+      input.checked = true;
+    }
+
+
+    const label =
+      document.createElement("label");
+
+    label.htmlFor = `option-${index}`;
+
+    label.innerHTML =
+      `<span class="option-letter">${letters[index]}</span>${option}`;
+
+
+    input.addEventListener("change", () => {
+
+      answers[currentQuestion] = index;
+      updateProgress();
+
+    });
+
+
+    wrapper.appendChild(input);
+    wrapper.appendChild(label);
+
+    optionsContainer.appendChild(wrapper);
+
+  });
+
+
+  document.getElementById("prevBtn").disabled =
+    currentQuestion === 0;
+
+
+  const nextBtn =
+    document.getElementById("nextBtn");
+
+
+  if (currentQuestion === questions.length - 1) {
+
+    nextBtn.textContent = "Submit Quiz";
+
+  } else {
+
+    nextBtn.textContent = "Next";
+
+  }
+
+
+  updateProgress();
+
+}
+
+
+function updateProgress() {
+
+  const answered =
+    answers.filter(answer => answer !== null).length;
+
+
+  document.getElementById("answeredCounter").textContent =
+    `${answered} answered`;
+
+
+  const progress =
+    ((currentQuestion + 1) / questions.length) * 100;
+
+
+  document.getElementById("progressFill").style.width =
+    `${progress}%`;
+
+}
+
+
+function nextQuestion() {
+
+  if (answers[currentQuestion] === null) {
+
+    alert("Please select an answer before continuing.");
+
+    return;
+
+  }
+
+
+  if (currentQuestion === questions.length - 1) {
+
+    submitQuiz();
+
+    return;
+
+  }
+
+
+  currentQuestion++;
+
+  loadQuestion();
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+function previousQuestion() {
+
+  if (currentQuestion === 0) {
+    return;
+  }
+
+
+  currentQuestion--;
+
+  loadQuestion();
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+function submitQuiz() {
+
+  submitted = true;
+
+
+  let score = 0;
+
+
+  questions.forEach((question, index) => {
+
+    if (answers[index] === question.answer) {
+      score++;
+    }
+
+  });
+
+
+  const percentage =
+    Math.round((score / questions.length) * 100);
+
+
+  document.getElementById("quizArea")
+    .classList.add("hidden");
+
+
+  document.querySelector(".progress-container")
+    .classList.add("hidden");
+
+
+  document.getElementById("resultSection")
+    .classList.remove("hidden");
+
+
+  document.getElementById("reviewSection")
+    .classList.remove("hidden");
+
+
+  document.getElementById("resultScore").textContent =
+    `${score}/${questions.length}`;
+
+
+  let message;
+
+
+  if (percentage >= 90) {
+
+    message =
+      "Excellent. You handled the CSS traps and situational questions very well.";
+
+  } else if (percentage >= 75) {
+
+    message =
+      "Strong result. Review selector specificity, the box model, and CSS units carefully.";
+
+  } else if (percentage >= 60) {
+
+    message =
+      "Decent result, but several questions require careful interpretation rather than memorization.";
+
+  } else {
+
+    message =
+      "Review the CSS reviewer again, especially selectors, spacing, units, and syntax before retaking.";
+
+  }
+
+
+  document.getElementById("resultMessage").textContent =
+    `${message} You scored ${percentage}%.`;
+
+
+  buildReview(score);
+
+  saveQuizProgress(
+    score,
+    percentage
+  );
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+function buildReview(score) {
+
+  const reviewContent =
+    document.getElementById("reviewContent");
+
+  reviewContent.innerHTML = "";
+
+
+  const letters = ["A", "B", "C", "D"];
+
+
+  questions.forEach((question, index) => {
+
+    const isCorrect =
+      answers[index] === question.answer;
+
+
+    const item =
+      document.createElement("div");
+
+    item.className =
+      `review-item ${isCorrect ? "correct" : "incorrect"}`;
+
+
+    const userAnswer =
+      answers[index] !== null
+        ? `${letters[answers[index]]}. ${question.options[answers[index]]}`
+        : "No answer";
+
+
+    const correctAnswer =
+      `${letters[question.answer]}. ${question.options[question.answer]}`;
+
+
+    item.innerHTML = `
+
+      <div class="review-question">
+        ${index + 1}. ${question.question}
+      </div>
+
+      <div class="review-answer ${
+        isCorrect ? "correct-answer" : "user-answer"
+      }">
+        Your answer: ${userAnswer}
+      </div>
+
+      <div class="review-answer correct-answer">
+        Correct answer: ${correctAnswer}
+      </div>
+
+      <div class="review-explanation">
+        ${question.explanation}
+      </div>
+
+    `;
+
+
+    reviewContent.appendChild(item);
+
+  });
+
+}
+
+
+function saveQuizProgress(score, percentage) {
+
+  let progress;
+
+
+  try {
+
+    progress =
+      JSON.parse(
+        localStorage.getItem("riasStudyHubProgress")
+      ) || {};
+
+  } catch (error) {
+
+    progress = {};
+
+  }
+
+
+  if (!progress.reviewers) {
+    progress.reviewers = {};
+  }
+
+
+  if (!progress.quizzes) {
+    progress.quizzes = {};
+  }
+
+
+  if (!progress.notes) {
+    progress.notes = {};
+  }
+
+
+  progress.quizzes.ict = {
+
+    completed: true,
+
+    score: score,
+
+    total: questions.length,
+
+    percentage: percentage,
+
+    date: new Date().toISOString()
+
+  };
+
+
+  localStorage.setItem(
+    "riasStudyHubProgress",
+    JSON.stringify(progress)
+  );
+
+}
+
+
+function retakeQuiz() {
+
+  currentQuestion = 0;
+
+  answers =
+    new Array(questions.length).fill(null);
+
+  submitted = false;
+
+
+  document.getElementById("resultSection")
+    .classList.add("hidden");
+
+
+  document.getElementById("reviewSection")
+    .classList.add("hidden");
+
+
+  document.getElementById("quizArea")
+    .classList.remove("hidden");
+
+
+  document.querySelector(".progress-container")
+    .classList.remove("hidden");
+
+
+  loadQuestion();
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

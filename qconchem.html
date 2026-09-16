@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ConChem Quiz | STE Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+      --red: #f87171;
+      --yellow: #facc15;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 17, 23, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 45px 22px 70px;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 28px;
+    }
+
+    .back-link:hover {
+      color: var(--blue);
+    }
+
+    .hero {
+      margin-bottom: 30px;
+    }
+
+    .subject-label {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 16px;
+    }
+
+    /* =========================
+       QUIZ INFO
+    ========================= */
+
+    .quiz-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .info-card strong {
+      display: block;
+      color: var(--blue);
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .info-card span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* =========================
+       QUIZ PROGRESS
+    ========================= */
+
+    .progress-container {
+      margin-bottom: 20px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #252a34;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 5%;
+      background: var(--blue);
+      transition: width 0.3s ease;
+    }
+
+    /* =========================
+       QUIZ CARD
+    ========================= */
+
+    .quiz-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 28px;
+    }
+
+    .question-number {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .question {
+      font-size: 23px;
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+
+    /* =========================
+       SCENARIO BOX
+    ========================= */
+
+    .scenario-box {
+      display: none;
+      background: #111722;
+      border: 1px solid #263b55;
+      border-radius: 12px;
+      padding: 17px;
+      margin-bottom: 22px;
+      color: #d6d9df;
+      font-size: 14px;
+    }
+
+    .scenario-box strong {
+      color: var(--blue);
+    }
+
+    /* =========================
+       OPTIONS
+    ========================= */
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option {
+      position: relative;
+    }
+
+    .option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .option label {
+      display: block;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      background: #141820;
+      border-radius: 11px;
+      cursor: pointer;
+      color: #dfe2e7;
+      transition: 0.2s;
+    }
+
+    .option label:hover {
+      border-color: var(--blue);
+      background: var(--surface-hover);
+    }
+
+    .option input:checked + label {
+      border-color: var(--blue);
+      background: #182333;
+      color: var(--text);
+    }
+
+    .option-letter {
+      color: var(--blue);
+      font-weight: 800;
+      margin-right: 8px;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .nav-btn {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      padding: 11px 18px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .nav-btn.primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #08111f;
+    }
+
+    .nav-btn.primary:hover {
+      background: var(--blue-hover);
+      color: #08111f;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    /* =========================
+       RESULT
+    ========================= */
+
+    .hidden {
+      display: none !important;
+    }
+
+    .result-section {
+      margin-top: 25px;
+    }
+
+    .result-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .result-card h2 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .score {
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--blue);
+      margin: 12px 0;
+    }
+
+    .result-message {
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .result-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .result-stat {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 15px;
+    }
+
+    .result-stat strong {
+      display: block;
+      font-size: 22px;
+      color: var(--text);
+    }
+
+    .result-stat span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .retry-btn {
+      border: 1px solid var(--blue);
+      background: transparent;
+      color: var(--blue);
+      padding: 11px 18px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .retry-btn:hover {
+      background: var(--blue);
+      color: #08111f;
+    }
+
+    /* =========================
+       REVIEW
+    ========================= */
+
+    .review-section {
+      margin-top: 25px;
+    }
+
+    .review-section h2 {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .review-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 20px;
+      margin-bottom: 13px;
+    }
+
+    .review-item.correct {
+      border-left: 4px solid var(--green);
+    }
+
+    .review-item.incorrect {
+      border-left: 4px solid var(--red);
+    }
+
+    .review-question {
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .review-answer {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .review-answer.correct-text {
+      color: var(--green);
+    }
+
+    .review-answer.incorrect-text {
+      color: var(--red);
+    }
+
+    .review-explanation {
+      margin-top: 12px;
+      padding: 13px;
+      background: #141820;
+      border-radius: 9px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 25px 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+        gap: 14px;
+      }
+
+      .container {
+        padding: 32px 16px 60px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .quiz-info {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-card {
+        padding: 20px;
+      }
+
+      .question {
+        font-size: 20px;
+      }
+
+      .result-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .navigation {
+        flex-direction: column-reverse;
+      }
+
+      .nav-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <a href="../index.html" class="logo">
+      STE <span>Study Hub</span>
+    </a>
+
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="reviewers.html">Reviewers</a>
+      <a href="quizzes.html" class="active">Quizzes</a>
+      <a href="notes.html">Notes</a>
+      <a href="progress.html">Progress</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <a href="quizzes.html" class="back-link">
+    ← Back to Quizzes
+  </a>
+
+
+  <section class="hero">
+
+    <div class="subject-label">
+      ConChem
+    </div>
+
+    <h1>
+      Molarity <span>Challenge</span>
+    </h1>
+
+    <p>
+      A 20-item advanced challenge covering molarity, molar mass,
+      mass-to-moles conversions, dilution, solution mixing, and
+      solution stoichiometry.
+    </p>
+
+  </section>
+
+
+  <div class="quiz-info">
+
+    <div class="info-card">
+      <strong>20</strong>
+      <span>Questions</span>
+    </div>
+
+    <div class="info-card">
+      <strong>Extreme</strong>
+      <span>Difficulty</span>
+    </div>
+
+    <div class="info-card">
+      <strong>Analytical</strong>
+      <span>Question Type</span>
+    </div>
+
+  </div>
+
+
+  <div class="progress-container">
+
+    <div class="progress-top">
+
+      <span id="questionProgress">
+        Question 1 of 20
+      </span>
+
+      <span id="answeredCount">
+        0 answered
+      </span>
+
+    </div>
+
+    <div class="progress-bar">
+      <div
+        class="progress-fill"
+        id="progressFill">
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- QUIZ AREA -->
+
+  <div id="quizArea">
+
+    <div class="quiz-card">
+
+      <div
+        class="question-number"
+        id="questionNumber">
+        Question 1
+      </div>
+
+      <h2
+        class="question"
+        id="questionText">
+      </h2>
+
+      <div
+        class="scenario-box"
+        id="scenarioBox">
+      </div>
+
+      <div
+        class="options"
+        id="options">
+      </div>
+
+
+      <div class="navigation">
+
+        <button
+          class="nav-btn"
+          id="prevBtn"
+          onclick="previousQuestion()">
+          Previous
+        </button>
+
+        <button
+          class="nav-btn primary"
+          id="nextBtn"
+          onclick="nextQuestion()">
+          Next
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- RESULT -->
+
+  <section
+    id="resultSection"
+    class="result-section hidden">
+
+    <div class="result-card">
+
+      <h2>
+        Quiz Complete
+      </h2>
+
+      <div
+        class="score"
+        id="scoreDisplay">
+        0/20
+      </div>
+
+      <p
+        class="result-message"
+        id="resultMessage">
+      </p>
+
+
+      <div class="result-stats">
+
+        <div class="result-stat">
+          <strong id="correctDisplay">0</strong>
+          <span>Correct</span>
+        </div>
+
+        <div class="result-stat">
+          <strong id="incorrectDisplay">0</strong>
+          <span>Incorrect</span>
+        </div>
+
+        <div class="result-stat">
+          <strong id="percentageDisplay">0%</strong>
+          <span>Percentage</span>
+        </div>
+
+      </div>
+
+
+      <button
+        class="retry-btn"
+        onclick="retakeQuiz()">
+        Retake Quiz
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- REVIEW -->
+
+  <section
+    id="reviewSection"
+    class="review-section hidden">
+
+    <h2>
+      Answer Review
+    </h2>
+
+    <div id="reviewContainer"></div>
+
+  </section>
+
+</main>
+
+
+<footer>
+  STE Study Hub • ConChem Molarity Challenge
+</footer>
+
+
+<script>
+
+  /* =====================================================
+     QUESTIONS
+  ===================================================== */
+
+  const questions = [
+
+    {
+      scenario:
+        "A student dissolves 11.70 g of NaCl and prepares exactly 400 mL of solution. Use a molar mass of 58.44 g/mol.",
+
+      question:
+        "What is the molarity of the resulting NaCl solution?",
+
+      options: [
+        "0.250 M",
+        "0.500 M",
+        "0.585 M",
+        "0.801 M"
+      ],
+
+      answer: 1,
+
+      explanation:
+        "First find moles: 11.70 ÷ 58.44 ≈ 0.200 mol. Convert 400 mL to 0.400 L. Then M = 0.200 ÷ 0.400 = 0.500 M."
+    },
+
+
+    {
+      scenario:
+        "A solution contains KOH at 0.350 M. The final solution volume is 425 mL. The molar mass of KOH is 56.11 g/mol.",
+
+      question:
+        "Approximately how many grams of KOH are present in the solution?",
+
+      options: [
+        "5.95 g",
+        "7.44 g",
+        "8.35 g",
+        "13.39 g"
+      ],
+
+      answer: 2,
+
+      explanation:
+        "Convert 425 mL to 0.425 L. Moles = MV = (0.350)(0.425) = 0.14875 mol. Mass = 0.14875 × 56.11 ≈ 8.35 g."
+    },
+
+
+    {
+      scenario:
+        "You have an 8.00 M stock solution and need to prepare exactly 750 mL of a 0.800 M solution.",
+
+      question:
+        "What volume of the 8.00 M stock solution is required?",
+
+      options: [
+        "7.50 mL",
+        "75.0 mL",
+        "93.8 mL",
+        "750 mL"
+      ],
+
+      answer: 1,
+
+      explanation:
+        "Use M₁V₁ = M₂V₂. V₁ = (0.800 × 750 mL) ÷ 8.00 = 75.0 mL."
+    },
+
+
+    {
+      scenario:
+        "Two NaCl solutions are mixed. Solution A is 150 mL of 0.800 M NaCl. Solution B is 350 mL of 0.200 M NaCl. Assume the volumes simply add.",
+
+      question:
+        "What is the final molarity of NaCl?",
+
+      options: [
+        "0.300 M",
+        "0.350 M",
+        "0.380 M",
+        "0.500 M"
+      ],
+
+      answer: 2,
+
+      explanation:
+        "Moles from A = (0.800)(0.150) = 0.120 mol. Moles from B = (0.200)(0.350) = 0.070 mol. Total = 0.190 mol. Total volume = 0.500 L. Final M = 0.190 ÷ 0.500 = 0.380 M."
+    },
+
+
+    {
+      scenario:
+        "Calculate the molar mass of Al₂(SO₄)₃ using Al = 26.98 g/mol, S = 32.06 g/mol, and O = 16.00 g/mol.",
+
+      question:
+        "Which value is the correct molar mass of Al₂(SO₄)₃?",
+
+      options: [
+        "150.09 g/mol",
+        "246.10 g/mol",
+        "278.14 g/mol",
+        "342.14 g/mol"
+      ],
+
+      answer: 3,
+
+      explanation:
+        "There are 2 Al atoms and 3 sulfate groups. MM = 2(26.98) + 3[32.06 + 4(16.00)] = 342.14 g/mol."
+    },
+
+
+    {
+      scenario:
+        "A student dissolves 9.80 g of H₂SO₄ to make exactly 250 mL of solution. Use H₂SO₄ = 98.08 g/mol.",
+
+      question:
+        "What is the approximate molarity of the solution?",
+
+      options: [
+        "0.100 M",
+        "0.250 M",
+        "0.400 M",
+        "0.980 M"
+      ],
+
+      answer: 2,
+
+      explanation:
+        "Moles = 9.80 ÷ 98.08 ≈ 0.0999 mol. Volume = 0.250 L. M ≈ 0.0999 ÷ 0.250 = 0.400 M."
+    },
+
+
+    {
+      scenario:
+        "Hydrogen reacts with oxygen according to the balanced equation: 2H₂ + O₂ → 2H₂O. A 0.750 M H₂ solution provides 400 mL of H₂.",
+
+      question:
+        "Assuming sufficient O₂ is available, how many moles of H₂O can theoretically form?",
+
+      options: [
+        "0.150 mol",
+        "0.300 mol",
+        "0.375 mol",
+        "0.600 mol"
+      ],
+
+      answer: 1,
+
+      explanation:
+        "H₂ moles = MV = (0.750)(0.400) = 0.300 mol. The balanced equation has a 2:2 H₂:H₂O ratio, so 0.300 mol H₂ produces 0.300 mol H₂O."
+    },
+
+
+    {
+      scenario:
+        "Sulfuric acid reacts with sodium hydroxide according to: 2NaOH + H₂SO₄ → Na₂SO₄ + 2H₂O. A student has 250 mL of 0.600 M NaOH.",
+
+      question:
+        "How many moles of H₂SO₄ are required to react exactly with all the NaOH?",
+
+      options: [
+        "0.0375 mol",
+        "0.0750 mol",
+        "0.150 mol",
+        "0.300 mol"
+      ],
+
+      answer: 1,
+
+      explanation:
+        "NaOH moles = (0.600)(0.250) = 0.150 mol. The ratio is 2 mol NaOH : 1 mol H₂SO₄, so H₂SO₄ required = 0.150 ÷ 2 = 0.0750 mol."
+    },
+
+
+    {
+      scenario:
+        "The reaction is 2NaOH + H₂SO₄ → Na₂SO₄ + 2H₂O. You mix 250 mL of 0.600 M NaOH with 500 mL of 0.400 M H₂SO₄.",
+
+      question:
+        "Which substance determines the maximum amount of H₂O that can form, and how many moles of H₂O can form?",
+
+      options: [
+        "H₂SO₄; 0.100 mol",
+        "H₂SO₄; 0.200 mol",
+        "NaOH; 0.150 mol",
+        "NaOH; 0.300 mol"
+      ],
+
+      answer: 2,
+
+      explanation:
+        "NaOH = (0.600)(0.250) = 0.150 mol. H₂SO₄ = (0.400)(0.500) = 0.200 mol. The equation requires 2 NaOH per 1 H₂SO₄, so 0.150 mol NaOH can form 0.150 mol H₂O. NaOH is limiting."
+    },
+
+
+    {
+      scenario:
+        "A student needs 200 mL of 0.750 M KNO₃. The molar mass of KNO₃ is approximately 101.1 g/mol.",
+
+      question:
+        "What mass of KNO₃ should be used?",
+
+      options: [
+        "7.58 g",
+        "10.11 g",
+        "15.17 g",
+        "20.22 g"
+      ],
+
+      answer: 2,
+
+      explanation:
+        "Moles = MV = (0.750)(0.200) = 0.150 mol. Mass = 0.150 × 101.1 = 15.165 g, approximately 15.17 g."
+    },
+
+
+    {
+      scenario:
+        "A 2.50 M stock solution is used to prepare 800 mL of a 0.625 M solution.",
+
+      question:
+        "What volume of the stock solution must be measured before dilution?",
+
+      options: [
+        "125 mL",
+        "200 mL",
+        "250 mL",
+        "320 mL"
+      ],
+
+      answer: 1,
+
+      explanation:
+        "M₁V₁ = M₂V₂. V₁ = (0.625)(800) ÷ 2.50 = 200 mL."
+    },
+
+
+    {
+      scenario:
+        "Two NaCl solutions are mixed: 200 mL of 0.500 M NaCl and 300 mL of 0.250 M NaCl. Assume the volumes simply add.",
+
+      question:
+        "What is the final NaCl concentration?",
+
+      options: [
+        "0.300 M",
+        "0.350 M",
+        "0.375 M",
+        "0.400 M"
+      ],
+
+      answer: 1,
+
+      explanation:
+        "First solution: 0.500 × 0.200 = 0.100 mol. Second: 0.250 × 0.300 = 0.075 mol. Total = 0.175 mol. Total volume = 0.500 L. Final M = 0.175 ÷ 0.500 = 0.350 M."
+    },
+
+
+    {
+      scenario:
+        "A student dissolves 11.10 g of CaCl₂ to prepare 500 mL of solution. Use CaCl₂ = 110.98 g/mol.",
+
+      question:
+        "What is the approximate molarity of the CaCl₂ solution?",
+
+      options: [
+        "0.100 M",
+        "0.200 M",
+        "0.500 M",
+        "1.000 M"
+      ],
+
+      answer: 1,
+
+      explanation:
+        "Moles = 11.10 ÷ 110.98 ≈ 0.100 mol. Volume = 0.500 L. M ≈ 0.100 ÷ 0.500 = 0.200 M."
+    },
+
+
+    {
+      scenario:
+        "A solution contains exactly 0.250 mol of solute and has a molarity of 0.800 M.",
+
+      question:
+        "What must the solution volume be?",
+
+      options: [
+        "0.200 L",
+        "0.250 L",
+        "0.3125 L",
+        "3.20 L"
+      ],
+
+      answer: 2,
+
+      explanation:
+        "Use V = n/M. V = 0.250 ÷ 0.800 = 0.3125 L."
+    },
+
+
+    {
+      scenario:
+        "A student claims that dissolving 0.200 mol of solute in 500 mL of solvent always produces a 0.400 M solution.",
+
+      question:
+        "What is the most important problem with the student's reasoning?",
+
+      options: [
+        "Molarity uses grams rather than moles.",
+        "The solvent must always be measured in liters.",
+        "Molarity uses the final volume of the entire solution, not necessarily the original solvent volume.",
+        "The value of 0.200 mol cannot be used in a molarity calculation."
+      ],
+
+      answer: 2,
+
+      explanation:
+        "Molarity is moles of solute per liter of the entire solution. The volume of solvent originally added is not automatically the final solution volume."
+    },
+
+
+    {
+      scenario:
+        "A student calculates the molar mass of SiO₂ as 28.08 + 16.00 = 44.08 g/mol.",
+
+      question:
+        "Which correction is necessary?",
+
+      options: [
+        "Multiply silicon by 2 because it appears first.",
+        "Multiply oxygen by 2 because the subscript applies to O.",
+        "Multiply the entire formula by 2 because SiO₂ has three atoms.",
+        "No correction is necessary."
+      ],
+
+      answer: 1,
+
+      explanation:
+        "SiO₂ contains one Si atom and two O atoms. Therefore, MM = 28.08 + 2(16.00) = 60.08 g/mol."
+    },
+
+
+    {
+      scenario:
+        "A 1.20 M solution contains 0.300 mol of solute. A student wants to dilute it without changing the amount of solute.",
+
+      question:
+        "What final volume would produce a concentration of 0.600 M?",
+
+      options: [
+        "0.125 L",
+        "0.250 L",
+        "0.500 L",
+        "2.00 L"
+      ],
+
+      answer: 2,
+
+      explanation:
+        "Use M = n/V and rearrange to V = n/M. V = 0.300 ÷ 0.600 = 0.500 L. The volume doubles while the amount of solute remains constant."
+    },
+
+
+    {
+      scenario:
+        "A 0.900 M NaCl solution has a volume of 200 mL. It is mixed with 0.300 M NaCl having a volume of 400 mL.",
+
+      question:
+        "Without calculating the exact value first, which statement correctly predicts the final concentration?",
+
+      options: [
+        "It must be greater than 0.900 M.",
+        "It must be exactly 0.900 M.",
+        "It must lie between 0.300 M and 0.900 M, closer to 0.300 M.",
+        "It must be less than 0.300 M."
+      ],
+
+      answer: 2,
+
+      explanation:
+        "The final concentration is a concentration-weighted result. Because the 0.300 M solution has twice the volume, it has greater influence, so the final value lies between the two concentrations and is closer to 0.300 M."
+    },
+
+
+    {
+      scenario:
+        "For the reaction 2H₂ + O₂ → 2H₂O, a student uses the coefficients 2:1:2 as a relationship between the substances.",
+
+      question:
+        "If 0.500 mol of O₂ reacts completely with sufficient H₂, how many moles of H₂O can form?",
+
+      options: [
+        "0.250 mol",
+        "0.500 mol",
+        "1.00 mol",
+        "2.00 mol"
+      ],
+
+      answer: 2,
+
+      explanation:
+        "The balanced equation gives a 1:2 mole ratio between O₂ and H₂O. Therefore, 0.500 mol O₂ produces 1.00 mol H₂O."
+    },
+
+
+    {
+      scenario:
+        "A student prepares a solution by dissolving 5.00 g of a substance with a molar mass of 50.0 g/mol into exactly 250 mL of solution.",
+
+      question:
+        "Which sequence correctly connects the given quantities to the final molarity?",
+
+      options: [
+        "5.00 × 50.0 → moles → divide by 250",
+        "5.00 ÷ 50.0 → moles → divide by 0.250 L",
+        "5.00 ÷ 250 → moles → divide by 50.0",
+        "50.0 ÷ 5.00 → moles → multiply by 0.250"
+      ],
+
+      answer: 1,
+
+      explanation:
+        "Mass is converted to moles by dividing by molar mass: 5.00 ÷ 50.0 = 0.100 mol. Then 250 mL becomes 0.250 L. M = 0.100 ÷ 0.250 = 0.400 M."
+    }
+
+  ];
+
+
+  /* =====================================================
+     STATE
+  ===================================================== */
+
+  let currentQuestion = 0;
+
+  let answers =
+    new Array(questions.length).fill(null);
+
+  let submitted = false;
+
+
+  /* =====================================================
+     ELEMENTS
+  ===================================================== */
+
+  const questionNumber =
+    document.getElementById("questionNumber");
+
+  const questionText =
+    document.getElementById("questionText");
+
+  const scenarioBox =
+    document.getElementById("scenarioBox");
+
+  const optionsContainer =
+    document.getElementById("options");
+
+  const prevBtn =
+    document.getElementById("prevBtn");
+
+  const nextBtn =
+    document.getElementById("nextBtn");
+
+  const questionProgress =
+    document.getElementById("questionProgress");
+
+  const answeredCount =
+    document.getElementById("answeredCount");
+
+  const progressFill =
+    document.getElementById("progressFill");
+
+  const quizArea =
+    document.getElementById("quizArea");
+
+  const resultSection =
+    document.getElementById("resultSection");
+
+  const reviewSection =
+    document.getElementById("reviewSection");
+
+
+  /* =====================================================
+     LOAD QUESTION
+  ===================================================== */
+
+  function loadQuestion() {
+
+    const q = questions[currentQuestion];
+
+    questionNumber.textContent =
+      `Question ${currentQuestion + 1}`;
+
+    questionText.textContent =
+      q.question;
+
+
+    if (q.scenario) {
+
+      scenarioBox.style.display = "block";
+
+      scenarioBox.innerHTML =
+        `<strong>Scenario:</strong> ${q.scenario}`;
+
+    } else {
+
+      scenarioBox.style.display = "none";
+
+      scenarioBox.innerHTML = "";
+
+    }
+
+
+    optionsContainer.innerHTML = "";
+
+
+    q.options.forEach((option, index) => {
+
+      const wrapper =
+        document.createElement("div");
+
+      wrapper.className = "option";
+
+
+      const input =
+        document.createElement("input");
+
+      input.type = "radio";
+
+      input.name = "answer";
+
+      input.id =
+        `q${currentQuestion}_option${index}`;
+
+      input.value = index;
+
+
+      const label =
+        document.createElement("label");
+
+      label.htmlFor = input.id;
+
+      label.innerHTML =
+        `<span class="option-letter">
+          ${String.fromCharCode(65 + index)}.
+        </span>
+        ${option}`;
+
+
+      if (answers[currentQuestion] === index) {
+        input.checked = true;
+      }
+
+
+      input.addEventListener(
+        "change",
+        function () {
+
+          answers[currentQuestion] =
+            Number(this.value);
+
+          updateProgress();
+
+        }
+      );
+
+
+      wrapper.appendChild(input);
+      wrapper.appendChild(label);
+
+      optionsContainer.appendChild(wrapper);
+
+    });
+
+
+    prevBtn.disabled =
+      currentQuestion === 0;
+
+
+    if (currentQuestion === questions.length - 1) {
+
+      nextBtn.textContent =
+        "Submit Quiz";
+
+    } else {
+
+      nextBtn.textContent =
+        "Next";
+
+    }
+
+
+    updateProgress();
+
+  }
+
+
+  /* =====================================================
+     UPDATE PROGRESS
+  ===================================================== */
+
+  function updateProgress() {
+
+    const answered =
+      answers.filter(
+        answer => answer !== null
+      ).length;
+
+
+    answeredCount.textContent =
+      `${answered} answered`;
+
+
+    questionProgress.textContent =
+      `Question ${currentQuestion + 1} of ${questions.length}`;
+
+
+    const progress =
+      ((currentQuestion + 1) / questions.length) * 100;
+
+
+    progressFill.style.width =
+      `${progress}%`;
+
+  }
+
+
+  /* =====================================================
+     NEXT QUESTION
+  ===================================================== */
+
+  function nextQuestion() {
+
+    if (currentQuestion <
+        questions.length - 1) {
+
+      currentQuestion++;
+
+      loadQuestion();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    } else {
+
+      submitQuiz();
+
+    }
+
+  }
+
+
+  /* =====================================================
+     PREVIOUS QUESTION
+  ===================================================== */
+
+  function previousQuestion() {
+
+    if (currentQuestion > 0) {
+
+      currentQuestion--;
+
+      loadQuestion();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+  }
+
+
+  /* =====================================================
+     SUBMIT QUIZ
+  ===================================================== */
+
+  function submitQuiz() {
+
+    submitted = true;
+
+
+    let score = 0;
+
+
+    questions.forEach(
+      (question, index) => {
+
+        if (
+          answers[index] ===
+          question.answer
+        ) {
+
+          score++;
+
+        }
+
+      }
+    );
+
+
+    const total =
+      questions.length;
+
+    const percentage =
+      Math.round((score / total) * 100);
+
+    const incorrect =
+      total - score;
+
+
+    document.getElementById(
+      "scoreDisplay"
+    ).textContent =
+      `${score}/${total}`;
+
+
+    document.getElementById(
+      "correctDisplay"
+    ).textContent =
+      score;
+
+
+    document.getElementById(
+      "incorrectDisplay"
+    ).textContent =
+      incorrect;
+
+
+    document.getElementById(
+      "percentageDisplay"
+    ).textContent =
+      `${percentage}%`;
+
+
+    const resultMessage =
+      document.getElementById(
+        "resultMessage"
+      );
+
+
+    if (percentage === 100) {
+
+      resultMessage.textContent =
+        "Perfect score. You mastered the Molarity challenge.";
+
+    } else if (percentage >= 90) {
+
+      resultMessage.textContent =
+        "Excellent performance on an extremely difficult ConChem quiz.";
+
+    } else if (percentage >= 75) {
+
+      resultMessage.textContent =
+        "Strong performance, but review the questions you missed.";
+
+    } else if (percentage >= 60) {
+
+      resultMessage.textContent =
+        "Good foundation. Recheck the multi-step calculations and unit conversions.";
+
+    } else {
+
+      resultMessage.textContent =
+        "Review the Molarity lessons carefully, especially the relationships between mass, moles, volume, and concentration.";
+
+    }
+
+
+    quizArea.classList.add("hidden");
+
+    resultSection.classList.remove("hidden");
+
+    reviewSection.classList.remove("hidden");
+
+
+    buildReview();
+
+    saveQuizProgress();
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =====================================================
+     BUILD REVIEW
+  ===================================================== */
+
+  function buildReview() {
+
+    const container =
+      document.getElementById(
+        "reviewContainer"
+      );
+
+
+    container.innerHTML = "";
+
+
+    questions.forEach(
+      (question, index) => {
+
+        const userAnswer =
+          answers[index];
+
+
+        const isCorrect =
+          userAnswer ===
+          question.answer;
+
+
+        const reviewItem =
+          document.createElement("div");
+
+
+        reviewItem.className =
+          `review-item ${
+            isCorrect
+              ? "correct"
+              : "incorrect"
+          }`;
+
+
+        const questionElement =
+          document.createElement("div");
+
+        questionElement.className =
+          "review-question";
+
+        questionElement.textContent =
+          `${index + 1}. ${question.question}`;
+
+
+        const userAnswerElement =
+          document.createElement("div");
+
+        userAnswerElement.className =
+          `review-answer ${
+            isCorrect
+              ? "correct-text"
+              : "incorrect-text"
+          }`;
+
+
+        if (userAnswer === null) {
+
+          userAnswerElement.textContent =
+            "Your answer: Not answered";
+
+        } else {
+
+          userAnswerElement.textContent =
+            `Your answer: ${
+              String.fromCharCode(
+                65 + userAnswer
+              )
+            }. ${
+              question.options[userAnswer]
+            }`;
+
+        }
+
+
+        const correctAnswerElement =
+          document.createElement("div");
+
+        correctAnswerElement.className =
+          "review-answer correct-text";
+
+        correctAnswerElement.textContent =
+          `Correct answer: ${
+            String.fromCharCode(
+              65 + question.answer
+            )
+          }. ${
+            question.options[
+              question.answer
+            ]
+          }`;
+
+
+        const explanation =
+          document.createElement("div");
+
+        explanation.className =
+          "review-explanation";
+
+        explanation.innerHTML =
+          `<strong>Explanation:</strong>
+           ${question.explanation}`;
+
+
+        reviewItem.appendChild(
+          questionElement
+        );
+
+        reviewItem.appendChild(
+          userAnswerElement
+        );
+
+        reviewItem.appendChild(
+          correctAnswerElement
+        );
+
+        reviewItem.appendChild(
+          explanation
+        );
+
+
+        container.appendChild(
+          reviewItem
+        );
+
+      }
+    );
+
+  }
+
+
+  /* =====================================================
+     SAVE QUIZ PROGRESS
+  ===================================================== */
+
+  function saveQuizProgress() {
+
+    try {
+
+      const existing =
+        localStorage.getItem(
+          "riasStudyHubProgress"
+        );
+
+
+      let progress;
+
+
+      if (existing) {
+
+        progress =
+          JSON.parse(existing);
+
+      } else {
+
+        progress = {
+          reviewers: {},
+          quizzes: {},
+          notes: {}
+        };
+
+      }
+
+
+      if (!progress.reviewers) {
+        progress.reviewers = {};
+      }
+
+      if (!progress.quizzes) {
+        progress.quizzes = {};
+      }
+
+      if (!progress.notes) {
+        progress.notes = {};
+      }
+
+
+      const score =
+        questions.reduce(
+          (total, question, index) => {
+
+            return total +
+              (
+                answers[index] ===
+                question.answer
+                  ? 1
+                  : 0
+              );
+
+          },
+          0
+        );
+
+
+      progress.quizzes.conchem = {
+
+        completed: true,
+
+        score: score,
+
+        total: questions.length,
+
+        percentage:
+          Math.round(
+            (score /
+              questions.length) *
+            100
+          ),
+
+        date:
+          new Date().toISOString()
+
+      };
+
+
+      localStorage.setItem(
+        "riasStudyHubProgress",
+        JSON.stringify(progress)
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Unable to save quiz progress:",
+        error
+      );
+
+    }
+
+  }
+
+
+  /* =====================================================
+     RETAKE
+  ===================================================== */
+
+  function retakeQuiz() {
+
+    currentQuestion = 0;
+
+    answers =
+      new Array(
+        questions.length
+      ).fill(null);
+
+    submitted = false;
+
+
+    quizArea.classList.remove(
+      "hidden"
+    );
+
+    resultSection.classList.add(
+      "hidden"
+    );
+
+    reviewSection.classList.add(
+      "hidden"
+    );
+
+
+    loadQuestion();
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =====================================================
+     START
+  ===================================================== */
+
+  loadQuestion();
+
+</script>
+
+</body>
+</html>

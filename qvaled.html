@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Values Education Quiz | STE Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+      --red: #f87171;
+      --yellow: #facc15;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      height: 70px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      background: var(--background);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    .container {
+      width: 88%;
+      max-width: 900px;
+      margin: auto;
+      padding: 45px 0 70px;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .back-link:hover {
+      color: var(--blue-hover);
+    }
+
+    .hero {
+      margin-bottom: 30px;
+    }
+
+    .subject-label {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 16px;
+    }
+
+    .quiz-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 30px 0;
+    }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .info-card strong {
+      display: block;
+      font-size: 21px;
+      color: var(--blue);
+      margin-bottom: 3px;
+    }
+
+    .info-card span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .progress-container {
+      margin-bottom: 20px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #252a34;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      transition: width 0.3s;
+    }
+
+    .quiz-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 28px;
+    }
+
+    .question-number {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 12px;
+    }
+
+    .question {
+      font-size: 22px;
+      line-height: 1.45;
+      margin-bottom: 20px;
+    }
+
+    .scenario-box {
+      display: none;
+      background: var(--surface-hover);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 12px 12px 0;
+      padding: 17px 18px;
+      margin-bottom: 20px;
+      color: #d1d5db;
+      font-size: 15px;
+    }
+
+    .scenario-box.visible {
+      display: block;
+    }
+
+    .scenario-box strong {
+      color: var(--text);
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option {
+      position: relative;
+    }
+
+    .option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .option label {
+      display: block;
+      background: var(--background);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #d1d5db;
+    }
+
+    .option label:hover {
+      border-color: var(--blue);
+      background: var(--surface-hover);
+    }
+
+    .option input:checked + label {
+      border-color: var(--blue);
+      background: rgba(77, 159, 255, 0.08);
+      color: var(--text);
+    }
+
+    .option.correct label {
+      border-color: var(--green);
+      background: rgba(74, 222, 128, 0.08);
+    }
+
+    .option.incorrect label {
+      border-color: var(--red);
+      background: rgba(248, 113, 113, 0.08);
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 25px;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      border: 1px solid var(--border);
+      background: var(--background);
+      color: var(--text);
+      padding: 11px 18px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .nav-btn.primary {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #08111f;
+    }
+
+    .nav-btn.primary:hover {
+      background: var(--blue-hover);
+      color: #08111f;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .result-section,
+    .review-section {
+      margin-top: 25px;
+    }
+
+    .result-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .result-card h2 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .result-score {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--blue);
+      margin: 10px 0;
+    }
+
+    .result-message {
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .result-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .stat {
+      background: var(--background);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 15px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 21px;
+      color: var(--text);
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .retry-btn {
+      border: 1px solid var(--blue);
+      background: var(--blue);
+      color: #08111f;
+      padding: 12px 20px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .retry-btn:hover {
+      background: var(--blue-hover);
+    }
+
+    .review-section h2 {
+      font-size: 25px;
+      margin-bottom: 15px;
+    }
+
+    .review-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 20px;
+      margin-bottom: 13px;
+    }
+
+    .review-item.correct {
+      border-left: 3px solid var(--green);
+    }
+
+    .review-item.incorrect {
+      border-left: 3px solid var(--red);
+    }
+
+    .review-question {
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .review-answer {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    .review-answer.correct-text {
+      color: var(--green);
+    }
+
+    .review-answer.incorrect-text {
+      color: var(--red);
+    }
+
+    .explanation {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      color: #d1d5db;
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        height: auto;
+        padding: 18px 5%;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav {
+        gap: 13px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      nav a {
+        font-size: 12px;
+      }
+
+      .container {
+        width: 90%;
+        padding-top: 35px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .quiz-info,
+      .result-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-card {
+        padding: 22px;
+      }
+
+      .question {
+        font-size: 20px;
+      }
+
+      .navigation {
+        flex-direction: column;
+      }
+
+      .nav-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    STE <span>Study Hub</span>
+  </a>
+
+  <nav>
+    <a href="/index.html">Home</a>
+    <a href="reviewers.html">Reviewers</a>
+    <a href="quizzes.html" class="active">Quizzes</a>
+    <a href="notes.html">Notes</a>
+    <a href="progress.html">Progress</a>
+  </nav>
+</header>
+
+
+<main class="container">
+
+  <a href="quizzes.html" class="back-link">
+    ← Back to Quizzes
+  </a>
+
+
+  <section class="hero">
+    <div class="subject-label">Values Education</div>
+
+    <h1>
+      Likas na Batas Moral
+    </h1>
+
+    <p>
+      Masusing pagsusulit tungkol sa pagsusuri ng mga batas, patakaran,
+      at gawain ayon sa dignidad ng tao, kapayapaan, katarungan,
+      at kabutihang panlahat.
+    </p>
+  </section>
+
+
+  <div class="quiz-info">
+
+    <div class="info-card">
+      <strong>22</strong>
+      <span>Questions</span>
+    </div>
+
+    <div class="info-card">
+      <strong>Easy</strong>
+      <span>Difficulty</span>
+    </div>
+
+    <div class="info-card">
+      <strong>Analytical</strong>
+      <span>Question Type</span>
+    </div>
+
+  </div>
+
+
+  <div class="progress-container">
+
+    <div class="progress-top">
+      <span id="questionProgress">Question 1 of 22</span>
+      <span id="answeredCount">0 answered</span>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+  </div>
+
+
+  <div id="quizArea">
+
+    <div class="quiz-card">
+
+      <div class="question-number" id="questionNumber">
+        Question 1
+      </div>
+
+      <h2 class="question" id="questionText"></h2>
+
+      <div class="scenario-box" id="scenarioBox"></div>
+
+      <div class="options" id="options"></div>
+
+      <div class="navigation">
+
+        <button
+          class="nav-btn"
+          id="prevBtn"
+          onclick="previousQuestion()"
+        >
+          Previous
+        </button>
+
+        <button
+          class="nav-btn primary"
+          id="nextBtn"
+          onclick="nextQuestion()"
+        >
+          Next
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <section id="resultSection" class="result-section hidden">
+
+    <div class="result-card">
+
+      <h2>Quiz Complete</h2>
+
+      <div class="result-score" id="finalScore">
+        0/20
+      </div>
+
+      <p class="result-message" id="resultMessage"></p>
+
+      <div class="result-stats">
+
+        <div class="stat">
+          <strong id="correctCount">0</strong>
+          <span>Correct</span>
+        </div>
+
+        <div class="stat">
+          <strong id="incorrectCount">0</strong>
+          <span>Incorrect</span>
+        </div>
+
+        <div class="stat">
+          <strong id="percentage">0%</strong>
+          <span>Percentage</span>
+        </div>
+
+      </div>
+
+      <button class="retry-btn" onclick="retakeQuiz()">
+        Retake Quiz
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <section id="reviewSection" class="review-section hidden">
+
+    <h2>Answer Review</h2>
+
+    <div id="reviewContainer"></div>
+
+  </section>
+
+</main>
+
+
+<script>
+
+  const questions = [
+
+    {
+      scenario:
+        "Isang pamilya ang gumawa ng patakaran na lahat ng miyembro ay kailangang gumawa ng parehong dami ng gawaing-bahay araw-araw. Gayunman, ang isang miyembro ay may mabigat na tungkulin sa paaralan at ang isa naman ay may pisikal na limitasyon. Iginiit ng magulang na 'pantay dapat ang lahat, kaya pareho ang gawain.'",
+      question:
+        "Aling pagsusuri ang PINAKAMAKATARUNGAN batay sa reviewer?",
+      options: [
+        "Mabuti ang patakaran dahil ang katarungan ay nangangahulugang eksaktong pareho ang gawain ng lahat.",
+        "Mabuti ang patakaran dahil mas mahalaga ang pagsunod kaysa sa kalagayan ng bawat miyembro.",
+        "Kailangang suriin kung makatuwiran ang pagkakaiba ng kakayahan at kalagayan bago masabing patas ang patakaran.",
+        "Hindi kailanman maaaring maging makatarungan ang anumang patakaran na may magkakaibang responsibilidad."
+      ],
+      answer: 2,
+      explanation:
+        "Ang katarungan ay hindi simpleng paggawa ng eksaktong parehong bagay ng lahat. Kailangang isaalang-alang ang kakayahan at kalagayan ng bawat miyembro."
+    },
+
+    {
+      scenario:
+        "Isang barangay ang nagpatupad ng patakaran na bawal magsalita ang sinumang residente tungkol sa mga desisyon ng pamunuan upang maiwasan ang pagtatalo. Dahil dito, naging tahimik ang komunidad, ngunit wala nang pagkakataon ang mga residente na maayos na ipahayag ang kanilang pagtutol.",
+      question:
+        "Ano ang pinakamahalagang problema sa patakarang ito?",
+      options: [
+        "Hindi ito maaaring maging mabuti dahil ang anumang patakaran na naglilimita sa kilos ay mali.",
+        "Maaaring may layuning kapayapaan ngunit kailangan pa ring suriin kung nirerespeto nito ang dignidad, karapatan, at makatarungang paraan ng pagtutol.",
+        "Mabuti ito dahil ang kapayapaan ay palaging mas mahalaga kaysa sa lahat ng ibang batayan.",
+        "Mabuti ito basta walang lumalabag sa patakaran."
+      ],
+      answer: 1,
+      explanation:
+        "Hindi sapat na nagdudulot ng katahimikan ang isang patakaran. Dapat ding suriin ang dignidad, karapatan, katarungan, layunin, epekto, at paraan ng pagpapatupad."
+    },
+
+    {
+      question:
+        "Alin ang PINAKAMALAPIT sa tunay na kahulugan ng Likas na Batas Moral ayon sa reviewer?",
+      options: [
+        "Isang listahan ng lahat ng batas na ginawa ng pamahalaan.",
+        "Mga pansamantalang patakaran na maaaring magbago depende sa kagustuhan ng pamilya.",
+        "Mga pangunahing prinsipyo ng kabutihan na maaaring makilala ng tao sa pamamagitan ng isip at konsensiya.",
+        "Mga parusang ginagamit upang pilitin ang tao na gumawa ng mabuti."
+      ],
+      answer: 2,
+      explanation:
+        "Ang Likas na Batas Moral ay mga pangunahing prinsipyo ng kabutihan at wastong pagkilos na maaaring makilala sa pamamagitan ng isip at konsensiya."
+    },
+
+    {
+      scenario:
+        "May patakaran ang isang pamilya na bawal mang-insulto o manigaw kapag may hindi pagkakaunawaan. Isang araw, nilabag ito ng isang miyembro. Sa halip na gantihan siya ng pagsigaw, pinakinggan muna ng pamilya ang kanyang panig bago magpasya.",
+      question:
+        "Aling kombinasyon ng batayan ang PINAKAMALINAW na makikita sa kanilang paraan ng pagharap sa sitwasyon?",
+      options: [
+        "Kapayapaan at dignidad ng tao",
+        "Katarungan lamang",
+        "Kabutihang panlahat lamang",
+        "Pagsunod sa batas lamang"
+      ],
+      answer: 0,
+      explanation:
+        "Ang pagbabawal sa insulto at pagsigaw ay tumutulong sa kapayapaan at paggalang sa dignidad. Ang pakikinig muna ay nagpapatibay rin sa maayos na pakikitungo."
+    },
+
+    {
+      scenario:
+        "Isang patakaran sa tahanan ang nagsasabing ang bunso lamang ang kailangang gumawa ng lahat ng paglilinis dahil 'siya ang pinakamaliit at pinakamadaling utusan.' Walang ibang dahilan ang ibinigay, at ang ibang miyembro ay walang regular na responsibilidad.",
+      question:
+        "Aling pagsusuri ang pinakaangkop?",
+      options: [
+        "Makatarungan ito dahil may karapatan ang magulang na gumawa ng anumang patakaran.",
+        "Maaaring hindi ito makatarungan dahil hindi isinasaalang-alang ang patas na pamamahagi ng responsibilidad.",
+        "Makatarungan ito dahil ang kabutihang panlahat ay nangangahulugang dapat makinabang ang nakatatanda.",
+        "Mabuti ito dahil ang pagsunod sa patakaran ay awtomatikong ginagawa itong tama."
+      ],
+      answer: 1,
+      explanation:
+        "Ang patakaran ay maaaring maging hindi makatarungan kung ang responsibilidad ay ipinapasa sa isang tao lamang nang walang makatuwirang dahilan."
+    },
+
+    {
+      question:
+        "May batas na malinaw na nakakatulong sa kaayusan ngunit ang paraan ng pagpapatupad nito ay nang-iinsulto at minamaliit ang ilang tao. Ano ang pinakamakatuwirang konklusyon?",
+      options: [
+        "Mabuti ang batas sa lahat ng pagkakataon dahil mabuti ang layunin nito.",
+        "Masama agad ang batas dahil may taong nasaktan.",
+        "Kailangang paghiwalayin ang pagsusuri sa layunin at paraan ng pagpapatupad at tingnan kung nirerespeto ang dignidad at katarungan.",
+        "Hindi na kailangang suriin ang batas dahil umiiral na ito."
+      ],
+      answer: 2,
+      explanation:
+        "Ayon sa reviewer, hindi sapat ang pagkakaroon ng patakaran. Dapat suriin ang layunin, epekto, pagiging patas, dignidad, at paraan ng pagpapatupad."
+    },
+
+    {
+      scenario:
+        "Isang ama ang nagsabi: 'Sumunod kayo dahil ako ang magulang. Hindi mahalaga kung naiintindihan ninyo ang dahilan.' Sinunod naman ng mga anak ang patakaran.",
+      question:
+        "Ano ang kulang sa ganitong konsepto ng responsableng pagsunod?",
+      options: [
+        "Ang pagsunod ay dapat nakabatay lamang sa takot sa parusa.",
+        "Dapat maunawaan din na ang responsableng pagsunod ay may kaugnayan sa pananagutan at paggalang sa kapwa.",
+        "Hindi dapat sumunod ang mga anak sa anumang patakaran ng magulang.",
+        "Ang responsableng pagsunod ay nangangahulugang hindi kailanman magtatanong."
+      ],
+      answer: 1,
+      explanation:
+        "Ang pagsunod sa batas ay hindi lamang tungkol sa pag-iwas sa parusa. Kasama rito ang pananagutan at paggalang sa kapwa."
+    },
+
+    {
+      scenario:
+        "May dalawang miyembro ng pamilya na parehong lumabag sa isang patakaran. Ang isa ay agad pinarusahan, habang ang isa ay pinabayaan dahil mas paborito siya ng magulang. Walang ibang makatuwirang dahilan sa pagkakaiba ng pagtrato.",
+      question:
+        "Aling batayan ang PINAKADIREKTANG nalabag?",
+      options: [
+        "Kapayapaan",
+        "Katarungan",
+        "Kabutihang panlahat",
+        "Likas na Batas Moral lamang"
+      ],
+      answer: 1,
+      explanation:
+        "Ang katarungan ay nangangailangan ng patas na pagtrato at makatuwirang pagbibigay ng karapatan at pananagutan."
+    },
+
+    {
+      question:
+        "Alin sa mga sumusunod ang nagpapakita ng PINAKAKUMPLETONG pagsusuri sa isang patakaran?",
+      options: [
+        "Tingnan kung sinusunod ito ng karamihan.",
+        "Tingnan kung may parusa sa lumalabag.",
+        "Tingnan ang layunin, epekto, pagiging patas, dignidad ng tao, kapayapaan, at kabutihang panlahat.",
+        "Tingnan lamang kung nagdudulot ito ng katahimikan."
+      ],
+      answer: 2,
+      explanation:
+        "Ang reviewer ay nagbibigay ng maraming batayan. Hindi sapat ang pagsunod, parusa, o katahimikan lamang."
+    },
+
+    {
+      scenario:
+        "Isang pamilya ang may limitadong pera. Nagpasya silang gamitin ang halos lahat ng kanilang budget para sa luho ng isang miyembro dahil siya ang may pinakamalaking ambag sa bahay. Dahil dito, hindi natutugunan ang ilang mahalagang pangangailangan ng iba.",
+      question:
+        "Bakit maaaring kwestiyunin ang desisyong ito batay sa kabutihang panlahat?",
+      options: [
+        "Dahil ang kabutihang panlahat ay nangangahulugang lahat ay dapat makakuha ng eksaktong parehong bagay.",
+        "Dahil ang kabutihang panlahat ay tumitingin sa kapakanan ng buong pangkat, hindi lamang sa kapakinabangan ng isang tao.",
+        "Dahil bawal magkaroon ng anumang personal na benepisyo sa loob ng pamilya.",
+        "Dahil ang pinakamalaking ambag ay walang anumang halaga."
+      ],
+      answer: 1,
+      explanation:
+        "Ang kabutihang panlahat ay nakatuon sa kapakanan ng buong pamilya, komunidad, o lipunan, hindi lamang sa isang tao."
+    },
+
+    {
+      scenario:
+        "Isang school policy ang naglalayong panatilihin ang kapayapaan. Ngunit kapag may hindi pagkakaunawaan, awtomatikong pinaniniwalaan ang isang panig at hindi na pinakikinggan ang kabilang panig.",
+      question:
+        "Aling pagsusuri ang PINAKAMATIBAY?",
+      options: [
+        "Mabuti ito dahil kapayapaan lamang ang kailangang isaalang-alang.",
+        "Hindi ito kailangang baguhin dahil ang pagkakaroon ng policy ay sapat na.",
+        "Maaaring mabuti ang layunin, ngunit ang paraan ay kailangang suriin dahil maaaring hindi ito patas at hindi nagbibigay ng sapat na paggalang sa mga taong kasangkot.",
+        "Masama ito dahil lahat ng school policy ay lumalabag sa Likas na Batas Moral."
+      ],
+      answer: 2,
+      explanation:
+        "Ang kapayapaan ay isa lamang sa mga batayan. Kailangang tingnan din ang katarungan, dignidad, epekto, at paraan ng pagpapatupad."
+    },
+
+    {
+      question:
+        "Sa proseso ng pagsusuri ng isang patakaran, bakit mahalagang alamin muna ang layunin bago agad gumawa ng konklusyon?",
+      options: [
+        "Dahil ang mabuting layunin ay awtomatikong ginagawang mabuti ang anumang paraan.",
+        "Dahil nakatutulong itong maunawaan kung bakit ginawa ang patakaran bago suriin ang epekto at pagiging makatarungan nito.",
+        "Dahil hindi mahalaga ang epekto kapag alam na ang layunin.",
+        "Dahil ang layunin lamang ang batayan ng Likas na Batas Moral."
+      ],
+      answer: 1,
+      explanation:
+        "Ang reviewer ay nagsasabing tukuyin muna ang patakaran at alamin ang layunin, pagkatapos ay tingnan ang epekto, pagiging patas, dignidad, at kabutihang panlahat."
+    },
+
+    {
+      scenario:
+        "Isang pamilya ang may patakaran na kailangang pakinggan muna ng bawat isa ang panig ng kabilang tao bago gumawa ng desisyon kapag may alitan. May nagsabi na mabagal ito at mas madaling magdesisyon agad.",
+      question:
+        "Bakit nananatiling makabuluhan ang patakarang ito ayon sa reviewer?",
+      options: [
+        "Dahil ang anumang mabagal na desisyon ay awtomatikong makatarungan.",
+        "Dahil ang pakikinig sa kabilang panig ay maaaring magtaguyod ng paggalang, maayos na komunikasyon, kapayapaan, at mas makatarungang pagdedesisyon.",
+        "Dahil hindi kailangang gumawa ng desisyon kapag may alitan.",
+        "Dahil ang kapayapaan ay nangangahulugang dapat laging sumang-ayon ang lahat."
+      ],
+      answer: 1,
+      explanation:
+        "Ang worked example sa reviewer ay direktang nag-uugnay sa pakikinig sa dignidad, kapayapaan, katarungan, at maayos na komunikasyon."
+    },
+
+    {
+      scenario:
+        "Isang bagong patakaran ang iminungkahi: 'Kung may miyembrong paulit-ulit na lumalabag, hindi na siya kailangang pakinggan kailanman.' Sinasabi ng gumawa na makakatulong ito sa mabilis na pagpapanatili ng kaayusan.",
+      question:
+        "Ano ang pinakamalaking kahinaan ng pangangatwirang ito?",
+      options: [
+        "Hindi nito awtomatikong ipinapakita na mali ang layuning magkaroon ng kaayusan, ngunit hindi nito nasusuri kung makatarungan at gumagalang sa dignidad ang paraan.",
+        "Mali ito dahil hindi kailanman maaaring magkaroon ng patakaran ang pamilya.",
+        "Mali ito dahil ang taong lumalabag ay dapat palaging sundin.",
+        "Mabuti ito dahil ang bilis ng pagpapatupad ay sapat na upang maging makatarungan."
+      ],
+      answer: 0,
+      explanation:
+        "Maaaring may makatuwirang layunin ang isang patakaran, ngunit kailangang suriin ang paraan at epekto nito sa dignidad at katarungan."
+    },
+
+    {
+      question:
+        "Alin ang pinakamalinaw na pagkakaiba ng 'pagsunod sa batas' at 'responsableng pagsunod sa batas'?",
+      options: [
+        "Ang una ay sumusunod lamang kapag may gantimpala, samantalang ang ikalawa ay hindi kailanman sumusunod.",
+        "Ang una ay tungkol sa pisikal na pagsunod, samantalang ang ikalawa ay tungkol lamang sa emosyon.",
+        "Ang responsableng pagsunod ay nakaugnay sa pag-unawa sa layunin ng makatarungang batas, pananagutan, at paggalang sa kapwa.",
+        "Walang pagkakaiba ang dalawa sa anumang sitwasyon."
+      ],
+      answer: 2,
+      explanation:
+        "Ang responsableng tao ay sumusunod sa lehitimo at makatarungang batas dahil nauunawaan niya ang layunin nito at isinasaalang-alang ang kapwa."
+    },
+
+    {
+      scenario:
+        "May patakaran sa pamilya na nagsasabing ang lahat ay kailangang humingi ng paumanhin kapag nakasakit ng iba. Gayunpaman, kapag ang magulang ang nakasakit ng damdamin ng anak, hindi niya kailangang humingi ng paumanhin dahil 'magulang siya.'",
+      question:
+        "Anong pagsusuri ang pinakamalakas?",
+      options: [
+        "Makatarungan ito dahil hindi kailangang pantay ang pamantayan sa loob ng pamilya.",
+        "Maaaring hindi ito patas dahil ang patakaran ay may magkaibang pamantayan nang walang ipinakitang makatuwirang dahilan.",
+        "Mabuti ito dahil ang dignidad ay para lamang sa mga anak.",
+        "Hindi ito maaaring suriin dahil pribadong patakaran lamang ito."
+      ],
+      answer: 1,
+      explanation:
+        "Ang katarungan ay nangangailangan ng patas at makatuwirang pagpapatupad. Ang dignidad ng bawat miyembro ay dapat ding igalang."
+    },
+
+    {
+      question:
+        "Alin sa mga sumusunod ang HINDI sapat na dahilan upang ituring na mabuti ang isang batas?",
+      options: [
+        "Maraming tao ang sumusunod dito.",
+        "Nirerespeto nito ang dignidad ng tao.",
+        "Makatarungan ang pagpapatupad nito.",
+        "Nakakatulong ito sa kabutihang panlahat."
+      ],
+      answer: 0,
+      explanation:
+        "Ang dami ng sumusunod ay hindi sapat na batayan. Kailangang suriin ang layunin, epekto, dignidad, kapayapaan, katarungan, at kabutihang panlahat."
+    },
+
+    {
+      scenario:
+        "Dalawang magkapatid ang parehong may responsibilidad sa bahay. Dahil nagkasakit ang isa, pansamantalang binawasan ang kanyang gawain at dinagdagan ang gawain ng isa. Sinabi ng iba na 'hindi na ito pantay.'",
+      question:
+        "Ano ang pinakamainam na tugon batay sa konsepto ng katarungan sa reviewer?",
+      options: [
+        "Hindi ito makatarungan dahil dapat eksaktong pareho ang gawain sa lahat ng pagkakataon.",
+        "Maaari itong maging makatarungan kung ang pagkakaiba ay may makatuwirang batayan sa kalagayan at kakayahan ng bawat miyembro.",
+        "Hindi ito maaaring maging makatarungan dahil may isang taong gumagawa nang higit.",
+        "Makatarungan lamang ito kung permanenteng ibibigay sa isang tao ang mas maraming gawain."
+      ],
+      answer: 1,
+      explanation:
+        "Ang reviewer mismo ay nagsasabing ang mga responsibilidad ay dapat isaalang-alang ang kakayahan at kalagayan ng bawat miyembro."
+    },
+
+    {
+      question:
+        "Kung ang isang patakaran ay nakakatulong sa karamihan ngunit malinaw na minamaliit ang dignidad ng isang maliit na grupo, ano ang pinakaangkop na gawin?",
+      options: [
+        "Tanggapin ito agad dahil mas marami ang nakikinabang.",
+        "Tanggihan agad ito nang hindi sinusuri ang layunin at epekto.",
+        "Suriin nang mas malalim ang epekto, dignidad, katarungan, layunin, paraan, at kabutihang panlahat bago gumawa ng konklusyon.",
+        "Piliin lamang ang batayan na pinakamadaling gamitin."
+      ],
+      answer: 2,
+      explanation:
+        "Hindi dapat iisa lamang ang batayan. Ang isang patakaran ay kailangang suriin nang komprehensibo ayon sa mga prinsipyong nasa reviewer."
+    },
+
+    {
+      scenario:
+        "Isang pamilya ang nagkaroon ng bagong house rule. Bago ito ipatupad, tinanong nila: Ano ang layunin nito? Sino ang maaapektuhan? Pantay ba ang pagpapatupad? Nirerespeto ba nito ang bawat miyembro? Makakatulong ba ito sa buong pamilya?",
+      question:
+        "Anong mahalagang proseso ang ipinapakita ng pamilya?",
+      options: [
+        "Pagsunod nang walang pagtatanong",
+        "Pag-iwas sa lahat ng patakaran",
+        "Sistematikong pagsusuri ng isang patakaran batay sa layunin, epekto, katarungan, dignidad, at kabutihang panlahat",
+        "Pagpili ng patakaran batay lamang sa kagustuhan ng nakararami"
+      ],
+      answer: 2,
+      explanation:
+        "Ang kanilang mga tanong ay direktang tumutugma sa proseso ng pagsusuri ng batas o gawain sa reviewer."
+    },
+
+    {
+      scenario:
+        "Isang lider ng pamilya ang nagsabi: 'Kung legal ang isang gawain, hindi na natin kailangang tanungin kung mabuti ito.' Tumutol ang isang miyembro at sinabing kailangan pa ring suriin ang epekto at paraan nito.",
+      question:
+        "Sino ang mas naaayon sa prinsipyong itinuturo ng reviewer?",
+      options: [
+        "Ang lider, dahil ang pagiging legal ay awtomatikong nangangahulugang makatarungan.",
+        "Ang miyembro, dahil hindi sapat ang pagkakaroon ng batas o patakaran; kailangan ding suriin ang layunin, epekto, dignidad, katarungan, at kabutihang panlahat.",
+        "Pareho silang mali dahil hindi dapat suriin ang anumang batas.",
+        "Ang lider, dahil ang konsensiya ay hindi bahagi ng pagsusuri."
+      ],
+      answer: 1,
+      explanation:
+        "Malinaw sa reviewer na hindi sapat na mayroong batas o patakaran upang masabing ito ay mabuti."
+    },
+
+    {
+      scenario:
+        "Isang pamilya ang may dalawang posibleng patakaran. Ang Patakaran A ay madaling ipatupad ngunit nagdudulot ng hindi patas na responsibilidad. Ang Patakaran B ay mas nangangailangan ng pag-uusap ngunit isinasaalang-alang ang kakayahan ng bawat miyembro, dignidad, kapayapaan, at kabutihang panlahat.",
+      question:
+        "Kung ang layunin ay pumili ng patakarang mas naaayon sa reviewer, alin ang mas matibay na pagpili?",
+      options: [
+        "Patakaran A, dahil mas madaling ipatupad ang pinakamahalagang katangian ng mabuting batas.",
+        "Patakaran A, dahil ang bilis ay mas mahalaga kaysa sa pagiging patas.",
+        "Patakaran B, dahil mas komprehensibo nitong isinasaalang-alang ang mga pangunahing batayan ng responsableng pagkilos.",
+        "Pareho, dahil walang kaugnayan ang paraan ng pagpapatupad sa pagiging mabuti ng patakaran."
+      ],
+      answer: 2,
+      explanation:
+        "Ang Patakaran B ay mas malinaw na naaayon sa dignidad, kapayapaan, katarungan, at kabutihang panlahat habang isinasaalang-alang din ang kakayahan at kalagayan."
+    }
+
+  ];
+
+
+  let currentQuestion = 0;
+  let answers = new Array(questions.length).fill(null);
+  let submitted = false;
+
+
+  function loadQuestion() {
+
+    const q = questions[currentQuestion];
+
+    document.getElementById("questionNumber").textContent =
+      `Question ${currentQuestion + 1}`;
+
+    document.getElementById("questionProgress").textContent =
+      `Question ${currentQuestion + 1} of ${questions.length}`;
+
+    document.getElementById("questionText").textContent =
+      q.question;
+
+
+    const scenarioBox =
+      document.getElementById("scenarioBox");
+
+    if (q.scenario) {
+
+      scenarioBox.innerHTML =
+        `<strong>Situation:</strong> ${q.scenario}`;
+
+      scenarioBox.classList.add("visible");
+
+    } else {
+
+      scenarioBox.innerHTML = "";
+      scenarioBox.classList.remove("visible");
+
+    }
+
+
+    const optionsContainer =
+      document.getElementById("options");
+
+    optionsContainer.innerHTML = "";
+
+
+    q.options.forEach((option, index) => {
+
+      const optionDiv =
+        document.createElement("div");
+
+      optionDiv.className = "option";
+
+      if (submitted) {
+
+        if (index === q.answer) {
+          optionDiv.classList.add("correct");
+        }
+
+        if (
+          answers[currentQuestion] === index &&
+          index !== q.answer
+        ) {
+          optionDiv.classList.add("incorrect");
+        }
+
+      }
+
+
+      optionDiv.innerHTML = `
+        <input
+          type="radio"
+          name="question"
+          id="option${index}"
+          value="${index}"
+          ${answers[currentQuestion] === index ? "checked" : ""}
+          ${submitted ? "disabled" : ""}
+        >
+
+        <label for="option${index}">
+          <strong>${String.fromCharCode(65 + index)}.</strong>
+          ${option}
+        </label>
+      `;
+
+
+      optionsContainer.appendChild(optionDiv);
+
+
+      if (!submitted) {
+
+        const radio =
+          optionDiv.querySelector("input");
+
+        radio.addEventListener("change", function () {
+
+          answers[currentQuestion] =
+            Number(this.value);
+
+          updateProgress();
+
+        });
+
+      }
+
+    });
+
+
+    document.getElementById("prevBtn").disabled =
+      currentQuestion === 0;
+
+
+    const nextBtn =
+      document.getElementById("nextBtn");
+
+
+    if (currentQuestion === questions.length - 1) {
+
+      nextBtn.textContent =
+        submitted ? "Finished" : "Submit Quiz";
+
+    } else {
+
+      nextBtn.textContent = "Next";
+
+    }
+
+
+    updateProgress();
+
+  }
+
+
+  function updateProgress() {
+
+    const answered =
+      answers.filter(answer => answer !== null).length;
+
+
+    document.getElementById("answeredCount").textContent =
+      `${answered} answered`;
+
+
+    const percentage =
+      ((currentQuestion + 1) / questions.length) * 100;
+
+
+    document.getElementById("progressFill").style.width =
+      `${percentage}%`;
+
+  }
+
+
+  function nextQuestion() {
+
+    if (submitted) return;
+
+
+    if (answers[currentQuestion] === null) {
+
+      alert("Please select an answer before continuing.");
+
+      return;
+
+    }
+
+
+    if (currentQuestion < questions.length - 1) {
+
+      currentQuestion++;
+
+      loadQuestion();
+
+    } else {
+
+      submitQuiz();
+
+    }
+
+  }
+
+
+  function previousQuestion() {
+
+    if (submitted) return;
+
+
+    if (currentQuestion > 0) {
+
+      currentQuestion--;
+
+      loadQuestion();
+
+    }
+
+  }
+
+
+  function submitQuiz() {
+
+    const unanswered =
+      answers.filter(answer => answer === null).length;
+
+
+    if (unanswered > 0) {
+
+      alert(
+        `Please answer all questions first. ${unanswered} question(s) remain unanswered.`
+      );
+
+      return;
+
+    }
+
+
+    submitted = true;
+
+
+    let score = 0;
+
+
+    questions.forEach((question, index) => {
+
+      if (answers[index] === question.answer) {
+        score++;
+      }
+
+    });
+
+
+    const total =
+      questions.length;
+
+    const percentage =
+      Math.round((score / total) * 100);
+
+    const incorrect =
+      total - score;
+
+
+    document.getElementById("finalScore").textContent =
+      `${score}/${total}`;
+
+    document.getElementById("correctCount").textContent =
+      score;
+
+    document.getElementById("incorrectCount").textContent =
+      incorrect;
+
+    document.getElementById("percentage").textContent =
+      `${percentage}%`;
+
+
+    let message;
+
+
+    if (percentage >= 95) {
+      message =
+        "Exceptional analytical mastery. You handled the hardest distinctions in the reviewer.";
+    } else if (percentage >= 85) {
+      message =
+        "Excellent performance. Your understanding of the principles is strong.";
+    } else if (percentage >= 75) {
+      message =
+        "Good performance. Review the distinctions between dignity, peace, justice, and the common good.";
+    } else if (percentage >= 60) {
+      message =
+        "You have the basic concepts, but the situational applications need more review.";
+    } else {
+      message =
+        "Review the lesson carefully, especially the process for evaluating laws and policies.";
+    }
+
+
+    document.getElementById("resultMessage").textContent =
+      message;
+
+
+    document.getElementById("quizArea")
+      .classList.add("hidden");
+
+    document.getElementById("resultSection")
+      .classList.remove("hidden");
+
+    document.getElementById("reviewSection")
+      .classList.remove("hidden");
+
+
+    buildReview();
+
+    saveQuizProgress();
+
+  }
+
+
+  function buildReview() {
+
+    const container =
+      document.getElementById("reviewContainer");
+
+    container.innerHTML = "";
+
+
+    questions.forEach((question, index) => {
+
+      const userAnswer =
+        answers[index];
+
+      const isCorrect =
+        userAnswer === question.answer;
+
+
+      const reviewItem =
+        document.createElement("div");
+
+
+      reviewItem.className =
+        `review-item ${isCorrect ? "correct" : "incorrect"}`;
+
+
+      const userAnswerText =
+        question.options[userAnswer];
+
+      const correctAnswerText =
+        question.options[question.answer];
+
+
+      reviewItem.innerHTML = `
+
+        <div class="review-question">
+          ${index + 1}. ${question.question}
+        </div>
+
+        <div class="review-answer ${
+          isCorrect ? "correct-text" : "incorrect-text"
+        }">
+          <strong>Your answer:</strong>
+          ${String.fromCharCode(65 + userAnswer)}. ${userAnswerText}
+        </div>
+
+        ${
+          !isCorrect
+          ? `
+            <div class="review-answer correct-text">
+              <strong>Correct answer:</strong>
+              ${String.fromCharCode(65 + question.answer)}.
+              ${correctAnswerText}
+            </div>
+          `
+          : ""
+        }
+
+        <div class="explanation">
+          <strong>Explanation:</strong>
+          ${question.explanation}
+        </div>
+
+      `;
+
+
+      container.appendChild(reviewItem);
+
+    });
+
+  }
+
+
+  function saveQuizProgress() {
+
+    let progress;
+
+
+    try {
+
+      progress =
+        JSON.parse(
+          localStorage.getItem("riasStudyHubProgress")
+        ) || {};
+
+    } catch (error) {
+
+      progress = {};
+
+    }
+
+
+    if (!progress.reviewers) {
+      progress.reviewers = {};
+    }
+
+    if (!progress.quizzes) {
+      progress.quizzes = {};
+    }
+
+    if (!progress.notes) {
+      progress.notes = {};
+    }
+
+
+    const score =
+      answers.reduce((total, answer, index) => {
+
+        return total +
+          (answer === questions[index].answer ? 1 : 0);
+
+      }, 0);
+
+
+    progress.quizzes.valed = {
+
+      completed: true,
+
+      score: score,
+
+      total: questions.length,
+
+      percentage:
+        Math.round(
+          (score / questions.length) * 100
+        ),
+
+      date:
+        new Date().toISOString()
+
+    };
+
+
+    localStorage.setItem(
+      "riasStudyHubProgress",
+      JSON.stringify(progress)
+    );
+
+  }
+
+
+  function retakeQuiz() {
+
+    currentQuestion = 0;
+
+    answers =
+      new Array(questions.length).fill(null);
+
+    submitted = false;
+
+
+    document.getElementById("quizArea")
+      .classList.remove("hidden");
+
+    document.getElementById("resultSection")
+      .classList.add("hidden");
+
+    document.getElementById("reviewSection")
+      .classList.add("hidden");
+
+
+    loadQuestion();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  loadQuestion();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Filipino Quiz | STE Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+      --red: #f87171;
+      --yellow: #facc15;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 17, 23, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 45px 22px 70px;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    .back-link:hover {
+      color: var(--blue);
+    }
+
+    .hero {
+      margin-bottom: 30px;
+    }
+
+    .subject-label {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 16px;
+    }
+
+    .quiz-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .info-card strong {
+      display: block;
+      color: var(--blue);
+      font-size: 23px;
+      margin-bottom: 3px;
+    }
+
+    .info-card span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .progress-container {
+      margin-bottom: 24px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 9px;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #252a34;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      transition: width 0.3s ease;
+    }
+
+    .quiz-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 28px;
+    }
+
+    .question-number {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 9px;
+    }
+
+    .question {
+      font-size: 24px;
+      line-height: 1.4;
+      margin-bottom: 18px;
+    }
+
+    .scenario-box {
+      display: none;
+      background: #141a22;
+      border: 1px solid #263b55;
+      border-left: 4px solid var(--blue);
+      border-radius: 11px;
+      padding: 17px;
+      margin-bottom: 20px;
+      color: #d6d9df;
+      font-size: 14px;
+    }
+
+    .scenario-box.visible {
+      display: block;
+    }
+
+    .scenario-box strong {
+      color: var(--blue);
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option {
+      position: relative;
+    }
+
+    .option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .option label {
+      display: block;
+      padding: 16px 17px;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      cursor: pointer;
+      color: #d6d9df;
+      transition: 0.2s;
+    }
+
+    .option label:hover {
+      background: var(--surface-hover);
+      border-color: #3c4554;
+    }
+
+    .option input:checked + label {
+      border-color: var(--blue);
+      background: #142033;
+      color: var(--text);
+    }
+
+    .option-letter {
+      display: inline-flex;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      background: #252a34;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 10px;
+    }
+
+    .option input:checked + label .option-letter {
+      background: var(--blue);
+      color: #08111f;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .nav-btn {
+      border: 1px solid var(--border);
+      background: #141820;
+      color: var(--text);
+      padding: 11px 18px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .nav-btn.primary {
+      background: var(--blue);
+      color: #08111f;
+      border-color: var(--blue);
+    }
+
+    .nav-btn.primary:hover {
+      background: var(--blue-hover);
+      color: #08111f;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .result-section,
+    .review-section {
+      margin-top: 25px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .result-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .result-score {
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--blue);
+      margin-bottom: 4px;
+    }
+
+    .result-label {
+      color: var(--muted);
+      margin-bottom: 17px;
+    }
+
+    .result-message {
+      color: #d6d9df;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .review-section h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .review-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 20px;
+      margin-bottom: 13px;
+    }
+
+    .review-item.correct {
+      border-left: 4px solid var(--green);
+    }
+
+    .review-item.incorrect {
+      border-left: 4px solid var(--red);
+    }
+
+    .review-question {
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .review-answer {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .review-answer strong {
+      color: var(--text);
+    }
+
+    .review-answer.correct-text strong {
+      color: var(--green);
+    }
+
+    .review-answer.incorrect-text strong {
+      color: var(--red);
+    }
+
+    .explanation {
+      margin-top: 13px;
+      padding: 13px;
+      background: #141820;
+      border-radius: 9px;
+      color: #c5c9d1;
+      font-size: 14px;
+    }
+
+    .retake-btn {
+      margin-top: 22px;
+      border: 1px solid var(--blue);
+      background: var(--blue);
+      color: #08111f;
+      padding: 12px 19px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .retake-btn:hover {
+      background: var(--blue-hover);
+    }
+
+    @media (max-width: 700px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+        gap: 14px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .quiz-info {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-card {
+        padding: 21px;
+      }
+
+      .question {
+        font-size: 21px;
+      }
+
+      .container {
+        padding: 32px 16px 60px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <a href="index.html" class="logo">
+      STE <span>Study Hub</span>
+    </a>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="reviewer.html">Reviewers</a>
+      <a href="quizzes.html" class="active">Quizzes</a>
+      <a href="notes.html">Notes</a>
+      <a href="progress.html">Progress</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <a href="quizzes.html" class="back-link">
+    ← Back to Quizzes
+  </a>
+
+  <section class="hero">
+
+    <div class="subject-label">
+      Filipino
+    </div>
+
+    <h1>
+      Kaligirang Pangkasaysayan ng mga
+      <span>Tekstong Pampanitikan noong 1986</span>
+    </h1>
+
+    <p>
+      Isang mahirap na situational quiz tungkol sa historical context,
+      tema, ebidensya, at wastong pagsusuri ng tekstong pampanitikan.
+      Basahin nang mabuti ang bawat sitwasyon.
+    </p>
+
+  </section>
+
+
+  <div class="quiz-info">
+
+    <div class="info-card">
+      <strong>21</strong>
+      <span>Questions</span>
+    </div>
+
+    <div class="info-card">
+      <strong>Hard</strong>
+      <span>Difficulty</span>
+    </div>
+
+    <div class="info-card">
+      <strong>Situational</strong>
+      <span>Question Type</span>
+    </div>
+
+  </div>
+
+
+  <div class="progress-container">
+
+    <div class="progress-top">
+      <span id="questionCounter">Question 1 of 21</span>
+      <span id="answeredCounter">0 answered</span>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+  </div>
+
+
+  <div id="quizArea">
+
+    <div class="quiz-card">
+
+      <div class="question-number" id="questionNumber">
+        Question 1
+      </div>
+
+      <h2 class="question" id="questionText"></h2>
+
+      <div class="scenario-box" id="scenarioBox"></div>
+
+      <div class="options" id="options"></div>
+
+      <div class="navigation">
+
+        <button
+          class="nav-btn"
+          id="prevBtn"
+          onclick="previousQuestion()"
+        >
+          Previous
+        </button>
+
+        <button
+          class="nav-btn primary"
+          id="nextBtn"
+          onclick="nextQuestion()"
+        >
+          Next
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <section
+    class="result-section hidden"
+    id="resultSection"
+  >
+
+    <div class="result-card">
+
+      <div class="result-score" id="resultScore">
+        0/21
+      </div>
+
+      <div class="result-label">
+        Final Score
+      </div>
+
+      <p class="result-message" id="resultMessage"></p>
+
+      <button
+        class="retake-btn"
+        onclick="retakeQuiz()"
+      >
+        Retake Quiz
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <section
+    class="review-section hidden"
+    id="reviewSection"
+  >
+
+    <h2>Review Your Answers</h2>
+
+    <div id="reviewContainer"></div>
+
+  </section>
+
+</main>
+
+
+<script>
+
+  const questions = [
+
+    {
+      question:
+        "Alin ang pinakamatibay na pagsusuri sa isang akdang isinulat o lumaganap sa panahong malapit sa 1986?",
+
+      scenario:
+        "Ang isang maikling kuwento ay tungkol sa mga ordinaryong mamamayang nagtutulungan upang ipaglaban ang kanilang paniniwala. Wala itong direktang binabanggit na EDSA, People Power, halalan, o sinumang politiko.",
+
+      options: [
+        "Maaari itong maiugnay sa konteksto ng 1986, ngunit kailangan pa rin ng tekstuwal at historikal na ebidensya bago gumawa ng matibay na konklusyon.",
+        "Tiyak na tungkol ito sa EDSA dahil isinulat ito malapit sa 1986.",
+        "Hindi ito maaaring magkaroon ng historikal na koneksyon dahil walang binanggit na EDSA.",
+        "Ang tema nito ay awtomatikong People Power dahil may pagkakaisa ang mga tauhan."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Hindi sapat ang petsa o pagkakahawig ng tema upang patunayang direktang tungkol sa isang partikular na pangyayari ang akda. Kailangang tingnan ang teksto at kaugnay na ebidensya."
+    },
+
+
+    {
+      question:
+        "Isang mag-aaral ang nagsabi: 'Dahil mahalagang pangyayari ang EDSA People Power Revolution, lahat ng tekstong pampanitikan noong 1986 ay dapat basahin bilang tekstong tungkol sa EDSA.' Ano ang pangunahing problema sa kaniyang pangangatwiran?",
+
+      options: [
+        "Ipinagpapalit niya ang historical context sa mismong paksa ng bawat akda.",
+        "Ipinapalagay niyang walang tema ang mga tekstong pampanitikan.",
+        "Ipinagpapalagay niyang walang kaugnayan ang panitikan sa kasaysayan.",
+        "Ipinagpapalagay niyang oral evidence lamang ang maaaring gamitin sa panitikan."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Mahalaga ang historical context, ngunit hindi nito awtomatikong tinutukoy ang paksa ng bawat akda."
+    },
+
+
+    {
+      question:
+        "Alin ang pinakamainam na halimbawa ng pagkakaiba ng 'pangyayari' at 'tema'?",
+
+      scenario:
+        "Sinusuri ng isang pangkat ang isang akdang may tauhang lumalahok sa sama-samang pagkilos ng mga mamamayan.",
+
+      options: [
+        "Ang sama-samang pagkilos ay maaaring bahagi ng konteksto o pangyayari, samantalang ang pagkakaisa ay maaaring maging tema ng akda.",
+        "Ang pagkakaisa ay isang pangyayari, samantalang ang 1986 ay isang tema.",
+        "Ang parehong pangyayari at tema ay tumutukoy sa eksaktong iisang bagay.",
+        "Ang pangyayari ay laging kathang-isip, samantalang ang tema ay laging historikal."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ang pangyayari ay bahagi ng kontekstong historikal. Ang tema naman ay pangunahing kaisipan o mensaheng maaaring ipahayag ng akda."
+    },
+
+
+    {
+      question:
+        "May dalawang posibleng interpretasyon ang isang tula. Parehong tumutukoy sa 'pag-asa,' ngunit isa lamang ang may malinaw na suporta mula sa mga taludtod at historikal na sources. Alin ang dapat piliin ng mananaliksik?",
+
+      options: [
+        "Ang interpretasyong may mas matibay na tekstuwal at historikal na ebidensya.",
+        "Ang interpretasyong mas emosyonal basahin.",
+        "Ang interpretasyong mas malapit sa personal na opinyon ng mananaliksik.",
+        "Ang parehong interpretasyon bilang pantay na napatunayan."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ang pagsusuri ay kailangang suportado ng ebidensya. Hindi sapat ang pagiging emosyonal o personal na paniniwala."
+    },
+
+
+    {
+      question:
+        "Alin ang sitwasyong nagpapakita ng wastong paggamit ng historical context?",
+
+      options: [
+        "Ginagamit ng mag-aaral ang mga kalagayan noong 1986 upang makatulong na ipaliwanag ang isang tema na una niyang natukoy sa mismong akda.",
+        "Pinipili ng mag-aaral ang tema batay lamang sa isang pangyayaring naganap noong 1986.",
+        "Ipinapalagay ng mag-aaral na pareho ang kahulugan ng lahat ng akda dahil pareho ang panahon.",
+        "Binabalewala ng mag-aaral ang teksto dahil mas mahalaga raw ang kasaysayan."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ang teksto ang pangunahing sinusuri, habang ang historical context ay nagbibigay ng karagdagang konteksto sa interpretasyon."
+    },
+
+
+    {
+      question:
+        "Alin ang pinakamahinang ebidensya para sa isang akademikong pahayag tungkol sa historical context ng isang akda?",
+
+      options: [
+        "Isang personal na palagay ng mananaliksik na walang tekstuwal o historikal na suporta.",
+        "Isang opisyal na dokumentong kaugnay ng panahon.",
+        "Isang mapagkakatiwalaang historical record.",
+        "Isang testimonya na sinusuri kasabay ng iba pang available na ebidensya."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ang personal na palagay lamang ay hindi sapat upang magpatunay ng isang historikal na koneksyon."
+    },
+
+
+    {
+      question:
+        "Isang estudyante ang nakahanap ng lumang larawan mula 1986 na nagpapakita ng malaking pagtitipon. Maaari ba niyang gamitin agad ang larawan bilang patunay na ang isang tauhan sa isang nobela ay tumutukoy sa pagtitipon na iyon?",
+
+      options: [
+        "Hindi agad. Maaari itong maging historical evidence, ngunit kailangan pa ring patunayan ang koneksyon nito sa mismong akda.",
+        "Oo, dahil anumang larawan mula 1986 ay direktang nagpapatunay sa kahulugan ng nobela.",
+        "Oo, dahil mas maaasahan ang larawan kaysa sa mismong teksto.",
+        "Hindi, dahil walang historical value ang mga larawan."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Maaaring maging mahalagang historical evidence ang larawan, ngunit hindi nito awtomatikong pinatutunayan ang interpretasyon ng isang partikular na akda."
+    },
+
+
+    {
+      question:
+        "Alin ang pinakamalinaw na halimbawa ng oral na ebidensya?",
+
+      scenario:
+        "Nais ng isang pangkat na malaman kung paano personal na naranasan ng isang mamamayan ang mga pangyayari noong 1986.",
+
+      options: [
+        "Isang panayam sa taong nakaranas mismo ng pangyayari.",
+        "Isang opisyal na dokumentong inilabas ng pamahalaan.",
+        "Isang litrato mula sa isang archive.",
+        "Isang newspaper record na ginawa noong panahong iyon."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ang panayam o personal na salaysay ng isang taong nakaranas ng pangyayari ay halimbawa ng oral evidence."
+    },
+
+
+    {
+      question:
+        "Bakit kailangang maging maingat sa paggamit ng oral na ebidensya?",
+
+      options: [
+        "Dahil ang personal na alaala ay maaaring mahalaga ngunit maaari ring maapektuhan ng memorya, pananaw, at limitasyon ng isang tao.",
+        "Dahil hindi kailanman maaaring gamitin ang oral evidence sa historical analysis.",
+        "Dahil awtomatikong mas mababa ang halaga ng testimonya kaysa sa lahat ng dokumento.",
+        "Dahil ang oral evidence ay laging kathang-isip."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Mahalaga ang oral histories, ngunit dapat itong suriin nang maingat at, kung maaari, ihambing sa iba pang ebidensya."
+    },
+
+
+    {
+      question:
+        "Isang mananaliksik ang nagsabing: 'Dahil sinabi ng isang saksi na ganito ang nangyari, ito na ang tiyak at kumpletong katotohanan.' Ano ang pinakaangkop na puna?",
+
+      options: [
+        "Mahalaga ang testimonya, ngunit dapat itong suriin at maaaring ihambing sa iba pang historical evidence.",
+        "Mali dahil walang anumang silbi ang testimonya.",
+        "Tama dahil hindi kailangang suriin ang oral evidence.",
+        "Tama dahil mas mataas ang credibility ng personal na alaala kaysa sa lahat ng sources."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ang testimonya ay mahalagang source ngunit dapat suriin sa konteksto at, kung kinakailangan, ihambing sa ibang sources."
+    },
+
+
+    {
+      question:
+        "Alin ang pinakamatibay na pagkakasunod-sunod sa pagsusuri ng tekstong pampanitikan gamit ang historical context?",
+
+      options: [
+        "Basahin ang akda → tukuyin ang tema → hanapin ang tekstuwal na ebidensya → suriin ang historical context → bumuo ng konklusyon.",
+        "Hanapin ang historical event → pumili ng tema → baguhin ang interpretasyon ng teksto upang umangkop dito → gumawa ng konklusyon.",
+        "Tukuyin ang 1986 event → ipalagay na ito ang paksa → maghanap ng anumang bahagi ng teksto na maaaring tumugma.",
+        "Basahin ang historical sources → gumawa ng tema → balewalain ang mismong akda → gumawa ng konklusyon."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ang wastong proseso ay nagsisimula sa mismong akda at gumagamit ng historical context upang suportahan at palalimin ang pagsusuri."
+    },
+
+
+    {
+      question:
+        "Kung ang isang akda ay may tema ng kalayaan, alin ang pinakamahinang konklusyon?",
+
+      options: [
+        "Ang akda ay tiyak na isinulat bilang direktang reaksiyon sa EDSA People Power Revolution.",
+        "Maaaring maiugnay ang tema ng kalayaan sa kalagayang panlipunan noong 1986 kung may sapat na ebidensya.",
+        "Maaaring makatulong ang historical context upang maunawaan ang kahulugan ng kalayaan sa panahon ng akda.",
+        "Maaaring suriin kung paano ipinahayag mismo ng akda ang ideya ng kalayaan."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ang salitang 'tiyak' ay nagpapakita ng sobrang laking konklusyon kung wala namang direktang ebidensya na ang akda ay reaksiyon sa EDSA."
+    },
+
+
+    {
+      question:
+        "Isang tula ang gumagamit ng simbolo ng 'pagsikat ng araw' pagkatapos ng mahabang panahon ng kadiliman. Alin ang pinakamaingat na interpretasyon?",
+
+      options: [
+        "Maaaring kumatawan ito sa pag-asa o pagbabago, ngunit kailangan pa ring suriin ang buong teksto at konteksto bago iugnay sa 1986.",
+        "Tiyak na simbolo ito ng People Power Revolution.",
+        "Walang posibilidad na maging simbolo ito dahil hindi literal ang araw.",
+        "Tiyak na simbolo ito ng isang partikular na politiko."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ang simbolo ay maaaring magkaroon ng maraming interpretasyon. Kailangang tingnan ang buong akda at ebidensya bago gumawa ng tiyak na historikal na koneksyon."
+    },
+
+
+    {
+      question:
+        "Alin ang nagpapakita ng circular reasoning sa pagsusuri ng panitikan?",
+
+      options: [
+        "Sinasabing ang akda ay tungkol sa 1986 dahil may tema itong pagkakaisa, at sinasabing ang pagkakaisa ay tungkol sa 1986 dahil ang akda ay tungkol daw sa 1986.",
+        "Sinusuri muna ang tema at saka naghahanap ng historical sources na maaaring sumuporta rito.",
+        "Inihahambing ang isang testimonya sa dokumento at sa mismong teksto.",
+        "Tinitingnan ang iba't ibang posibleng interpretasyon bago pumili."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ang circular reasoning ay gumagamit ng sariling konklusyon bilang suporta sa mismong konklusyon sa halip na magbigay ng independent evidence."
+    },
+
+
+    {
+      question:
+        "May dalawang historical source na tila magkasalungat tungkol sa isang pangyayari. Ano ang pinakaakademikong hakbang?",
+
+      options: [
+        "Suriin ang pinagmulan, panahon, layunin, credibility, at iba pang ebidensya bago magpasya kung paano gagamitin ang mga ito.",
+        "Piliin agad ang source na mas pabor sa sariling interpretasyon.",
+        "Itapon ang parehong source dahil magkasalungat sila.",
+        "Piliin ang mas mahabang source dahil mas marami itong impormasyon."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ang magkakaibang sources ay kailangang suriin batay sa provenance, credibility, context, at pagkakatugma sa ibang ebidensya."
+    },
+
+
+    {
+      question:
+        "Alin ang pinakaangkop na dahilan kung bakit mahalaga ang 1986 bilang historical context sa lesson?",
+
+      options: [
+        "Nagbibigay ito ng mahalagang kalagayang panlipunan at pampolitika na maaaring makatulong sa pag-unawa sa ilang tema at pananaw sa panitikan.",
+        "Dahil lahat ng akdang pampanitikan noong panahong iyon ay tungkol sa parehong pangyayari.",
+        "Dahil awtomatikong nagbabago ang kahulugan ng bawat akda kapag nagbago ang taon.",
+        "Dahil mas mahalaga ang petsa ng pagkakasulat kaysa sa nilalaman ng akda."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Mahalaga ang 1986 bilang konteksto dahil nakatutulong itong ipaliwanag ang kalagayan kung saan maaaring nabuo o nabasa ang ilang ideya sa panitikan."
+    },
+
+
+    {
+      question:
+        "Kung ang isang akda ay nagpapakita ng mga taong nagsasama-sama upang harapin ang isang suliranin, alin ang HINDI awtomatikong sumusunod?",
+
+      options: [
+        "Ang akda ay direktang naglalarawan sa EDSA People Power Revolution.",
+        "Maaaring makita rito ang tema ng pagkakaisa.",
+        "Maaaring suriin ang ideya ng collective action.",
+        "Maaaring ihambing ang tema nito sa ilang karanasan ng lipunan noong 1986."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ang pagkakaroon ng pagkakaisa sa akda ay hindi sapat upang patunayang direktang inilalarawan nito ang EDSA."
+    },
+
+
+    {
+      question:
+        "Alin ang pinakamahusay na halimbawa ng isang konklusyong may wastong antas ng katiyakan?",
+
+      scenario:
+        "May malinaw na tema ng pagkakaisa sa akda. May ilang bahagi ng teksto na tumutukoy sa sama-samang pagkilos. May historical sources ding nagpapakita ng kahalagahan ng collective action noong 1986.",
+
+      options: [
+        "Maaaring maiugnay ang tema ng pagkakaisa sa historical context ng 1986 dahil parehong sinusuportahan ng tekstuwal at historikal na ebidensya ang ugnayang ito.",
+        "Tiyak na ang may-akda ay literal na nagsasalaysay tungkol sa EDSA.",
+        "Ang buong akda ay isang historical document tungkol sa 1986.",
+        "Walang halaga ang historical context dahil kathang-isip ang akda."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ang 'maaaring maiugnay' ay angkop dahil kinikilala nito ang suportadong koneksyon nang hindi gumagawa ng mas malawak na claim kaysa sa ipinapakita ng ebidensya."
+    },
+
+
+    {
+      question:
+        "Isang estudyante ang nagsuri ng akda gamit lamang ang historical sources at halos hindi binanggit ang mismong teksto. Ano ang pinakamalaking problema?",
+
+      options: [
+        "Nawawala ang sentro ng literary analysis dahil kailangang suriin mismo ang tekstong pampanitikan.",
+        "Walang halaga ang historical sources sa literary analysis.",
+        "Dapat historical sources lamang ang gamitin sa pagsusuri.",
+        "Hindi maaaring gamitin ang historical context sa panitikan."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ang historical context ay pantulong sa pagsusuri. Hindi nito pinapalitan ang pagsusuri sa mismong akda."
+    },
+
+
+    {
+      question:
+        "Alin sa mga sumusunod ang pinakamahusay na nagpapakita ng pagkakaiba ng 'interpretasyon' at 'ebidensya'?",
+
+      options: [
+        "Ang pahayag na 'tema ito ng pag-asa' ay interpretasyon; ang partikular na bahagi ng teksto na sumusuporta rito ay ebidensya.",
+        "Ang interpretasyon at ebidensya ay parehong opinyon.",
+        "Ang historical event ay palaging interpretasyon, habang ang tema ay palaging ebidensya.",
+        "Ang interpretasyon ay dapat manggaling lamang sa oral testimony."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ang interpretasyon ay paliwanag o kahulugan na ibinibigay sa teksto. Ang ebidensya naman ang sumusuporta sa interpretasyong iyon."
+    },
+
+
+    {
+      question:
+        "Kung pipili ka lamang ng isang prinsipyo na dapat tandaan sa buong lesson, alin ang pinakatumpak?",
+
+      options: [
+        "Huwag piliting umangkop ang akda sa kasaysayan; gamitin ang historical context upang mas malalim na maunawaan ang tekstong may sapat na ebidensya.",
+        "Ang kasaysayan ang laging nagbibigay ng eksaktong kahulugan sa panitikan.",
+        "Ang petsa ng akda ang pinakamahalagang ebidensya sa lahat ng pagkakataon.",
+        "Kapag may pagkakahawig ang tema at historical event, sapat na iyon upang patunayang direktang konektado ang mga ito."
+      ],
+
+      answer: 0,
+
+      explanation:
+        "Ito ang pangunahing prinsipyo ng lesson: teksto, tema, historical context, at ebidensya ay kailangang pagsamahin nang maingat sa halip na gumawa ng unsupported assumptions."
+    }
+
+  ];
+
+
+  let currentQuestion = 0;
+  let answers = new Array(questions.length).fill(null);
+  let submitted = false;
+
+
+  const questionCounter =
+    document.getElementById("questionCounter");
+
+  const answeredCounter =
+    document.getElementById("answeredCounter");
+
+  const progressFill =
+    document.getElementById("progressFill");
+
+  const questionNumber =
+    document.getElementById("questionNumber");
+
+  const questionText =
+    document.getElementById("questionText");
+
+  const scenarioBox =
+    document.getElementById("scenarioBox");
+
+  const optionsContainer =
+    document.getElementById("options");
+
+  const prevBtn =
+    document.getElementById("prevBtn");
+
+  const nextBtn =
+    document.getElementById("nextBtn");
+
+  const quizArea =
+    document.getElementById("quizArea");
+
+  const resultSection =
+    document.getElementById("resultSection");
+
+  const reviewSection =
+    document.getElementById("reviewSection");
+
+  const resultScore =
+    document.getElementById("resultScore");
+
+  const resultMessage =
+    document.getElementById("resultMessage");
+
+  const reviewContainer =
+    document.getElementById("reviewContainer");
+
+
+  function loadQuestion() {
+
+    const q = questions[currentQuestion];
+
+    questionNumber.textContent =
+      `Question ${currentQuestion + 1}`;
+
+    questionText.textContent =
+      q.question;
+
+    questionCounter.textContent =
+      `Question ${currentQuestion + 1} of ${questions.length}`;
+
+    const answered =
+      answers.filter(answer => answer !== null).length;
+
+    answeredCounter.textContent =
+      `${answered} answered`;
+
+    progressFill.style.width =
+      `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+
+    if (q.scenario) {
+
+      scenarioBox.classList.add("visible");
+
+      scenarioBox.innerHTML =
+        `<strong>Situation:</strong> ${q.scenario}`;
+
+    } else {
+
+      scenarioBox.classList.remove("visible");
+
+      scenarioBox.innerHTML = "";
+
+    }
+
+
+    optionsContainer.innerHTML = "";
+
+
+    q.options.forEach((option, index) => {
+
+      const wrapper =
+        document.createElement("div");
+
+      wrapper.className = "option";
+
+      const inputId =
+        `q${currentQuestion}_option${index}`;
+
+      wrapper.innerHTML = `
+        <input
+          type="radio"
+          id="${inputId}"
+          name="question"
+          value="${index}"
+          ${answers[currentQuestion] === index ? "checked" : ""}
+        >
+
+        <label for="${inputId}">
+          <span class="option-letter">
+            ${String.fromCharCode(65 + index)}
+          </span>
+          ${option}
+        </label>
+      `;
+
+      optionsContainer.appendChild(wrapper);
+
+
+      const input =
+        wrapper.querySelector("input");
+
+      input.addEventListener("change", function () {
+
+        answers[currentQuestion] =
+          Number(this.value);
+
+        answeredCounter.textContent =
+          `${answers.filter(answer => answer !== null).length} answered`;
+
+      });
+
+    });
+
+
+    prevBtn.disabled =
+      currentQuestion === 0;
+
+
+    if (currentQuestion === questions.length - 1) {
+
+      nextBtn.textContent =
+        "Submit Quiz";
+
+    } else {
+
+      nextBtn.textContent =
+        "Next";
+
+    }
+
+  }
+
+
+  function nextQuestion() {
+
+    if (answers[currentQuestion] === null) {
+
+      alert("Piliin muna ang iyong sagot bago magpatuloy.");
+
+      return;
+
+    }
+
+
+    if (currentQuestion === questions.length - 1) {
+
+      submitQuiz();
+
+      return;
+
+    }
+
+
+    currentQuestion++;
+
+    loadQuestion();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  function previousQuestion() {
+
+    if (currentQuestion === 0) {
+      return;
+    }
+
+    currentQuestion--;
+
+    loadQuestion();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  function submitQuiz() {
+
+    submitted = true;
+
+    let score = 0;
+
+
+    questions.forEach((question, index) => {
+
+      if (answers[index] === question.answer) {
+        score++;
+      }
+
+    });
+
+
+    const percentage =
+      Math.round((score / questions.length) * 100);
+
+
+    resultScore.textContent =
+      `${score}/${questions.length} (${percentage}%)`;
+
+
+    if (percentage >= 90) {
+
+      resultMessage.textContent =
+        "Actual game master";
+
+    } else if (percentage >= 75) {
+
+      resultMessage.textContent =
+        "damn bruh, good. job lol";
+
+    } else if (percentage >= 60) {
+
+      resultMessage.textContent =
+        "nice try, better luck next time tho";
+
+    } else {
+
+      resultMessage.textContent =
+        "bruh you bums at ts";
+
+    }
+
+
+    quizArea.classList.add("hidden");
+
+    resultSection.classList.remove("hidden");
+
+    reviewSection.classList.remove("hidden");
+
+
+    buildReview();
+
+    saveQuizProgress(score, percentage);
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  function buildReview() {
+
+    reviewContainer.innerHTML = "";
+
+
+    questions.forEach((question, index) => {
+
+      const userAnswer =
+        answers[index];
+
+      const correct =
+        userAnswer === question.answer;
+
+
+      const item =
+        document.createElement("div");
+
+      item.className =
+        `review-item ${correct ? "correct" : "incorrect"}`;
+
+
+      const userAnswerText =
+        userAnswer === null
+          ? "Walang sagot"
+          : `${String.fromCharCode(65 + userAnswer)}. ${question.options[userAnswer]}`;
+
+
+      const correctAnswerText =
+        `${String.fromCharCode(65 + question.answer)}. ${question.options[question.answer]}`;
+
+
+      item.innerHTML = `
+
+        <div class="review-question">
+          ${index + 1}. ${question.question}
+        </div>
+
+        <div class="review-answer ${correct ? "correct-text" : "incorrect-text"}">
+          <strong>Your Answer:</strong>
+          ${userAnswerText}
+        </div>
+
+        <div class="review-answer correct-text">
+          <strong>Correct Answer:</strong>
+          ${correctAnswerText}
+        </div>
+
+        <div class="explanation">
+          <strong>Paliwanag:</strong>
+          ${question.explanation}
+        </div>
+
+      `;
+
+
+      reviewContainer.appendChild(item);
+
+    });
+
+  }
+
+
+  function saveQuizProgress(score, percentage) {
+
+    let progress;
+
+
+    try {
+
+      progress =
+        JSON.parse(
+          localStorage.getItem("riasStudyHubProgress")
+        ) || {};
+
+    } catch (error) {
+
+      progress = {};
+
+    }
+
+
+    if (!progress.reviewers) {
+      progress.reviewers = {};
+    }
+
+    if (!progress.quizzes) {
+      progress.quizzes = {};
+    }
+
+    if (!progress.notes) {
+      progress.notes = {};
+    }
+
+
+    progress.quizzes.filipino = {
+
+      completed: true,
+
+      score: score,
+
+      total: questions.length,
+
+      percentage: percentage,
+
+      date: new Date().toISOString()
+
+    };
+
+
+    localStorage.setItem(
+      "riasStudyHubProgress",
+      JSON.stringify(progress)
+    );
+
+  }
+
+
+  function retakeQuiz() {
+
+    currentQuestion = 0;
+
+    answers =
+      new Array(questions.length).fill(null);
+
+    submitted = false;
+
+
+    quizArea.classList.remove("hidden");
+
+    resultSection.classList.add("hidden");
+
+    reviewSection.classList.add("hidden");
+
+
+    loadQuestion();
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  loadQuestion();
+
+</script>
+
+</body>
+</html>

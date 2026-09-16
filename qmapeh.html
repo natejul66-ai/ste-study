@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>MAPEH Quiz | STE Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+      --red: #f87171;
+      --yellow: #facc15;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 17, 23, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 45px 22px 70px;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+
+    .back-link:hover {
+      color: var(--blue);
+    }
+
+    .hero {
+      margin-bottom: 30px;
+    }
+
+    .subject-label {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 16px;
+    }
+
+    .quiz-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 17px;
+      text-align: center;
+    }
+
+    .info-card strong {
+      display: block;
+      color: var(--blue);
+      font-size: 22px;
+      margin-bottom: 3px;
+    }
+
+    .info-card span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .progress-container {
+      margin-bottom: 25px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #252a34;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 4%;
+      background: var(--blue);
+      transition: width 0.3s;
+    }
+
+    .quiz-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 30px;
+    }
+
+    .question-number {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .question {
+      font-size: 22px;
+      line-height: 1.45;
+      margin-bottom: 20px;
+    }
+
+    .scenario-box {
+      background: #111722;
+      border: 1px solid #263b55;
+      border-radius: 11px;
+      padding: 17px;
+      margin-bottom: 22px;
+      color: #d6d9df;
+      font-size: 14px;
+    }
+
+    .scenario-box strong {
+      color: var(--blue);
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option {
+      position: relative;
+    }
+
+    .option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .option label {
+      display: block;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 16px 18px;
+      cursor: pointer;
+      color: #d6d9df;
+      transition: 0.2s;
+    }
+
+    .option label:hover {
+      background: var(--surface-hover);
+      border-color: #3b4657;
+    }
+
+    .option input:checked + label {
+      border-color: var(--blue);
+      background: #142033;
+      color: var(--text);
+    }
+
+    .option-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #202735;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .nav-btn {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      padding: 11px 18px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .nav-btn.primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #08111f;
+    }
+
+    .nav-btn.primary:hover {
+      background: var(--blue-hover);
+      color: #08111f;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .result-section {
+      margin-top: 25px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .result-label {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .result-score {
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--blue);
+      line-height: 1.1;
+    }
+
+    .result-message {
+      color: #d6d9df;
+      margin-top: 10px;
+    }
+
+    .result-details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .result-detail {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 13px;
+    }
+
+    .result-detail strong {
+      display: block;
+      color: var(--blue);
+      font-size: 19px;
+    }
+
+    .result-detail span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .retry-btn {
+      margin-top: 25px;
+      border: 1px solid var(--blue);
+      background: transparent;
+      color: var(--blue);
+      padding: 11px 18px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .retry-btn:hover {
+      background: var(--blue);
+      color: #08111f;
+    }
+
+    .review-section {
+      margin-top: 25px;
+    }
+
+    .review-section h2 {
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+
+    .review-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 20px;
+      margin-bottom: 13px;
+    }
+
+    .review-item.correct {
+      border-left: 4px solid var(--green);
+    }
+
+    .review-item.incorrect {
+      border-left: 4px solid var(--red);
+    }
+
+    .review-question {
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .review-answer {
+      font-size: 14px;
+      color: #d6d9df;
+      margin-bottom: 7px;
+    }
+
+    .review-answer.correct-answer {
+      color: var(--green);
+    }
+
+    .review-answer.user-answer {
+      color: var(--red);
+    }
+
+    .review-explanation {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 25px 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+        gap: 14px;
+      }
+
+      .container {
+        padding: 32px 16px 60px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .quiz-info,
+      .result-details {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-card {
+        padding: 21px;
+      }
+
+      .question {
+        font-size: 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <a href="../index.html" class="logo">
+      STE <span>Study Hub</span>
+    </a>
+
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="reviewers.html">Reviewers</a>
+      <a href="quizzes.html" class="active">Quizzes</a>
+      <a href="notes.html">Notes</a>
+      <a href="progress.html">Progress</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <a href="quizzes.html" class="back-link">
+    ← Back to Quizzes
+  </a>
+
+
+  <section class="hero">
+
+    <div class="subject-label">
+      MAPEH
+    </div>
+
+    <h1>
+      Music, Arts, PE & Health:
+      <span>Advanced Challenge</span>
+    </h1>
+
+    <p>
+      An intentionally difficult assessment covering musical analysis,
+      Greco-Roman art, Filipino cultural interpretation, responsible
+      parenthood, family planning, and family wellness.
+    </p>
+
+  </section>
+
+
+  <div class="quiz-info">
+
+    <div class="info-card">
+      <strong>28</strong>
+      <span>Questions</span>
+    </div>
+
+    <div class="info-card">
+      <strong>Easy</strong>
+      <span>Difficulty</span>
+    </div>
+
+    <div class="info-card">
+      <strong>Analytical</strong>
+      <span>Question Type</span>
+    </div>
+
+  </div>
+
+
+  <div class="progress-container">
+
+    <div class="progress-top">
+      <span id="questionCounter">
+        Question 1 of 28
+      </span>
+
+      <span id="answeredCounter">
+        0 answered
+      </span>
+    </div>
+
+    <div class="progress-bar">
+      <div
+        class="progress-fill"
+        id="progressFill">
+      </div>
+    </div>
+
+  </div>
+
+
+  <div id="quizArea">
+
+    <div class="quiz-card">
+
+      <div
+        class="question-number"
+        id="questionNumber">
+        Question 1
+      </div>
+
+      <h2
+        class="question"
+        id="questionText">
+      </h2>
+
+      <div
+        class="scenario-box"
+        id="scenarioBox">
+      </div>
+
+      <div
+        class="options"
+        id="options">
+      </div>
+
+      <div class="navigation">
+
+        <button
+          class="nav-btn"
+          id="prevBtn"
+          onclick="previousQuestion()">
+          Previous
+        </button>
+
+        <button
+          class="nav-btn primary"
+          id="nextBtn"
+          onclick="nextQuestion()">
+          Next
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <section
+    id="resultSection"
+    class="result-section hidden">
+
+    <div class="result-label">
+      Final Score
+    </div>
+
+    <div
+      class="result-score"
+      id="resultScore">
+      0%
+    </div>
+
+    <p
+      class="result-message"
+      id="resultMessage">
+    </p>
+
+    <div class="result-details">
+
+      <div class="result-detail">
+        <strong id="correctCount">0</strong>
+        <span>Correct</span>
+      </div>
+
+      <div class="result-detail">
+        <strong id="wrongCount">0</strong>
+        <span>Incorrect</span>
+      </div>
+
+      <div class="result-detail">
+        <strong>28</strong>
+        <span>Total</span>
+      </div>
+
+    </div>
+
+    <button
+      class="retry-btn"
+      onclick="retakeQuiz()">
+      Retake Quiz
+    </button>
+
+  </section>
+
+
+  <section
+    id="reviewSection"
+    class="review-section hidden">
+
+    <h2>
+      Answer Review
+    </h2>
+
+    <div id="reviewContent"></div>
+
+  </section>
+
+</main>
+
+
+<footer>
+  MAPEH Quiz • STE Study Hub
+</footer>
+
+
+<script>
+
+const questions = [
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A student hears a musical passage in which the recognizable sequence
+      of notes remains largely unchanged, but the passage gradually becomes
+      louder and then softer.
+    `,
+    question:
+      "Which musical element is changing most directly, while the recognizable musical idea remains the same?",
+    options: [
+      "Melody",
+      "Dynamics",
+      "Timbre",
+      "Form"
+    ],
+    answer: 1,
+    explanation:
+      "Dynamics concerns changes in loudness or softness. Melody concerns the organized sequence of musical notes."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      Two recordings contain the same melody and approximately the same
+      rhythm. In one recording the melody is played by a violin, while in
+      the other it is played by a flute.
+    `,
+    question:
+      "Which element most directly explains why the two versions have different sound qualities?",
+    options: [
+      "Form",
+      "Rhythm",
+      "Timbre",
+      "Dynamics"
+    ],
+    answer: 2,
+    explanation:
+      "Timbre is the tone quality that makes one instrument or voice sound different from another."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A listener describes a composition by identifying an opening section,
+      a contrasting section, and the return of earlier musical material.
+      The listener is primarily analyzing how the entire composition is
+      organized.
+    `,
+    question:
+      "Which musical element is being analyzed?",
+    options: [
+      "Form",
+      "Timbre",
+      "Dynamics",
+      "Melody"
+    ],
+    answer: 0,
+    explanation:
+      "Form refers to the overall structure or organization of a musical composition."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A performance contains several musical lines occurring at the same
+      time. A student focuses not on the loudness of the lines, but on how
+      these lines interact with one another.
+    `,
+    question:
+      "Which concept provides the most precise description of the student's focus?",
+    options: [
+      "Texture",
+      "Dynamics",
+      "Timbre",
+      "Rhythm"
+    ],
+    answer: 0,
+    explanation:
+      "Texture concerns how different melodic or musical lines interact with one another."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A student says:
+      "The rhythm is the melody because both involve musical notes."
+      Another student argues that rhythm concerns how beats, sounds, and
+      silences are organized.
+    `,
+    question:
+      "Which conclusion is most accurate?",
+    options: [
+      "The first student is correct because rhythm and melody are identical.",
+      "The second student is correct because rhythm concerns the organization of beats, sounds, and silences.",
+      "Both students are incorrect because rhythm only describes instruments.",
+      "The first student is correct because rhythm determines timbre."
+    ],
+    answer: 1,
+    explanation:
+      "Rhythm concerns the organization of beats, sounds, and silences, while melody is an organized sequence of musical notes."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      An artwork contains a carefully proportioned human figure. The artist
+      emphasizes balance, harmony, and an idealized representation of the
+      human body.
+    `,
+    question:
+      "Which interpretation is most strongly supported by the lesson?",
+    options: [
+      "The characteristics are consistent with important features associated with Greek art.",
+      "The characteristics automatically prove that the artwork is a Roman mosaic.",
+      "The characteristics show that the artwork is primarily a musical form.",
+      "The characteristics prove that the artwork was created in the modern Philippines."
+    ],
+    answer: 0,
+    explanation:
+      "Greek art is associated with human figures, proportion, balance, harmony, and idealized representations."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      An ancient artwork clearly reflects Greek artistic influence, but its
+      subject matter and presentation also reflect Roman interests and
+      practices.
+    `,
+    question:
+      "Which statement best represents the relationship between Greek and Roman art described in the reviewer?",
+    options: [
+      "Roman art developed without any connection to Greek traditions.",
+      "Greek art copied every Roman artistic practice.",
+      "Roman art was strongly influenced by Greek traditions while also developing its own approaches.",
+      "Greek and Roman art are completely interchangeable terms."
+    ],
+    answer: 2,
+    explanation:
+      "Roman art was strongly influenced by Greek traditions but developed its own approaches to architecture, sculpture, painting, and public art."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A researcher discovers an ancient image formed by arranging many small
+      pieces of stone or tile into a larger visual composition.
+    `,
+    question:
+      "Which artistic category best identifies the technique?",
+    options: [
+      "Sculpture",
+      "Mosaic",
+      "Pottery",
+      "Architecture"
+    ],
+    answer: 1,
+    explanation:
+      "Mosaics are images or patterns formed by arranging small pieces of materials such as stone or tile."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A student compares a classical Western artwork with a Filipino
+      cultural artwork. Instead of declaring one superior, the student
+      identifies similarities, differences, and ways certain artistic ideas
+      may be adapted or interpreted differently.
+    `,
+    question:
+      "Why is this approach most appropriate for the lesson?",
+    options: [
+      "Cultural comparison should determine which culture is superior.",
+      "Classical traditions should never be connected with Filipino culture.",
+      "Cultural comparison is intended to understand relationships and differences.",
+      "Only visual similarities matter in cultural analysis."
+    ],
+    answer: 2,
+    explanation:
+      "The reviewer specifically emphasizes understanding relationships and differences rather than automatically judging one culture as better."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A student hears an unfamiliar piece of music and immediately says,
+      "This sounds classical, so it must be from one exact historical period."
+      Another student instead examines melody, rhythm, dynamics, instruments,
+      texture, and overall character before making an interpretation.
+    `,
+    question:
+      "Which student's approach better follows the reviewer?",
+    options: [
+      "The first, because genre labels eliminate the need for observation.",
+      "The first, because every classical work has identical musical features.",
+      "The second, because listening and identifying musical elements provide evidence for analysis.",
+      "Neither, because music cannot be analyzed through observable features."
+    ],
+    answer: 2,
+    explanation:
+      "The lesson emphasizes listening and observation of musical elements rather than making unsupported conclusions from a label."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A learner is asked to analyze a Filipino performance influenced by
+      Western classical musical ideas. The learner identifies the musical
+      features, compares them with the classical tradition, and then explains
+      how those ideas appear within the Filipino setting.
+    `,
+    question:
+      "Which sequence best represents the analytical process?",
+    options: [
+      "Compare → observe → ignore context → memorize",
+      "Observe/listen → analyze → compare → connect to cultural context",
+      "Judge → memorize → compare → remove cultural context",
+      "Create first → compare later → ignore the original features"
+    ],
+    answer: 1,
+    explanation:
+      "The reviewer emphasizes observation, listening, comparison, cultural connection, and guided creative work."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A student wants to make a sculpture inspired by classical Greek
+      characteristics but wants the finished work to communicate a distinctly
+      Filipino cultural experience.
+    `,
+    question:
+      "Which approach best fits the reviewer's concept of Filipino cultural context?",
+    options: [
+      "Copy a Greek sculpture exactly and remove all Filipino references.",
+      "Reject all classical influence because Filipino culture must remain isolated.",
+      "Observe classical ideas and adapt or interpret them through a Filipino cultural reference.",
+      "Combine random visual features without considering either tradition."
+    ],
+    answer: 2,
+    explanation:
+      "The reviewer allows classical ideas to be observed, adapted, or interpreted within Filipino cultural contexts."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A family makes an important decision. The adults consider their
+      responsibilities, available resources, family members' well-being,
+      reliable information, and the consequences of the decision.
+    `,
+    question:
+      "Which principle most directly describes this decision-making process?",
+    options: [
+      "Impulse-based decision-making",
+      "Informed and responsible decision-making",
+      "Decision-making based only on financial resources",
+      "Decision-making based only on personal preference"
+    ],
+    answer: 1,
+    explanation:
+      "Responsible decisions consider accurate information, responsibilities, circumstances, respect, consequences, and family well-being."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A lesson asks students to distinguish responsible parenthood from
+      simply providing material resources.
+    `,
+    question:
+      "Which statement most accurately captures the broader concept of responsible parenthood?",
+    options: [
+        "It is limited to providing financial support.",
+        "It focuses only on physical needs.",
+        "It involves recognizing and fulfilling responsibilities related to raising and caring for children.",
+        "It means making every decision for children without considering their development."
+    ],
+    answer: 2,
+    explanation:
+      "Responsible parenthood includes physical care, emotional support, education, financial responsibility, protection, and guidance."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A family has enough food and shelter but consistently ignores emotional
+      support, education, protection, and guidance.
+    `,
+    question:
+      "Which conclusion is most defensible based on the reviewer?",
+    options: [
+      "The family automatically fulfills every responsibility because physical needs are enough.",
+      "Responsible parenthood includes multiple dimensions beyond physical needs.",
+      "Emotional support is unrelated to family wellness.",
+      "Education and guidance are exclusively community responsibilities."
+    ],
+    answer: 1,
+    explanation:
+      "The reviewer identifies physical needs, emotional support, education, financial responsibility, protection, and guidance as important responsibilities."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A family discusses whether and when to have children and considers the
+      spacing of pregnancies, health, personal circumstances, resources, and
+      responsibilities.
+    `,
+    question:
+      "Which concept is being described most directly?",
+    options: [
+      "Family planning",
+      "Financial planning alone",
+      "Physical fitness",
+      "Cultural comparison"
+    ],
+    answer: 0,
+    explanation:
+      "Family planning involves informed decisions about whether and when to have children and about pregnancy spacing."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A student classifies several broad family-planning categories. One
+      category involves awareness of fertility patterns and naturally
+      occurring reproductive signs rather than a physical barrier or device.
+    `,
+    question:
+      "Which classification fits the description?",
+    options: [
+      "Barrier methods",
+      "Natural methods",
+      "Intrauterine methods",
+      "Hormonal methods"
+    ],
+    answer: 1,
+    explanation:
+      "Natural methods use awareness of fertility patterns and naturally occurring reproductive signs."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      Another category is described as using a physical barrier intended to
+      prevent sperm from reaching an egg.
+    `,
+    question:
+      "Which classification matches this description?",
+    options: [
+      "Natural methods",
+      "Hormonal methods",
+      "Barrier methods",
+      "Permanently intended methods"
+    ],
+    answer: 2,
+    explanation:
+      "Barrier methods are designed to prevent sperm from reaching an egg by creating a physical barrier."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A student is given six broad classifications and is asked to identify
+      the one whose defining feature involves a device placed inside the
+      uterus by a qualified healthcare professional.
+    `,
+    question:
+      "Which classification should the student select?",
+    options: [
+      "Emergency contraception",
+      "Natural methods",
+      "Intrauterine methods",
+      "Barrier methods"
+    ],
+    answer: 2,
+    explanation:
+      "Intrauterine methods involve a device placed inside the uterus by a qualified healthcare professional."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A student claims that a family-planning decision is responsible as long
+      as it is inexpensive. Another student argues that cost is only one of
+      several relevant considerations.
+    `,
+    question:
+      "Which argument is more consistent with the reviewer?",
+    options: [
+      "The first, because financial cost is the only objective factor.",
+      "The second, because health, circumstances, responsibilities, resources, and well-being may all matter.",
+      "The first, because family wellness is exclusively financial.",
+      "Neither, because family planning does not involve decision-making."
+    ],
+    answer: 1,
+    explanation:
+      "The reviewer identifies health, personal circumstances, resources, responsibilities, informed decision-making, and overall well-being as relevant."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A family is evaluating a major decision. They first gather information
+      from reliable sources, then consider their responsibilities and
+      circumstances, evaluate family wellness, and finally make a decision.
+    `,
+    question:
+      "Which stage occurs immediately before the final responsible choice in the reviewer's sequence?",
+    options: [
+      "Gather accurate information",
+      "Consider responsibilities",
+      "Consider family wellness",
+      "Ignore conflicting information"
+    ],
+    answer: 2,
+    explanation:
+      "The sequence is: gather accurate information → consider responsibilities → consider family wellness → make responsible choices."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A family decision improves financial stability but creates severe
+      emotional strain and neglects the physical and social needs of family
+      members.
+    `,
+    question:
+      "Which evaluation is most consistent with the reviewer's definition of family wellness?",
+    options: [
+      "The decision is automatically healthy because financial wellness is the only measurable form of wellness.",
+      "The decision should be evaluated across physical, emotional, social, and financial dimensions.",
+      "The decision cannot affect family wellness because wellness concerns only individuals.",
+      "The decision is automatically responsible whenever money is saved."
+    ],
+    answer: 1,
+    explanation:
+      "Family wellness includes physical, emotional, social, and financial aspects, so one dimension cannot automatically determine the overall result."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      Consider the following two statements:
+
+      <br><br>
+
+      I. A responsible decision considers relevant consequences and
+      responsibilities.
+
+      <br>
+      II. An informed decision should be based on accurate information.
+    `,
+    question:
+      "Which conclusion is best supported by the reviewer?",
+    options: [
+      "Only statement I is correct.",
+      "Only statement II is correct.",
+      "Both statements are consistent with the principles of responsible decision-making.",
+      "Neither statement is relevant to family wellness."
+    ],
+    answer: 2,
+    explanation:
+      "The reviewer explicitly connects responsible choices with consequences, responsibilities, respect, well-being, and accurate information."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A student encounters a health question that could affect an individual's
+      personal circumstances. Instead of relying on an unverified social-media
+      post, the student seeks reliable health information and qualified
+      professional guidance.
+    `,
+    question:
+      "Why is this approach especially appropriate according to the reviewer?",
+    options: [
+      "Personal medical decisions never require accurate information.",
+      "Reliable information and qualified healthcare professionals can help address individual health considerations.",
+      "Social-media posts are always more accurate than professional guidance.",
+      "The best health decisions are always based on whichever source is most convenient."
+    ],
+    answer: 1,
+    explanation:
+      "The reviewer emphasizes accurate information and qualified healthcare professionals when individual health considerations are involved."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A student is given the following classification problem:
+
+      <br><br>
+
+      A = uses hormones to affect reproductive processes<br>
+      B = uses a physical barrier<br>
+      C = involves a device placed inside the uterus<br>
+      D = uses awareness of fertility patterns
+    `,
+    question:
+      "Which sequence correctly identifies A, B, C, and D?",
+    options: [
+      "A Natural, B Hormonal, C Barrier, D Intrauterine",
+      "A Hormonal, B Barrier, C Intrauterine, D Natural",
+      "A Barrier, B Natural, C Hormonal, D Emergency",
+      "A Intrauterine, B Barrier, C Natural, D Hormonal"
+    ],
+    answer: 1,
+    explanation:
+      "Hormonal methods use hormones, barrier methods create a physical barrier, intrauterine methods involve a device inside the uterus, and natural methods use fertility awareness."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A student is comparing two artistic traditions. The student notices
+      that Roman art shows Greek influence but also observes distinctive
+      Roman approaches to architecture and public art.
+    `,
+    question:
+      "Which interpretation avoids both oversimplification and false separation?",
+    options: [
+      "Roman art is completely unrelated to Greek art.",
+      "Roman art is merely a perfect copy of Greek art.",
+      "Roman art was influenced by Greek traditions while also developing its own approaches.",
+      "Greek and Roman art cannot be compared because they belong to different cultures."
+    ],
+    answer: 2,
+    explanation:
+      "The reviewer presents Roman art as strongly influenced by Greek traditions while still developing its own artistic approaches."
+  },
+
+
+  {
+    scenario: `
+      <strong>Scenario:</strong>
+      A music student hears two performances. Performance A gradually changes
+      from soft to loud. Performance B uses the same musical idea but changes
+      from violin to flute.
+    `,
+    question:
+      "Which pairing correctly identifies the primary changing elements?",
+    options: [
+      "A = Dynamics; B = Timbre",
+      "A = Timbre; B = Dynamics",
+      "A = Form; B = Rhythm",
+      "A = Melody; B = Form"
+    ],
+    answer: 0,
+    explanation:
+      "Changes in loudness or softness involve dynamics, while a change in instrument sound quality involves timbre."
+  },
+
+
+  {
+    scenario: `
+      <strong>Final Challenge:</strong>
+      Four students make the following claims:
+
+      <br><br>
+
+      <strong>Student A:</strong> "Family wellness only means physical health."
+
+      <br>
+      <strong>Student B:</strong> "Responsible parenthood includes guidance and emotional support."
+
+      <br>
+      <strong>Student C:</strong> "Cultural comparison should automatically rank one culture above another."
+
+      <br>
+      <strong>Student D:</strong> "Dynamics describes the overall structure of a composition."
+    `,
+    question:
+      "Which student made the statement most consistent with the reviewer?",
+    options: [
+      "Student A",
+      "Student B",
+      "Student C",
+      "Student D"
+    ],
+    answer: 1,
+    explanation:
+      "Responsible parenthood includes emotional support and guidance. The other three statements contradict the reviewer's definitions of family wellness, cultural comparison, and dynamics."
+  }
+
+];
+
+
+let currentQuestion = 0;
+
+let answers =
+  new Array(questions.length).fill(null);
+
+let submitted = false;
+
+
+function loadQuestion() {
+
+  const q = questions[currentQuestion];
+
+  document.getElementById("questionNumber").textContent =
+    "Question " + (currentQuestion + 1);
+
+  document.getElementById("questionText").textContent =
+    q.question;
+
+
+  const scenarioBox =
+    document.getElementById("scenarioBox");
+
+  if (q.scenario) {
+
+    scenarioBox.innerHTML = q.scenario;
+    scenarioBox.style.display = "block";
+
+  } else {
+
+    scenarioBox.style.display = "none";
+
+  }
+
+
+  const optionsContainer =
+    document.getElementById("options");
+
+  optionsContainer.innerHTML = "";
+
+
+  q.options.forEach((option, index) => {
+
+    const optionDiv =
+      document.createElement("div");
+
+    optionDiv.className = "option";
+
+
+    const input =
+      document.createElement("input");
+
+    input.type = "radio";
+    input.name = "answer";
+    input.id = "option-" + index;
+    input.value = index;
+
+    if (answers[currentQuestion] === index) {
+      input.checked = true;
+    }
+
+
+    input.addEventListener(
+      "change",
+      function () {
+
+        answers[currentQuestion] =
+          Number(this.value);
+
+        updateProgress();
+
+      }
+    );
+
+
+    const label =
+      document.createElement("label");
+
+    label.htmlFor = "option-" + index;
+
+
+    const letter =
+      document.createElement("span");
+
+    letter.className = "option-letter";
+
+    letter.textContent =
+      String.fromCharCode(65 + index);
+
+
+    label.appendChild(letter);
+
+    label.appendChild(
+      document.createTextNode(option)
+    );
+
+
+    optionDiv.appendChild(input);
+    optionDiv.appendChild(label);
+
+    optionsContainer.appendChild(optionDiv);
+
+  });
+
+
+  updateProgress();
+
+}
+
+
+function updateProgress() {
+
+  const answered =
+    answers.filter(
+      answer => answer !== null
+    ).length;
+
+
+  document.getElementById(
+    "questionCounter"
+  ).textContent =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+
+
+  document.getElementById(
+    "answeredCounter"
+  ).textContent =
+    `${answered} answered`;
+
+
+  const percentage =
+    ((currentQuestion + 1) /
+      questions.length) * 100;
+
+
+  document.getElementById(
+    "progressFill"
+  ).style.width =
+    percentage + "%";
+
+
+  document.getElementById(
+    "prevBtn"
+  ).disabled =
+    currentQuestion === 0;
+
+
+  document.getElementById(
+    "nextBtn"
+  ).textContent =
+    currentQuestion === questions.length - 1
+      ? "Submit Quiz"
+      : "Next";
+
+}
+
+
+function nextQuestion() {
+
+  if (answers[currentQuestion] === null) {
+
+    alert(
+      "Please select an answer before continuing."
+    );
+
+    return;
+
+  }
+
+
+  if (
+    currentQuestion <
+    questions.length - 1
+  ) {
+
+    currentQuestion++;
+
+    loadQuestion();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  } else {
+
+    submitQuiz();
+
+  }
+
+}
+
+
+function previousQuestion() {
+
+  if (currentQuestion > 0) {
+
+    currentQuestion--;
+
+    loadQuestion();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+}
+
+
+function submitQuiz() {
+
+  const unanswered =
+    answers.filter(
+      answer => answer === null
+    ).length;
+
+
+  if (unanswered > 0) {
+
+    alert(
+      `You still have ${unanswered} unanswered question(s).`
+    );
+
+    return;
+
+  }
+
+
+  let score = 0;
+
+
+  questions.forEach(
+    (question, index) => {
+
+      if (
+        answers[index] ===
+        question.answer
+      ) {
+
+        score++;
+
+      }
+
+    }
+  );
+
+
+  const total =
+    questions.length;
+
+
+  const percentage =
+    Math.round(
+      (score / total) * 100
+    );
+
+
+  submitted = true;
+
+
+  document.getElementById(
+    "quizArea"
+  ).classList.add("hidden");
+
+
+  document.getElementById(
+    "resultSection"
+  ).classList.remove("hidden");
+
+
+  document.getElementById(
+    "resultScore"
+  ).textContent =
+    `${percentage}%`;
+
+
+  document.getElementById(
+    "correctCount"
+  ).textContent =
+    score;
+
+
+  document.getElementById(
+    "wrongCount"
+  ).textContent =
+    total - score;
+
+
+  let message;
+
+
+  if (percentage >= 96) {
+
+    message =
+      "damn u da real prefect score";
+
+  } else if (percentage >= 88) {
+
+    message =
+      "wow so excellentious";
+
+  } else if (percentage >= 80) {
+
+    message =
+      "pwede pero depende, retake ka kaya ulit";
+
+  } else if (percentage >= 70) {
+
+    message =
+      "You have the potential bruh";
+
+  } else {
+
+    message =
+      "go back reviewing cuh";
+
+  }
+
+
+  document.getElementById(
+    "resultMessage"
+  ).textContent =
+    message;
+
+
+  saveQuizProgress(
+    score,
+    total,
+    percentage
+  );
+
+
+  buildReview();
+
+
+  document.getElementById(
+    "reviewSection"
+  ).classList.remove("hidden");
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+function buildReview() {
+
+  const container =
+    document.getElementById(
+      "reviewContent"
+    );
+
+
+  container.innerHTML = "";
+
+
+  questions.forEach(
+    (question, index) => {
+
+      const item =
+        document.createElement("div");
+
+
+      const isCorrect =
+        answers[index] ===
+        question.answer;
+
+
+      item.className =
+        "review-item " +
+        (
+          isCorrect
+            ? "correct"
+            : "incorrect"
+        );
+
+
+      const questionText =
+        document.createElement("div");
+
+      questionText.className =
+        "review-question";
+
+      questionText.textContent =
+        `${index + 1}. ${question.question}`;
+
+
+      const userAnswer =
+        document.createElement("div");
+
+      userAnswer.className =
+        "review-answer " +
+        (
+          isCorrect
+            ? "correct-answer"
+            : "user-answer"
+        );
+
+
+      userAnswer.textContent =
+        isCorrect
+          ? `Your answer: ${question.options[answers[index]]} ✓`
+          : `Your answer: ${question.options[answers[index]]}`;
+
+
+      const correctAnswer =
+        document.createElement("div");
+
+      correctAnswer.className =
+        "review-answer correct-answer";
+
+      correctAnswer.textContent =
+        `Correct answer: ${question.options[question.answer]}`;
+
+
+      const explanation =
+        document.createElement("div");
+
+      explanation.className =
+        "review-explanation";
+
+      explanation.textContent =
+        question.explanation;
+
+
+      item.appendChild(questionText);
+      item.appendChild(userAnswer);
+
+
+      if (!isCorrect) {
+        item.appendChild(correctAnswer);
+      }
+
+
+      item.appendChild(explanation);
+
+      container.appendChild(item);
+
+    }
+  );
+
+}
+
+
+function getProgress() {
+
+  try {
+
+    const stored =
+      JSON.parse(
+        localStorage.getItem(
+          "riasStudyHubProgress"
+        )
+      );
+
+
+    if (!stored) {
+
+      return {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    }
+
+
+    return {
+
+      reviewers:
+        stored.reviewers || {},
+
+      quizzes:
+        stored.quizzes || {},
+
+      notes:
+        stored.notes || {}
+
+    };
+
+  } catch (error) {
+
+    return {
+      reviewers: {},
+      quizzes: {},
+      notes: {}
+    };
+
+  }
+
+}
+
+
+function saveQuizProgress(
+  score,
+  total,
+  percentage
+) {
+
+  const progress =
+    getProgress();
+
+
+  if (!progress.quizzes) {
+    progress.quizzes = {};
+  }
+
+
+  progress.quizzes.mapeh = {
+
+    completed: true,
+
+    score: score,
+
+    total: total,
+
+    percentage: percentage,
+
+    date:
+      new Date().toISOString()
+
+  };
+
+
+  localStorage.setItem(
+    "riasStudyHubProgress",
+    JSON.stringify(progress)
+  );
+
+}
+
+
+function retakeQuiz() {
+
+  currentQuestion = 0;
+
+  answers =
+    new Array(
+      questions.length
+    ).fill(null);
+
+  submitted = false;
+
+
+  document.getElementById(
+    "quizArea"
+  ).classList.remove("hidden");
+
+
+  document.getElementById(
+    "resultSection"
+  ).classList.add("hidden");
+
+
+  document.getElementById(
+    "reviewSection"
+  ).classList.add("hidden");
+
+
+  loadQuestion();
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
