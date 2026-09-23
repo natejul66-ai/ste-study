@@ -1,0 +1,2446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>RMA Quiz | STE Study Hub</title>
+
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+      --red: #f87171;
+      --yellow: #facc15;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 17, 23, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1000px;
+      margin: auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: .2s;
+      white-space: nowrap;
+    }
+
+    nav a:hover {
+      color: var(--text);
+      background: var(--surface-hover);
+    }
+
+    nav a.active {
+      color: var(--blue);
+      background: rgba(77, 159, 255, .1);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 35px 20px 60px;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .back-link:hover {
+      color: var(--blue);
+    }
+
+    .subject {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 28px 0;
+    }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 18px;
+    }
+
+    .info-card .label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .info-card .value {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .progress-section {
+      margin: 25px 0;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 9px;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--surface);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: var(--blue);
+      transition: width .25s ease;
+    }
+
+    .quiz-card,
+    .result {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 28px;
+    }
+
+    .question-number {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .question {
+      font-size: 22px;
+      line-height: 1.5;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .context-box {
+      background: #10141c;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 20px;
+      color: var(--muted);
+      white-space: pre-wrap;
+    }
+
+    .context-box strong {
+      color: var(--text);
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .option {
+      width: 100%;
+      text-align: left;
+      border: 1px solid var(--border);
+      background: #141820;
+      color: var(--text);
+      padding: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: .2s;
+    }
+
+    .option:hover {
+      background: var(--surface-hover);
+      border-color: #3b4352;
+    }
+
+    .option.selected {
+      border-color: var(--blue);
+      background: rgba(77, 159, 255, .1);
+    }
+
+    .option.correct {
+      border-color: var(--green);
+      background: rgba(74, 222, 128, .08);
+    }
+
+    .option.incorrect {
+      border-color: var(--red);
+      background: rgba(248, 113, 113, .08);
+    }
+
+    .answer-input {
+      width: 100%;
+      min-height: 52px;
+      resize: vertical;
+      background: #141820;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      outline: none;
+      font: inherit;
+    }
+
+    .answer-input:focus {
+      border-color: var(--blue);
+    }
+
+    textarea.answer-input {
+      min-height: 130px;
+    }
+
+    .input-label {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0 0 8px;
+    }
+
+    .multi-note {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    /* =====================================================
+       IMAGE VISUALS
+       ===================================================== */
+
+    .visual-box {
+      background: #11151d;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .visual-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .visual-caption {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    .visual-image {
+      display: block;
+      width: 100%;
+      max-width: 900px;
+      height: auto;
+      margin: 0 auto;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #0f1117;
+      object-fit: contain;
+    }
+
+    .visual-image-placeholder {
+      width: 100%;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px 15px;
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      background: #0f1117;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 25px;
+      gap: 12px;
+    }
+
+    button.nav-btn,
+    button.retake-btn {
+      border: 1px solid var(--border);
+      background: var(--surface-hover);
+      color: var(--text);
+      border-radius: 9px;
+      padding: 11px 18px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    button.nav-btn:hover,
+    button.retake-btn:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    button.primary {
+      background: var(--blue) !important;
+      color: #07111f !important;
+      border-color: var(--blue) !important;
+    }
+
+    button.nav-btn:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    .result {
+      display: none;
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .result h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .score {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .result-item {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .result-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .result-item strong {
+      font-size: 20px;
+    }
+
+    .review {
+      display: none;
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .review h3 {
+      margin-bottom: 15px;
+    }
+
+    .review-item {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 10px;
+    }
+
+    .review-item.correct {
+      border-color: var(--green);
+    }
+
+    .review-item.incorrect {
+      border-color: var(--red);
+    }
+
+    .review-item.manual {
+      border-color: var(--yellow);
+    }
+
+    .review-question {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .review-answer {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .review-answer strong {
+      color: var(--text);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 25px 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+
+      .header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav {
+        width: 100%;
+        overflow-x: auto;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .info-grid,
+      .result-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-card,
+      .result {
+        padding: 20px;
+      }
+
+      .question {
+        font-size: 20px;
+      }
+
+      .visual-box {
+        padding: 10px;
+      }
+
+      .visual-image {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <a href="../index.html" class="logo">
+      STE <span>Study Hub</span>
+    </a>
+
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../reviewers.html">Reviewers</a>
+      <a href="../quizzes.html" class="active">Quizzes</a>
+      <a href="../notes.html">Notes</a>
+      <a href="../progress.html">Progress</a>
+    </nav>
+
+  </div>
+</header>
+
+<main class="container">
+
+  <a href="../quizzes.html" class="back-link">
+    ← Back to Quizzes
+  </a>
+
+  <section class="hero">
+
+    <div class="subject">
+      RAPID MATHEMATICS ASSESSMENT
+    </div>
+
+    <h1>
+      Rapid Mathematics Assessment
+    </h1>
+
+    <p>
+      A web-based RMA practice assessment covering number expressions,
+      data, coordinates, variables, equations, triangles, circles, and
+      mathematical reasoning.
+    </p>
+
+  </section>
+
+  <section class="info-grid">
+
+    <div class="info-card">
+      <div class="label">
+        Questions
+      </div>
+
+      <div class="value">
+        47 Questions
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="label">
+        Assessment
+      </div>
+
+      <div class="value">
+        RMA G7–G10
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="label">
+        Question Type
+      </div>
+
+      <div class="value">
+        Mixed Response
+      </div>
+    </div>
+
+  </section>
+
+  <section class="progress-section">
+
+    <div class="progress-top">
+
+      <span id="progressText">
+        Question 1 of 47
+      </span>
+
+      <span id="answeredText">
+        0 answered
+      </span>
+
+    </div>
+
+    <div class="progress-bar">
+      <div
+        class="progress-fill"
+        id="progressFill">
+      </div>
+    </div>
+
+  </section>
+
+  <section
+    class="quiz-card"
+    id="quizCard">
+
+    <div
+      class="question-number"
+      id="questionNumber">
+    </div>
+
+    <div
+      class="question"
+      id="questionText">
+    </div>
+
+    <div id="questionContent"></div>
+
+    <div class="navigation">
+
+      <button
+        class="nav-btn"
+        id="prevBtn"
+        onclick="previousQuestion()">
+        Previous
+      </button>
+
+      <button
+        class="nav-btn primary"
+        id="nextBtn"
+        onclick="nextQuestion()">
+        Next
+      </button>
+
+    </div>
+
+  </section>
+
+  <section
+    class="result"
+    id="result">
+
+    <h2>
+      Assessment Complete
+    </h2>
+
+    <div
+      class="score"
+      id="scoreDisplay">
+      0%
+    </div>
+
+    <div class="result-grid">
+
+      <div class="result-item">
+        <span>
+          Objective Score
+        </span>
+
+        <strong id="scoreFraction">
+          0
+        </strong>
+      </div>
+
+      <div class="result-item">
+        <span>
+          Correct
+        </span>
+
+        <strong id="correctCount">
+          0
+        </strong>
+      </div>
+
+      <div class="result-item">
+        <span>
+          Needs Review
+        </span>
+
+        <strong id="manualCount">
+          0
+        </strong>
+      </div>
+
+    </div>
+
+    <button
+      class="retake-btn primary"
+      onclick="retakeQuiz()">
+      Retake Assessment
+    </button>
+
+    <div
+      class="review"
+      id="review">
+
+      <h3>
+        Answer Review
+      </h3>
+
+      <div id="reviewList"></div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  STE Study Hub
+</footer>
+
+<script>
+
+const questions = [
+
+  {
+    type: "text",
+    q: "Verify the first number expression from the pattern. Show the computation and determine its value.",
+    context: "Pattern reference: 4 × 4 − 5 × 3",
+    answer: "1",
+    explanation: "4 × 4 = 16, 5 × 3 = 15, and 16 − 15 = 1."
+  },
+
+  {
+    type: "text",
+    q: "Following the pattern of the expressions, what number expression should come immediately after 5 × 5 − 6 × 4?",
+    context: "The expressions follow a consecutive-number pattern.",
+    answer: "6 × 6 − 7 × 5",
+    explanation: "Each expression increases both factors by 1 while preserving the pattern."
+  },
+
+  {
+    type: "multi",
+    q: "Which algebraic expressions correctly represent the pattern of number expressions?",
+    options: [
+      "(n)(n) − (n + 3)(n + 1)",
+      "(n)(n) − [(n + 1)(n − 1)]",
+      "(n − 1)(n − 1) − n(n − 2)",
+      "n² − 3n",
+      "n² − n − 1"
+    ],
+    answer: [1, 2],
+    explanation: "The valid expressions simplify to the same constant value represented by the number-expression pattern."
+  },
+
+  {
+    type: "textarea",
+    q: "Explain your reasoning for selecting the algebraic expression or expressions in the previous item. Show enough work to support your choice.",
+    manual: true
+  },
+
+  {
+    type: "text",
+    q: "In the algebraic pattern you selected, what does the variable n represent?",
+    answer: "the starting integer",
+    manual: true
+  },
+
+  {
+    type: "text",
+    q: "Using repeated multiplication by 2, demonstrate that 1024 belongs to the powers-of-2 sequence.",
+    context: "Example pattern: 2² = 4, 2³ = 8, 2⁴ = 16, 2⁵ = 32.",
+    answer: "1024",
+    manual: true
+  },
+
+  {
+    type: "text",
+    q: "Write 1024 using exponential notation with base 2.",
+    answer: "2^10",
+    explanation: "2 multiplied by itself 10 times equals 1024."
+  },
+
+  {
+    type: "multi",
+    q: "Which of the following numbers satisfy BOTH conditions: they are powers of 2, multiples of 16, and are greater than 50 but less than 200?",
+    options: ["32", "64", "96", "128", "192"],
+    answer: [1, 3],
+    explanation: "64 = 2⁶ and 128 = 2⁷. Both are multiples of 16 and fall between 50 and 200."
+  },
+
+  {
+    type: "text",
+    q: "Is there a number strictly between 0.998 and 0.999? If yes, give one example. If no, explain.",
+    answer: "yes",
+    manual: true
+  },
+
+  {
+    type: "text",
+    q: "Compute 0.999 − 0.998. Show the decimal subtraction.",
+    answer: "0.001",
+    explanation: "0.999 − 0.998 = 0.001."
+  },
+
+  {
+    type: "text",
+    q: "Can a fraction be greater than 3/4 while still being less than 1? If yes, give an example.",
+    answer: "yes",
+    manual: true
+  },
+
+  /* =====================================================
+     Q12 IMAGE
+     ===================================================== */
+
+  {
+    type: "text",
+    q: "From the provided absence-versus-grade scatter graph, determine how many students have an overall grade below 84.",
+    context: "Use the RMA-style scatter plot shown below.",
+    answer: "8",
+    manual: true,
+
+    visual: {
+      type: "image",
+      title: "Absences vs. Overall Grade",
+      src: "/graph.jpg",
+      alt: "Scatter plot showing absences versus overall grade",
+      caption: "Absences vs. Overall Grade"
+    }
+  },
+
+  {
+    type: "textarea",
+    q: "Explain how the graph supports your answer to the previous item.",
+    manual: true
+  },
+
+  {
+    type: "single",
+    q: "Which statement best describes the relationship shown by the absence-and-grade data?",
+    options: [
+      "More absences are associated with higher grades.",
+      "Fewer absences are associated with higher grades.",
+      "More absences are associated with lower grades.",
+      "Fewer absences are associated with lower grades."
+    ],
+    answer: 2,
+    explanation: "The graph shows a downward relationship between absences and overall academic grade."
+  },
+
+  /* =====================================================
+     Q15 IMAGE
+     ===================================================== */
+
+  {
+    type: "textarea",
+    q: "Two puroks have monthly-income data with the same general center but different spreads. Which purok shows greater diversity in income? Explain using the graph's spread.",
+    manual: true,
+
+    visual: {
+      type: "image",
+      title: "Monthly Income of Two Puroks",
+      src: "/Screenshot_20260923_194801.jpg",
+      alt: "Graph comparing monthly income of two Puroks",
+      caption: "Monthly Income of Two Puroks"
+    }
+  },
+
+  {
+    type: "textarea",
+    q: "Both puroks have equal average monthly income. Should equal financial assistance automatically be given to both? State your position and identify the graph information supporting it.",
+    manual: true
+  },
+
+  {
+    type: "text",
+    q: "Using the activity table, determine the total number of Grade 7 students who participated in the music activity.",
+    context: `
+Music and Sports Participation
+
+                         Sports   No Sports   Total
+Music                       18        31        49
+No Music                    42        19        61
+Total                       60        50       110
+`,
+    answer: "49",
+    explanation: "The music row has a total of 49 students."
+  },
+
+  {
+    type: "text",
+    q: "Using the same table, how many students participated in neither activity?",
+    answer: "19",
+    explanation: "The No Music and No Sports cell contains 19 students."
+  },
+
+  {
+    type: "text",
+    q: "What is the probability of randomly selecting a student who participated in both music and sports?",
+    answer: "18/110",
+    manual: true
+  },
+
+  {
+    type: "textarea",
+    q: "Write one new mathematical question that could be answered using the activity table above.",
+    manual: true
+  },
+
+  /* =====================================================
+     Q21 IMAGE
+     ===================================================== */
+
+  {
+    type: "single",
+    q: "Based on the number-line diagram, which coordinate corresponds to point F?",
+    context: "The labeled reference points include 100 and 500. Point F is positioned at the negative location indicated by the diagram.",
+    options: ["−500", "−400", "−300", "−200", "−50"],
+    answer: 2,
+    explanation: "Point F corresponds to −300 on the RMA number-line diagram.",
+
+    visual: {
+      type: "image",
+      title: "Number Line",
+      src: "/Screenshot_20260923_210140.jpg",
+      alt: "Number line showing point F at negative 300",
+      caption: "Number Line with Point F"
+    }
+  },
+
+  /* =====================================================
+     Q22 IMAGE
+     ===================================================== */
+
+  {
+    type: "text",
+    q: "Using the same number line, identify the coordinate of point G.",
+    answer: "0",
+    explanation: "Point G is located at zero.",
+
+    visual: {
+      type: "image",
+      title: "Number Line",
+      src: "/Screenshot_20260923_210140.jpg",
+      alt: "Number line showing point G at zero",
+      caption: "Number Line with Point G"
+    }
+  },
+
+  /* =====================================================
+     Q23 IMAGE
+     ===================================================== */
+
+  {
+    type: "text",
+    q: "From the Cartesian-plane diagram, give the ordered pair representing point C.",
+    context: "Reference points: A is at (−2, 4) and B is at (2, 0).",
+    answer: "(4,4)",
+    explanation: "Point C is located at (4, 4).",
+
+    visual: {
+      type: "image",
+      title: "Cartesian Plane",
+      src: "/Screenshot_20260923_210156.jpg",
+      alt: "Cartesian coordinate plane showing points A, B, and C",
+      caption: "Cartesian Plane with Points A, B, and C"
+    }
+  },
+
+  /* =====================================================
+     Q24 IMAGE
+     ===================================================== */
+
+  {
+    type: "multi",
+    q: "The line through B and C contains several ordered pairs. Select the two listed points that lie on that line.",
+    options: [
+      "(1, −1)",
+      "(1, −2)",
+      "(2, 3)",
+      "(3, 2)",
+      "(4, 7)",
+      "(5, 6)"
+    ],
+    answer: [0, 3],
+    explanation: "The two matching ordered pairs are (1, −1) and (3, 2).",
+
+    visual: {
+      type: "image",
+      title: "Line Through B and C",
+      src: "/Screenshot_20260923_210156.jpg",
+      alt: "Coordinate plane showing the line through points B and C",
+      caption: "Line Through B and C"
+    }
+  },
+
+  /* =====================================================
+     Q25 IMAGE
+     ===================================================== */
+
+  {
+    type: "single",
+    q: "A line is drawn through points A and B. Which rule describes every ordered pair on this line?",
+    options: [
+      "(x, −2x)",
+      "(x, −2x + 1)",
+      "(x, −x)",
+      "(x, −x + 1)",
+      "(x, −x + 2)"
+    ],
+    answer: 4,
+    explanation: "The line through A and B follows y = −x + 2.",
+
+    visual: {
+      type: "image",
+      title: "Line: y = −x + 2",
+      src: "/Screenshot_20260923_210156.jpg",
+      alt: "Coordinate plane showing a line represented by y equals negative x plus 2",
+      caption: "Line Through A and B"
+    }
+  },
+
+  /* =====================================================
+     Q26 IMAGE
+     ===================================================== */
+
+  {
+    type: "text",
+    q: "Using the coordinates in the Cartesian-plane diagram, calculate the area of triangle ABC.",
+    answer: "8",
+    manual: true,
+
+    visual: {
+      type: "image",
+      title: "Triangle ABC",
+      src: "/Screenshot_20260923_210156.jpg",
+      alt: "Coordinate plane showing triangle ABC with labeled coordinates",
+      caption: "Triangle ABC"
+    }
+  },
+
+  {
+    type: "single",
+    q: "If A represents your house, B your school, and C the barangay hall, which destination is reached by the shorter straight-line walk from A?",
+    options: [
+      "The school",
+      "The barangay hall"
+    ],
+    answer: 0,
+    explanation: "The distance from A to B is shorter than the distance from A to C."
+  },
+
+  {
+    type: "textarea",
+    q: "Explain or show the distance comparison you used to answer the previous item.",
+    manual: true
+  },
+
+  {
+    type: "multi",
+    q: "If r is an integer, select every value below that can be produced by 2r − 1.",
+    options: ["−5", "−27", "−82", "99", "46", "122"],
+    answer: [0, 1, 3],
+    explanation: "For integer r, 2r − 1 is always odd. −5, −27, and 99 are odd."
+  },
+
+  /* =====================================================
+     Q30 IMAGE
+     ===================================================== */
+
+  {
+    type: "multi",
+    q: "Apples cost 3 for ₱100. Which formulas correctly describe the cost of n apples?",
+    options: [
+      "cost = 100/3",
+      "cost = 3n/100",
+      "cost = 100n",
+      "cost = 100n/3",
+      "3 : 100 = n : cost"
+    ],
+    answer: [3, 4],
+    explanation: "The proportional relationship gives cost = 100n/3, equivalently 3:100 = n:cost.",
+  },
+
+  {
+    type: "text",
+    q: "In the equation 17 + a = b + 3, give two possible values for a and b that make the equation true.",
+    answer: "any pair with b-a=14",
+    manual: true
+  },
+
+  {
+    type: "single",
+    q: "Which statement must always hold for the values a and b in 17 + a = b + 3?",
+    options: [
+      "a is greater than b.",
+      "a + b = 20.",
+      "b − a = 14.",
+      "a and b may be chosen without restriction."
+    ],
+    answer: 2,
+    explanation: "Rearranging gives b − a = 14."
+  },
+
+  {
+    type: "single",
+    q: "A solution changes 5y − 8 = 14 − 3y into 5y + 3y − 8 = 14. What algebraic principle justifies this step?",
+    options: [
+      "Subtract 3y from both sides.",
+      "Subtract 8 from both sides.",
+      "Add 3y to both sides.",
+      "Divide both sides by 8."
+    ],
+    answer: 2,
+    explanation: "Adding 3y to both sides preserves equality and moves the −3y term."
+  },
+
+  /* =====================================================
+     Q34 IMAGE
+     ===================================================== */
+
+  {
+    type: "text",
+    q: "The tricycle-rental model is C = 250 + 200d. What is the rental cost for 5 days?",
+    context: "C is total cost and d is the number of rental days.",
+    answer: "1250",
+    explanation: "C = 250 + 200(5) = 1250.",
+
+    visual: {
+      type: "image",
+      title: "Tricycle Rental Model",
+      src: "/Screenshot_20260923_210254.jpg",
+      alt: "Table showing tricycle rental cost for different numbers of days",
+      caption: "Tricycle Rental Model"
+    }
+  },
+
+  {
+    type: "single",
+    q: "In C = 250 + 200d, what does 250 represent?",
+    options: [
+      "The daily rental charge",
+      "The number of days",
+      "The fixed starting charge",
+      "The total cost of one day"
+    ],
+    answer: 2,
+    explanation: "250 is the fixed cost independent of the number of days."
+  },
+
+  {
+    type: "text",
+    q: "In C = 250 + 200d, what does 200 represent?",
+    answer: "the cost per day",
+    manual: true
+  },
+
+  /* =====================================================
+     Q37 IMAGE
+     ===================================================== */
+
+  {
+    type: "single",
+    q: "On the graph of the tricycle-rental model, which feature represents the 200 in the formula?",
+    options: [
+      "x-intercept",
+      "y-intercept",
+      "slope",
+      "minimum point"
+    ],
+    answer: 2,
+    explanation: "The coefficient of d is the slope, representing the daily increase in cost.",
+
+    visual: {
+      type: "image",
+      title: "Tricycle Rental Cost",
+      src: "/Screenshot_20260923_210254.jpg",
+      alt: "Line graph showing tricycle rental cost increasing with the number of days",
+      caption: "Tricycle Rental Cost"
+    }
+  },
+
+  /* =====================================================
+     Q38 IMAGE
+     ===================================================== */
+
+  {
+    type: "multi",
+    q: "A triangle has p = 30°. Select the TWO pairs of q and r below that could complete the triangle.",
+    options: [
+      "q = 10°, r = 140°",
+      "q = 10°, r = 130°",
+      "q = 110°, r = 30°",
+      "q = 100°, r = 80°",
+      "q = 100°, r = 50°"
+    ],
+    answer: [1, 3],
+    explanation: "Triangle angles must total 180°. With p = 30°, q + r must equal 150°.",
+
+    visual: {
+      type: "image",
+      title: "Triangle Angle Model",
+      src: "/Screenshot_20260923_210318.jpg",
+      alt: "Triangle showing angles p, q, and r",
+      caption: "Triangle Angle Model"
+    }
+  },
+
+  /* =====================================================
+     Q39 IMAGE
+     ===================================================== */
+
+  {
+    type: "multi",
+    q: "Suppose r = 60° and the exterior angle at Q is 130°. Which statements about p and q are true?",
+    options: [
+      "p + q = 130°",
+      "p and q can have several values.",
+      "p = 70° and q = 50°",
+      "p = 50° and q = 70°",
+      "r + p = 130°"
+    ],
+    answer: [0, 2, 3, 4],
+    explanation: "The exterior angle relationship and the triangle angle sum constrain the values.",
+
+    visual: {
+      type: "image",
+      title: "Exterior Angle of a Triangle",
+      src: "/Screenshot_20260923_210318.jpg",
+      alt: "Triangle showing an exterior angle of 130 degrees and interior angles",
+      caption: "Exterior Angle of a Triangle"
+    }
+  },
+
+  {
+    type: "multi",
+    q: "Which triangle properties are useful for determining p and q in the previous problem?",
+    options: [
+      "Every angle in an equilateral triangle is 60°.",
+      "An isosceles triangle has equal base angles.",
+      "An exterior angle and its adjacent interior angle form a linear pair.",
+      "A triangle's exterior angle equals the sum of its two remote interior angles.",
+      "Every triangle has six exterior angles.",
+      "The exterior angles of a triangle sum to 360°."
+    ],
+    answer: [2, 3],
+    explanation: "The linear-pair relationship and exterior-angle theorem directly apply."
+  },
+
+  /* =====================================================
+     Q41 IMAGE
+     ===================================================== */
+
+  {
+    type: "single",
+    q: "A triangular dog-house frame has side lengths in the ratio 3:3:2, with the shortest side equal to 1 meter. What are the lengths of the two equal sides?",
+    options: [
+      "1.5 m each",
+      "2 m and 3 m",
+      "3 m each",
+      "4 m and 6 m"
+    ],
+    answer: 0,
+    explanation: "If the ratio 2 parts equals 1 m, then 3 parts equals 1.5 m.",
+
+    visual: {
+      type: "image",
+      title: "Dog-House Triangle",
+      src: "/Screenshot_20260923_210358.jpg",
+      alt: "Triangle showing a 3 to 3 to 2 side ratio",
+      caption: "Dog-House Triangle"
+    }
+  },
+
+  {
+    type: "textarea",
+    q: "Compare the side lengths of the dog-house triangle with the corresponding sides of the triangular toy-storage section. Are they proportional? Show your reasoning.",
+    manual: true
+  },
+
+  /* =====================================================
+     Q43 IMAGE
+     ===================================================== */
+
+  {
+    type: "single",
+    q: "The base of the triangular toy-storage section is 25 cm. Based on the proportional relationship, what are the lengths of its two equal sides?",
+    options: [
+      "37.5 cm each",
+      "50 cm and 75 cm",
+      "75 cm each",
+      "100 cm and 150 cm"
+    ],
+    answer: 0,
+    explanation: "The corresponding sides follow the 3:3:2 ratio, so the equal sides are 37.5 cm each.",
+
+    visual: {
+      type: "image",
+      title: "Toy-Storage Triangle",
+      src: "/Screenshot_20260923_210358.jpg",
+      alt: "Triangle showing two equal sides of 37.5 centimeters and a base of 25 centimeters",
+      caption: "Toy-Storage Triangle"
+    }
+  },
+
+  /* =====================================================
+     Q44 IMAGE
+     ===================================================== */
+
+  {
+    type: "text",
+    q: "A circular pool has a diameter of 10 m and a surrounding sidewalk 1 m wide. Using π = 3.14, calculate the area of the sidewalk.",
+    answer: "37.68",
+    manual: true,
+
+    visual: {
+      type: "image",
+      title: "Circular Pool and Sidewalk",
+      src: "/Screenshot_20260923_210423.jpg",
+      alt: "Circular pool with a ten meter diameter and a one meter wide surrounding sidewalk",
+      caption: "Circular Pool and Sidewalk"
+    }
+  },
+
+  /* =====================================================
+     Q45 IMAGE
+     ===================================================== */
+
+  {
+    type: "multi",
+    q: "The circular pool is split into two equal areas. One half is 1.5 m deep and the other is 0.6 m deep. Which expression represents the total water volume?",
+    options: [
+      "10π(2.1)",
+      "25π(2.1)",
+      "10π(2.1)/2",
+      "25π(2.1)/2",
+      "100π(2.1)/2"
+    ],
+    answer: [3],
+    explanation: "The pool has radius 5 m, so its full area is 25π. The average depth of the two equal halves is (1.5 + 0.6)/2 = 1.05, giving 25π(2.1)/2.",
+
+    visual: {
+      type: "image",
+      title: "Pool Depths",
+      src: "/Screenshot_20260923_210442.jpg",
+      alt: "Circular pool divided into two equal areas with depths of 1.5 meters and 0.6 meters",
+      caption: "Pool Depths"
+    }
+  },
+
+  /* =====================================================
+     Q46 IMAGE
+     ===================================================== */
+
+  {
+    type: "text",
+    q: "A wheel has a diameter of 60 cm. It completes exactly five full rolls. Show how you would determine the total distance travelled.",
+    context: "Use the circumference relationship C = πd.",
+    answer: "300π",
+    manual: true,
+
+    visual: {
+      type: "image",
+      title: "Wheel Rotation",
+      src: "/Screenshot_20260923_210456.jpg",
+      alt: "Wheel with a diameter of 60 centimeters completing five full rolls",
+      caption: "Wheel Rotation"
+    }
+  },
+
+  /* =====================================================
+     Q47 IMAGE
+     ===================================================== */
+
+  {
+    type: "text",
+    q: "After five complete rolls, through how many degrees has a marked point on the wheel rotated?",
+    answer: "1800",
+    explanation: "One complete revolution is 360°. Five revolutions give 5 × 360° = 1800°.",
+
+    visual: {
+      type: "image",
+      title: "Five Complete Rotations",
+      src: "/Screenshot_20260923_210456.jpg",
+      alt: "Wheel illustrating five complete rotations of 360 degrees each",
+      caption: "Five Complete Rotations"
+    }
+  }
+
+];
+
+let currentQuestion = 0;
+
+let answers =
+  new Array(questions.length).fill(null);
+
+const questionNumber =
+  document.getElementById("questionNumber");
+
+const questionText =
+  document.getElementById("questionText");
+
+const questionContent =
+  document.getElementById("questionContent");
+
+const progressText =
+  document.getElementById("progressText");
+
+const answeredText =
+  document.getElementById("answeredText");
+
+const progressFill =
+  document.getElementById("progressFill");
+
+const prevBtn =
+  document.getElementById("prevBtn");
+
+const nextBtn =
+  document.getElementById("nextBtn");
+
+
+/* =====================================================
+   IMAGE VISUAL SYSTEM
+   ===================================================== */
+
+function createVisual(item) {
+
+  if (!item.visual) {
+    return;
+  }
+
+  const visual = item.visual;
+
+  const box =
+    document.createElement("div");
+
+  box.className =
+    "visual-box";
+
+  const title =
+    document.createElement("div");
+
+  title.className =
+    "visual-title";
+
+  title.textContent =
+    visual.title || "Question Visual";
+
+  box.appendChild(title);
+
+  createImageVisual(
+    box,
+    visual
+  );
+
+  questionContent.appendChild(box);
+}
+
+
+/* =====================================================
+   IMAGE RENDERER
+   ===================================================== */
+
+function createImageVisual(box, visual) {
+
+  if (!visual.src) {
+
+    const placeholder =
+      document.createElement("div");
+
+    placeholder.className =
+      "visual-image-placeholder";
+
+    placeholder.textContent =
+      "No image path has been provided.";
+
+    box.appendChild(
+      placeholder
+    );
+
+    return;
+  }
+
+  const image =
+    document.createElement("img");
+
+  image.className =
+    "visual-image";
+
+  image.src =
+    visual.src;
+
+  image.alt =
+    visual.alt ||
+    visual.title ||
+    "Question visual";
+
+  image.loading =
+    "lazy";
+
+  image.onerror =
+    function () {
+
+      const placeholder =
+        document.createElement("div");
+
+      placeholder.className =
+        "visual-image-placeholder";
+
+      placeholder.textContent =
+        `Image not found: ${visual.src}`;
+
+      image.replaceWith(
+        placeholder
+      );
+    };
+
+  box.appendChild(
+    image
+  );
+
+  if (visual.caption) {
+
+    const caption =
+      document.createElement("div");
+
+    caption.className =
+      "visual-caption";
+
+    caption.textContent =
+      visual.caption;
+
+    box.appendChild(
+      caption
+    );
+  }
+}
+
+
+/* =====================================================
+   QUIZ RENDERING
+   ===================================================== */
+
+function renderQuestion() {
+
+  const item =
+    questions[currentQuestion];
+
+  questionNumber.textContent =
+    `Question ${currentQuestion + 1}`;
+
+  questionText.textContent =
+    item.q;
+
+  questionContent.innerHTML =
+    "";
+
+  if (item.context) {
+
+    const box =
+      document.createElement("div");
+
+    box.className =
+      "context-box";
+
+    box.textContent =
+      item.context;
+
+    questionContent.appendChild(
+      box
+    );
+  }
+
+  if (item.visual) {
+
+    createVisual(item);
+  }
+
+  if (
+    item.type === "single" ||
+    item.type === "multi"
+  ) {
+
+    const note =
+      document.createElement("div");
+
+    note.className =
+      "multi-note";
+
+    note.textContent =
+      item.type === "multi"
+        ? "Select all answers that apply."
+        : "Select one answer.";
+
+    questionContent.appendChild(
+      note
+    );
+
+    const options =
+      document.createElement("div");
+
+    options.className =
+      "options";
+
+    item.options.forEach(
+      (option, index) => {
+
+        const button =
+          document.createElement("button");
+
+        button.className =
+          "option";
+
+        button.textContent =
+          `${String.fromCharCode(97 + index)}. ${option}`;
+
+        const saved =
+          answers[currentQuestion];
+
+        if (
+          item.type === "single" &&
+          saved === index
+        ) {
+
+          button.classList.add(
+            "selected"
+          );
+        }
+
+        if (
+          item.type === "multi" &&
+          Array.isArray(saved) &&
+          saved.includes(index)
+        ) {
+
+          button.classList.add(
+            "selected"
+          );
+        }
+
+        button.onclick =
+          () => chooseOption(index);
+
+        options.appendChild(
+          button
+        );
+      }
+    );
+
+    questionContent.appendChild(
+      options
+    );
+
+  } else {
+
+    const label =
+      document.createElement("label");
+
+    label.className =
+      "input-label";
+
+    label.textContent =
+      item.type === "textarea"
+        ? "Write your explanation or solution:"
+        : "Enter your answer:";
+
+    questionContent.appendChild(
+      label
+    );
+
+    const input =
+      document.createElement(
+        item.type === "textarea"
+          ? "textarea"
+          : "input"
+      );
+
+    input.className =
+      "answer-input";
+
+    if (
+      item.type !== "textarea"
+    ) {
+
+      input.type =
+        "text";
+    }
+
+    input.value =
+      answers[currentQuestion] || "";
+
+    input.placeholder =
+      item.type === "textarea"
+        ? "Write your solution or explanation here..."
+        : "Type your answer here...";
+
+    input.addEventListener(
+      "input",
+      () => {
+
+        answers[currentQuestion] =
+          input.value;
+
+        updateProgress();
+      }
+    );
+
+    questionContent.appendChild(
+      input
+    );
+  }
+
+  prevBtn.disabled =
+    currentQuestion === 0;
+
+  nextBtn.textContent =
+    currentQuestion ===
+    questions.length - 1
+      ? "Submit"
+      : "Next";
+
+  updateProgress();
+}
+
+
+/* =====================================================
+   OPTION SELECTION
+   ===================================================== */
+
+function chooseOption(index) {
+
+  const item =
+    questions[currentQuestion];
+
+  if (
+    item.type === "single"
+  ) {
+
+    answers[currentQuestion] =
+      index;
+
+  } else {
+
+    if (
+      !Array.isArray(
+        answers[currentQuestion]
+      )
+    ) {
+
+      answers[currentQuestion] =
+        [];
+    }
+
+    const list =
+      answers[currentQuestion];
+
+    const position =
+      list.indexOf(index);
+
+    if (position >= 0) {
+
+      list.splice(
+        position,
+        1
+      );
+
+    } else {
+
+      list.push(index);
+    }
+  }
+
+  renderQuestion();
+}
+
+
+/* =====================================================
+   PROGRESS
+   ===================================================== */
+
+function updateProgress() {
+
+  let answered = 0;
+
+  answers.forEach(
+    answer => {
+
+      if (
+        Array.isArray(answer)
+      ) {
+
+        if (
+          answer.length > 0
+        ) {
+
+          answered++;
+        }
+
+      } else if (
+        answer !== null &&
+        String(answer).trim() !== ""
+      ) {
+
+        answered++;
+      }
+
+    }
+  );
+
+  progressText.textContent =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+
+  answeredText.textContent =
+    `${answered} answered`;
+
+  progressFill.style.width =
+    `${((currentQuestion + 1) / questions.length) * 100}%`;
+}
+
+
+/* =====================================================
+   NEXT
+   ===================================================== */
+
+function nextQuestion() {
+
+  if (
+    currentQuestion ===
+    questions.length - 1
+  ) {
+
+    finishQuiz();
+
+    return;
+  }
+
+  currentQuestion++;
+
+  renderQuestion();
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+/* =====================================================
+   PREVIOUS
+   ===================================================== */
+
+function previousQuestion() {
+
+  if (
+    currentQuestion > 0
+  ) {
+
+    currentQuestion--;
+
+    renderQuestion();
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+}
+
+
+/* =====================================================
+   NORMALIZATION
+   ===================================================== */
+
+function normalize(value) {
+
+  return String(value)
+    .toLowerCase()
+    .replace(/[°₱₋−]/g, "")
+    .replace(/\s+/g, "")
+    .replace(/,/g, "");
+}
+
+
+/* =====================================================
+   ANSWER CHECKING
+   ===================================================== */
+
+function checkAnswer(
+  item,
+  userAnswer
+) {
+
+  if (item.manual) {
+    return null;
+  }
+
+  if (
+    item.type === "single"
+  ) {
+
+    return userAnswer ===
+      item.answer;
+  }
+
+  if (
+    item.type === "multi"
+  ) {
+
+    if (
+      !Array.isArray(userAnswer)
+    ) {
+
+      return false;
+    }
+
+    const expected =
+      [...item.answer].sort();
+
+    const actual =
+      [...userAnswer].sort();
+
+    return JSON.stringify(
+      expected
+    ) === JSON.stringify(
+      actual
+    );
+  }
+
+  if (
+    item.type === "text"
+  ) {
+
+    if (
+      userAnswer === null
+    ) {
+
+      return false;
+    }
+
+    const value =
+      normalize(userAnswer);
+
+    const expected =
+      normalize(item.answer);
+
+    if (
+      value === expected
+    ) {
+
+      return true;
+    }
+
+    if (
+      item.answer === "yes"
+    ) {
+
+      return (
+        value === "yes" ||
+        value === "y"
+      );
+    }
+
+    if (
+      item.answer ===
+      "the starting integer"
+    ) {
+
+      return (
+        value.includes(
+          "integer"
+        ) ||
+        value.includes(
+          "starting"
+        )
+      );
+    }
+
+    if (
+      item.answer ===
+      "the cost per day"
+    ) {
+
+      return (
+        value.includes(
+          "perday"
+        ) ||
+        value.includes(
+          "daily"
+        ) ||
+        value.includes(
+          "200"
+        )
+      );
+    }
+
+    if (
+      item.answer ===
+      "300π"
+    ) {
+
+      return (
+        value === "300pi" ||
+        value === "942"
+      );
+    }
+
+    return false;
+  }
+
+  return false;
+}
+
+
+/* =====================================================
+   FINISH QUIZ
+   ===================================================== */
+
+function finishQuiz() {
+
+  const unanswered =
+    answers.filter(
+      answer => {
+
+        if (
+          Array.isArray(answer)
+        ) {
+
+          return (
+            answer.length === 0
+          );
+        }
+
+        return (
+          answer === null ||
+          String(answer).trim() === ""
+        );
+
+      }
+    ).length;
+
+  if (
+    unanswered > 0
+  ) {
+
+    const proceed =
+      confirm(
+        `You have ${unanswered} unanswered question(s). Submit anyway?`
+      );
+
+    if (!proceed) {
+      return;
+    }
+  }
+
+  let correct = 0;
+  let manual = 0;
+
+  questions.forEach(
+    (item, index) => {
+
+      const result =
+        checkAnswer(
+          item,
+          answers[index]
+        );
+
+      if (
+        result === true
+      ) {
+
+        correct++;
+      }
+
+      if (
+        result === null
+      ) {
+
+        manual++;
+      }
+
+    }
+  );
+
+  const objectiveTotal =
+    questions.length - manual;
+
+  const percentage =
+    objectiveTotal === 0
+      ? 0
+      : Math.round(
+          (correct / objectiveTotal) *
+          100
+        );
+
+  document.getElementById(
+    "quizCard"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "result"
+  ).style.display =
+    "block";
+
+  document.getElementById(
+    "scoreDisplay"
+  ).textContent =
+    `${percentage}%`;
+
+  document.getElementById(
+    "scoreFraction"
+  ).textContent =
+    `${correct} / ${objectiveTotal}`;
+
+  document.getElementById(
+    "correctCount"
+  ).textContent =
+    correct;
+
+  document.getElementById(
+    "manualCount"
+  ).textContent =
+    manual;
+
+  generateReview();
+
+  saveProgress(
+    percentage,
+    correct,
+    objectiveTotal
+  );
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+/* =====================================================
+   FORMAT ANSWER
+   ===================================================== */
+
+function formatUserAnswer(
+  item,
+  answer
+) {
+
+  if (
+    answer === null ||
+    answer === undefined ||
+    String(answer).trim() === ""
+  ) {
+
+    return "No answer";
+  }
+
+  if (
+    item.type === "single"
+  ) {
+
+    return (
+      item.options[answer] ||
+      "No answer"
+    );
+  }
+
+  if (
+    item.type === "multi"
+  ) {
+
+    return answer
+      .map(
+        index =>
+          item.options[index]
+      )
+      .join(", ");
+  }
+
+  return answer;
+}
+
+
+/* =====================================================
+   ANSWER REVIEW
+   ===================================================== */
+
+function generateReview() {
+
+  const review =
+    document.getElementById(
+      "review"
+    );
+
+  const list =
+    document.getElementById(
+      "reviewList"
+    );
+
+  list.innerHTML =
+    "";
+
+  questions.forEach(
+    (item, index) => {
+
+      const result =
+        checkAnswer(
+          item,
+          answers[index]
+        );
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+      let statusClass =
+        "manual";
+
+      if (
+        result === true
+      ) {
+
+        statusClass =
+          "correct";
+      }
+
+      if (
+        result === false
+      ) {
+
+        statusClass =
+          "incorrect";
+      }
+
+      div.className =
+        `review-item ${statusClass}`;
+
+      let statusText;
+
+      if (
+        result === true
+      ) {
+
+        statusText =
+          "Correct";
+
+      } else if (
+        result === false
+      ) {
+
+        statusText =
+          "Incorrect";
+
+      } else {
+
+        statusText =
+          "Manual review";
+      }
+
+      let expected =
+        "";
+
+      if (
+        !item.manual &&
+        item.answer !== undefined
+      ) {
+
+        if (
+          item.type === "single"
+        ) {
+
+          expected =
+            item.options[
+              item.answer
+            ];
+
+        } else if (
+          item.type === "multi"
+        ) {
+
+          expected =
+            item.answer
+              .map(
+                index =>
+                  item.options[index]
+              )
+              .join(", ");
+
+        } else {
+
+          expected =
+            item.answer;
+        }
+      }
+
+      div.innerHTML = `
+        <div class="review-question">
+          ${index + 1}. ${item.q}
+        </div>
+
+        <div class="review-answer">
+
+          <strong>Status:</strong>
+          ${statusText}
+
+          <br>
+
+          <strong>Your answer:</strong>
+          ${formatUserAnswer(
+            item,
+            answers[index]
+          )}
+
+          ${
+            expected
+              ? `<br><strong>Expected:</strong> ${expected}`
+              : ""
+          }
+
+          ${
+            item.explanation
+              ? `<br><br>${item.explanation}`
+              : ""
+          }
+
+        </div>
+      `;
+
+      list.appendChild(
+        div
+      );
+    }
+  );
+
+  review.style.display =
+    "block";
+}
+
+
+/* =====================================================
+   SAVE PROGRESS
+   ===================================================== */
+
+function saveProgress(
+  percentage,
+  correct,
+  total
+) {
+
+  let progress = {};
+
+  try {
+
+    progress =
+      JSON.parse(
+        localStorage.getItem(
+          "riasStudyHubProgress"
+        )
+      ) || {};
+
+  } catch {
+
+    progress = {};
+  }
+
+  if (
+    !progress.quizzes
+  ) {
+
+    progress.quizzes =
+      {};
+  }
+
+  progress.quizzes.rma = {
+
+    completed: true,
+
+    score:
+      correct,
+
+    total:
+      total,
+
+    percentage:
+      percentage,
+
+    date:
+      new Date().toISOString()
+  };
+
+  localStorage.setItem(
+    "riasStudyHubProgress",
+    JSON.stringify(progress)
+  );
+}
+
+
+/* =====================================================
+   RETAKE
+   ===================================================== */
+
+function retakeQuiz() {
+
+  currentQuestion =
+    0;
+
+  answers =
+    new Array(
+      questions.length
+    ).fill(null);
+
+  document.getElementById(
+    "result"
+  ).style.display =
+    "none";
+
+  document.getElementById(
+    "quizCard"
+  ).style.display =
+    "block";
+
+  renderQuestion();
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+/* =====================================================
+   START QUIZ
+   ===================================================== */
+
+renderQuestion();
+
+</script>
+
+</body>
+</html>
