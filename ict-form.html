@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Forms Reviewer | STE Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+      --red: #f87171;
+      --yellow: #facc15;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 17, 23, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1000px;
+      margin: auto;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 20px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 35px 20px 60px;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    .back-link:hover {
+      color: var(--blue);
+    }
+
+    .hero {
+      margin-bottom: 28px;
+    }
+
+    .subject {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 7px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 36px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 750px;
+    }
+
+    .reviewer-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 25px 0;
+    }
+
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 18px;
+    }
+
+    .info-label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    .info-value {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .completion {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 25px 0 35px;
+    }
+
+    .completion-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .completion-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .completion-status {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 3px;
+    }
+
+    .completion-status.completed {
+      color: var(--green);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--background);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 15px 0;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--green);
+      transition: width 0.3s ease;
+    }
+
+    .complete-btn {
+      border: 1px solid var(--green);
+      background: transparent;
+      color: var(--green);
+      border-radius: 9px;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .complete-btn:hover {
+      background: rgba(74, 222, 128, 0.08);
+    }
+
+    .complete-btn.completed {
+      background: var(--green);
+      color: #0f1117;
+    }
+
+    .section {
+      margin-bottom: 35px;
+    }
+
+    .section h2 {
+      font-size: 24px;
+      margin: 0 0 15px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      margin-top: -5px;
+      margin-bottom: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .card p {
+      margin: 8px 0;
+    }
+
+    .highlight {
+      border-left: 3px solid var(--blue);
+      background: var(--surface);
+      border-radius: 0 10px 10px 0;
+      padding: 15px 17px;
+      margin: 15px 0;
+    }
+
+    .highlight strong {
+      color: var(--blue);
+    }
+
+    .warning {
+      border-left-color: var(--yellow);
+    }
+
+    .warning strong {
+      color: var(--yellow);
+    }
+
+    .definition-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .definition {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 17px;
+    }
+
+    .definition strong {
+      color: var(--blue);
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .code {
+      background: #0b0d12;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 15px;
+      overflow-x: auto;
+      margin: 12px 0;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 13px;
+      color: #dce3ec;
+      white-space: pre;
+    }
+
+    .code .tag {
+      color: var(--blue);
+    }
+
+    .code .attr {
+      color: var(--yellow);
+    }
+
+    .code .value {
+      color: var(--green);
+    }
+
+    .property-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .property {
+      border: 1px solid var(--border);
+      background: var(--background);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .property code {
+      color: var(--blue);
+      font-family: Consolas, Monaco, monospace;
+    }
+
+    .property p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 5px 0 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: var(--background);
+      color: var(--blue);
+    }
+
+    td {
+      background: var(--surface);
+    }
+
+    .type {
+      color: var(--yellow);
+      font-family: Consolas, Monaco, monospace;
+    }
+
+    .example {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 15px;
+    }
+
+    .example-title {
+      color: var(--green);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .memory-box {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    .memory-box h3 {
+      margin-top: 0;
+      color: var(--yellow);
+    }
+
+    .tip-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .tip-list li {
+      margin-bottom: 8px;
+    }
+
+    .playground {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    .playground textarea {
+      width: 100%;
+      min-height: 210px;
+      resize: vertical;
+      background: #0b0d12;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 15px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .playground textarea:focus {
+      border-color: var(--blue);
+    }
+
+    .run-btn {
+      margin-top: 12px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 9px;
+      padding: 11px 18px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .run-btn:hover {
+      background: var(--blue-hover);
+    }
+
+    .preview {
+      margin-top: 15px;
+      width: 100%;
+      min-height: 180px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .quick-review {
+      display: grid;
+      gap: 10px;
+    }
+
+    .quick-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .quick-item strong {
+      color: var(--blue);
+    }
+
+    .footer-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 45px;
+    }
+
+    @media (max-width: 700px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .reviewer-info,
+      .definition-grid,
+      .property-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 29px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      STE <span>Study Hub</span>
+    </a>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="reviewer.html" class="active">Reviewers</a>
+      <a href="quizzes.html">Quizzes</a>
+      <a href="notes.html">Notes</a>
+      <a href="progress.html">Progress</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+  <a href="reviewer.html" class="back-link">
+    ← Back to Reviewers
+  </a>
+
+  <div class="hero">
+    <div class="subject">ICT</div>
+    <h1>HTML Forms</h1>
+    <p>
+      Learn how HTML forms collect user input using form elements,
+      input types, and form attributes.
+    </p>
+  </div>
+
+
+  <!-- PROGRESS -->
+
+  <div class="completion">
+    <div class="completion-top">
+      <div>
+        <div class="completion-title">Reviewer Progress</div>
+        <div class="completion-status" id="completionStatus">
+          Not completed
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <button class="complete-btn" id="completeBtn">
+      Mark as Complete
+    </button>
+  </div>
+
+
+  <!-- 1 -->
+
+  <section class="section">
+    <h2>1. What Is an HTML Form?</h2>
+
+    <div class="card">
+      <p>
+        An HTML form is used to <strong>collect user input</strong>.
+        The input is often sent to a server for processing.
+      </p>
+
+      <div class="code">
+<span class="tag">&lt;form&gt;</span>
+  form elements
+<span class="tag">&lt;/form&gt;</span>
+      </div>
+
+      <div class="highlight">
+        <strong>Remember:</strong>
+        The <code>&lt;form&gt;</code> element is a container for
+        different types of form controls.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 2 -->
+
+  <section class="section">
+    <h2>2. The &lt;input&gt; Element</h2>
+
+    <div class="card">
+      <p>
+        The <code>&lt;input&gt;</code> element is one of the most
+        commonly used form elements.
+      </p>
+
+      <p>
+        Its appearance and behavior depend on the
+        <code>type</code> attribute.
+      </p>
+
+      <div class="code">
+<span class="tag">&lt;input</span>
+  <span class="attr">type</span>=<span class="value">"text"</span>
+<span class="tag">&gt;</span>
+      </div>
+    </div>
+
+    <div class="definition-grid">
+
+      <div class="definition">
+        <strong>text</strong>
+        Creates a single-line text input field.
+      </div>
+
+      <div class="definition">
+        <strong>radio</strong>
+        Lets the user select one choice from a group.
+      </div>
+
+      <div class="definition">
+        <strong>checkbox</strong>
+        Lets the user select zero or more choices.
+      </div>
+
+      <div class="definition">
+        <strong>submit</strong>
+        Creates a button used to submit form data.
+      </div>
+
+      <div class="definition">
+        <strong>button</strong>
+        Creates a clickable button.
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 3 -->
+
+  <section class="section">
+    <h2>3. The &lt;label&gt; Element</h2>
+
+    <div class="card">
+      <p>
+        The <code>&lt;label&gt;</code> element defines a label for
+        many form elements.
+      </p>
+
+      <p>
+        The <code>for</code> attribute of the label should match the
+        <code>id</code> of the input it belongs to.
+      </p>
+
+      <div class="code">
+<span class="tag">&lt;label</span>
+  <span class="attr">for</span>=<span class="value">"fname"</span>
+<span class="tag">&gt;</span>
+  First name:
+<span class="tag">&lt;/label&gt;</span>
+
+<span class="tag">&lt;input</span>
+  <span class="attr">type</span>=<span class="value">"text"</span>
+  <span class="attr">id</span>=<span class="value">"fname"</span>
+  <span class="attr">name</span>=<span class="value">"fname"</span>
+<span class="tag">&gt;</span>
+      </div>
+
+      <div class="highlight">
+        <strong>Key connection:</strong>
+        <code>label for="fname"</code> → <code>input id="fname"</code>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 4 -->
+
+  <section class="section">
+    <h2>4. Text Fields</h2>
+
+    <div class="card">
+      <p>
+        <code>&lt;input type="text"&gt;</code> creates a
+        single-line text input field.
+      </p>
+
+      <div class="code">
+<span class="tag">&lt;form&gt;</span>
+
+  <span class="tag">&lt;label</span>
+    <span class="attr">for</span>=<span class="value">"fname"</span>
+  <span class="tag">&gt;</span>First name:<span class="tag">&lt;/label&gt;</span>
+
+  <span class="tag">&lt;input</span>
+    <span class="attr">type</span>=<span class="value">"text"</span>
+    <span class="attr">id</span>=<span class="value">"fname"</span>
+    <span class="attr">name</span>=<span class="value">"fname"</span>
+  <span class="tag">&gt;</span>
+
+<span class="tag">&lt;/form&gt;</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 5 -->
+
+  <section class="section">
+    <h2>5. Radio Buttons</h2>
+
+    <div class="card">
+      <p>
+        Radio buttons allow a user to select
+        <strong>ONE</strong> choice from a limited number of choices.
+      </p>
+
+      <div class="code">
+<span class="tag">&lt;input</span>
+  <span class="attr">type</span>=<span class="value">"radio"</span>
+  <span class="attr">name</span>=<span class="value">"language"</span>
+  <span class="attr">value</span>=<span class="value">"HTML"</span>
+<span class="tag">&gt;</span>
+
+<span class="tag">&lt;label&gt;</span>HTML<span class="tag">&lt;/label&gt;</span>
+      </div>
+
+      <div class="highlight">
+        <strong>Memory tip:</strong>
+        Radio = choose <strong>one</strong>.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 6 -->
+
+  <section class="section">
+    <h2>6. Checkboxes</h2>
+
+    <div class="card">
+      <p>
+        Checkboxes allow a user to select
+        <strong>ZERO or MORE</strong> options.
+      </p>
+
+      <div class="code">
+<span class="tag">&lt;input</span>
+  <span class="attr">type</span>=<span class="value">"checkbox"</span>
+  <span class="attr">name</span>=<span class="value">"vehicle"</span>
+  <span class="attr">value</span>=<span class="value">"Bike"</span>
+<span class="tag">&gt;</span>
+
+<span class="tag">&lt;label&gt;</span>Bike<span class="tag">&lt;/label&gt;</span>
+      </div>
+
+      <div class="highlight">
+        <strong>Memory tip:</strong>
+        Checkbox = choose <strong>zero, one, or many</strong>.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 7 -->
+
+  <section class="section">
+    <h2>7. Submit Button</h2>
+
+    <div class="card">
+      <p>
+        <code>&lt;input type="submit"&gt;</code> creates a button
+        for submitting form data.
+      </p>
+
+      <div class="code">
+<span class="tag">&lt;input</span>
+  <span class="attr">type</span>=<span class="value">"submit"</span>
+  <span class="attr">value</span>=<span class="value">"Submit"</span>
+<span class="tag">&gt;</span>
+      </div>
+
+      <p>
+        The form's <code>action</code> attribute specifies the
+        form-handler that processes the submitted data.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- 8 -->
+
+  <section class="section">
+    <h2>8. Important Form Elements</h2>
+
+    <div class="property-grid">
+
+      <div class="property">
+        <code>&lt;form&gt;</code>
+        <p>Defines the form.</p>
+      </div>
+
+      <div class="property">
+        <code>&lt;input&gt;</code>
+        <p>Creates different types of input controls.</p>
+      </div>
+
+      <div class="property">
+        <code>&lt;label&gt;</code>
+        <p>Defines a label for a form control.</p>
+      </div>
+
+      <div class="property">
+        <code>&lt;select&gt;</code>
+        <p>Creates a drop-down list.</p>
+      </div>
+
+      <div class="property">
+        <code>&lt;option&gt;</code>
+        <p>Defines an option inside a select list.</p>
+      </div>
+
+      <div class="property">
+        <code>&lt;textarea&gt;</code>
+        <p>Creates a multi-line text input area.</p>
+      </div>
+
+      <div class="property">
+        <code>&lt;button&gt;</code>
+        <p>Creates a clickable button.</p>
+      </div>
+
+      <div class="property">
+        <code>&lt;fieldset&gt;</code>
+        <p>Groups related form elements.</p>
+      </div>
+
+      <div class="property">
+        <code>&lt;legend&gt;</code>
+        <p>Defines a caption for a fieldset.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 9 -->
+
+  <section class="section">
+    <h2>9. Select, Option, and Textarea</h2>
+
+    <div class="card">
+      <h3>Select</h3>
+      <p>
+        The <code>&lt;select&gt;</code> element creates a
+        drop-down list.
+      </p>
+
+      <div class="code">
+<span class="tag">&lt;select</span> <span class="attr">name</span>=<span class="value">"subject"</span><span class="tag">&gt;</span>
+
+  <span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="value">"math"</span><span class="tag">&gt;</span>
+    Mathematics
+  <span class="tag">&lt;/option&gt;</span>
+
+  <span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="value">"science"</span><span class="tag">&gt;</span>
+    Science
+  <span class="tag">&lt;/option&gt;</span>
+
+<span class="tag">&lt;/select&gt;</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Textarea</h3>
+
+      <p>
+        The <code>&lt;textarea&gt;</code> element defines a
+        multi-line input field.
+      </p>
+
+      <div class="code">
+<span class="tag">&lt;textarea</span>
+  <span class="attr">name</span>=<span class="value">"message"</span>
+  <span class="attr">rows</span>=<span class="value">"4"</span>
+  <span class="attr">cols</span>=<span class="value">"30"</span>
+<span class="tag">&gt;</span>
+<span class="tag">&lt;/textarea&gt;</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 10 -->
+
+  <section class="section">
+    <h2>10. Common Input Types</h2>
+
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Input Type</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td class="type">text</td>
+            <td>Single-line text</td>
+          </tr>
+
+          <tr>
+            <td class="type">password</td>
+            <td>Password input</td>
+          </tr>
+
+          <tr>
+            <td class="type">email</td>
+            <td>Email address</td>
+          </tr>
+
+          <tr>
+            <td class="type">number</td>
+            <td>Numeric input</td>
+          </tr>
+
+          <tr>
+            <td class="type">date</td>
+            <td>Date selection</td>
+          </tr>
+
+          <tr>
+            <td class="type">time</td>
+            <td>Time selection</td>
+          </tr>
+
+          <tr>
+            <td class="type">color</td>
+            <td>Color picker</td>
+          </tr>
+
+          <tr>
+            <td class="type">file</td>
+            <td>File selection</td>
+          </tr>
+
+          <tr>
+            <td class="type">range</td>
+            <td>Range slider</td>
+          </tr>
+
+          <tr>
+            <td class="type">url</td>
+            <td>URL input</td>
+          </tr>
+
+          <tr>
+            <td class="type">search</td>
+            <td>Search field</td>
+          </tr>
+
+          <tr>
+            <td class="type">tel</td>
+            <td>Telephone number input</td>
+          </tr>
+
+          <tr>
+            <td class="type">hidden</td>
+            <td>Hidden input field</td>
+          </tr>
+
+          <tr>
+            <td class="type">submit</td>
+            <td>Submit button</td>
+          </tr>
+
+          <tr>
+            <td class="type">reset</td>
+            <td>Reset button</td>
+          </tr>
+
+          <tr>
+            <td class="type">button</td>
+            <td>Clickable button</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <!-- 11 -->
+
+  <section class="section">
+    <h2>11. Form Attributes</h2>
+
+    <div class="card">
+      <p>
+        Form attributes control how a form behaves and where
+        submitted data is sent.
+      </p>
+
+      <div class="property-grid">
+
+        <div class="property">
+          <code>action</code>
+          <p>Specifies where the form data is sent.</p>
+        </div>
+
+        <div class="property">
+          <code>method</code>
+          <p>Specifies the HTTP method used to send form data.</p>
+        </div>
+
+        <div class="property">
+          <code>target</code>
+          <p>Specifies where to display the response.</p>
+        </div>
+
+        <div class="property">
+          <code>autocomplete</code>
+          <p>Specifies whether autocomplete is enabled.</p>
+        </div>
+
+        <div class="property">
+          <code>novalidate</code>
+          <p>Specifies that form validation should not occur.</p>
+        </div>
+
+        <div class="property">
+          <code>enctype</code>
+          <p>Specifies how submitted form data should be encoded.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 12 -->
+
+  <section class="section">
+    <h2>12. GET vs POST</h2>
+
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Main Idea</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td class="type">GET</td>
+            <td>
+              Appends form data to the URL.
+            </td>
+          </tr>
+
+          <tr>
+            <td class="type">POST</td>
+            <td>
+              Sends form data in the HTTP request body.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="code">
+<span class="tag">&lt;form</span>
+  <span class="attr">action</span>=<span class="value">"/action_page.php"</span>
+  <span class="attr">method</span>=<span class="value">"post"</span>
+<span class="tag">&gt;</span>
+
+  ...
+
+<span class="tag">&lt;/form&gt;</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 13 -->
+
+  <section class="section">
+    <h2>13. Important Input Attributes</h2>
+
+    <div class="card">
+      <div class="property-grid">
+
+        <div class="property">
+          <code>value</code>
+          <p>Specifies an initial value.</p>
+        </div>
+
+        <div class="property">
+          <code>readonly</code>
+          <p>Makes the input read-only.</p>
+        </div>
+
+        <div class="property">
+          <code>disabled</code>
+          <p>Disables the input.</p>
+        </div>
+
+        <div class="property">
+          <code>size</code>
+          <p>Specifies the visible width of the input.</p>
+        </div>
+
+        <div class="property">
+          <code>maxlength</code>
+          <p>Specifies the maximum number of characters.</p>
+        </div>
+
+        <div class="property">
+          <code>min</code>
+          <p>Specifies a minimum value.</p>
+        </div>
+
+        <div class="property">
+          <code>max</code>
+          <p>Specifies a maximum value.</p>
+        </div>
+
+        <div class="property">
+          <code>multiple</code>
+          <p>Allows more than one value where supported.</p>
+        </div>
+
+        <div class="property">
+          <code>required</code>
+          <p>Specifies that the field must be filled out.</p>
+        </div>
+
+        <div class="property">
+          <code>placeholder</code>
+          <p>Provides a short hint describing the expected value.</p>
+        </div>
+
+        <div class="property">
+          <code>pattern</code>
+          <p>Specifies a pattern the input value must match.</p>
+        </div>
+
+        <div class="property">
+          <code>autofocus</code>
+          <p>Automatically focuses the input when the page loads.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 14 -->
+
+  <section class="section">
+    <h2>14. The name Attribute</h2>
+
+    <div class="card">
+      <p>
+        An input field needs a <code>name</code> attribute to have
+        its value submitted with the form.
+      </p>
+
+      <div class="code">
+<span class="tag">&lt;input</span>
+  <span class="attr">type</span>=<span class="value">"text"</span>
+  <span class="attr">name</span>=<span class="value">"firstname"</span>
+<span class="tag">&gt;</span>
+      </div>
+
+      <div class="highlight warning">
+        <strong>Important:</strong>
+        If the <code>name</code> attribute is omitted, the value of
+        that input field will not be submitted.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 15 -->
+
+  <section class="section">
+    <h2>15. Input Form Attributes</h2>
+
+    <div class="card">
+      <p>
+        These attributes can override certain
+        <code>&lt;form&gt;</code> attributes for an individual
+        submit button.
+      </p>
+
+      <div class="property-grid">
+
+        <div class="property">
+          <code>formaction</code>
+          <p>Specifies the URL where the form data is sent.</p>
+        </div>
+
+        <div class="property">
+          <code>formenctype</code>
+          <p>Specifies how form data is encoded.</p>
+        </div>
+
+        <div class="property">
+          <code>formmethod</code>
+          <p>Specifies the HTTP method used to submit the form.</p>
+        </div>
+
+        <div class="property">
+          <code>formnovalidate</code>
+          <p>Specifies that the form should not be validated.</p>
+        </div>
+
+        <div class="property">
+          <code>formtarget</code>
+          <p>Specifies where to display the response.</p>
+        </div>
+
+        <div class="property">
+          <code>form</code>
+          <p>Specifies the form an input belongs to.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 16 -->
+
+  <section class="section">
+    <h2>16. Complete Form Example</h2>
+
+    <div class="card">
+      <div class="code">
+<span class="tag">&lt;form</span>
+  <span class="attr">action</span>=<span class="value">"/action_page.php"</span>
+  <span class="attr">method</span>=<span class="value">"post"</span>
+<span class="tag">&gt;</span>
+
+  <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="value">"fname"</span><span class="tag">&gt;</span>
+    First name:
+  <span class="tag">&lt;/label&gt;</span>
+
+  <span class="tag">&lt;input</span>
+    <span class="attr">type</span>=<span class="value">"text"</span>
+    <span class="attr">id</span>=<span class="value">"fname"</span>
+    <span class="attr">name</span>=<span class="value">"fname"</span>
+    <span class="attr">required</span>
+  <span class="tag">&gt;</span>
+
+  <span class="tag">&lt;br&gt;&lt;br&gt;</span>
+
+  <span class="tag">&lt;input</span>
+    <span class="attr">type</span>=<span class="value">"submit"</span>
+    <span class="attr">value</span>=<span class="value">"Submit"</span>
+  <span class="tag">&gt;</span>
+
+<span class="tag">&lt;/form&gt;</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PLAYGROUND -->
+
+  <section class="section">
+    <h2>17. Try HTML Forms</h2>
+
+    <div class="playground">
+
+      <p class="section-intro">
+        Edit the HTML below and click Run to preview the form.
+      </p>
+
+      <textarea id="editor"><form>
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name">
+
+  <br><br>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email">
+
+  <br><br>
+
+  <input type="submit" value="Submit">
+</form></textarea>
+
+      <button class="run-btn" onclick="runCode()">
+        Run Code
+      </button>
+
+      <iframe
+        id="previewFrame"
+        class="preview"
+        title="HTML Form Preview">
+      </iframe>
+
+    </div>
+  </section>
+
+
+  <!-- QUICK REVIEW -->
+
+  <section class="section">
+    <h2>18. Quick Review</h2>
+
+    <div class="quick-review">
+
+      <div class="quick-item">
+        <strong>&lt;form&gt;</strong>
+        → Container for form controls.
+      </div>
+
+      <div class="quick-item">
+        <strong>&lt;input&gt;</strong>
+        → Creates different types of input controls.
+      </div>
+
+      <div class="quick-item">
+        <strong>radio</strong>
+        → Select ONE choice.
+      </div>
+
+      <div class="quick-item">
+        <strong>checkbox</strong>
+        → Select ZERO or MORE choices.
+      </div>
+
+      <div class="quick-item">
+        <strong>&lt;label&gt;</strong>
+        → Labels a form control.
+      </div>
+
+      <div class="quick-item">
+        <strong>action</strong>
+        → Specifies where form data is sent.
+      </div>
+
+      <div class="quick-item">
+        <strong>method</strong>
+        → Specifies how form data is submitted.
+      </div>
+
+      <div class="quick-item">
+        <strong>name</strong>
+        → Identifies an input value for submission.
+      </div>
+
+      <div class="quick-item">
+        <strong>required</strong>
+        → Requires the user to enter a value.
+      </div>
+
+      <div class="quick-item">
+        <strong>placeholder</strong>
+        → Gives the user a hint about expected input.
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- MEMORY -->
+
+  <section class="section">
+    <div class="memory-box">
+
+      <h3>Remember These</h3>
+
+      <ul class="tip-list">
+        <li>
+          <code>radio</code> = one choice
+        </li>
+
+        <li>
+          <code>checkbox</code> = zero or more choices
+        </li>
+
+        <li>
+          <code>label for</code> should match the input's
+          <code>id</code>
+        </li>
+
+        <li>
+          Inputs need <code>name</code> to submit their values.
+        </li>
+
+        <li>
+          <code>action</code> = where the data goes
+        </li>
+
+        <li>
+          <code>method</code> = how the data is sent
+        </li>
+
+        <li>
+          <code>required</code> = field must be completed
+        </li>
+
+        <li>
+          <code>placeholder</code> = input hint
+        </li>
+      </ul>
+
+    </div>
+  </section>
+
+
+  <div class="footer-note">
+    STE Study Hub • ICT Reviewer
+  </div>
+
+</div>
+
+
+<script>
+
+  /* =========================
+     REVIEWER PROGRESS
+  ========================= */
+
+  const reviewerId = "html-form";
+
+  const completionStatus =
+    document.getElementById("completionStatus");
+
+  const completeBtn =
+    document.getElementById("completeBtn");
+
+  const progressFill =
+    document.getElementById("progressFill");
+
+
+  function getProgress() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem("riasStudyHubProgress")
+      ) || {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    } catch (error) {
+
+      return {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    }
+
+  }
+
+
+  function saveProgress(progress) {
+
+    localStorage.setItem(
+      "riasStudyHubProgress",
+      JSON.stringify(progress)
+    );
+
+  }
+
+
+  function updateCompletionUI() {
+
+    const progress = getProgress();
+
+    const completed =
+      progress.reviewers &&
+      progress.reviewers[reviewerId] === true;
+
+
+    if (completed) {
+
+      completionStatus.textContent =
+        "Completed ✓";
+
+      completionStatus.classList.add(
+        "completed"
+      );
+
+      completeBtn.textContent =
+        "Completed ✓";
+
+      completeBtn.classList.add(
+        "completed"
+      );
+
+      progressFill.style.width =
+        "100%";
+
+    } else {
+
+      completionStatus.textContent =
+        "Not completed";
+
+      completionStatus.classList.remove(
+        "completed"
+      );
+
+      completeBtn.textContent =
+        "Mark as Complete";
+
+      completeBtn.classList.remove(
+        "completed"
+      );
+
+      progressFill.style.width =
+        "0%";
+
+    }
+
+  }
+
+
+  completeBtn.addEventListener(
+    "click",
+    function () {
+
+      const progress = getProgress();
+
+      if (!progress.reviewers) {
+        progress.reviewers = {};
+      }
+
+      const currentlyCompleted =
+        progress.reviewers[reviewerId] === true;
+
+      progress.reviewers[reviewerId] =
+        !currentlyCompleted;
+
+      saveProgress(progress);
+
+      updateCompletionUI();
+
+    }
+  );
+
+
+  /* =========================
+     HTML PLAYGROUND
+  ========================= */
+
+  function runCode() {
+
+    const code =
+      document.getElementById("editor").value;
+
+    const preview =
+      document.getElementById("previewFrame");
+
+    preview.srcdoc = code;
+
+  }
+
+
+  updateCompletionUI();
+
+  runCode();
+
+</script>
+
+</body>
+</html>

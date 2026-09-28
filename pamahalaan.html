@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Interaksyon ng Pamahalaan sa Pamilihan | STE Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+      --yellow: #facc15;
+      --red: #fb7185;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 17, 23, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 45px 22px 70px;
+    }
+
+    .hero {
+      margin-bottom: 35px;
+    }
+
+    .subject-label {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 16px;
+    }
+
+    .completion {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 35px;
+    }
+
+    .completion-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 13px;
+    }
+
+    .completion-title {
+      font-weight: 700;
+    }
+
+    .completion-status {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .completion-status.completed {
+      color: var(--green);
+    }
+
+    .progress-bar {
+      height: 8px;
+      border-radius: 20px;
+      background: #252a34;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      transition: width 0.3s;
+    }
+
+    .complete-btn {
+      margin-top: 15px;
+      border: 1px solid var(--blue);
+      background: transparent;
+      color: var(--blue);
+      padding: 10px 16px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .complete-btn:hover {
+      background: var(--blue);
+      color: #08111f;
+    }
+
+    .complete-btn.completed {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    section {
+      margin-bottom: 42px;
+    }
+
+    .section-heading {
+      margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+      font-size: 27px;
+      margin-bottom: 5px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .card h4 {
+      color: var(--blue);
+      font-size: 16px;
+      margin-bottom: 7px;
+    }
+
+    .card p {
+      color: #d6d9df;
+    }
+
+    .definition {
+      border-left: 4px solid var(--blue);
+      background: #141922;
+    }
+
+    .definition strong {
+      color: var(--blue);
+    }
+
+    /* PROPERTY GRID */
+
+    .property-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .property {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 18px;
+    }
+
+    .property-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 50%;
+      background: #202735;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .property p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .property strong {
+      color: var(--text);
+    }
+
+    /* DIAGRAMS */
+
+    .diagram-box {
+      background: #11141b;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 25px;
+      margin: 20px 0;
+      overflow-x: auto;
+    }
+
+    .diagram-title {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    svg {
+      display: block;
+      margin: auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .axis {
+      stroke: #68707e;
+      stroke-width: 2;
+    }
+
+    .grid-line {
+      stroke: #282d38;
+      stroke-width: 1;
+    }
+
+    .demand-line {
+      stroke: var(--blue);
+      stroke-width: 5;
+      fill: none;
+    }
+
+    .supply-line {
+      stroke: var(--green);
+      stroke-width: 5;
+      fill: none;
+    }
+
+    .shortage-line {
+      stroke: var(--red);
+      stroke-width: 6;
+    }
+
+    .surplus-line {
+      stroke: var(--yellow);
+      stroke-width: 6;
+    }
+
+    .equilibrium-dot {
+      fill: var(--yellow);
+    }
+
+    .svg-label {
+      fill: var(--text);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .svg-muted {
+      fill: var(--muted);
+      font-size: 13px;
+    }
+
+    .svg-blue {
+      fill: var(--blue);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .svg-green {
+      fill: var(--green);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .svg-red {
+      fill: var(--red);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .svg-yellow {
+      fill: var(--yellow);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* SCHEDULE */
+
+    .schedule {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .schedule th,
+    .schedule td {
+      border: 1px solid var(--border);
+      padding: 13px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .schedule th {
+      background: #202530;
+      color: var(--blue);
+    }
+
+    .schedule td {
+      background: #141820;
+      color: #d6d9df;
+    }
+
+    .equilibrium-cell {
+      color: var(--green) !important;
+      font-weight: 700;
+    }
+
+    .shortage-cell {
+      color: var(--red) !important;
+      font-weight: 700;
+    }
+
+    .surplus-cell {
+      color: var(--yellow) !important;
+      font-weight: 700;
+    }
+
+    /* FORMULA */
+
+    .formula {
+      background: #101722;
+      border: 1px solid #263b55;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      margin: 18px 0;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    /* STEPS */
+
+    .steps {
+      display: grid;
+      gap: 13px;
+      margin-top: 15px;
+    }
+
+    .step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .step-number {
+      min-width: 29px;
+      height: 29px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #08111f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* THREE STATES */
+
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .state {
+      padding: 20px;
+      border-radius: 13px;
+      background: #141820;
+      border: 1px solid var(--border);
+    }
+
+    .state h3 {
+      margin-bottom: 8px;
+    }
+
+    .state p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .state.equilibrium h3 {
+      color: var(--green);
+    }
+
+    .state.shortage h3 {
+      color: var(--red);
+    }
+
+    .state.surplus h3 {
+      color: var(--yellow);
+    }
+
+    /* CAUSE EFFECT */
+
+    .cause-effect {
+      display: grid;
+      gap: 12px;
+    }
+
+    .cause {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      padding: 16px;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+    }
+
+    .cause strong {
+      color: var(--blue);
+    }
+
+    .arrow {
+      color: var(--blue);
+      font-size: 20px;
+    }
+
+    /* VIDEO */
+
+    .video-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 22px;
+    }
+
+    .video-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .video-card h3 {
+      margin-bottom: 7px;
+    }
+
+    .video-card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 17px;
+    }
+
+    .video-link {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 9px;
+      background: var(--blue);
+      color: #08111f;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .video-link:hover {
+      background: var(--blue-hover);
+    }
+
+    /* QUICK REVIEW */
+
+    .quick-list {
+      display: grid;
+      gap: 11px;
+    }
+
+    .quick-item {
+      padding: 14px 16px;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #d6d9df;
+    }
+
+    .quick-item strong {
+      color: var(--blue);
+    }
+
+    @media (max-width: 750px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+        gap: 14px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .property-grid,
+      .state-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 32px 16px 60px;
+      }
+
+      .card {
+        padding: 19px;
+      }
+
+      .cause {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+    }
+    /* =========================
+   VIDEO LIBRARY
+========================= */
+
+.video-library {
+  margin-top: 55px;
+}
+
+.section-heading {
+  margin-bottom: 20px;
+}
+
+.section-label {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.section-heading h2 {
+  margin: 6px 0 5px;
+  font-size: 25px;
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Folder */
+
+.folder {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Folder top */
+
+.folder-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 22px;
+  background: var(--surface-hover);
+  border-bottom: 1px solid var(--border);
+}
+
+.folder-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(77, 159, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+}
+
+.folder-header h3 {
+  margin: 0 0 4px;
+  font-size: 17px;
+}
+
+.folder-header span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Video list */
+
+.video-list {
+  padding: 8px;
+}
+
+.video-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 16px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  transition: 0.2s ease;
+}
+
+.video-item:hover {
+  background: var(--surface-hover);
+}
+
+.video-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: rgba(77, 159, 255, 0.12);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.video-info {
+  flex: 1;
+}
+
+.video-info h4 {
+  margin: 0 0 4px;
+  font-size: 14px;
+}
+
+.video-info p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.video-arrow {
+  color: var(--muted);
+  font-size: 18px;
+  transition: 0.2s ease;
+}
+
+.video-item:hover .video-arrow {
+  color: var(--blue);
+  transform: translate(2px, -2px);
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .folder-header {
+    padding: 17px;
+  }
+
+  .video-item {
+    padding: 14px 9px;
+  }
+
+  .video-info p {
+    font-size: 11px;
+  }
+
+  .video-arrow {
+    font-size: 16px;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <a href="index.html" class="logo">
+      STE <span>Study Hub</span>
+    </a>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="reviewer.html" class="active">Reviewers</a>
+      <a href="quizzes.html">Quizzes</a>
+      <a href="notes.html">Notes</a>
+      <a href="progress.html">Progress</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <!-- HERO -->
+
+  <div class="hero">
+
+    <div class="subject-label">AP Reviewer</div>
+
+    <h1>
+      Interaksyon ng <span>Pamahalaan</span> sa Pamilihan
+    </h1>
+
+    <p>
+      Alamin ang mga paraan ng interbensyon ng pamahalaan sa pamilihan &mdash; price ceiling, price floor, buwis, subsidyo, at quota &mdash; at kung paano nakaaapekto ang bawat isa sa presyo at dami.
+    </p>
+
+  </div>
+
+
+  <!-- COMPLETION -->
+
+  <div class="completion">
+
+    <div class="completion-top">
+
+      <div>
+        <div class="completion-title">
+          Reviewer Progress
+        </div>
+
+        <div class="completion-status" id="completionStatus">
+          Not completed
+        </div>
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <button class="complete-btn" id="completeBtn">
+      Mark as Complete
+    </button>
+
+  </div>
+
+
+  <!-- 1. BAKIT NAKIKIALAM ANG PAMAHALAAN -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>1. Bakit Nakikialam ang Pamahalaan sa Pamilihan?</h2>
+      <p>Hindi laging perpekto ang malayang pamilihan.</p>
+    </div>
+
+    <div class="card definition">
+      <p>
+        Kahit na ang <strong>demand at suplay</strong> ang karaniwang
+        nagtatakda ng presyo, minsan ay <strong>nakikialam ang pamahalaan</strong>
+        upang protektahan ang mamimili o prodyuser, panatilihin ang
+        katatagan ng presyo, o itama ang mga <strong>market failure</strong>.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Mga Paraan ng Interbensyon</h3>
+      <p>
+        Apat sa pinakakaraniwang paraan: <strong>price ceiling</strong>,
+        <strong>price floor</strong>, <strong>buwis (tax)</strong>,
+        <strong>subsidyo</strong>, at <strong>quota</strong>.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- 2. PRICE CEILING -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>2. Price Ceiling (Presyong Pinakamataas)</h2>
+      <p>Isang legal na limitasyon kung gaano kataas ang maaaring itakdang presyo.</p>
+    </div>
+
+    <div class="card definition">
+      <p>
+        Ang <strong>price ceiling</strong> ay isang presyong itinakda ng
+        pamahalaan na <strong>mas mababa sa equilibrium price</strong>,
+        upang hindi maging masyadong mahal ang isang produkto para sa
+        mamimili. Halimbawa: itinakdang presyo ng bigas o gamot.
+      </p>
+    </div>
+
+    <div class="diagram-box">
+      <div class="diagram-title">Price Ceiling &mdash; Nagdudulot ng Kakulangan</div>
+      <svg width="600" height="360" viewBox="0 0 600 360">
+
+        <line x1="100" y1="50" x2="100" y2="290" class="axis" />
+        <line x1="100" y1="290" x2="540" y2="290" class="axis" />
+
+        <line x1="150" y1="70" x2="500" y2="260" class="demand-line" />
+        <line x1="150" y1="260" x2="500" y2="70" class="supply-line" />
+
+        <line x1="100" y1="210" x2="540" y2="210" stroke="#facc15" stroke-width="3" stroke-dasharray="8,6" />
+
+        <circle cx="325" cy="165" r="6" class="equilibrium-dot" />
+
+        <text x="30" y="65" class="svg-label">Presyo</text>
+        <text x="460" y="320" class="svg-label">Dami</text>
+
+        <text x="420" y="235" class="svg-blue">Demand</text>
+        <text x="420" y="95" class="svg-green">Supply</text>
+
+        <text x="15" y="205" class="svg-yellow">Ceiling</text>
+        <text x="335" y="150" class="svg-muted">Equilibrium</text>
+
+        <text x="185" y="230" class="svg-red">Qs (kaunti)</text>
+        <text x="380" y="230" class="svg-red">Qd (marami)</text>
+
+      </svg>
+    </div>
+
+    <div class="card">
+      <h3>Epekto</h3>
+      <p>
+        Dahil mababa ang presyo, <strong>tumataas ang quantity demanded</strong>
+        pero <strong>bumababa ang quantity supplied</strong> &mdash;
+        nagreresulta ito sa <strong>kakulangan (shortage)</strong>, at
+        posibleng lumitaw ang <strong>black market</strong> kung saan
+        mas mataas ang totoong ibinebenta ng ilan.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- 3. PRICE FLOOR -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>3. Price Floor (Presyong Pinakamababa)</h2>
+      <p>Isang legal na limitasyon kung gaano kababa ang maaaring itakdang presyo.</p>
+    </div>
+
+    <div class="card definition">
+      <p>
+        Ang <strong>price floor</strong> ay isang presyong itinakda ng
+        pamahalaan na <strong>mas mataas sa equilibrium price</strong>,
+        upang protektahan ang kita ng mga prodyuser. Halimbawa: minimum
+        wage o support price para sa palay ng mga magsasaka.
+      </p>
+    </div>
+
+    <div class="diagram-box">
+      <div class="diagram-title">Price Floor &mdash; Nagdudulot ng Labis</div>
+      <svg width="600" height="360" viewBox="0 0 600 360">
+
+        <line x1="100" y1="50" x2="100" y2="290" class="axis" />
+        <line x1="100" y1="290" x2="540" y2="290" class="axis" />
+
+        <line x1="150" y1="70" x2="500" y2="260" class="demand-line" />
+        <line x1="150" y1="260" x2="500" y2="70" class="supply-line" />
+
+        <line x1="100" y1="120" x2="540" y2="120" stroke="#facc15" stroke-width="3" stroke-dasharray="8,6" />
+
+        <circle cx="325" cy="165" r="6" class="equilibrium-dot" />
+
+        <text x="30" y="65" class="svg-label">Presyo</text>
+        <text x="460" y="320" class="svg-label">Dami</text>
+
+        <text x="420" y="235" class="svg-blue">Demand</text>
+        <text x="420" y="95" class="svg-green">Supply</text>
+
+        <text x="15" y="115" class="svg-yellow">Floor</text>
+        <text x="335" y="150" class="svg-muted">Equilibrium</text>
+
+        <text x="185" y="145" class="svg-red">Qd (kaunti)</text>
+        <text x="380" y="145" class="svg-red">Qs (marami)</text>
+
+      </svg>
+    </div>
+
+    <div class="card">
+      <h3>Epekto</h3>
+      <p>
+        Dahil mataas ang presyo, <strong>tumataas ang quantity supplied</strong>
+        pero <strong>bumababa ang quantity demanded</strong> &mdash;
+        nagreresulta ito sa <strong>labis (surplus)</strong>.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- 4. BUWIS -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>4. Buwis (Tax) bilang Interbensyon</h2>
+      <p>Ginagamit para makalikom ng kita o hadlangan ang konsumo ng ilang produkto.</p>
+    </div>
+
+    <div class="card">
+      <p>
+        Kapag nagpataw ng buwis ang pamahalaan sa isang produkto
+        (hal. sin tax sa sigarilyo), <strong>tumataas ang gastos ng
+        prodyuser</strong>, kaya <strong>umuurong (shift to the left/up)
+        ang supply curve</strong>. Karaniwang resulta:
+        <strong>tumataas ang presyo</strong> at
+        <strong>bumababa ang quantity</strong> na ibinebenta.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Sino ang Nagbabayad ng Buwis?</h3>
+      <p>
+        Karaniwan, <strong>parehong</strong> mamimili at prodyuser ang
+        may bahagi sa pagbabayad ng buwis (tax burden/incidence),
+        depende kung gaano ka-sensitibo (elastic) ang demand o suplay
+        sa pagbabago ng presyo.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- 5. SUBSIDYO -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>5. Subsidyo (Subsidy)</h2>
+      <p>Tulong pinansyal ng pamahalaan upang mapababa ang gastos sa produksyon.</p>
+    </div>
+
+    <div class="card">
+      <p>
+        Ang <strong>subsidyo</strong> ay tulong-pananalapi ng pamahalaan
+        (hal. sa mga magsasaka o pampublikong transportasyon) na
+        <strong>nagpapababa sa gastos ng produksyon</strong>, kaya
+        <strong>gumagalaw pababa/pakanan ang supply curve</strong>.
+        Karaniwang resulta: <strong>bumababa ang presyo</strong> at
+        <strong>tumataas ang dami</strong> ng ibinebenta.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- 6. QUOTA -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>6. Quota</h2>
+      <p>Direktang limitasyon sa dami, hindi sa presyo.</p>
+    </div>
+
+    <div class="card">
+      <p>
+        Ang <strong>quota</strong> ay isang legal na limitasyon sa
+        <strong>pinakamataas na dami</strong> ng isang produkto na
+        maaaring ibenta o i-import (hal. import quota sa asukal).
+        Dahil limitado ang suplay kahit gustong bumili ng marami ang
+        mamimili, karaniwang <strong>tumataas ang presyo</strong>.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- 7. QUICK COMPARISON -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>7. Mabilisang Paghahambing</h2>
+      <p>Ang epekto ng bawat paraan ng interbensyon.</p>
+    </div>
+
+    <table class="schedule">
+      <tr>
+        <th>Interbensyon</th>
+        <th>Epekto sa Presyo</th>
+        <th>Resulta</th>
+      </tr>
+      <tr>
+        <td>Price Ceiling</td>
+        <td>Itinatakdang mababa</td>
+        <td class="shortage-cell">Kakulangan</td>
+      </tr>
+      <tr>
+        <td>Price Floor</td>
+        <td>Itinatakdang mataas</td>
+        <td class="surplus-cell">Labis</td>
+      </tr>
+      <tr>
+        <td>Buwis</td>
+        <td>Tumataas</td>
+        <td>Bumababang quantity</td>
+      </tr>
+      <tr>
+        <td>Subsidyo</td>
+        <td>Bumababa</td>
+        <td>Tumataas na quantity</td>
+      </tr>
+      <tr>
+        <td>Quota</td>
+        <td>Tumataas</td>
+        <td>Limitadong supply</td>
+      </tr>
+    </table>
+
+  </section>
+
+
+  <!-- 8. QUICK REVIEW -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>8. Mabilisang Balik-Aral</h2>
+      <p>Mga pangunahing konseptong dapat tandaan.</p>
+    </div>
+
+    <div class="card">
+      <div class="quick-list">
+
+        <div class="quick-item">
+          <strong>Price Ceiling:</strong> presyong itinakdang mababa &rarr; kakulangan.
+        </div>
+
+        <div class="quick-item">
+          <strong>Price Floor:</strong> presyong itinakdang mataas &rarr; labis.
+        </div>
+
+        <div class="quick-item">
+          <strong>Buwis:</strong> pataas ang gastos ng prodyuser, umuurong ang supply.
+        </div>
+
+        <div class="quick-item">
+          <strong>Subsidyo:</strong> pababa ang gastos ng prodyuser, gumagalaw pakanan ang supply.
+        </div>
+
+        <div class="quick-item">
+          <strong>Quota:</strong> direktang limitasyon sa dami, hindi sa presyo.
+        </div>
+
+        <div class="quick-item">
+          <strong>Layunin ng Interbensyon:</strong> protektahan ang mamimili/prodyuser
+          o itama ang market failure.
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<script>
+
+  const reviewerId = "pamahalaan-pamilihan";
+
+  const completeBtn =
+    document.getElementById("completeBtn");
+
+  const completionStatus =
+    document.getElementById("completionStatus");
+
+  const progressFill =
+    document.getElementById("progressFill");
+
+
+  function getProgress() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem("riasStudyHubProgress")
+      ) || {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    } catch (error) {
+
+      return {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    }
+
+  }
+
+
+  function saveProgress(progress) {
+
+    localStorage.setItem(
+      "riasStudyHubProgress",
+      JSON.stringify(progress)
+    );
+
+  }
+
+
+  function updateCompletionUI() {
+
+    const progress = getProgress();
+
+    const completed =
+      progress.reviewers &&
+      progress.reviewers[reviewerId] === true;
+
+
+    if (completed) {
+
+      completionStatus.textContent = "Completed ✓";
+      completionStatus.classList.add("completed");
+
+      completeBtn.textContent = "Completed ✓";
+      completeBtn.classList.add("completed");
+
+      progressFill.style.width = "100%";
+
+    } else {
+
+      completionStatus.textContent = "Not completed";
+      completionStatus.classList.remove("completed");
+
+      completeBtn.textContent = "Mark as Complete";
+      completeBtn.classList.remove("completed");
+
+      progressFill.style.width = "0%";
+
+    }
+
+  }
+
+
+  completeBtn.addEventListener("click", function () {
+
+    const progress = getProgress();
+
+    if (!progress.reviewers) {
+      progress.reviewers = {};
+    }
+
+    const currentlyCompleted =
+      progress.reviewers[reviewerId] === true;
+
+    progress.reviewers[reviewerId] =
+      !currentlyCompleted;
+
+    saveProgress(progress);
+
+    updateCompletionUI();
+
+  });
+
+
+  updateCompletionUI();
+
+</script>
+
+</body>
+</html>

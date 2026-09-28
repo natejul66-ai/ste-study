@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Factoring &amp; Laws of Exponents | STE Study Hub</title>
+
+  <style>
+    :root {
+      --background: #0f1117;
+      --surface: #171a21;
+      --surface-hover: #1c2029;
+      --border: #282d38;
+      --text: #f1f3f5;
+      --muted: #969daa;
+      --blue: #4d9fff;
+      --blue-hover: #6aafff;
+      --green: #4ade80;
+      --yellow: #facc15;
+      --red: #fb7185;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 17, 23, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--blue);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 45px 22px 70px;
+    }
+
+    .hero {
+      margin-bottom: 35px;
+    }
+
+    .subject-label {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 16px;
+    }
+
+    .completion {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 35px;
+    }
+
+    .completion-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 13px;
+    }
+
+    .completion-title {
+      font-weight: 700;
+    }
+
+    .completion-status {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .completion-status.completed {
+      color: var(--green);
+    }
+
+    .progress-bar {
+      height: 8px;
+      border-radius: 20px;
+      background: #252a34;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      transition: width 0.3s;
+    }
+
+    .complete-btn {
+      margin-top: 15px;
+      border: 1px solid var(--blue);
+      background: transparent;
+      color: var(--blue);
+      padding: 10px 16px;
+      border-radius: 9px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .complete-btn:hover {
+      background: var(--blue);
+      color: #08111f;
+    }
+
+    .complete-btn.completed {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    section {
+      margin-bottom: 42px;
+    }
+
+    .section-heading {
+      margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+      font-size: 27px;
+      margin-bottom: 5px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .card h4 {
+      color: var(--blue);
+      font-size: 16px;
+      margin-bottom: 7px;
+    }
+
+    .card p {
+      color: #d6d9df;
+    }
+
+    .definition {
+      border-left: 4px solid var(--blue);
+      background: #141922;
+    }
+
+    .definition strong {
+      color: var(--blue);
+    }
+
+    /* PROPERTY GRID */
+
+    .property-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .property {
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 18px;
+    }
+
+    .property-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 50%;
+      background: #202735;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .property p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .property strong {
+      color: var(--text);
+    }
+
+    /* DIAGRAMS */
+
+    .diagram-box {
+      background: #11141b;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 25px;
+      margin: 20px 0;
+      overflow-x: auto;
+    }
+
+    .diagram-title {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    svg {
+      display: block;
+      margin: auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .axis {
+      stroke: #68707e;
+      stroke-width: 2;
+    }
+
+    .grid-line {
+      stroke: #282d38;
+      stroke-width: 1;
+    }
+
+    .demand-line {
+      stroke: var(--blue);
+      stroke-width: 5;
+      fill: none;
+    }
+
+    .supply-line {
+      stroke: var(--green);
+      stroke-width: 5;
+      fill: none;
+    }
+
+    .shortage-line {
+      stroke: var(--red);
+      stroke-width: 6;
+    }
+
+    .surplus-line {
+      stroke: var(--yellow);
+      stroke-width: 6;
+    }
+
+    .equilibrium-dot {
+      fill: var(--yellow);
+    }
+
+    .svg-label {
+      fill: var(--text);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .svg-muted {
+      fill: var(--muted);
+      font-size: 13px;
+    }
+
+    .svg-blue {
+      fill: var(--blue);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .svg-green {
+      fill: var(--green);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .svg-red {
+      fill: var(--red);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .svg-yellow {
+      fill: var(--yellow);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* SCHEDULE */
+
+    .schedule {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    .schedule th,
+    .schedule td {
+      border: 1px solid var(--border);
+      padding: 13px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .schedule th {
+      background: #202530;
+      color: var(--blue);
+    }
+
+    .schedule td {
+      background: #141820;
+      color: #d6d9df;
+    }
+
+    .equilibrium-cell {
+      color: var(--green) !important;
+      font-weight: 700;
+    }
+
+    .shortage-cell {
+      color: var(--red) !important;
+      font-weight: 700;
+    }
+
+    .surplus-cell {
+      color: var(--yellow) !important;
+      font-weight: 700;
+    }
+
+    /* FORMULA */
+
+    .formula {
+      background: #101722;
+      border: 1px solid #263b55;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      margin: 18px 0;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    /* STEPS */
+
+    .steps {
+      display: grid;
+      gap: 13px;
+      margin-top: 15px;
+    }
+
+    .step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .step-number {
+      min-width: 29px;
+      height: 29px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #08111f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* THREE STATES */
+
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .state {
+      padding: 20px;
+      border-radius: 13px;
+      background: #141820;
+      border: 1px solid var(--border);
+    }
+
+    .state h3 {
+      margin-bottom: 8px;
+    }
+
+    .state p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .state.equilibrium h3 {
+      color: var(--green);
+    }
+
+    .state.shortage h3 {
+      color: var(--red);
+    }
+
+    .state.surplus h3 {
+      color: var(--yellow);
+    }
+
+    /* CAUSE EFFECT */
+
+    .cause-effect {
+      display: grid;
+      gap: 12px;
+    }
+
+    .cause {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      padding: 16px;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+    }
+
+    .cause strong {
+      color: var(--blue);
+    }
+
+    .arrow {
+      color: var(--blue);
+      font-size: 20px;
+    }
+
+    /* VIDEO */
+
+    .video-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 22px;
+    }
+
+    .video-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .video-card h3 {
+      margin-bottom: 7px;
+    }
+
+    .video-card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 17px;
+    }
+
+    .video-link {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 9px;
+      background: var(--blue);
+      color: #08111f;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .video-link:hover {
+      background: var(--blue-hover);
+    }
+
+    /* QUICK REVIEW */
+
+    .quick-list {
+      display: grid;
+      gap: 11px;
+    }
+
+    .quick-item {
+      padding: 14px 16px;
+      background: #141820;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #d6d9df;
+    }
+
+    .quick-item strong {
+      color: var(--blue);
+    }
+
+    @media (max-width: 750px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+        gap: 14px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .property-grid,
+      .state-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 32px 16px 60px;
+      }
+
+      .card {
+        padding: 19px;
+      }
+
+      .cause {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+    }
+    /* =========================
+   VIDEO LIBRARY
+========================= */
+
+.video-library {
+  margin-top: 55px;
+}
+
+.section-heading {
+  margin-bottom: 20px;
+}
+
+.section-label {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.section-heading h2 {
+  margin: 6px 0 5px;
+  font-size: 25px;
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Folder */
+
+.folder {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Folder top */
+
+.folder-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 22px;
+  background: var(--surface-hover);
+  border-bottom: 1px solid var(--border);
+}
+
+.folder-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(77, 159, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+}
+
+.folder-header h3 {
+  margin: 0 0 4px;
+  font-size: 17px;
+}
+
+.folder-header span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Video list */
+
+.video-list {
+  padding: 8px;
+}
+
+.video-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 16px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  transition: 0.2s ease;
+}
+
+.video-item:hover {
+  background: var(--surface-hover);
+}
+
+.video-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: rgba(77, 159, 255, 0.12);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.video-info {
+  flex: 1;
+}
+
+.video-info h4 {
+  margin: 0 0 4px;
+  font-size: 14px;
+}
+
+.video-info p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.video-arrow {
+  color: var(--muted);
+  font-size: 18px;
+  transition: 0.2s ease;
+}
+
+.video-item:hover .video-arrow {
+  color: var(--blue);
+  transform: translate(2px, -2px);
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .folder-header {
+    padding: 17px;
+  }
+
+  .video-item {
+    padding: 14px 9px;
+  }
+
+  .video-info p {
+    font-size: 11px;
+  }
+
+  .video-arrow {
+    font-size: 16px;
+  }
+}
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <a href="index.html" class="logo">
+      STE <span>Study Hub</span>
+    </a>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="reviewer.html" class="active">Reviewers</a>
+      <a href="quizzes.html">Quizzes</a>
+      <a href="notes.html">Notes</a>
+      <a href="progress.html">Progress</a>
+    </nav>
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <!-- HERO -->
+
+  <div class="hero">
+
+    <div class="subject-label">Mathematics Reviewer</div>
+
+    <h1>
+      Factoring &amp; Laws of <span>Exponents</span>
+    </h1>
+
+    <p>
+      Learn the seven laws of exponents, then follow the same method order used in the linked video: GCF, grouping, trinomials (a = 1 and a &ne; 1), perfect square trinomials, difference of squares, and sum/difference of cubes.
+    </p>
+
+  </div>
+
+
+  <!-- COMPLETION -->
+
+  <div class="completion">
+
+    <div class="completion-top">
+
+      <div>
+        <div class="completion-title">
+          Reviewer Progress
+        </div>
+
+        <div class="completion-status" id="completionStatus">
+          Not completed
+        </div>
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <button class="complete-btn" id="completeBtn">
+      Mark as Complete
+    </button>
+
+  </div>
+
+
+  <!-- 1. WHAT IS AN EXPONENT -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>1. What Is an Exponent?</h2>
+      <p>The shorthand for repeated multiplication.</p>
+    </div>
+
+    <div class="card definition">
+      <p>
+        An <strong>exponent</strong> (or power) tells you how many times a
+        number, called the <strong>base</strong>, is multiplied by itself.
+        In <strong>x&#8319;</strong>, <strong>x</strong> is the base and
+        <strong>n</strong> is the exponent.
+      </p>
+    </div>
+
+    <div class="formula">
+      b&#8319; = b &times; b &times; b &times; ... (n times)
+    </div>
+
+    <div class="card">
+      <h3>Example</h3>
+      <p>
+        <strong>2&#8308;</strong> means 2 multiplied by itself 4 times:
+        2 &times; 2 &times; 2 &times; 2 = <strong>16</strong>.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- 2. LAWS OF EXPONENTS -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>2. Laws of Exponents</h2>
+      <p>Seven rules that let you simplify expressions without expanding them.</p>
+    </div>
+
+    <div class="property-grid">
+
+      <div class="property">
+        <div class="property-number">1</div>
+        <p><strong>Product Rule:</strong> x<sup>m</sup> &middot; x<sup>n</sup> = x<sup>m+n</sup></p>
+      </div>
+
+      <div class="property">
+        <div class="property-number">2</div>
+        <p><strong>Quotient Rule:</strong> x<sup>m</sup> &divide; x<sup>n</sup> = x<sup>m&minus;n</sup></p>
+      </div>
+
+      <div class="property">
+        <div class="property-number">3</div>
+        <p><strong>Power Rule:</strong> (x<sup>m</sup>)<sup>n</sup> = x<sup>mn</sup></p>
+      </div>
+
+      <div class="property">
+        <div class="property-number">4</div>
+        <p><strong>Power of a Product:</strong> (xy)<sup>n</sup> = x<sup>n</sup>y<sup>n</sup></p>
+      </div>
+
+      <div class="property">
+        <div class="property-number">5</div>
+        <p><strong>Power of a Quotient:</strong> (x/y)<sup>n</sup> = x<sup>n</sup>/y<sup>n</sup></p>
+      </div>
+
+      <div class="property">
+        <div class="property-number">6</div>
+        <p><strong>Zero Exponent:</strong> x&#8304; = 1 (x &ne; 0)</p>
+      </div>
+
+      <div class="property">
+        <div class="property-number">7</div>
+        <p><strong>Negative Exponent:</strong> x<sup>&minus;n</sup> = 1/x<sup>n</sup></p>
+      </div>
+
+    </div>
+
+    <div class="card">
+      <h3>Worked Examples</h3>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>
+            <strong>x&#179; &middot; x&#8308; = x&#8311;</strong> &mdash; add
+            the exponents (3 + 4 = 7) because the bases match.
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>
+            <strong>y&#8311; &divide; y&#179; = y&#8308;</strong> &mdash;
+            subtract the exponents (7 &minus; 3 = 4).
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>
+            <strong>(a&sup2;)&#179; = a&#8310;</strong> &mdash;
+            multiply the exponents (2 &times; 3 = 6).
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <div>
+            <strong>2&#8315;&sup3; = 1/2&sup3; = 1/8</strong> &mdash; flip the
+            base to make the exponent positive.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- 3. WHAT IS FACTORING -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>3. What Is Factoring?</h2>
+      <p>Breaking an expression into the pieces that multiply back into it.</p>
+    </div>
+
+    <div class="card definition">
+      <p>
+        <strong>Factoring</strong> is rewriting a polynomial as a
+        <strong>product of simpler polynomials</strong> (its factors). It's
+        the reverse of distributing/expanding. This reviewer walks through
+        the methods in the same order used in the
+        <strong>Factoring Trinomials &amp; Polynomials</strong> video linked
+        in the Video Library below: GCF first, then grouping, then
+        trinomials, then the special patterns.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- 4. GCF -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>4. Greatest Common Monomial Factor (GCF)</h2>
+      <p>Always try this method first, on every problem.</p>
+    </div>
+
+    <div class="card">
+      <h3>Steps</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>Find the largest number that divides every term's coefficient.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>Find the lowest power of each variable that appears in every term.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>Divide each term by that GCF and write it outside a parenthesis.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="formula">
+      6x&sup3; + 9x&sup2; = 3x&sup2;(2x + 3)
+    </div>
+
+    <div class="card">
+      <h3>One More Example</h3>
+      <p>
+        <strong>12x&sup2;y &minus; 18xy&sup2; = 6xy(2x &minus; 3y)</strong>.
+        The GCF of 12 and 18 is 6, and the lowest shared power of x and y
+        across both terms is x&sup1; and y&sup1;.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- 5. FACTORING BY GROUPING -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>5. Factoring by Grouping</h2>
+      <p>The go-to method for polynomials with four terms.</p>
+    </div>
+
+    <div class="card">
+      <h3>Steps</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>Split the polynomial into two pairs of terms.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>Factor out the GCF from each pair separately.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>
+            If both pairs now share the same binomial, factor that
+            binomial out of the whole expression.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="formula">
+      xy + 3x + 2y + 6 = x(y + 3) + 2(y + 3) = (y + 3)(x + 2)
+    </div>
+
+    <div class="card">
+      <h3>A Cubic Example</h3>
+      <p>
+        Grouping also works on higher-degree polynomials:
+        <strong>2x&sup3; + 6x&sup2; + 5x + 15 = 2x&sup2;(x + 3) + 5(x + 3)
+        = (x + 3)(2x&sup2; + 5)</strong>.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- 6. TRINOMIALS A=1 -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>6. Factoring Trinomials When the Leading Coefficient Is 1</h2>
+      <p>x&sup2; + bx + c &mdash; the simplest trinomial case.</p>
+    </div>
+
+    <div class="card">
+      <h3>Steps</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>List factor pairs of <strong>c</strong>.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>Find the pair that <strong>adds up to b</strong>.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>Write it as <strong>(x + first)(x + second)</strong>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="formula">
+      x&sup2; + 7x + 12 = (x + 3)(x + 4)
+    </div>
+
+    <div class="card">
+      <h3>More Examples</h3>
+      <p>
+        <strong>x&sup2; &minus; 2x &minus; 15 = (x &minus; 5)(x + 3)</strong>
+        &mdash; check: (&minus;5)(3) = &minus;15 and (&minus;5) + 3 = &minus;2. ✓
+      </p>
+      <p>
+        <strong>x&sup2; &minus; 9x + 20 = (x &minus; 4)(x &minus; 5)</strong>
+        &mdash; check: (&minus;4)(&minus;5) = 20 and (&minus;4) + (&minus;5) = &minus;9. ✓
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- 7. TRINOMIALS A != 1 -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>7. Factoring Trinomials When the Leading Coefficient Is Not 1</h2>
+      <p>ax&sup2; + bx + c, where a &ne; 1 &mdash; the AC method.</p>
+    </div>
+
+    <div class="card">
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>Multiply the leading coefficient <strong>a</strong> by the constant term <strong>c</strong>.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>
+            Find two numbers that <strong>multiply to ac</strong> and
+            <strong>add to b</strong>.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>Rewrite the middle term (bx) using those two numbers.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <div>Finish by <strong>factoring by grouping</strong> (Method 5).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="formula">
+      2x&sup2; + 7x + 3 = 2x&sup2; + 6x + x + 3 = 2x(x + 3) + 1(x + 3) = (x + 3)(2x + 1)
+    </div>
+
+    <div class="card">
+      <p>
+        Here ac = 2 &times; 3 = 6. The numbers 6 and 1 multiply to 6
+        and add to 7, so 7x splits into 6x + x, then grouping takes over.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- 8. PERFECT SQUARE TRINOMIAL -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>8. Perfect Square Trinomial</h2>
+      <p>Learn to test for this pattern before trying anything else.</p>
+    </div>
+
+    <div class="card">
+      <h3>The 3-Part Test</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>Is the <strong>first term</strong> a perfect square?</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>Is the <strong>last term</strong> a perfect square?</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>
+            Is the <strong>middle term</strong> equal to twice the product
+            of the two square roots?
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="property-grid">
+      <div class="property">
+        <div class="property-number">+</div>
+        <p><strong>a&sup2; + 2ab + b&sup2; = (a + b)&sup2;</strong></p>
+      </div>
+      <div class="property">
+        <div class="property-number">&minus;</div>
+        <p><strong>a&sup2; &minus; 2ab + b&sup2; = (a &minus; b)&sup2;</strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Testing an Example</h3>
+      <p>
+        Is <strong>4x&sup2; + 12x + 9</strong> a perfect square trinomial?
+        &radic;4x&sup2; = 2x, &radic;9 = 3, and 2(2x)(3) = 12x &mdash; it
+        matches the middle term, so yes: <strong>4x&sup2; + 12x + 9 =
+        (2x + 3)&sup2;</strong>.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- 9. DIFFERENCE OF TWO SQUARES -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>9. Difference of Two Squares</h2>
+      <p>Spot this pattern: a squared term minus another squared term.</p>
+    </div>
+
+    <div class="formula">
+      a&sup2; &minus; b&sup2; = (a + b)(a &minus; b)
+    </div>
+
+    <div class="card">
+      <h3>Examples</h3>
+      <p>
+        <strong>x&sup2; &minus; 25 = (x + 5)(x &minus; 5)</strong>,
+        since 25 = 5&sup2;.
+      </p>
+      <p>
+        <strong>4x&sup2; &minus; 9 = (2x + 3)(2x &minus; 3)</strong>,
+        since 4x&sup2; = (2x)&sup2; and 9 = 3&sup2;.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>GCF First, Then Difference of Squares</h3>
+      <p>
+        <strong>3x&sup2; &minus; 27 = 3(x&sup2; &minus; 9) = 3(x + 3)(x &minus; 3)</strong>.
+        Always pull out a GCF first &mdash; it often reveals the pattern
+        underneath.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- 10. SUM AND DIFFERENCE OF CUBES -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>10. Sum and Difference of Cubes</h2>
+      <p>Less common, but worth memorizing the pattern.</p>
+    </div>
+
+    <div class="formula">
+      a&sup3; + b&sup3; = (a + b)(a&sup2; &minus; ab + b&sup2;)
+    </div>
+
+    <div class="formula">
+      a&sup3; &minus; b&sup3; = (a &minus; b)(a&sup2; + ab + b&sup2;)
+    </div>
+
+  </section>
+
+
+  <!-- 11. FACTOR COMPLETELY -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>11. Bonus: Factor Completely by Combining Patterns</h2>
+      <p>Sometimes a perfect square trinomial is hiding inside a difference of squares.</p>
+    </div>
+
+    <div class="card">
+      <h3>Steps</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div>Group three of the terms and check if they form a perfect square trinomial.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div>Rewrite that group as a squared binomial.</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div>
+            Now the whole expression is a <strong>difference of two
+            squares</strong> &mdash; factor it that way.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="formula">
+      x&sup2; + 6x + 9 &minus; y&sup2; = (x + 3)&sup2; &minus; y&sup2; = (x + 3 + y)(x + 3 &minus; y)
+    </div>
+
+    <div class="card">
+      <p>
+        The first three terms, x&sup2; + 6x + 9, factor into (x + 3)&sup2;
+        (Method 8). That turns the whole expression into
+        <strong>(x + 3)&sup2; &minus; y&sup2;</strong>, a difference of
+        squares (Method 9), which factors into two binomials.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- 12. QUICK COMPARISON -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>12. Quick Comparison: Factoring Patterns</h2>
+      <p>Which pattern applies? Check the shape of the expression first.</p>
+    </div>
+
+    <table class="schedule">
+      <tr>
+        <th>Pattern</th>
+        <th>Shape</th>
+        <th>Factors Into</th>
+      </tr>
+      <tr>
+        <td>GCF</td>
+        <td>Every term shares a factor</td>
+        <td>factor(remaining terms)</td>
+      </tr>
+      <tr>
+        <td>Grouping</td>
+        <td>Four terms</td>
+        <td>(binomial)(binomial)</td>
+      </tr>
+      <tr>
+        <td>General Trinomial (a = 1)</td>
+        <td>x&sup2; + bx + c</td>
+        <td>(x + m)(x + n)</td>
+      </tr>
+      <tr>
+        <td>General Trinomial (a &ne; 1)</td>
+        <td>ax&sup2; + bx + c</td>
+        <td>AC method &rarr; grouping</td>
+      </tr>
+      <tr>
+        <td>Perfect Square Trinomial</td>
+        <td>a&sup2; &plusmn; 2ab + b&sup2;</td>
+        <td>(a &plusmn; b)&sup2;</td>
+      </tr>
+      <tr>
+        <td>Difference of Squares</td>
+        <td>a&sup2; &minus; b&sup2;</td>
+        <td>(a+b)(a&minus;b)</td>
+      </tr>
+      <tr>
+        <td>Sum/Difference of Cubes</td>
+        <td>a&sup3; &plusmn; b&sup3;</td>
+        <td>(a&plusmn;b)(a&sup2;&#8723;ab+b&sup2;)</td>
+      </tr>
+    </table>
+
+  </section>
+
+
+  <!-- VIDEO LIBRARY -->
+
+  <section class="video-library">
+
+    <div class="section-heading">
+      <div>
+        <span class="section-label">LEARNING VIDEOS</span>
+
+        <h2>📁 Video Library</h2>
+
+        <p>
+          Watch these videos for a walkthrough of every method covered above.
+        </p>
+      </div>
+    </div>
+
+    <div class="folder">
+
+      <div class="folder-header">
+        <div class="folder-icon">📁</div>
+        <div>
+          <h3>Factoring Videos</h3>
+          <span>3 videos &bull; Mathematics</span>
+        </div>
+      </div>
+
+      <div class="video-list">
+
+        <a
+          class="video-item"
+          href="https://youtu.be/9MUDAr1PnlE"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="video-icon">▶</div>
+          <div class="video-info">
+            <h4>Factoring Trinomials &amp; Polynomials, Basic Introduction</h4>
+            <p>
+              The main video this reviewer follows &mdash; covers grouping,
+              trinomials (leading coefficient 1 and not 1), perfect square
+              trinomials, difference of squares, and sum/difference of cubes.
+            </p>
+          </div>
+          <span class="video-arrow">↗</span>
+        </a>
+
+        <a
+          class="video-item"
+          href="https://www.youtube.com/watch?v=ynefQgfxZBs"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="video-icon">▶</div>
+          <div class="video-info">
+            <h4>The Greatest Common Factor</h4>
+            <p>
+              A closer look at finding and factoring out the GCF before
+              trying any other method.
+            </p>
+          </div>
+          <span class="video-arrow">↗</span>
+        </a>
+
+        <a
+          class="video-item"
+          href="https://www.youtube.com/watch?v=t7-JCa7phCQ"
+          target="_blank"
+          rel="noopener"
+        >
+          <div class="video-icon">▶</div>
+          <div class="video-info">
+            <h4>How to Factor by Grouping</h4>
+            <p>
+              More practice splitting four-term polynomials into pairs and
+              factoring out the shared binomial.
+            </p>
+          </div>
+          <span class="video-arrow">↗</span>
+        </a>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- 13. QUICK REVIEW -->
+
+  <section>
+
+    <div class="section-heading">
+      <h2>13. Quick Review</h2>
+      <p>The most important things to remember before a quiz.</p>
+    </div>
+
+    <div class="card">
+      <div class="quick-list">
+
+        <div class="quick-item">
+          <strong>Same base, multiplying:</strong> add the exponents.
+        </div>
+
+        <div class="quick-item">
+          <strong>Same base, dividing:</strong> subtract the exponents.
+        </div>
+
+        <div class="quick-item">
+          <strong>Power of a power:</strong> multiply the exponents.
+        </div>
+
+        <div class="quick-item">
+          <strong>Anything to the 0:</strong> equals 1.
+        </div>
+
+        <div class="quick-item">
+          <strong>Negative exponent:</strong> flip it to the other side of the fraction.
+        </div>
+
+        <div class="quick-item">
+          <strong>Factoring order to try:</strong> GCF &rarr; grouping (4 terms)
+          &rarr; trinomial methods &rarr; special patterns (squares/cubes).
+        </div>
+
+        <div class="quick-item">
+          <strong>Trinomial (a = 1):</strong> find two numbers that multiply to c and add to b.
+        </div>
+
+        <div class="quick-item">
+          <strong>Trinomial (a &ne; 1):</strong> use the AC method, then finish by grouping.
+        </div>
+
+        <div class="quick-item">
+          <strong>Perfect square trinomial test:</strong> both ends are perfect
+          squares, and the middle is twice their product.
+        </div>
+
+        <div class="quick-item">
+          <strong>a&sup2; &minus; b&sup2;:</strong> difference of squares &rarr; (a+b)(a&minus;b).
+        </div>
+
+        <div class="quick-item">
+          <strong>Factor completely:</strong> a perfect square trinomial can hide
+          inside a bigger difference of squares &mdash; group it first.
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<script>
+
+  const reviewerId = "factoring-exponents";
+
+  const completeBtn =
+    document.getElementById("completeBtn");
+
+  const completionStatus =
+    document.getElementById("completionStatus");
+
+  const progressFill =
+    document.getElementById("progressFill");
+
+
+  function getProgress() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem("riasStudyHubProgress")
+      ) || {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    } catch (error) {
+
+      return {
+        reviewers: {},
+        quizzes: {},
+        notes: {}
+      };
+
+    }
+
+  }
+
+
+  function saveProgress(progress) {
+
+    localStorage.setItem(
+      "riasStudyHubProgress",
+      JSON.stringify(progress)
+    );
+
+  }
+
+
+  function updateCompletionUI() {
+
+    const progress = getProgress();
+
+    const completed =
+      progress.reviewers &&
+      progress.reviewers[reviewerId] === true;
+
+
+    if (completed) {
+
+      completionStatus.textContent = "Completed ✓";
+      completionStatus.classList.add("completed");
+
+      completeBtn.textContent = "Completed ✓";
+      completeBtn.classList.add("completed");
+
+      progressFill.style.width = "100%";
+
+    } else {
+
+      completionStatus.textContent = "Not completed";
+      completionStatus.classList.remove("completed");
+
+      completeBtn.textContent = "Mark as Complete";
+      completeBtn.classList.remove("completed");
+
+      progressFill.style.width = "0%";
+
+    }
+
+  }
+
+
+  completeBtn.addEventListener("click", function () {
+
+    const progress = getProgress();
+
+    if (!progress.reviewers) {
+      progress.reviewers = {};
+    }
+
+    const currentlyCompleted =
+      progress.reviewers[reviewerId] === true;
+
+    progress.reviewers[reviewerId] =
+      !currentlyCompleted;
+
+    saveProgress(progress);
+
+    updateCompletionUI();
+
+  });
+
+
+  updateCompletionUI();
+
+</script>
+
+</body>
+</html>
