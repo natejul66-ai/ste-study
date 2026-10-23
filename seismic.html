@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earth's Interior and Seismic Waves | STE Study Hub</title>
+
+<style>
+:root {
+  --background:#0f1117;
+  --surface:#171a21;
+  --surface-hover:#1c2029;
+  --border:#282d38;
+  --text:#f1f3f5;
+  --muted:#969daa;
+  --blue:#4d9fff;
+  --blue-hover:#6aafff;
+  --green:#4ade80;
+  --yellow:#facc15;
+  --red:#f87171;
+}
+* {box-sizing:border-box;margin:0;padding:0}
+html {scroll-behavior:smooth}
+body {
+  font-family:Arial,sans-serif;
+  background:var(--background);
+  color:var(--text);
+  line-height:1.7;
+}
+header {
+  border-bottom:1px solid var(--border);
+  background:rgba(15,17,23,.95);
+  position:sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter:blur(10px);
+}
+.header-inner {
+  max-width:1100px;
+  margin:auto;
+  padding:18px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+.logo {
+  color:var(--text);
+  text-decoration:none;
+  font-size:21px;
+  font-weight:700;
+  white-space:nowrap;
+}
+.logo span {color:var(--blue)}
+nav {display:flex;gap:20px;flex-wrap:wrap}
+nav a {
+  color:var(--muted);
+  text-decoration:none;
+  font-size:14px;
+  font-weight:600;
+}
+nav a:hover,nav a.active {color:var(--blue)}
+.container {
+  max-width:1000px;
+  margin:auto;
+  padding:44px 22px 70px;
+}
+.hero {margin-bottom:32px}
+.subject-label {
+  color:var(--blue);
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+h1 {font-size:38px;line-height:1.2;margin-bottom:13px}
+h1 span {color:var(--blue)}
+.hero p,.section-heading p {color:var(--muted)}
+.hero p {max-width:750px}
+section {margin-bottom:42px}
+.section-heading {margin-bottom:19px}
+.section-heading h2 {font-size:27px;line-height:1.3;margin-bottom:5px}
+.section-heading p {font-size:14px}
+.card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:23px;
+  margin-bottom:17px;
+}
+.card h3 {font-size:20px;margin-bottom:10px}
+.card h4 {font-size:16px;margin-bottom:7px}
+.card p {color:#d6d9df}
+.definition {
+  border-left:4px solid var(--blue);
+  background:#141922;
+}
+.definition strong {color:var(--blue)}
+.completion {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:20px;
+  margin-bottom:36px;
+}
+.completion-top {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
+}
+.completion-title {font-weight:700}
+.completion-status {font-size:13px;color:var(--muted)}
+.completion-status.completed {color:var(--green)}
+.progress-bar {
+  height:8px;
+  border-radius:20px;
+  background:#252a34;
+  overflow:hidden;
+}
+.progress-fill {
+  height:100%;
+  width:0;
+  background:var(--blue);
+  transition:width .3s;
+}
+.complete-btn {
+  margin-top:15px;
+  border:1px solid var(--blue);
+  background:transparent;
+  color:var(--blue);
+  padding:10px 16px;
+  border-radius:9px;
+  font-weight:700;
+  cursor:pointer;
+}
+.complete-btn:hover {background:var(--blue);color:#08111f}
+.complete-btn.completed {border-color:var(--green);color:var(--green)}
+.visual {
+  background:#11141b;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:23px;
+  margin:18px 0;
+  overflow-x:auto;
+}
+.visual-title {
+  color:var(--muted);
+  text-align:center;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+svg {display:block;max-width:100%;height:auto;margin:auto}
+.diagram-label {fill:var(--text);font-size:15px;font-weight:700}
+.diagram-small {fill:var(--muted);font-size:12px}
+.property-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.property {
+  background:#141820;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:17px;
+}
+.property h4 {color:var(--blue)}
+.property p {font-size:14px;color:var(--muted)}
+.tag {
+  display:inline-block;
+  border-radius:7px;
+  padding:4px 9px;
+  font-size:12px;
+  font-weight:700;
+  background:#202735;
+  color:var(--blue);
+  margin-bottom:9px;
+}
+.blue {color:var(--blue);font-weight:700}
+.green {color:var(--green);font-weight:700}
+.yellow {color:var(--yellow);font-weight:700}
+.red {color:var(--red);font-weight:700}
+.formula {
+  margin:17px 0;
+  background:#101722;
+  border:1px solid #263b55;
+  border-radius:12px;
+  padding:17px;
+  text-align:center;
+  color:var(--blue);
+  font-size:19px;
+  font-weight:700;
+}
+.note {
+  border:1px solid #554b28;
+  background:#211e15;
+  padding:16px;
+  border-radius:11px;
+  margin-top:16px;
+  color:#e7dfc5;
+  font-size:14px;
+}
+.steps {display:grid;gap:13px}
+.step {display:flex;align-items:flex-start;gap:12px}
+.step-number {
+  width:29px;
+  min-width:29px;
+  height:29px;
+  border-radius:50%;
+  background:var(--blue);
+  color:#08111f;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  font-weight:700;
+}
+.step p {color:#d6d9df}
+.comparison {width:100%;border-collapse:collapse;margin-top:12px}
+.comparison th,.comparison td {
+  border:1px solid var(--border);
+  padding:12px;
+  text-align:left;
+  font-size:13px;
+}
+.comparison th {background:#202530;color:var(--blue)}
+.comparison td {background:#141820;color:#d6d9df}
+.timeline {display:grid;gap:13px}
+.timeline-item {
+  display:grid;
+  grid-template-columns:110px 1fr;
+  gap:15px;
+  background:#141820;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:15px;
+}
+.timeline-time {font-weight:700;color:var(--blue)}
+.timeline-item p {font-size:14px;color:var(--muted)}
+.video-link {
+  display:inline-block;
+  background:var(--blue);
+  color:#08111f;
+  padding:10px 15px;
+  border-radius:9px;
+  font-weight:700;
+  font-size:13px;
+  text-decoration:none;
+}
+.quick-list {display:grid;gap:10px}
+.quick-item {
+  background:#141820;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:13px 15px;
+  color:#d6d9df;
+}
+.quick-item strong {color:var(--blue)}
+@media(max-width:750px) {
+  .header-inner {flex-direction:column;align-items:flex-start}
+  nav {gap:13px}
+  .container {padding:32px 16px 55px}
+  h1 {font-size:30px}
+  .property-grid {grid-template-columns:1fr}
+  .card {padding:18px}
+  .comparison th,.comparison td {padding:8px;font-size:11px}
+  .timeline-item {grid-template-columns:1fr;gap:3px}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">STE <span>Study Hub</span></a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="reviewer.html" class="active">Reviewers</a>
+      <a href="quizzes.html">Quizzes</a>
+      <a href="notes.html">Notes</a>
+      <a href="progress.html">Progress</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+<div class="hero">
+  <div class="subject-label">Science Reviewer</div>
+  <h1>Earth's Interior and <span>Seismic Waves</span></h1>
+  <p>
+    Learn how seismic waves travel, how scientists study Earth's hidden
+    layers, what discontinuities reveal about the planet, and how
+    earthquake early warning and preparedness help protect communities
+    in the Philippines.
+  </p>
+</div>
+
+<div class="completion">
+  <div class="completion-top">
+    <div>
+      <div class="completion-title">Reviewer Progress</div>
+      <div class="completion-status" id="completionStatus">Not completed</div>
+    </div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <button class="complete-btn" id="completeBtn">Mark as Complete</button>
+</div>
+
+
+<!-- SECTION 1 -->
+
+<section>
+  <div class="section-heading">
+    <h2>1. What Are Seismic Waves?</h2>
+    <p>Earthquakes release energy that travels through Earth and along its surface.</p>
+  </div>
+
+  <div class="card definition">
+    <p>
+      <strong>Seismic waves</strong> are waves of energy produced by
+      earthquakes, volcanic activity, explosions, or other disturbances.
+      Scientists study their arrival times, speeds, and paths to investigate
+      Earth's interior.
+    </p>
+  </div>
+
+  <div class="property-grid">
+    <div class="property">
+      <h4>Body Waves</h4>
+      <p>Travel through Earth's interior. The two main types are P-waves and S-waves.</p>
+    </div>
+    <div class="property">
+      <h4>Surface Waves</h4>
+      <p>Travel along Earth's surface. They often produce strong ground motion and can cause significant damage.</p>
+    </div>
+  </div>
+
+  <div class="visual">
+    <div class="visual-title">Two Main Paths of Seismic Waves</div>
+    <svg viewBox="0 0 560 270" width="560" role="img" aria-label="Body waves travel through Earth while surface waves travel along its exterior">
+      <circle cx="155" cy="130" r="95" fill="#d97745" stroke="#facc15" stroke-width="4"/>
+      <circle cx="155" cy="130" r="62" fill="#facc15"/>
+      <circle cx="155" cy="130" r="31" fill="#f87171"/>
+      <path d="M92 88 Q155 30 218 88" fill="none" stroke="#4d9fff" stroke-width="4"/>
+      <path d="M218 88 Q252 130 218 172" fill="none" stroke="#4d9fff" stroke-width="4"/>
+      <path d="M155 130 L212 91" stroke="#f1f3f5" stroke-width="3" stroke-dasharray="5 4"/>
+      <circle cx="212" cy="91" r="6" fill="#f1f3f5"/>
+      <g class="diagram-label">
+        <text x="300" y="70">Surface waves</text>
+        <text x="300" y="151">Body waves</text>
+      </g>
+      <g class="diagram-small">
+        <text x="300" y="90">Travel along the exterior</text>
+        <text x="300" y="171">Travel through Earth's interior</text>
+      </g>
+      <path d="M225 75 L280 75" stroke="#4d9fff" stroke-width="3"/>
+      <path d="M205 130 L280 150" stroke="#f1f3f5" stroke-width="3" stroke-dasharray="5 4"/>
+      <text x="280" y="240" class="diagram-small">Simplified illustration</text>
+    </svg>
+  </div>
+</section>
+
+
+<!-- SECTION 2 -->
+
+<section>
+  <div class="section-heading">
+    <h2>2. P-Waves and S-Waves</h2>
+    <p>Both are body waves, but they move differently through materials.</p>
+  </div>
+
+  <div class="property-grid">
+    <div class="card">
+      <span class="tag">Primary Wave</span>
+      <h3>P-Waves</h3>
+      <p>
+        P-waves are the fastest seismic body waves, so they are generally
+        the first to arrive at a seismic station.
+      </p>
+      <br>
+      <p><strong>Motion:</strong> Particles vibrate parallel to the direction of travel.</p>
+      <p><strong>Materials:</strong> Solids, liquids, and gases.</p>
+      <p><strong>Other name:</strong> Compressional or longitudinal waves.</p>
+    </div>
+
+    <div class="card">
+      <span class="tag">Secondary Wave</span>
+      <h3>S-Waves</h3>
+      <p>
+        S-waves travel more slowly than P-waves and usually arrive second.
+        They cannot travel through liquids.
+      </p>
+      <br>
+      <p><strong>Motion:</strong> Particles vibrate perpendicular to the direction of travel.</p>
+      <p><strong>Materials:</strong> Solids only.</p>
+      <p><strong>Other name:</strong> Shear or transverse waves.</p>
+    </div>
+  </div>
+
+  <div class="visual">
+    <div class="visual-title">Compare Particle Motion</div>
+    <svg viewBox="0 0 560 310" width="560" role="img" aria-label="P-wave particles move parallel to propagation and S-wave particles move perpendicular to propagation">
+      <text x="25" y="40" class="diagram-label">P-wave: compression and expansion</text>
+      <line x1="30" y1="105" x2="520" y2="105" stroke="#4d9fff" stroke-width="2"/>
+      <g fill="#4d9fff">
+        <circle cx="45" cy="105" r="5"/><circle cx="56" cy="105" r="5"/>
+        <circle cx="67" cy="105" r="5"/><circle cx="78" cy="105" r="5"/>
+        <circle cx="119" cy="105" r="5"/><circle cx="160" cy="105" r="5"/>
+        <circle cx="201" cy="105" r="5"/><circle cx="242" cy="105" r="5"/>
+        <circle cx="253" cy="105" r="5"/><circle cx="264" cy="105" r="5"/>
+        <circle cx="275" cy="105" r="5"/><circle cx="316" cy="105" r="5"/>
+        <circle cx="357" cy="105" r="5"/><circle cx="398" cy="105" r="5"/>
+        <circle cx="439" cy="105" r="5"/><circle cx="450" cy="105" r="5"/>
+        <circle cx="461" cy="105" r="5"/><circle cx="472" cy="105" r="5"/>
+      </g>
+      <path d="M75 145 L475 145" stroke="#f1f3f5" stroke-width="2"/>
+      <path d="M465 137 L475 145 L465 153" fill="none" stroke="#f1f3f5" stroke-width="2"/>
+      <text x="210" y="165" class="diagram-small">Direction of travel</text>
+
+      <text x="25" y="210" class="diagram-label">S-wave: side-to-side or up-and-down motion</text>
+      <line x1="30" y1="260" x2="520" y2="260" stroke="#4ade80" stroke-width="2"/>
+      <path d="M30 260 Q60 220 90 260 T150 260 T210 260 T270 260 T330 260 T390 260 T450 260 T510 260"
+            fill="none" stroke="#4ade80" stroke-width="3"/>
+      <path d="M75 292 L475 292" stroke="#f1f3f5" stroke-width="2"/>
+      <path d="M465 284 L475 292 L465 300" fill="none" stroke="#f1f3f5" stroke-width="2"/>
+    </svg>
+  </div>
+
+  <table class="comparison">
+    <tr><th>Feature</th><th>P-Waves</th><th>S-Waves</th></tr>
+    <tr><td>Relative speed</td><td>Faster</td><td>Slower</td></tr>
+    <tr><td>Arrival at station</td><td>Usually first</td><td>Usually second</td></tr>
+    <tr><td>Particle motion</td><td>Parallel to travel</td><td>Perpendicular to travel</td></tr>
+    <tr><td>Through solids</td><td>Yes</td><td>Yes</td></tr>
+    <tr><td>Through liquids</td><td>Yes</td><td>No</td></tr>
+    <tr><td>Through gases</td><td>Yes</td><td>No</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Exam tip:</strong> If a question asks which wave can travel
+    through Earth's liquid outer core, the answer is <strong>P-wave</strong>.
+    S-waves cannot travel through liquids.
+  </div>
+</section>
+
+
+<!-- SECTION 3 -->
+
+<section>
+  <div class="section-heading">
+    <h2>3. Seismographs and Seismograms</h2>
+    <p>One detects and records ground motion; the other is the recorded result.</p>
+  </div>
+
+  <div class="property-grid">
+    <div class="card">
+      <h3>Seismograph</h3>
+      <p>
+        A <strong>seismograph</strong> is an instrument used to detect
+        and record ground motion caused by seismic waves.
+        Modern instruments commonly use electronic sensors and digital recording systems.
+      </p>
+    </div>
+    <div class="card">
+      <h3>Seismogram</h3>
+      <p>
+        A <strong>seismogram</strong> is the recorded trace or data showing
+        ground motion over time. Scientists examine it to identify wave
+        arrivals and analyze an earthquake.
+      </p>
+    </div>
+  </div>
+
+  <div class="visual">
+    <div class="visual-title">Example of a Seismogram</div>
+    <svg viewBox="0 0 560 280" width="560" role="img" aria-label="Example seismogram showing an early P-wave arrival and later S-wave arrival">
+      <rect x="48" y="35" width="475" height="185" rx="5" fill="#141820" stroke="#282d38"/>
+      <g stroke="#282d38" stroke-width="1">
+        <line x1="48" y1="80" x2="523" y2="80"/>
+        <line x1="48" y1="125" x2="523" y2="125"/>
+        <line x1="48" y1="170" x2="523" y2="170"/>
+        <line x1="140" y1="35" x2="140" y2="220"/>
+        <line x1="235" y1="35" x2="235" y2="220"/>
+        <line x1="330" y1="35" x2="330" y2="220"/>
+        <line x1="425" y1="35" x2="425" y2="220"/>
+      </g>
+      <line x1="48" y1="125" x2="523" y2="125" stroke="#969daa" stroke-width="1"/>
+      <path d="M50 125 L115 125 L125 120 L132 130 L139 115 L146 137 L153 122 L160 128 L170 125 L215 125 L222 118 L229 135 L236 110 L243 142 L250 94 L257 158 L264 75 L271 174 L278 91 L285 157 L292 113 L299 134 L306 122 L313 127 L320 125 L370 125 L380 105 L390 150 L400 87 L410 169 L420 66 L430 186 L440 80 L450 166 L460 95 L470 147 L480 110 L490 135 L500 125 L523 125"
+            fill="none" stroke="#4d9fff" stroke-width="2.5"/>
+      <line x1="145" y1="40" x2="145" y2="215" stroke="#4ade80" stroke-dasharray="5 4" stroke-width="2"/>
+      <line x1="265" y1="40" x2="265" y2="215" stroke="#facc15" stroke-dasharray="5 4" stroke-width="2"/>
+      <text x="112" y="28" class="diagram-label">P arrival</text>
+      <text x="245" y="28" class="diagram-label">S arrival</text>
+      <text x="285" y="255" class="diagram-small" text-anchor="middle">Time →</text>
+      <text x="10" y="135" class="diagram-small" transform="rotate(-90 10 135)">Ground motion</text>
+    </svg>
+    <p class="diagram-small">
+      Illustrative trace only; real seismograms vary by earthquake, distance, and instrument.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>How to Read a Seismogram</h3>
+    <div class="steps">
+      <div class="step"><div class="step-number">1</div><p>Identify the first clear arrival, usually the <strong>P-wave</strong>.</p></div>
+      <div class="step"><div class="step-number">2</div><p>Identify the later <strong>S-wave</strong> arrival, if recorded.</p></div>
+      <div class="step"><div class="step-number">3</div><p>Measure the time difference between the P- and S-wave arrivals.</p></div>
+      <div class="step"><div class="step-number">4</div><p>Use the arrival-time difference with travel-time information to estimate the station's distance from the earthquake source.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 4 -->
+
+<section>
+  <div class="section-heading">
+    <h2>4. How Seismic Waves Reveal Earth's Hidden Layers</h2>
+    <p>Wave speed, direction, and missing arrivals reveal what lies beneath the surface.</p>
+  </div>
+
+  <div class="property-grid">
+    <div class="property">
+      <h4>Changes in Speed</h4>
+      <p>Seismic waves change speed when they pass through materials with different properties.</p>
+    </div>
+    <div class="property">
+      <h4>Refraction</h4>
+      <p>Waves can bend when their speed changes as they enter another layer.</p>
+    </div>
+    <div class="property">
+      <h4>Reflection</h4>
+      <p>Some wave energy bounces off boundaries between layers.</p>
+    </div>
+    <div class="property">
+      <h4>Shadow Zones</h4>
+      <p>Regions where certain direct seismic waves are not detected, helping scientists infer internal boundaries.</p>
+    </div>
+  </div>
+
+  <div class="visual">
+    <div class="visual-title">Wave Paths Inside Earth</div>
+    <svg viewBox="0 0 560 340" width="560" role="img" aria-label="Curved seismic wave paths passing through Earth's interior">
+      <circle cx="200" cy="170" r="135" fill="#d97745" stroke="#facc15" stroke-width="3"/>
+      <circle cx="200" cy="170" r="85" fill="#facc15"/>
+      <circle cx="200" cy="170" r="42" fill="#f87171"/>
+      <path d="M85 100 Q200 -5 315 100" fill="none" stroke="#4d9fff" stroke-width="3"/>
+      <path d="M85 100 Q150 170 200 170 Q250 170 315 100" fill="none" stroke="#4ade80" stroke-width="3"/>
+      <path d="M85 100 Q205 285 315 100" fill="none" stroke="#f1f3f5" stroke-width="2.5" stroke-dasharray="7 5"/>
+      <circle cx="85" cy="100" r="6" fill="#f1f3f5"/>
+      <circle cx="315" cy="100" r="6" fill="#f1f3f5"/>
+      <g class="diagram-label">
+        <text x="355" y="88">Refraction</text>
+        <text x="355" y="150">Changing speed</text>
+        <text x="355" y="212">Wave paths</text>
+      </g>
+      <g class="diagram-small">
+        <text x="355" y="106">Bending between layers</text>
+        <text x="355" y="168">Different materials</text>
+        <text x="355" y="230">Reveal internal structure</text>
+      </g>
+      <text x="200" y="328" text-anchor="middle" class="diagram-small">Simplified illustration, not to scale</text>
+    </svg>
+  </div>
+
+  <div class="card">
+    <h3>What the Evidence Tells Scientists</h3>
+    <div class="steps">
+      <div class="step"><div class="step-number">1</div><p>P- and S-wave speeds vary with the properties of the material they pass through.</p></div>
+      <div class="step"><div class="step-number">2</div><p>S-waves are not transmitted through Earth's liquid outer core.</p></div>
+      <div class="step"><div class="step-number">3</div><p>P-waves pass through the outer core but are strongly refracted, producing a P-wave shadow zone.</p></div>
+      <div class="step"><div class="step-number">4</div><p>Wave patterns and other geophysical evidence help scientists infer the structure and physical state of Earth's layers.</p></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Important:</strong> The absence of direct S-waves through the outer
+    core is key evidence that the outer core is liquid. P-wave behavior also
+    supports this conclusion.
+  </div>
+</section>
+
+
+<!-- SECTION 5 -->
+
+<section>
+  <div class="section-heading">
+    <h2>5. Discontinuities Inside Earth</h2>
+    <p>Discontinuities are boundaries where seismic-wave behavior changes because the material changes.</p>
+  </div>
+
+  <div class="visual">
+    <div class="visual-title">Major Internal Boundaries</div>
+    <svg viewBox="0 0 560 400" width="560" role="img" aria-label="Diagram of the Moho and Gutenberg discontinuities within Earth">
+      <circle cx="190" cy="190" r="150" fill="#d97745" stroke="#58a6ff" stroke-width="5"/>
+      <circle cx="190" cy="190" r="110" fill="#d97745" stroke="#facc15" stroke-width="3"/>
+      <circle cx="190" cy="190" r="62" fill="#facc15" stroke="#f87171" stroke-width="3"/>
+      <circle cx="190" cy="190" r="28" fill="#f87171"/>
+      <path d="M320 55 L355 55 L375 55" stroke="#58a6ff" stroke-width="2" fill="none"/>
+      <path d="M290 105 L355 130 L375 130" stroke="#facc15" stroke-width="2" fill="none"/>
+      <path d="M248 190 L355 210 L375 210" stroke="#f87171" stroke-width="2" fill="none"/>
+      <g class="diagram-label">
+        <text x="382" y="59">Moho</text>
+        <text x="382" y="134">Gutenberg</text>
+        <text x="382" y="214">Inner-core</text>
+        <text x="382" y="232">boundary</text>
+      </g>
+      <g class="diagram-small">
+        <text x="382" y="76">Crust–mantle</text>
+        <text x="382" y="151">Mantle–outer core</text>
+        <text x="382" y="252">Outer–inner core</text>
+      </g>
+      <text x="190" y="370" text-anchor="middle" class="diagram-small">Simplified, not to scale</text>
+    </svg>
+  </div>
+
+  <div class="card">
+    <h3>Mohorovičić Discontinuity (Moho)</h3>
+    <p>
+      The <strong>Moho</strong> is the boundary between Earth's crust and
+      mantle. Seismic-wave speeds generally increase as waves enter the
+      mantle because the rocks have different physical properties.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Gutenberg Discontinuity</h3>
+    <p>
+      The <strong>Gutenberg discontinuity</strong> is the boundary between
+      the mantle and the liquid outer core, at roughly 2,900 kilometers
+      below Earth's surface. S-waves cannot travel through the liquid outer
+      core, and P-waves change speed and direction there.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Lehmann Discontinuity</h3>
+    <p>
+      The <strong>inner-core boundary</strong>, often associated with
+      Inge Lehmann's discovery, separates the liquid outer core from the
+      solid inner core at roughly 5,150 kilometers depth.
+    </p>
+  </div>
+
+  <table class="comparison">
+    <tr><th>Boundary</th><th>Separates</th><th>Key evidence</th></tr>
+    <tr><td>Moho</td><td>Crust and mantle</td><td>Change in seismic-wave speed</td></tr>
+    <tr><td>Gutenberg</td><td>Mantle and outer core</td><td>S-wave shadow and P-wave refraction</td></tr>
+    <tr><td>Inner-core boundary</td><td>Outer and inner core</td><td>Changes in P-wave behavior; evidence of a solid inner core</td></tr>
+  </table>
+</section>
+
+
+<!-- SECTION 6 -->
+
+<section>
+  <div class="section-heading">
+    <h2>6. Earthquake Early Warning</h2>
+    <p>Early warning can provide a short amount of time to take protective action.</p>
+  </div>
+
+  <div class="card definition">
+    <p>
+      An <strong>earthquake early warning system</strong> detects an
+      earthquake that has already begun and sends alerts to places that
+      may experience strong shaking. It uses sensor data and rapid
+      processing to provide warning before stronger shaking arrives,
+      where time and system coverage allow.
+    </p>
+  </div>
+
+  <div class="visual">
+    <div class="visual-title">How Early Warning Works</div>
+    <svg viewBox="0 0 560 360" width="560" role="img" aria-label="Earthquake early warning sequence from earthquake detection to alert and protective action">
+      <g>
+        <rect x="25" y="30" width="220" height="70" rx="12" fill="#172438" stroke="#4d9fff" stroke-width="2"/>
+        <rect x="315" y="30" width="220" height="70" rx="12" fill="#172438" stroke="#4d9fff" stroke-width="2"/>
+        <rect x="315" y="145" width="220" height="70" rx="12" fill="#172438" stroke="#4d9fff" stroke-width="2"/>
+        <rect x="25" y="145" width="220" height="70" rx="12" fill="#172438" stroke="#4d9fff" stroke-width="2"/>
+      </g>
+      <g class="diagram-label" text-anchor="middle">
+        <text x="135" y="59">1. Earthquake begins</text>
+        <text x="135" y="80" class="diagram-small">Sensors detect waves</text>
+        <text x="425" y="59">2. Data are processed</text>
+        <text x="425" y="80" class="diagram-small">Location and shaking estimated</text>
+        <text x="425" y="174">3. Alert is sent</text>
+        <text x="425" y="195" class="diagram-small">If the system can deliver it</text>
+        <text x="135" y="174">4. Take protective action</text>
+        <text x="135" y="195" class="diagram-small">Drop, Cover, and Hold On</text>
+      </g>
+      <g stroke="#4d9fff" stroke-width="3" fill="none">
+        <path d="M245 65 L305 65"/>
+        <path d="M297 57 L305 65 L297 73"/>
+        <path d="M425 100 L425 137"/>
+        <path d="M417 129 L425 137 L433 129"/>
+        <path d="M315 180 L255 180"/>
+        <path d="M263 172 L255 180 L263 188"/>
+      </g>
+      <text x="280" y="270" text-anchor="middle" class="diagram-label">Time may be limited</text>
+      <text x="280" y="295" text-anchor="middle" class="diagram-small">Alerts are not predictions of earthquakes.</text>
+      <text x="280" y="315" text-anchor="middle" class="diagram-small">Some locations may receive little or no warning.</text>
+    </svg>
+  </div>
+
+  <div class="property-grid">
+    <div class="property">
+      <h4>Early Warning</h4>
+      <p>Issued after an earthquake starts, before strong shaking reaches a location when enough time is available.</p>
+    </div>
+    <div class="property">
+      <h4>Earthquake Prediction</h4>
+      <p>Would identify the exact time, location, and magnitude in advance. Reliable exact prediction is not currently possible.</p>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Remember:</strong> An alert is not a guarantee that shaking
+    will follow, and the absence of an alert does not mean an earthquake
+    is not happening. Always follow official local guidance.
+  </div>
+</section>
+
+
+<!-- SECTION 7 -->
+
+<section>
+  <div class="section-heading">
+    <h2>7. Earthquake Preparedness in the Philippines</h2>
+    <p>Know what to do before, during, and after an earthquake.</p>
+  </div>
+
+  <div class="card">
+    <span class="tag">Before an Earthquake</span>
+    <h3>Prepare and Reduce Hazards</h3>
+    <div class="quick-list">
+      <div class="quick-item">Identify safe spots away from windows and heavy objects.</div>
+      <div class="quick-item">Secure shelves, cabinets, appliances, and hanging objects.</div>
+      <div class="quick-item">Prepare an emergency kit with water, food, a flashlight, a radio, batteries, medicines, and first-aid supplies.</div>
+      <div class="quick-item">Make a family communication and reunion plan.</div>
+      <div class="quick-item">Know evacuation routes and local emergency instructions.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="tag">During an Earthquake</span>
+    <h3>Drop, Cover, and Hold On</h3>
+    <div class="visual">
+      <div class="visual-title">The Three Protective Actions</div>
+      <svg viewBox="0 0 560 260" width="560" role="img" aria-label="Three steps: drop to the ground, take cover under sturdy furniture, and hold on">
+        <g>
+          <rect x="10" y="20" width="170" height="190" rx="12" fill="#141820" stroke="#282d38"/>
+          <rect x="195" y="20" width="170" height="190" rx="12" fill="#141820" stroke="#282d38"/>
+          <rect x="380" y="20" width="170" height="190" rx="12" fill="#141820" stroke="#282d38"/>
+        </g>
+        <g stroke="#4d9fff" stroke-width="5" fill="none" stroke-linecap="round">
+          <circle cx="95" cy="70" r="15"/>
+          <path d="M95 87 L95 130 L70 151 M95 130 L120 151"/>
+          <path d="M58 167 L130 167"/>
+          <path d="M228 125 L330 125 M240 125 L240 170 M318 125 L318 170"/>
+          <circle cx="285" cy="77" r="13"/>
+          <path d="M285 90 L285 120 L263 136 M285 120 L307 136"/>
+          <path d="M430 125 L500 125 M440 125 L440 170 M490 125 L490 170"/>
+          <circle cx="465" cy="77" r="13"/>
+          <path d="M465 90 L465 120 L445 136 M465 120 L485 136"/>
+        </g>
+        <g class="diagram-label" text-anchor="middle">
+          <text x="95" y="195">DROP</text>
+          <text x="280" y="195">COVER</text>
+          <text x="465" y="195">HOLD ON</text>
+        </g>
+        <text x="280" y="242" text-anchor="middle" class="diagram-small">Protect your head and neck.</text>
+      </svg>
+    </div>
+    <div class="quick-list">
+      <div class="quick-item"><strong>DROP:</strong> Get down on your hands and knees so the shaking is less likely to knock you over.</div>
+      <div class="quick-item"><strong>COVER:</strong> Protect your head and neck under sturdy furniture. If there is no shelter, get low and cover your head and neck with your arms.</div>
+      <div class="quick-item"><strong>HOLD ON:</strong> Hold your shelter until the shaking stops and be ready to move with it.</div>
+    </div>
+    <div class="note">
+      If you are indoors, stay inside during the shaking. Stay away from
+      windows and do not rush toward exits. If you are outside, move to an
+      open area away from buildings, trees, power lines, and other hazards.
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="tag">After an Earthquake</span>
+    <h3>Stay Alert and Check for Hazards</h3>
+    <div class="quick-list">
+      <div class="quick-item">Expect aftershocks and be ready to Drop, Cover, and Hold On again.</div>
+      <div class="quick-item">Check yourself and others for injuries when it is safe; give first aid if trained.</div>
+      <div class="quick-item">Avoid damaged buildings, fallen power lines, and unsafe roads.</div>
+      <div class="quick-item">If you smell gas or suspect a leak, leave the area and report it safely. Do not operate electrical switches in the affected area.</div>
+      <div class="quick-item">Follow announcements from PHIVOLCS, local authorities, and emergency responders.</div>
+      <div class="quick-item">If you are in a coastal area and feel strong or long earthquake shaking, move inland or to higher ground when safe and follow official tsunami evacuation instructions.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 8 -->
+
+<section>
+  <div class="section-heading">
+    <h2>8. Philippine Earthquake Safety Agencies</h2>
+    <p>Know which organizations provide scientific information and emergency support.</p>
+  </div>
+
+  <div class="property-grid">
+    <div class="property">
+      <h4>PHIVOLCS</h4>
+      <p>The Philippine Institute of Volcanology and Seismology monitors earthquakes and volcanoes and provides scientific information, hazard maps, and public advisories.</p>
+      <p style="margin-top:12px"><a class="video-link" href="https://www.phivolcs.dost.gov.ph/" target="_blank" rel="noopener noreferrer">PHIVOLCS Website</a></p>
+    </div>
+
+    <div class="property">
+      <h4>NDRRMC / OCD</h4>
+      <p>The National Disaster Risk Reduction and Management Council and Office of Civil Defense coordinate disaster preparedness, response, and risk-reduction activities.</p>
+      <p style="margin-top:12px"><a class="video-link" href="https://ndrrmc.gov.ph/" target="_blank" rel="noopener noreferrer">NDRRMC Website</a></p>
+    </div>
+  </div>
+
+  <div class="note">
+    Use official agency advisories for current earthquake information.
+    Do not rely on forwarded messages or unverified social media posts.
+  </div>
+</section>
+
+
+<!-- SECTION 9 -->
+
+<section>
+  <div class="section-heading">
+    <h2>9. Putting the Concepts Together</h2>
+    <p>How scientists move from earthquake recordings to an understanding of Earth's interior.</p>
+  </div>
+
+  <div class="card">
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <p>An earthquake releases energy that travels as seismic waves.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <p>Seismographs detect and record ground motion, producing seismograms.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <p>Scientists compare P-wave and S-wave arrival times and examine their paths.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <p>Changes in wave speed, refraction, and shadow zones reveal boundaries and physical differences inside Earth.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">5</div>
+        <p>Scientists use this knowledge to understand earthquakes and improve hazard assessment and preparedness.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- QUICK REVIEW -->
+
+<section>
+  <div class="section-heading">
+    <h2>10. Quick Review</h2>
+    <p>Memorize these key facts before your assessment.</p>
+  </div>
+
+  <div class="card">
+    <div class="quick-list">
+      <div class="quick-item"><strong>Seismic waves:</strong> Energy waves produced by earthquakes and other disturbances.</div>
+      <div class="quick-item"><strong>Body waves:</strong> Travel through Earth's interior.</div>
+      <div class="quick-item"><strong>Surface waves:</strong> Travel along Earth's surface.</div>
+      <div class="quick-item"><strong>P-waves:</strong> Faster compressional waves that can travel through solids, liquids, and gases.</div>
+      <div class="quick-item"><strong>S-waves:</strong> Shear waves that travel through solids but not liquids or gases.</div>
+      <div class="quick-item"><strong>Seismograph:</strong> Instrument that detects and records ground motion.</div>
+      <div class="quick-item"><strong>Seismogram:</strong> The recorded trace or data from a seismic recording.</div>
+      <div class="quick-item"><strong>Moho:</strong> Boundary between the crust and mantle.</div>
+      <div class="quick-item"><strong>Gutenberg discontinuity:</strong> Boundary between the mantle and liquid outer core.</div>
+      <div class="quick-item"><strong>Shadow zones:</strong> Regions where certain direct seismic waves are not detected.</div>
+      <div class="quick-item"><strong>Early warning:</strong> Detects an earthquake after it begins and may provide time to take protective action.</div>
+      <div class="quick-item"><strong>Earthquake safety:</strong> Drop, Cover, and Hold On during shaking.</div>
+      <div class="quick-item"><strong>PHIVOLCS:</strong> Philippine agency providing earthquake and volcano monitoring and scientific advisories.</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+const reviewerId = "science";
+const completeBtn = document.getElementById("completeBtn");
+const completionStatus = document.getElementById("completionStatus");
+const progressFill = document.getElementById("progressFill");
+
+function getProgress() {
+  try {
+    return JSON.parse(localStorage.getItem("riasStudyHubProgress")) || {
+      reviewers: {},
+      quizzes: {},
+      notes: {}
+    };
+  } catch (error) {
+    return { reviewers: {}, quizzes: {}, notes: {} };
+  }
+}
+
+function saveProgress(progress) {
+  localStorage.setItem("riasStudyHubProgress", JSON.stringify(progress));
+}
+
+function updateCompletionUI() {
+  const progress = getProgress();
+  const completed = progress.reviewers &&
+                    progress.reviewers[reviewerId] === true;
+
+  if (completed) {
+    completionStatus.textContent = "Completed ✓";
+    completionStatus.classList.add("completed");
+    completeBtn.textContent = "Completed ✓";
+    completeBtn.classList.add("completed");
+    progressFill.style.width = "100%";
+  } else {
+    completionStatus.textContent = "Not completed";
+    completionStatus.classList.remove("completed");
+    completeBtn.textContent = "Mark as Complete";
+    completeBtn.classList.remove("completed");
+    progressFill.style.width = "0%";
+  }
+}
+
+completeBtn.addEventListener("click", () => {
+  const progress = getProgress();
+
+  if (!progress.reviewers) {
+    progress.reviewers = {};
+  }
+
+  progress.reviewers[reviewerId] =
+    progress.reviewers[reviewerId] !== true;
+
+  saveProgress(progress);
+  updateCompletionUI();
+});
+
+updateCompletionUI();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Triangle Congruence | STE Study Hub</title>
+<style>
+:root{
+  --background:#0f1117;--surface:#171a21;--hover:#1c2029;
+  --border:#282d38;--text:#f1f3f5;--muted:#969daa;
+  --blue:#4d9fff;--blue-hover:#6aafff;--green:#4ade80;
+  --yellow:#facc15;--red:#f87171;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--background);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.7}
+a{color:var(--blue);text-decoration:none}
+a:hover{color:var(--blue-hover)}
+header{position:sticky;top:0;z-index:20;background:rgba(15,17,23,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav{max-width:1000px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:18px;font-weight:800;white-space:nowrap;color:var(--text)}
+.logo span{color:var(--blue)}
+nav{display:flex;flex-wrap:wrap;gap:15px}
+nav a{font-size:13px;color:var(--muted)}
+nav a.active,nav a:hover{color:var(--blue)}
+.container{max-width:1000px;margin:auto;padding:28px 20px 60px}
+.hero{padding:30px;border:1px solid var(--border);border-radius:18px;background:linear-gradient(135deg,#172438,#171a21 70%)}
+.eyebrow{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;color:var(--blue)}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.2;margin:8px 0 14px}
+h2{font-size:24px;line-height:1.3;margin:0 0 12px}
+h3{font-size:18px;line-height:1.4;margin:0 0 8px}
+p{margin:8px 0 14px}
+.muted{color:var(--muted)}
+.hero p{max-width:740px;color:#c5cad4}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.pill{font-size:12px;border:1px solid var(--border);border-radius:30px;padding:5px 10px;background:#111722}
+.card,.section,.progress-card{margin-top:20px;background:var(--surface);border:1px solid var(--border);border-radius:15px;padding:22px}
+.progress-top{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.progress-track{height:8px;background:#292e39;border-radius:20px;overflow:hidden;margin:14px 0 0}
+.progress-fill{height:100%;width:0;background:var(--green);transition:width .2s}
+button{cursor:pointer;background:var(--hover);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:10px 14px;font-weight:700;font-size:13px}
+button:hover{border-color:var(--blue)}
+.primary{background:var(--blue);color:#07111e;border-color:var(--blue)}
+.primary:hover{background:var(--blue-hover)}
+.section-title{display:flex;gap:12px;align-items:flex-start;margin-bottom:15px}
+.num{flex-shrink:0;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:#1b2c43;color:var(--blue);font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}
+.mini{background:#14171e;border:1px solid var(--border);border-radius:12px;padding:16px;min-width:0}
+.callout{background:#142033;border-left:3px solid var(--blue);padding:13px 15px;border-radius:0 10px 10px 0;margin:14px 0}
+.callout.green{background:#14221d;border-left-color:var(--green)}
+.callout.yellow{background:#262216;border-left-color:var(--yellow)}
+.formula{background:#101722;border:1px solid #26364a;border-radius:12px;text-align:center;padding:14px;margin:13px 0;color:#dceaff;font-size:clamp(17px,3vw,23px);font-weight:800}
+.diagram{background:#10141c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;overflow:hidden}
+svg{display:block;width:100%;height:auto;max-height:340px}
+.svg-label{font-size:13px;fill:var(--text)}
+.svg-muted{font-size:11px;fill:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:11px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:var(--blue);background:#141b27}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px;margin:14px 0}
+.table-wrap table{min-width:520px}
+.steps{padding-left:22px}
+.steps li{padding:4px 0 8px}
+details{border:1px solid var(--border);border-radius:10px;padding:13px 15px;margin:10px 0;background:#14171e}
+summary{cursor:pointer;font-weight:700}
+.answer{color:var(--green);margin-top:9px}
+.tag{display:inline-block;font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px;background:#1b2c43;color:var(--blue);margin-bottom:7px}
+footer{border-top:1px solid var(--border);padding:22px;text-align:center;color:var(--muted);font-size:13px}
+@media(max-width:650px){
+ .nav{align-items:flex-start;flex-direction:column}
+ nav{gap:12px}
+ .container{padding:20px 14px 45px}
+ .hero{padding:22px}
+ .section,.card,.progress-card{padding:17px}
+ .grid{grid-template-columns:1fr}
+ .progress-top{align-items:flex-start;flex-direction:column}
+ h2{font-size:21px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="logo" href="index.html">STE <span>Study Hub</span></a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a class="active" href="reviewer.html">Reviewers</a>
+      <a href="quizzes.html">Quizzes</a>
+      <a href="notes.html">Notes</a>
+      <a href="progress.html">Progress</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+<section class="hero">
+  <div class="eyebrow">Mathematics Reviewer</div>
+  <h1>Triangle Congruence and Geometric Theorems</h1>
+  <p>Learn how to prove triangles congruent, identify corresponding parts, and apply important triangle theorems to solve for missing sides and angles.</p>
+  <div class="pills">
+    <span class="pill">SSS · SAS · ASA · AAS</span>
+    <span class="pill">CPCTC</span>
+    <span class="pill">Triangle Theorems</span>
+    <span class="pill">Worked Examples</span>
+  </div>
+</section>
+
+<section class="progress-card">
+  <div class="progress-top">
+    <div>
+      <h3>Reviewer Progress</h3>
+      <p class="muted" id="progressText">Mark this reviewer complete after studying the lesson.</p>
+    </div>
+    <button class="primary" id="completeBtn">Mark as Complete</button>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</section>
+
+<section class="section" id="basics">
+  <div class="section-title"><div class="num">1</div><div><h2>Congruent Triangles: The Basics</h2><p class="muted">What does it mean for two triangles to be congruent?</p></div></div>
+  Two triangles are <b>congruent</b> if they have the same size and shape. Their corresponding sides have equal lengths, and their corresponding angles have equal measures.
+  <div class="diagram">
+    <svg viewBox="0 0 360 175" role="img" aria-label="Two congruent triangles with matching sides">
+      <polygon points="25,130 85,35 145,130" fill="#4d9fff" fill-opacity=".12" stroke="#4d9fff" stroke-width="2.5"/>
+      <polygon points="210,130 270,35 330,130" fill="#4ade80" fill-opacity=".10" stroke="#4ade80" stroke-width="2.5"/>
+      <g class="svg-label">
+        <text x="15" y="145">A</text><text x="81" y="24">B</text><text x="147" y="145">C</text>
+        <text x="199" y="145">D</text><text x="266" y="24">E</text><text x="332" y="145">F</text>
+      </g>
+      <g stroke="#facc15" stroke-width="2">
+        <path d="M53 78 l10 6 M73 99 l10 6"/>
+        <path d="M238 78 l10 6 M258 99 l10 6"/>
+        <path d="M55 130 l0 -7 M245 130 l0 -7"/>
+      </g>
+      <text x="180" y="164" text-anchor="middle" class="svg-muted">Matching marks identify corresponding parts</text>
+    </svg>
+  </div>
+  <div class="formula">△ABC ≅ △DEF</div>
+  The order of the letters matters:
+  <div class="table-wrap"><table>
+    <tr><th>Correspondence</th><th>Matching part</th></tr>
+    <tr><td>Vertex A ↔ D</td><td>∠A ≅ ∠D</td></tr>
+    <tr><td>Vertex B ↔ E</td><td>∠B ≅ ∠E</td></tr>
+    <tr><td>Vertex C ↔ F</td><td>∠C ≅ ∠F</td></tr>
+    <tr><td>Side AB ↔ DE</td><td>AB = DE</td></tr>
+    <tr><td>Side BC ↔ EF</td><td>BC = EF</td></tr>
+    <tr><td>Side AC ↔ DF</td><td>AC = DF</td></tr>
+  </table></div>
+  <div class="callout yellow"><b>Important:</b> Similar-looking triangles are not automatically congruent. You need enough given information to prove they have the same size and shape.</div>
+</section>
+
+<section class="section" id="criteria">
+  <div class="section-title"><div class="num">2</div><div><h2>The Four Triangle Congruence Conditions</h2><p class="muted">Know exactly which combination of sides and angles proves congruence.</p></div></div>
+  <div class="grid">
+    <div class="mini">
+      <span class="tag">SSS</span><h3>Side-Side-Side</h3>
+      All three corresponding sides are equal.
+      <div class="diagram">
+        <svg viewBox="0 0 300 130" role="img" aria-label="SSS congruence triangle diagram">
+          <polygon points="20,105 65,20 110,105" fill="#4d9fff" fill-opacity=".10" stroke="#4d9fff" stroke-width="2"/>
+          <polygon points="185,105 230,20 275,105" fill="#4d9fff" fill-opacity=".10" stroke="#4d9fff" stroke-width="2"/>
+          <g stroke="#facc15" stroke-width="2">
+            <path d="M40 63 l10 5 M205 63 l10 5"/>
+            <path d="M88 63 l10 -5 M253 63 l10 -5"/>
+            <path d="M60 105 l0 -7 M225 105 l0 -7"/>
+          </g>
+        </svg>
+      </div>
+      <div class="formula">3 sides = 3 sides</div>
+      <p class="muted">Example: AB = DE, BC = EF, AC = DF.</p>
+    </div>
+    <div class="mini">
+      <span class="tag">SAS</span><h3>Side-Angle-Side</h3>
+      Two sides and the <b>included angle</b> between them are equal.
+      <div class="diagram">
+        <svg viewBox="0 0 300 130" role="img" aria-label="SAS congruence diagram with included angles">
+          <polygon points="20,105 65,20 110,105" fill="#4ade80" fill-opacity=".10" stroke="#4ade80" stroke-width="2"/>
+          <polygon points="185,105 230,20 275,105" fill="#4ade80" fill-opacity=".10" stroke="#4ade80" stroke-width="2"/>
+          <path d="M36 105 A20 20 0 0 1 29 88 M201 105 A20 20 0 0 1 194 88" fill="none" stroke="#facc15" stroke-width="2"/>
+          <path d="M45 62 l9 5 M210 62 l9 5 M75 61 l8 4 M240 61 l8 4" stroke="#facc15" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="formula">Side + included angle + side</div>
+      <p class="muted">The angle must be between the two known sides.</p>
+    </div>
+    <div class="mini">
+      <span class="tag">ASA</span><h3>Angle-Side-Angle</h3>
+      Two angles and the <b>included side</b> between them are equal.
+      <div class="diagram">
+        <svg viewBox="0 0 300 130" role="img" aria-label="ASA congruence diagram">
+          <polygon points="20,105 65,20 110,105" fill="#4d9fff" fill-opacity=".10" stroke="#4d9fff" stroke-width="2"/>
+          <polygon points="185,105 230,20 275,105" fill="#4d9fff" fill-opacity=".10" stroke="#4d9fff" stroke-width="2"/>
+          <path d="M37 105 A18 18 0 0 1 29 90 M202 105 A18 18 0 0 1 194 90 M57 35 A17 17 0 0 1 74 35 M222 35 A17 17 0 0 1 239 35" fill="none" stroke="#facc15" stroke-width="2"/>
+          <path d="M60 63 l9 4 M225 63 l9 4" stroke="#facc15" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="formula">Angle + included side + angle</div>
+      <p class="muted">The known side lies between the two known angles.</p>
+    </div>
+    <div class="mini">
+      <span class="tag">AAS</span><h3>Angle-Angle-Side</h3>
+      Two angles and a <b>non-included side</b> are equal.
+      <div class="diagram">
+        <svg viewBox="0 0 300 130" role="img" aria-label="AAS congruence diagram">
+          <polygon points="20,105 65,20 110,105" fill="#4ade80" fill-opacity=".10" stroke="#4ade80" stroke-width="2"/>
+          <polygon points="185,105 230,20 275,105" fill="#4ade80" fill-opacity=".10" stroke="#4ade80" stroke-width="2"/>
+          <path d="M37 105 A18 18 0 0 1 29 90 M57 35 A17 17 0 0 1 74 35 M202 105 A18 18 0 0 1 194 90 M222 35 A17 17 0 0 1 239 35" fill="none" stroke="#facc15" stroke-width="2"/>
+          <path d="M86 66 l9 -4 M251 66 l9 -4" stroke="#facc15" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="formula">Angle + angle + non-included side</div>
+      <p class="muted">The known side is not between the two known angles.</p>
+    </div>
+  </div>
+  <div class="callout green"><b>Memory trick:</b> SSS = three sides; SAS = two sides with the angle between; ASA = two angles with the side between; AAS = two angles and a side outside them.</div>
+  <div class="table-wrap"><table>
+    <tr><th>Condition</th><th>Given information</th><th>Proves congruence?</th></tr>
+    <tr><td>SSS</td><td>Three pairs of equal sides</td><td>Yes</td></tr>
+    <tr><td>SAS</td><td>Two pairs of equal sides and included angle</td><td>Yes</td></tr>
+    <tr><td>ASA</td><td>Two pairs of equal angles and included side</td><td>Yes</td></tr>
+    <tr><td>AAS</td><td>Two pairs of equal angles and a non-included side</td><td>Yes</td></tr>
+    <tr><td>AAA</td><td>Three pairs of equal angles</td><td>No, proves similarity only</td></tr>
+    <tr><td>SSA</td><td>Two sides and a non-included angle</td><td>Not generally</td></tr>
+  </table></div>
+</section>
+
+<section class="section" id="cpctc">
+  <div class="section-title"><div class="num">3</div><div><h2>Corresponding Parts and CPCTC</h2><p class="muted">First prove the triangles congruent. Then use their matching parts.</p></div></div>
+  <b>CPCTC</b> means <b>Corresponding Parts of Congruent Triangles are Congruent.</b>
+  If △ABC ≅ △DEF, then corresponding sides and angles are equal.
+  <div class="formula">△ABC ≅ △DEF ⟹ BC = EF and ∠A = ∠D</div>
+  <div class="callout">CPCTC is usually used <b>after</b> proving two triangles congruent. It is not itself a method for proving the triangles congruent.</div>
+  <h3>Worked example</h3>
+  Given: △ABC ≅ △DEF, AB = 3x + 2, DE = 17.
+  <ol class="steps">
+    <li>Because the triangles are congruent, AB corresponds to DE.</li>
+    <li>By CPCTC, AB = DE.</li>
+    <li>Substitute: 3x + 2 = 17.</li>
+    <li>Subtract 2: 3x = 15.</li>
+    <li>Divide by 3: <b>x = 5.</b></li>
+  </ol>
+  <div class="callout green">Use the order of the triangle names to match corresponding vertices correctly.</div>
+</section>
+
+<section class="section" id="proofs">
+  <div class="section-title"><div class="num">4</div><div><h2>How to Prove Triangles Congruent</h2><p class="muted">A proof connects the given facts to a valid congruence condition.</p></div></div>
+  <ol class="steps">
+    <li><b>Read the given information.</b> Identify equal sides, equal angles, shared sides, and parallel lines.</li>
+    <li><b>Identify the two triangles.</b> Write their names in the correct corresponding order.</li>
+    <li><b>List three useful facts.</b> Look for SSS, SAS, ASA, AAS, or HL if the triangles are right triangles.</li>
+    <li><b>State the congruence condition.</b> Explain why the facts are sufficient.</li>
+    <li><b>Use CPCTC.</b> Once congruence is established, find any remaining equal sides or angles.</li>
+  </ol>
+  <h3>Worked proof: Shared side</h3>
+  <div class="diagram">
+    <svg viewBox="0 0 340 185" role="img" aria-label="Two triangles sharing side AC">
+      <polygon points="35,145 170,30 170,145" fill="#4d9fff" fill-opacity=".10" stroke="#4d9fff" stroke-width="2"/>
+      <polygon points="170,30 305,145 170,145" fill="#4ade80" fill-opacity=".10" stroke="#4ade80" stroke-width="2"/>
+      <path d="M100 88 l8 8 M232 88 l-8 8" stroke="#facc15" stroke-width="2"/>
+      <path d="M170 30 L170 145" stroke="#facc15" stroke-width="3"/>
+      <g class="svg-label"><text x="22" y="160">B</text><text x="165" y="20">A</text><text x="165" y="164">C</text><text x="309" y="160">D</text></g>
+      <text x="181" y="91" class="svg-muted">Shared side</text>
+    </svg>
+  </div>
+  Suppose AB = AD, BC = DC, and AC is shared.
+  <div class="table-wrap"><table>
+    <tr><th>Statement</th><th>Reason</th></tr>
+    <tr><td>AB = AD</td><td>Given</td></tr>
+    <tr><td>BC = DC</td><td>Given</td></tr>
+    <tr><td>AC = AC</td><td>Reflexive Property</td></tr>
+    <tr><td>△ABC ≅ △ADC</td><td>SSS Congruence</td></tr>
+  </table></div>
+  <div class="callout yellow"><b>Reflexive Property:</b> Any segment or angle is congruent to itself. A shared side can count as one of the required equal sides.</div>
+</section>
+
+<section class="section" id="isosceles">
+  <div class="section-title"><div class="num">5</div><div><h2>Isosceles Triangle Theorem</h2><p class="muted">Equal sides create equal opposite angles.</p></div></div>
+  An <b>isosceles triangle</b> has at least two equal sides. The angles opposite those equal sides, called the <b>base angles</b>, are equal.
+  <div class="diagram">
+    <svg viewBox="0 0 340 205" role="img" aria-label="Isosceles triangle with equal sides and equal base angles">
+      <polygon points="170,25 55,165 285,165" fill="#4d9fff" fill-opacity=".10" stroke="#4d9fff" stroke-width="2.5"/>
+      <path d="M108 91 l12 8 M220 99 l12 -8" stroke="#facc15" stroke-width="3"/>
+      <path d="M78 165 A25 25 0 0 1 72 145 M262 145 A25 25 0 0 1 256 165" fill="none" stroke="#4ade80" stroke-width="2.5"/>
+      <g class="svg-label"><text x="170" y="17" text-anchor="middle">A</text><text x="40" y="182">B</text><text x="289" y="182">C</text><text x="170" y="194" text-anchor="middle" fill="#4ade80">∠B = ∠C</text></g>
+    </svg>
+  </div>
+  <div class="formula">If AB = AC, then ∠B = ∠C</div>
+  The converse is also true: if two angles in a triangle are equal, the sides opposite them are equal.
+  <h3>Worked example</h3>
+  In △ABC, AB = AC, ∠B = 2x + 10°, and ∠C = 50°.
+  <ol class="steps">
+    <li>Equal sides mean equal base angles, so ∠B = ∠C.</li>
+    <li>Set up: 2x + 10 = 50.</li>
+    <li>Subtract 10: 2x = 40.</li>
+    <li>Divide by 2: <b>x = 20.</b></li>
+  </ol>
+  <div class="callout green">The vertex angle is opposite the base. The two base angles are opposite the equal sides.</div>
+</section>
+
+<section class="section" id="perpendicular">
+  <div class="section-title"><div class="num">6</div><div><h2>Perpendicular Bisector Theorem</h2><p class="muted">Points on a perpendicular bisector are equally distant from both endpoints.</p></div></div>
+  A <b>perpendicular bisector</b> crosses a segment at its midpoint and forms a 90° angle.
+  <div class="diagram">
+    <svg viewBox="0 0 340 190" role="img" aria-label="Perpendicular bisector of segment AB with point P equidistant from endpoints">
+      <line x1="45" y1="140" x2="295" y2="140" stroke="#4d9fff" stroke-width="3"/>
+      <line x1="170" y1="25" x2="170" y2="175" stroke="#facc15" stroke-width="2.5" stroke-dasharray="6 5"/>
+      <line x1="170" y1="50" x2="45" y2="140" stroke="#4ade80" stroke-width="2"/>
+      <line x1="170" y1="50" x2="295" y2="140" stroke="#4ade80" stroke-width="2"/>
+      <path d="M170 140 L170 126 L184 126 L184 140" fill="none" stroke="#f1f3f5" stroke-width="1.5"/>
+      <circle cx="170" cy="50" r="4" fill="#facc15"/>
+      <g class="svg-label"><text x="32" y="158">A</text><text x="300" y="158">B</text><text x="179" y="45">P</text><text x="164" y="158">M</text></g>
+      <text x="170" y="182" text-anchor="middle" class="svg-muted">AM = MB; PA = PB</text>
+    </svg>
+  </div>
+  <div class="formula">If P is on the perpendicular bisector of AB, then PA = PB.</div>
+  <b>Converse:</b> If PA = PB, then P lies on the perpendicular bisector of AB.
+  <h3>Worked example</h3>
+  Point P lies on the perpendicular bisector of AB. If PA = 4x − 3 and PB = 2x + 9, find x.
+  <ol class="steps">
+    <li>Use the theorem: PA = PB.</li>
+    <li>Set up: 4x − 3 = 2x + 9.</li>
+    <li>Subtract 2x: 2x − 3 = 9.</li>
+    <li>Add 3: 2x = 12.</li>
+    <li><b>x = 6.</b> Both distances equal 21 units.</li>
+  </ol>
+</section>
+
+<section class="section" id="midsegment">
+  <div class="section-title"><div class="num">7</div><div><h2>Midline / Midsegment Theorem</h2><p class="muted">A segment joining the midpoints of two sides of a triangle.</p></div></div>
+  The <b>triangle midsegment theorem</b> states that a segment joining the midpoints of two sides of a triangle is parallel to the third side and half as long.
+  <div class="diagram">
+    <svg viewBox="0 0 340 220" role="img" aria-label="Triangle midsegment MN parallel to BC and half its length">
+      <polygon points="170,25 45,185 295,185" fill="#4d9fff" fill-opacity=".08" stroke="#4d9fff" stroke-width="2.5"/>
+      <line x1="107.5" y1="105" x2="232.5" y2="105" stroke="#4ade80" stroke-width="3"/>
+      <circle cx="107.5" cy="105" r="4" fill="#4ade80"/><circle cx="232.5" cy="105" r="4" fill="#4ade80"/>
+      <g class="svg-label"><text x="170" y="17" text-anchor="middle">A</text><text x="30" y="202">B</text><text x="300" y="202">C</text><text x="88" y="101">M</text><text x="237" y="101">N</text></g>
+      <text x="170" y="94" text-anchor="middle" fill="#4ade80" font-size="12">MN</text>
+      <text x="170" y="215" text-anchor="middle" class="svg-muted">MN ∥ BC and MN = ½ BC</text>
+    </svg>
+  </div>
+  <div class="formula">MN ∥ BC and MN = ½ BC</div>
+  If M is the midpoint of AB and N is the midpoint of AC:
+  <ul>
+    <li>AM = MB</li>
+    <li>AN = NC</li>
+    <li>MN is parallel to BC.</li>
+    <li>MN = BC ÷ 2, or BC = 2(MN).</li>
+  </ul>
+  <h3>Worked example</h3>
+  If MN is a midsegment and BC = 26 cm, find MN.
+  <div class="formula">MN = ½(26) = 13 cm</div>
+  If MN = 8 cm, then BC = 2(8) = <b>16 cm</b>.
+  <div class="callout yellow">Do not confuse a triangle midsegment with a trapezoid midsegment. This lesson uses the triangle theorem.</div>
+</section>
+
+<section class="section" id="hl">
+  <div class="section-title"><div class="num">8</div><div><h2>Right Triangle Congruence Theorem (HL)</h2><p class="muted">HL stands for Hypotenuse-Leg.</p></div></div>
+  The <b>HL theorem</b> proves two right triangles congruent when their hypotenuses and one pair of corresponding legs are equal.
+  <div class="diagram">
+    <svg viewBox="0 0 340 185" role="img" aria-label="Two right triangles with matching hypotenuses and legs">
+      <polygon points="25,145 25,55 130,145" fill="#4d9fff" fill-opacity=".10" stroke="#4d9fff" stroke-width="2.5"/>
+      <polygon points="195,145 195,55 300,145" fill="#4ade80" fill-opacity=".10" stroke="#4ade80" stroke-width="2.5"/>
+      <path d="M25 130 L40 130 L40 145 M195 130 L210 130 L210 145" fill="none" stroke="#f1f3f5" stroke-width="1.5"/>
+      <path d="M70 100 l8 5 M240 100 l8 5" stroke="#facc15" stroke-width="2"/>
+      <path d="M74 145 l-3 -8 M244 145 l-3 -8" stroke="#facc15" stroke-width="2"/>
+      <g class="svg-label"><text x="15" y="50">A</text><text x="14" y="160">B</text><text x="133" y="160">C</text><text x="185" y="50">D</text><text x="184" y="160">E</text><text x="303" y="160">F</text></g>
+      <text x="170" y="178" text-anchor="middle" class="svg-muted">Both triangles must be right triangles</text>
+    </svg>
+  </div>
+  <div class="formula">Right angle + equal hypotenuse + equal leg → HL</div>
+  <div class="callout green"><b>Remember:</b> HL only applies to right triangles. The hypotenuse is always opposite the 90° angle and is the longest side.</div>
+  <h3>Worked example</h3>
+  △ABC and △DEF are right triangles. AC and DF are hypotenuses, AC = DF, and AB = DE.
+  <ol class="steps">
+    <li>Both triangles have a right angle.</li>
+    <li>The hypotenuses are equal: AC = DF.</li>
+    <li>One corresponding leg is equal: AB = DE.</li>
+    <li>Therefore, <b>△ABC ≅ △DEF by HL</b>, provided the vertices are named in corresponding order.</li>
+  </ol>
+</section>
+
+<section class="section" id="missing">
+  <div class="section-title"><div class="num">9</div><div><h2>Finding Missing Measurements</h2><p class="muted">Translate geometric information into equations.</p></div></div>
+  <h3>Example A: Corresponding sides</h3>
+  If △ABC ≅ △DEF, AB = 5x − 4, and DE = 21, find x.
+  <ol class="steps">
+    <li>AB corresponds to DE, so AB = DE.</li>
+    <li>5x − 4 = 21.</li>
+    <li>5x = 25.</li>
+    <li><b>x = 5.</b></li>
+  </ol>
+  <h3>Example B: Triangle angle sum</h3>
+  A triangle has angles 2x°, 3x°, and 85°. Find x.
+  <ol class="steps">
+    <li>Interior angles sum to 180°.</li>
+    <li>2x + 3x + 85 = 180.</li>
+    <li>5x = 95.</li>
+    <li><b>x = 19.</b> The angles are 38°, 57°, and 85°.</li>
+  </ol>
+  <h3>Example C: Isosceles triangle</h3>
+  The base angles are (3x + 5)° and (5x − 15)°. Find x.
+  <ol class="steps">
+    <li>Base angles are equal.</li>
+    <li>3x + 5 = 5x − 15.</li>
+    <li>20 = 2x.</li>
+    <li><b>x = 10.</b> Each base angle is 35°.</li>
+  </ol>
+  <h3>Example D: Midsegment</h3>
+  A triangle's midsegment is 3x + 2 and its parallel third side is 8x − 6. Find x.
+  <ol class="steps">
+    <li>The midsegment is half the third side.</li>
+    <li>3x + 2 = ½(8x − 6).</li>
+    <li>Multiply both sides by 2: 6x + 4 = 8x − 6.</li>
+    <li>10 = 2x, so <b>x = 5</b>.</li>
+    <li>The midsegment is 17 units and the third side is 34 units.</li>
+  </ol>
+</section>
+
+<section class="section" id="practice">
+  <div class="section-title"><div class="num">10</div><div><h2>Quick Review and Practice</h2><p class="muted">Try each problem before revealing the answer.</p></div></div>
+  <details><summary>1. Which condition uses three pairs of equal sides?</summary><p class="answer">Answer: SSS.</p></details>
+  <details><summary>2. Two sides and the angle between them are equal. Which condition?</summary><p class="answer">Answer: SAS.</p></details>
+  <details><summary>3. Why should CPCTC come after proving triangles congruent?</summary><p class="answer">Answer: CPCTC states that corresponding parts of already-proven congruent triangles are congruent.</p></details>
+  <details><summary>4. If AB = AC and ∠B = 42°, find ∠C.</summary><p class="answer">Answer: ∠C = 42°, by the Isosceles Triangle Theorem.</p></details>
+  <details><summary>5. P lies on the perpendicular bisector of AB. If PA = 3x + 4 and PB = 19, find x.</summary><p class="answer">Answer: 3x + 4 = 19, so x = 5.</p></details>
+  <details><summary>6. A triangle's third side is 32 cm. Find its midsegment length.</summary><p class="answer">Answer: 32 ÷ 2 = 16 cm.</p></details>
+  <details><summary>7. What two measurements, besides the right angles, are needed for HL?</summary><p class="answer">Answer: Equal hypotenuses and one pair of equal corresponding legs.</p></details>
+  <details><summary>8. Is AAA a triangle congruence condition?</summary><p class="answer">Answer: No. AAA establishes similarity, not necessarily congruence.</p></details>
+  <details><summary>9. If △ABC ≅ △PQR, which side corresponds to AC?</summary><p class="answer">Answer: PR, because A ↔ P, B ↔ Q, and C ↔ R.</p></details>
+  <details><summary>10. A midsegment is 11 cm. How long is the parallel third side?</summary><p class="answer">Answer: 2 × 11 = 22 cm.</p></details>
+</section>
+
+<section class="section">
+  <div class="section-title"><div class="num">✓</div><div><h2>Notes Sheet</h2><p class="muted">Review these before a quiz or exam.</p></div></div>
+  <div class="table-wrap"><table>
+    <tr><th>Concept</th><th>Key rule</th></tr>
+    <tr><td>SSS</td><td>Three pairs of equal sides</td></tr>
+    <tr><td>SAS</td><td>Two sides and included angle</td></tr>
+    <tr><td>ASA</td><td>Two angles and included side</td></tr>
+    <tr><td>AAS</td><td>Two angles and non-included side</td></tr>
+    <tr><td>CPCTC</td><td>Corresponding parts of congruent triangles are congruent</td></tr>
+    <tr><td>Isosceles Triangle Theorem</td><td>Equal sides have equal opposite angles</td></tr>
+    <tr><td>Perpendicular Bisector Theorem</td><td>A point on the perpendicular bisector is equidistant from the endpoints</td></tr>
+    <tr><td>Midsegment Theorem</td><td>Parallel to the third side and half its length</td></tr>
+    <tr><td>HL</td><td>Right triangles with equal hypotenuse and one equal leg are congruent</td></tr>
+  </table></div>
+  <div class="callout green"><b>Proof strategy:</b> Identify the given facts → match corresponding parts → choose a valid congruence condition → conclude congruence → apply CPCTC if needed.</div>
+</section>
+</main>
+
+<footer>STE Study Hub · Mathematics Reviewer</footer>
+
+<script>
+const reviewerId = "mathematics";
+const storageKey = "riasStudyHubProgress";
+const completeBtn = document.getElementById("completeBtn");
+const progressText = document.getElementById("progressText");
+const progressFill = document.getElementById("progressFill");
+
+function readProgress(){
+  try {
+    return JSON.parse(localStorage.getItem(storageKey)) || {};
+  } catch(error) {
+    return {};
+  }
+}
+
+function renderProgress(){
+  const progress = readProgress();
+  if(!progress.reviewers) progress.reviewers = {};
+  const completed = progress.reviewers[reviewerId] === true;
+
+  completeBtn.textContent = completed ? "Mark as Incomplete" : "Mark as Complete";
+  progressText.textContent = completed
+    ? "Reviewer completed. You can change this status anytime."
+    : "Mark this reviewer complete after studying the lesson.";
+  progressFill.style.width = completed ? "100%" : "0%";
+}
+
+completeBtn.addEventListener("click", function(){
+  const progress = readProgress();
+  if(!progress.reviewers) progress.reviewers = {};
+  progress.reviewers[reviewerId] = progress.reviewers[reviewerId] !== true;
+  localStorage.setItem(storageKey, JSON.stringify(progress));
+  renderProgress();
+});
+
+renderProgress();
+</script>
+</body>
+</html>

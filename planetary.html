@@ -1,0 +1,583 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar System | STE Study Hub</title>
+<style>
+:root {
+  --background:#0f1117;
+  --surface:#171a21;
+  --surface-hover:#1c2029;
+  --border:#282d38;
+  --text:#f1f3f5;
+  --muted:#969daa;
+  --blue:#4d9fff;
+  --blue-hover:#6aafff;
+  --green:#4ade80;
+  --yellow:#facc15;
+  --red:#f87171;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--background);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.7;
+}
+a{color:var(--blue);text-decoration:none}
+a:hover{color:var(--blue-hover)}
+header{
+  position:sticky;top:0;z-index:10;
+  background:rgba(15,17,23,.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.nav{
+  max-width:1000px;margin:auto;padding:15px 20px;
+  display:flex;justify-content:space-between;
+  align-items:center;gap:18px;flex-wrap:wrap;
+}
+.logo{font-size:19px;font-weight:800;color:var(--text)}
+.logo span{color:var(--blue)}
+nav{display:flex;gap:17px;flex-wrap:wrap;font-size:13px}
+nav a{color:var(--muted)}
+nav a.active,nav a:hover{color:var(--blue)}
+.container{max-width:1000px;margin:auto;padding:28px 20px 60px}
+.back{display:inline-block;margin-bottom:18px;font-size:14px}
+.hero{
+  padding:30px;border:1px solid var(--border);
+  border-radius:18px;
+  background:linear-gradient(135deg,#171a21,#17263a);
+  margin-bottom:24px;
+}
+.eyebrow{
+  color:var(--blue);font-size:12px;font-weight:800;
+  text-transform:uppercase;letter-spacing:1.5px;
+}
+h1{font-size:clamp(28px,5vw,42px);line-height:1.2;margin:8px 0 12px}
+h2{font-size:23px;margin:0 0 14px}
+h3{font-size:17px;margin:0 0 8px}
+p{margin:8px 0;color:#d7dbe3}
+.muted{color:var(--muted)}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.pill{
+  font-size:12px;padding:5px 10px;border-radius:20px;
+  border:1px solid var(--border);color:var(--muted);
+}
+.section{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:15px;padding:24px;margin-bottom:20px;
+}
+.section-label{
+  color:var(--blue);font-size:12px;font-weight:800;
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;
+}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.card{
+  background:#12151c;border:1px solid var(--border);
+  border-radius:12px;padding:17px;min-width:0;
+}
+.card p{font-size:14px}
+.term{color:var(--blue);font-weight:700}
+.callout{
+  border-left:3px solid var(--blue);background:#142033;
+  padding:13px 15px;border-radius:0 9px 9px 0;margin:14px 0;
+}
+.callout.green{border-color:var(--green);background:#14231d}
+.callout.yellow{border-color:var(--yellow);background:#282416}
+.diagram{
+  width:100%;max-width:620px;display:block;margin:15px auto;
+  border:1px solid var(--border);border-radius:12px;
+  background:#11151d;padding:10px;
+}
+.diagram text{font-family:Arial,sans-serif;fill:#f1f3f5;font-size:13px}
+.diagram .line{stroke:#4d9fff;stroke-width:2.5;fill:none}
+.diagram .orbit{stroke:#596575;stroke-width:1.5;fill:none}
+.diagram .sun{fill:#facc15}
+.diagram .planet{fill:#4d9fff}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+th,td{border:1px solid var(--border);padding:10px;text-align:left;vertical-align:top}
+th{background:#202634;color:var(--blue)}
+td{color:#d7dbe3}
+ul,ol{padding-left:22px;color:#d7dbe3}
+li{margin:5px 0}
+button{
+  background:var(--blue);color:#0f1117;border:0;border-radius:9px;
+  padding:10px 15px;font-weight:700;cursor:pointer;font-size:14px;
+}
+button:hover{background:var(--blue-hover)}
+button.secondary{background:#252b36;color:var(--text);border:1px solid var(--border)}
+button.secondary:hover{background:#303746}
+.progress-track{height:8px;background:#292e39;border-radius:10px;overflow:hidden;margin:12px 0}
+.progress-fill{height:100%;width:0;background:var(--green);transition:width .2s}
+.progress-row{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.question{
+  border:1px solid var(--border);background:#12151c;
+  border-radius:11px;padding:16px;margin:12px 0;
+}
+.question p{font-weight:700}
+.options{display:grid;gap:8px;margin-top:10px}
+.option{
+  background:var(--surface-hover);border:1px solid var(--border);
+  border-radius:8px;padding:10px 12px;cursor:pointer;
+  color:var(--text);font-weight:400;text-align:left;
+}
+.option:hover{border-color:var(--blue)}
+.option.correct{border-color:var(--green);background:#14231d}
+.option.wrong{border-color:var(--red);background:#2a191c}
+.feedback{font-size:13px;color:var(--muted);margin-top:8px}
+.answer{display:none;color:var(--green);font-size:14px;margin-top:9px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+@media(max-width:650px){
+  .grid{grid-template-columns:1fr}
+  .hero,.section{padding:19px}
+  .nav{padding:13px 16px}
+  nav{gap:11px}
+  .container{padding:22px 14px 45px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="logo" href="index.html">STE <span>Study Hub</span></a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a class="active" href="reviewer.html">Reviewers</a>
+      <a href="quizzes.html">Quizzes</a>
+      <a href="notes.html">Notes</a>
+      <a href="progress.html">Progress</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <a class="back" href="../reviewer.html">← Back to Reviewers</a>
+
+  <section class="hero">
+    <div class="eyebrow">Science Reviewer</div>
+    <h1>The Solar System</h1>
+    <p>Review the Sun, planets, comets, asteroids, meteoroids, meteors, meteorites, and dwarf planets. Use the key terms and practice questions to check your understanding.</p>
+    <div class="pills">
+      <span class="pill">Science</span>
+      <span class="pill">Astronomy</span>
+      <span class="pill">Key Concepts</span>
+      <span class="pill">Practice Quiz</span>
+    </div>
+  </section>
+
+  <section class="section" id="progress">
+    <div class="progress-row">
+      <div>
+        <div class="section-label">Reviewer Progress</div>
+        <h2 style="margin-bottom:0">Solar System Reviewer</h2>
+      </div>
+      <button id="completeBtn" onclick="toggleComplete()">Mark as Complete</button>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <p class="muted" id="progressText">Not completed yet</p>
+  </section>
+
+  <section class="section">
+    <div class="section-label">01 · Overview</div>
+    <h2>What Is the Solar System?</h2>
+    <p>The Solar System consists of the Sun and the celestial objects that orbit it, including planets, dwarf planets, moons, asteroids, comets, and smaller bodies.</p>
+    <p>The Sun is at the center of the Solar System and contains more than 99% of its total mass. Its gravity helps keep objects in orbit.</p>
+
+    <svg class="diagram" viewBox="0 0 600 290" role="img" aria-label="Diagram of the Sun and the eight planets">
+      <circle cx="300" cy="145" r="30" class="sun"/>
+      <circle cx="300" cy="145" r="52" class="orbit"/>
+      <circle cx="300" cy="145" r="78" class="orbit"/>
+      <circle cx="300" cy="145" r="105" class="orbit"/>
+      <circle cx="300" cy="145" r="132" class="orbit"/>
+      <circle cx="300" cy="145" r="158" class="orbit"/>
+      <circle cx="300" cy="145" r="184" class="orbit"/>
+      <circle cx="300" cy="145" r="211" class="orbit"/>
+      <circle cx="300" cy="145" r="237" class="orbit"/>
+      <circle cx="352" cy="145" r="4" fill="#a7aab0"/>
+      <circle cx="378" cy="145" r="6" fill="#c99a63"/>
+      <circle cx="405" cy="145" r="7" fill="#4d9fff"/>
+      <circle cx="432" cy="145" r="5" fill="#df7659"/>
+      <circle cx="458" cy="145" r="12" fill="#d9b783"/>
+      <circle cx="484" cy="145" r="10" fill="#c4a76a"/>
+      <circle cx="510" cy="145" r="8" fill="#79c8d7"/>
+      <circle cx="537" cy="145" r="8" fill="#5379e0"/>
+      <text x="300" y="150" text-anchor="middle" fill="#11151d" style="font-weight:bold">Sun</text>
+      <text x="352" y="133" text-anchor="middle">Mercury</text>
+      <text x="378" y="126" text-anchor="middle">Venus</text>
+      <text x="405" y="113" text-anchor="middle">Earth</text>
+      <text x="432" y="103" text-anchor="middle">Mars</text>
+      <text x="458" y="87" text-anchor="middle">Jupiter</text>
+      <text x="484" y="72" text-anchor="middle">Saturn</text>
+      <text x="510" y="55" text-anchor="middle">Uranus</text>
+      <text x="537" y="37" text-anchor="middle">Neptune</text>
+      <text x="300" y="275" text-anchor="middle" style="font-size:11px;fill:#969daa">Simplified illustration; sizes and distances are not to scale.</text>
+    </svg>
+
+    <div class="callout">
+      <strong>Remember:</strong> The eight planets in order from the Sun are Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune.
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">02 · Vocabulary</div>
+    <h2>Essential Terms</h2>
+    <div class="grid">
+      <div class="card"><h3 class="term">Gravity</h3><p>The force of attraction between bodies due to their masses.</p></div>
+      <div class="card"><h3 class="term">Nebula</h3><p>A cloud of gas and dust in interstellar space.</p></div>
+      <div class="card"><h3 class="term">Nebular Hypothesis</h3><p>The idea that the Solar System formed from a rotating cloud of gas and dust that flattened into a disk.</p></div>
+      <div class="card"><h3 class="term">Orbit</h3><p>The path followed by a celestial body as it moves around another object.</p></div>
+      <div class="card"><h3 class="term">Satellite</h3><p>A body that orbits a planet or another celestial body.</p></div>
+      <div class="card"><h3 class="term">Terrestrial Planets</h3><p>The rocky inner planets: Mercury, Venus, Earth, and Mars.</p></div>
+      <div class="card"><h3 class="term">Jovian Planets</h3><p>The giant outer planets: Jupiter, Saturn, Uranus, and Neptune.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">03 · Small Solar System Bodies</div>
+    <h2>Comets</h2>
+    <p>A comet is a small celestial object that orbits the Sun. It contains ice, dust, rock, and frozen gases. Comets are sometimes called <strong>dirty snowballs</strong>.</p>
+    <div class="grid">
+      <div class="card">
+        <h3 class="term">Nucleus</h3>
+        <p>The solid central part of a comet, containing frozen materials and dust.</p>
+      </div>
+      <div class="card">
+        <h3 class="term">Coma</h3>
+        <p>A cloud of gas and dust that forms around the nucleus when the comet is heated by the Sun.</p>
+      </div>
+      <div class="card">
+        <h3 class="term">Tail</h3>
+        <p>Gas and dust released from the comet. The tail generally points away from the Sun due to the solar wind and sunlight.</p>
+      </div>
+      <div class="card">
+        <h3 class="term">Oort Cloud</h3>
+        <p>A distant region thought to contain many icy bodies, including possible sources of long-period comets.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>As a comet approaches the Sun:</strong>
+      <ol>
+        <li>Its ice heats up and releases gas and dust.</li>
+        <li>A coma forms around the nucleus.</li>
+        <li>Gas and dust form tails that point generally away from the Sun.</li>
+      </ol>
+    </div>
+    <p><strong>Halley's Comet:</strong> It was last seen from Earth in 1986 and takes about 76 years to orbit the Sun.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-label">04 · Asteroids</div>
+    <h2>Asteroids and the Asteroid Belt</h2>
+    <p>An <strong>asteroid</strong> is a small, generally rocky, solid body that orbits the Sun. Asteroids range from tiny objects to bodies hundreds of kilometers across.</p>
+    <div class="card">
+      <h3 class="term">Asteroid Belt</h3>
+      <p>The region between the orbits of Mars and Jupiter where many asteroids are found.</p>
+    </div>
+    <p>Ceres was once considered the largest asteroid. In 2006, it was classified as a dwarf planet.</p>
+    <p>The presentation lists Vesta, Pallas, and Hygiea among the largest asteroids, with approximate diameters of 530 km, 522 km, and 430 km, respectively.</p>
+    <div class="callout yellow">
+      <strong>Do not confuse them:</strong> Asteroids are generally rocky, while comets contain significant amounts of ice and can develop a coma and tail near the Sun.
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">05 · Meteoroids, Meteors, and Meteorites</div>
+    <h2>Three Related Terms</h2>
+    <table>
+      <thead><tr><th>Term</th><th>Meaning</th><th>Where?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Meteoroid</strong></td><td>A small solid body moving through space.</td><td>Space</td></tr>
+        <tr><td><strong>Meteor</strong></td><td>The bright streak of light produced when a meteoroid enters Earth's atmosphere and heats up.</td><td>Atmosphere</td></tr>
+        <tr><td><strong>Meteorite</strong></td><td>A fragment that survives its passage through the atmosphere and reaches the ground.</td><td>Ground</td></tr>
+      </tbody>
+    </table>
+    <div class="callout green">
+      <strong>Memory trick:</strong> A meteoroid is in space, a meteor glows in the atmosphere, and a meteorite reaches the ground.
+    </div>
+    <h3>How a Meteor Forms</h3>
+    <ol>
+      <li>A meteoroid travels through space.</li>
+      <li>It enters Earth's atmosphere.</li>
+      <li>Interactions with the atmosphere cause intense heating.</li>
+      <li>The object and surrounding gas glow, creating a streak of light.</li>
+      <li>If a fragment survives and reaches the ground, it is called a meteorite.</li>
+    </ol>
+    <h3>Types of Meteoroids by Composition</h3>
+    <div class="grid">
+      <div class="card"><h3 class="term">Stony</h3><p>Made mainly of rocky minerals.</p></div>
+      <div class="card"><h3 class="term">Iron</h3><p>Made mainly of iron and nickel; typically dense.</p></div>
+      <div class="card"><h3 class="term">Stony-Iron</h3><p>Contain both metal and rocky materials and are less common.</p></div>
+    </div>
+    <h3>Where Do Meteoroids Come From?</h3>
+    <ul>
+      <li><strong>Comets:</strong> Release dust and rocky fragments as they travel near the Sun.</li>
+      <li><strong>Asteroids:</strong> Collisions can break off pieces.</li>
+      <li><strong>Space-rock collisions:</strong> Impacts produce smaller fragments.</li>
+    </ul>
+    <p class="muted">Scientists study meteoroids to learn about the early Solar System, the composition of space objects, and objects that may approach Earth.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-label">06 · Dwarf Planets</div>
+    <h2>What Is a Dwarf Planet?</h2>
+    <p>A dwarf planet orbits the Sun and is nearly round because of its own gravity, but it has not cleared other objects from its orbital neighborhood. It is not a moon.</p>
+    <h3>IAU Classification Criteria</h3>
+    <ul>
+      <li>It orbits the Sun.</li>
+      <li>It is nearly round due to its own gravity.</li>
+      <li>It has not cleared its orbital neighborhood.</li>
+      <li>It is not a satellite of another body.</li>
+    </ul>
+    <div class="grid">
+      <div class="card"><h3 class="term">Pluto</h3><p>Located in the Kuiper Belt; reclassified as a dwarf planet in 2006.</p></div>
+      <div class="card"><h3 class="term">Eris</h3><p>A distant dwarf planet that is slightly smaller than Pluto in diameter.</p></div>
+      <div class="card"><h3 class="term">Haumea</h3><p>Known for its elongated shape and rapid rotation.</p></div>
+      <div class="card"><h3 class="term">Makemake</h3><p>Located in the Kuiper Belt and has a very cold surface.</p></div>
+      <div class="card"><h3 class="term">Ceres</h3><p>Located in the asteroid belt; formerly classified as an asteroid.</p></div>
+    </div>
+    <div class="callout">
+      <strong>Why is Pluto a dwarf planet?</strong> Pluto orbits the Sun, is nearly round, and is not a moon, but it has not cleared other objects from its orbital region.
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">07 · Quick Review</div>
+    <h2>Remember These Facts</h2>
+    <ul>
+      <li>The Sun contains more than 99% of the Solar System's total mass.</li>
+      <li>Terrestrial planets: Mercury, Venus, Earth, and Mars.</li>
+      <li>Jovian planets: Jupiter, Saturn, Uranus, and Neptune.</li>
+      <li>Comets contain ice, dust, rock, and frozen gases.</li>
+      <li>The asteroid belt lies between Mars and Jupiter.</li>
+      <li>A meteoroid is in space; a meteor is the streak of light; a meteorite reaches the ground.</li>
+      <li>Pluto was reclassified as a dwarf planet in 2006.</li>
+      <li>Halley's Comet has an orbital period of about 76 years.</li>
+    </ul>
+  </section>
+
+  <section class="section" id="practice">
+    <div class="section-label">08 · Test Yourself</div>
+    <h2>Practice Questions</h2>
+    <p class="muted">Choose one answer per question. Your feedback appears immediately.</p>
+    <div id="quiz"></div>
+    <div class="progress-row" style="margin-top:18px">
+      <p id="scoreText" class="muted">Score: 0 / 10 answered</p>
+      <button class="secondary" onclick="resetQuiz()">Reset Practice</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Final Check</div>
+    <h2>Practice</h2>
+    <ul>
+      <li>The difference between terrestrial and Jovian planets.</li>
+      <li>Why a comet develops a coma and tail near the Sun.</li>
+      <li>The difference between an asteroid and a comet.</li>
+      <li>The difference between a meteoroid, meteor, and meteorite.</li>
+      <li>Why Pluto is classified as a dwarf planet.</li>
+    </ul>
+    <p class="muted">If you can explain these concepts in your own words, you are ready for a review quiz.</p>
+  </section>
+</main>
+
+<footer>STE Study Hub · Science Reviewer</footer>
+
+<script>
+const reviewerId = "science";
+const storageKey = "riasStudyHubProgress";
+
+function getProgress(){
+  try {
+    return JSON.parse(localStorage.getItem(storageKey)) || {};
+  } catch(e) {
+    return {};
+  }
+}
+
+function isComplete(){
+  const progress = getProgress();
+  return !!(progress.reviewers && progress.reviewers[reviewerId] === true);
+}
+
+function renderCompletion(){
+  const done = isComplete();
+  document.getElementById("completeBtn").textContent =
+    done ? "✓ Completed · Mark Incomplete" : "Mark as Complete";
+  document.getElementById("progressFill").style.width = done ? "100%" : "0%";
+  document.getElementById("progressText").textContent =
+    done ? "Reviewer marked as complete." : "Not completed yet";
+}
+
+function toggleComplete(){
+  const progress = getProgress();
+  if(!progress.reviewers) progress.reviewers = {};
+  progress.reviewers[reviewerId] = !(
+    progress.reviewers[reviewerId] === true
+  );
+  localStorage.setItem(storageKey, JSON.stringify(progress));
+  renderCompletion();
+}
+renderCompletion();
+
+const questions = [
+  {
+    q:"1. Which object is at the center of our Solar System?",
+    options:["Earth","The Moon","The Sun","Jupiter"],
+    answer:2,
+    explanation:"The Sun is at the center of the Solar System."
+  },
+  {
+    q:"2. Which group contains the four terrestrial planets?",
+    options:[
+      "Jupiter, Saturn, Uranus, Neptune",
+      "Mercury, Venus, Earth, Mars",
+      "Earth, Mars, Jupiter, Saturn",
+      "Venus, Earth, Uranus, Neptune"
+    ],
+    answer:1,
+    explanation:"The terrestrial planets are the four rocky inner planets."
+  },
+  {
+    q:"3. What is a nebula?",
+    options:[
+      "A rocky planet",
+      "A cloud of gas and dust in space",
+      "A planet's orbit",
+      "A meteorite"
+    ],
+    answer:1,
+    explanation:"A nebula is a cloud in interstellar space."
+  },
+  {
+    q:"4. What is a comet mainly made of?",
+    options:[
+      "Only iron",
+      "Only liquid water",
+      "Ice, dust, rock, and frozen gases",
+      "Only solid metal"
+    ],
+    answer:2,
+    explanation:"Comets contain ice, dust, rock, and frozen gases."
+  },
+  {
+    q:"5. What is the cloud surrounding a comet's nucleus called?",
+    options:["Asteroid belt","Orbit","Coma","Nebula"],
+    answer:2,
+    explanation:"The coma forms when material released from the nucleus surrounds it."
+  },
+  {
+    q:"6. Where is the main asteroid belt located?",
+    options:[
+      "Between Earth and Mars",
+      "Between Mars and Jupiter",
+      "Beyond Neptune only",
+      "Between Mercury and Venus"
+    ],
+    answer:1,
+    explanation:"The asteroid belt is located between Mars and Jupiter."
+  },
+  {
+    q:"7. What do we call a small solid body moving through space?",
+    options:["Meteor","Meteorite","Meteoroid","Coma"],
+    answer:2,
+    explanation:"A meteoroid is the object while it is traveling through space."
+  },
+  {
+    q:"8. What is the bright streak produced when a meteoroid enters the atmosphere?",
+    options:["Meteor","Meteorite","Asteroid","Satellite"],
+    answer:0,
+    explanation:"The visible streak of light is called a meteor."
+  },
+  {
+    q:"9. Which object has reached Earth's ground after passing through the atmosphere?",
+    options:["Comet","Meteorite","Meteoroid","Nebula"],
+    answer:1,
+    explanation:"A surviving fragment that reaches the ground is a meteorite."
+  },
+  {
+    q:"10. Why is Pluto classified as a dwarf planet?",
+    options:[
+      "It does not orbit the Sun",
+      "It is a moon of Neptune",
+      "It has no gravity",
+      "It has not cleared its orbital neighborhood"
+    ],
+    answer:3,
+    explanation:"Pluto does not meet the planet criterion of clearing its orbital neighborhood."
+  }
+];
+
+let answers = {};
+
+function renderQuiz(){
+  const quiz = document.getElementById("quiz");
+  quiz.innerHTML = "";
+  questions.forEach((question,index)=>{
+    const box = document.createElement("div");
+    box.className = "question";
+
+    const title = document.createElement("p");
+    title.textContent = question.q;
+    box.appendChild(title);
+
+    const options = document.createElement("div");
+    options.className = "options";
+
+    question.options.forEach((option,optionIndex)=>{
+      const button = document.createElement("button");
+      button.className = "option";
+      button.textContent = String.fromCharCode(65+optionIndex)+". "+option;
+      button.onclick = ()=>selectAnswer(index,optionIndex);
+      if(answers[index] !== undefined){
+        button.disabled = true;
+        if(optionIndex === question.answer) button.classList.add("correct");
+        if(optionIndex === answers[index] && optionIndex !== question.answer){
+          button.classList.add("wrong");
+        }
+      }
+      options.appendChild(button);
+    });
+
+    box.appendChild(options);
+
+    const feedback = document.createElement("div");
+    feedback.className = "feedback";
+    feedback.id = "feedback-"+index;
+    if(answers[index] !== undefined){
+      feedback.textContent =
+        (answers[index] === question.answer ? "Correct. " : "Not quite. ") +
+        question.explanation;
+    }
+    box.appendChild(feedback);
+    quiz.appendChild(box);
+  });
+  updateScore();
+}
+
+function selectAnswer(questionIndex,optionIndex){
+  if(answers[questionIndex] !== undefined) return;
+  answers[questionIndex] = optionIndex;
+  renderQuiz();
+}
+
+function updateScore(){
+  const answered = Object.keys(answers).length;
+  const correct = questions.filter((q,i)=>answers[i] === q.answer).length;
+  document.getElementById("scoreText").textContent =
+    "Score: "+correct+" / "+questions.length+
+    " correct · "+answered+" / "+questions.length+" answered";
+}
+
+function resetQuiz(){
+  answers = {};
+  renderQuiz();
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
