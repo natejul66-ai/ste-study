@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colloids | STE Study Hub</title>
+<style>
+:root{
+  --background:#0f1117;--surface:#171a21;--hover:#1c2029;
+  --border:#282d38;--text:#f1f3f5;--muted:#969daa;
+  --blue:#4d9fff;--blue-hover:#6aafff;--green:#4ade80;
+  --yellow:#facc15;--red:#f87171;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--background);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.7}
+a{color:var(--blue);text-decoration:none}
+a:hover{color:var(--blue-hover)}
+header{position:sticky;top:0;z-index:20;background:rgba(15,17,23,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav{max-width:1000px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:18px;font-weight:800;white-space:nowrap;color:var(--text)}
+.logo span{color:var(--blue)}
+nav{display:flex;flex-wrap:wrap;gap:15px}
+nav a{font-size:13px;color:var(--muted)}
+nav a.active,nav a:hover{color:var(--blue)}
+.container{max-width:1000px;margin:auto;padding:28px 20px 60px}
+.hero{padding:30px;border:1px solid var(--border);border-radius:18px;background:linear-gradient(135deg,#172438,#171a21 70%)}
+.eyebrow{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;color:var(--blue)}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.2;margin:8px 0 14px}
+h2{font-size:24px;line-height:1.3;margin:0 0 12px}
+h3{font-size:18px;line-height:1.4;margin:0 0 8px}
+p{margin:8px 0 14px}
+.muted{color:var(--muted)}
+.hero p{max-width:740px;color:#c5cad4}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.pill{font-size:12px;border:1px solid var(--border);border-radius:30px;padding:5px 10px;background:#111722}
+.card,.section,.progress-card{margin-top:20px;background:var(--surface);border:1px solid var(--border);border-radius:15px;padding:22px}
+.progress-top{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.progress-track{height:8px;background:#292e39;border-radius:20px;overflow:hidden;margin:14px 0 0}
+.progress-fill{height:100%;width:0;background:var(--green);transition:width .2s}
+button{cursor:pointer;background:var(--hover);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:10px 14px;font-weight:700;font-size:13px}
+button:hover{border-color:var(--blue)}
+.primary{background:var(--blue);color:#07111e;border-color:var(--blue)}
+.primary:hover{background:var(--blue-hover)}
+.section-title{display:flex;gap:12px;align-items:flex-start;margin-bottom:15px}
+.num{flex-shrink:0;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:#1b2c43;color:var(--blue);font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}
+.mini{background:#14171e;border:1px solid var(--border);border-radius:12px;padding:16px;min-width:0}
+.callout{background:#142033;border-left:3px solid var(--blue);padding:13px 15px;border-radius:0 10px 10px 0;margin:14px 0}
+.callout.green{background:#14221d;border-left-color:var(--green)}
+.callout.yellow{background:#262216;border-left-color:var(--yellow)}
+.formula{background:#101722;border:1px solid #26364a;border-radius:12px;text-align:center;padding:14px;margin:13px 0;color:#dceaff;font-size:clamp(17px,3vw,23px);font-weight:800}
+.diagram{background:#10141c;border:1px solid var(--border);border-radius:12px;padding:12px;margin:14px 0;overflow:hidden}
+.video-frame{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--border);border-radius:12px;background:#080a0f;margin-top:14px}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+svg{display:block;width:100%;height:auto;max-height:340px}
+.svg-label{font-size:13px;fill:var(--text)}
+.svg-muted{font-size:11px;fill:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:11px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:var(--blue);background:#141b27}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:10px;margin:14px 0}
+.table-wrap table{min-width:520px}
+.steps{padding-left:22px}
+.steps li{padding:4px 0 8px}
+details{border:1px solid var(--border);border-radius:10px;padding:13px 15px;margin:10px 0;background:#14171e}
+summary{cursor:pointer;font-weight:700}
+.answer{color:var(--green);margin-top:9px}
+.tag{display:inline-block;font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px;background:#1b2c43;color:var(--blue);margin-bottom:7px}
+footer{border-top:1px solid var(--border);padding:22px;text-align:center;color:var(--muted);font-size:13px}
+@media(max-width:650px){
+ .nav{align-items:flex-start;flex-direction:column}
+ nav{gap:12px}
+ .container{padding:20px 14px 45px}
+ .hero{padding:22px}
+ .section,.card,.progress-card{padding:17px}
+ .grid{grid-template-columns:1fr}
+ .progress-top{align-items:flex-start;flex-direction:column}
+ h2{font-size:21px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="logo" href="../index.html">STE <span>Study Hub</span></a>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a class="active" href="../reviewer.html">Reviewers</a>
+      <a href="../quizzes.html">Quizzes</a>
+      <a href="../notes.html">Notes</a>
+      <a href="../progress.html">Progress</a>
+    </nav>
+  </div>
+</header>
+<main class="container">
+
+<section class="hero">
+  <div class="eyebrow">ConChem Reviewer</div>
+  <h1>Colloids</h1>
+  <p>Understand what colloids are, how they compare with solutions and suspensions, their types and properties, how they are prepared, and how they are used in everyday life and the human body.</p>
+  <div class="pills">
+    <span class="pill">Solutions · Colloids · Suspensions</span>
+    <span class="pill">Types of Colloids</span>
+    <span class="pill">Properties</span>
+    <span class="pill">Preparation & Dialysis</span>
+  </div>
+</section>
+<section class="progress-card">
+  <div class="progress-top">
+    <div>
+      <h3>Reviewer Progress</h3>
+      <p class="muted" id="progressText">Mark this reviewer complete after studying the lesson.</p>
+    </div>
+    <button class="primary" id="completeBtn">Mark as Complete</button>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</section>
+<section class="section" id="video">
+  <div class="section-title"><div class="num">▶</div><div><h2>Video Lesson</h2><p class="muted">This is mainly for solving. Concepts are below</p></div></div>
+  <div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/c8dDLe37ONg" title="ConChem video lesson" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+  <p class="muted"><a href="https://youtu.be/c8dDLe37ONg" target="_blank" rel="noopener noreferrer">Open video on YouTube</a></p>
+</section>
+<section class="section" id="basics">
+  <div class="section-title"><div class="num">1</div><div><h2>What Are Colloids?</h2><p class="muted">Start with the particles that make up a colloidal system.</p></div></div>
+  <p>A <b>colloid</b> is a mixture in which very small particles are dispersed throughout another substance. The particles are larger than those in a true solution but generally small enough that they do not settle out like particles in a suspension.</p>
+  <div class="grid">
+    <div class="mini"><span class="tag">Dispersed particles</span><h3>Like the solute</h3><p>The substance distributed throughout the mixture. It is the dispersed component.</p></div>
+    <div class="mini"><span class="tag">Dispersing medium</span><h3>Like the solvent</h3><p>The substance in which the dispersed particles are distributed.</p></div>
+  </div>
+  <h3>Compare solutions, colloids, and suspensions</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Property</th><th>Solution</th><th>Colloid</th><th>Suspension</th></tr>
+    <tr><td>Particle size</td><td>Less than 1 nm</td><td>1 to 100 nm</td><td>More than 100 nm</td></tr>
+    <tr><td>Appearance</td><td>Clear</td><td>Clear or apparently uniform</td><td>Cloudy</td></tr>
+    <tr><td>Separation on standing</td><td>Does not separate</td><td>Does not normally separate</td><td>Particles may settle or separate</td></tr>
+    <tr><td>Filter paper</td><td>Passes through</td><td>Passes through ordinary filter paper</td><td>Particles do not pass through ordinary filter paper</td></tr>
+    <tr><td>Example</td><td>Salt solution</td><td>Starch solution</td><td>Muddy water</td></tr>
+  </table></div>
+  <div class="callout yellow"><b>Remember:</b> Ordinary filter paper does not separate colloidal particles from the dispersing medium, but it can retain many suspension particles.</div>
+</section>
+
+<section class="section" id="types">
+  <div class="section-title"><div class="num">2</div><div><h2>The Eight Types of Colloids</h2><p class="muted">Classify a colloid by the physical state of its dispersed particles and dispersing medium.</p></div></div>
+  <p>Use the first phase to identify the <b>dispersed particles</b> and the second phase to identify the <b>dispersing medium</b>.</p>
+  <div class="table-wrap"><table>
+    <tr><th>Type</th><th>Dispersed particles</th><th>Dispersing medium</th><th>Examples</th></tr>
+    <tr><td><b>Foam</b></td><td>Gas</td><td>Liquid</td><td>Beaten egg white, shaving cream, whipped cream, ice cream soda</td></tr>
+    <tr><td><b>Solid foam</b></td><td>Gas</td><td>Solid</td><td>Marshmallow, rubber foam</td></tr>
+    <tr><td><b>Liquid aerosol</b></td><td>Liquid</td><td>Gas</td><td>Clouds, fog, mist, hair spray, deodorant spray</td></tr>
+    <tr><td><b>Emulsion</b></td><td>Liquid</td><td>Liquid</td><td>Milk, mayonnaise, blood</td></tr>
+    <tr><td><b>Gel</b></td><td>Liquid</td><td>Solid</td><td>Cheese, butter, margarine</td></tr>
+    <tr><td><b>Solid aerosol</b></td><td>Solid</td><td>Gas</td><td>Smoke, dust in air</td></tr>
+    <tr><td><b>Sol</b></td><td>Solid</td><td>Liquid</td><td>Paint, starch mixture, hot chocolate, gelatin</td></tr>
+    <tr><td><b>Solid sol</b></td><td>Solid</td><td>Solid</td><td>Colored glass, gems such as ruby and garnet</td></tr>
+  </table></div>
+  <div class="grid">
+    <div class="mini"><span class="tag">Gas in liquid</span><h3>Foam</h3><p>Gas particles are spread through a liquid. Examples include whipped cream and beaten egg white.</p></div>
+    <div class="mini"><span class="tag">Liquid in liquid</span><h3>Emulsion</h3><p>One liquid is dispersed in another liquid. Milk and mayonnaise are examples.</p></div>
+    <div class="mini"><span class="tag">Liquid in solid</span><h3>Gel</h3><p>A semisolid colloid with relatively high viscosity. Examples include cheese, butter, and margarine.</p></div>
+    <div class="mini"><span class="tag">Solid in liquid</span><h3>Sol</h3><p>Solid particles are dispersed through a liquid, as in paint or a starch mixture.</p></div>
+  </div>
+  <div class="callout green"><b>Classification tip:</b> Do not classify a colloid by its appearance alone. Identify the state of the dispersed particles first, then the state of the medium.</div>
+</section>
+
+<section class="section" id="properties">
+  <div class="section-title"><div class="num">3</div><div><h2>Properties of Colloids</h2><p class="muted">Four important properties of colloids.</p></div></div>
+  <div class="mini">
+    <span class="tag">Property 1</span><h3>Tyndall Effect</h3>
+    <p>The <b>Tyndall effect</b> is the scattering of light by colloidal particles, making the path of a light beam visible.</p>
+    <div class="diagram"><svg viewBox="0 0 340 110" role="img" aria-label="Light beam becoming visible through colloid">
+      <rect x="18" y="20" width="304" height="70" rx="10" fill="#182131" stroke="#282d38"/>
+      <path d="M35 55 L300 55" stroke="#facc15" stroke-width="3" stroke-linecap="round"/>
+      <path d="M35 55 L300 55" stroke="#facc15" stroke-width="18" opacity=".13"/>
+      <g fill="#4d9fff"><circle cx="75" cy="37" r="2.5"/><circle cx="105" cy="70" r="2.5"/><circle cx="148" cy="43" r="2.5"/><circle cx="178" cy="72" r="2.5"/><circle cx="218" cy="38" r="2.5"/><circle cx="252" cy="68" r="2.5"/></g>
+      <text x="170" y="101" text-anchor="middle" class="svg-muted">Scattered light makes the beam visible</text>
+    </svg></div>
+    <p class="muted">John Tyndall, a British physicist, investigated this effect.</p>
+  </div>
+  <div class="mini">
+    <span class="tag">Property 2</span><h3>Brownian Movement</h3>
+    <p><b>Brownian movement</b> is the rapid, random motion of dispersed particles through the dispersing medium.</p>
+    <div class="diagram"><svg viewBox="0 0 340 125" role="img" aria-label="Random motion paths of colloidal particles">
+      <rect x="15" y="10" width="310" height="95" rx="10" fill="#111722" stroke="#282d38"/>
+      <path d="M45 78 L78 56 L96 72 L125 35 L153 50 L184 27 L211 52 L245 34 L286 58" fill="none" stroke="#4d9fff" stroke-width="2" stroke-dasharray="4 4"/>
+      <path d="M58 28 L82 44 L70 68 L109 82 L139 64 L167 87 L203 71 L235 88 L276 74" fill="none" stroke="#4ade80" stroke-width="2" stroke-dasharray="4 4"/>
+      <g fill="#4d9fff"><circle cx="45" cy="78" r="4"/><circle cx="125" cy="35" r="4"/><circle cx="211" cy="52" r="4"/><circle cx="286" cy="58" r="4"/></g>
+      <g fill="#4ade80"><circle cx="58" cy="28" r="4"/><circle cx="139" cy="64" r="4"/><circle cx="203" cy="71" r="4"/><circle cx="276" cy="74" r="4"/></g>
+    </svg></div>
+    <p class="muted">Robert Brown, a Scottish botanist, observed this movement in 1827.</p>
+  </div>
+  <div class="mini">
+    <span class="tag">Property 3</span><h3>Adsorptive Property</h3>
+    <p><b>Adsorption</b> is the ability of a substance to physically hold another substance on its surface. The key idea is that the substance is held at the surface rather than being described as spread throughout the whole material.</p>
+  </div>
+  <div class="mini">
+    <span class="tag">Property 4</span><h3>Electrical Charge</h3>
+    <p>Colloidal particles adsorb ions present in the dispersing medium. Depending on the colloid, the particles attract either positive ions or negative ions, rather than both types.</p>
+  </div>
+</section>
+
+<section class="section" id="preparation">
+  <div class="section-title"><div class="num">4</div><div><h2>Preparation of Colloids</h2><p class="muted">The lesson describes two general methods.</p></div></div>
+  <div class="grid">
+    <div class="mini"><span class="tag">Method 1</span><h3>Dispersion</h3><p>Dispersion breaks down larger particles until they reach colloidal size.</p><p><b>Methods listed:</b> grinding, using an emulsifying agent, homogenization, and peptization.</p></div>
+    <div class="mini"><span class="tag">Method 2</span><h3>Condensation</h3><p>Condensation joins particles of molecular size to form particles of colloidal size. Double decomposition reactions and physical methods can also be used.</p></div>
+  </div>
+  <h3>Important terms</h3>
+  <div class="mini"><b>Emulsifying agent</b><p>A substance that stabilizes an emulsion so it does not separate into its components.</p></div>
+  <div class="mini"><b>Homogenization</b><p>The process of blending or emulsifying a substance by forcing it through fine openings against a hard surface.</p></div>
+  <div class="mini"><b>Peptizing agent</b><p>The lesson describes a peptizing agent as an enzyme in the body that breaks down food particles to colloidal size.</p></div>
+  <h3>Examples of condensation reactions</h3>
+  <div class="formula">FeCl₃ + 3H₂O → Fe(OH)₃ + 3HCl</div>
+  <p class="muted">Ferric chloride + water → ferric hydroxide + hydrochloric acid</p>
+  <div class="formula">Al₂(SO₄)₃ + 6H₂O → 2Al(OH)₃ + 3H₂SO₄</div>
+  <div class="callout yellow"><b>Distinguish the methods:</b> Dispersion breaks larger particles down. Condensation brings smaller molecular particles together to form colloidal-sized particles.</div>
+</section>
+
+<section class="section" id="dialysis">
+  <div class="section-title"><div class="num">5</div><div><h2>Dialysis and Hemodialysis</h2><p class="muted">How a membrane can separate small particles from colloidal material.</p></div></div>
+  <p>Colloidal-sized substances, such as blood proteins, are retained by a membrane, while smaller molecules and ions can pass through. <b>Dialysis</b> is the selective passage of small particles through a dialyzing membrane.</p>
+  <div class="diagram"><svg viewBox="0 0 340 135" role="img" aria-label="Dialysis membrane retaining large particles while smaller particles pass">
+    <rect x="18" y="15" width="304" height="100" rx="10" fill="#111722" stroke="#282d38"/>
+    <rect x="158" y="20" width="24" height="90" rx="5" fill="#4d9fff" opacity=".24" stroke="#4d9fff" stroke-dasharray="3 3"/>
+    <g fill="#4ade80"><circle cx="52" cy="45" r="7"/><circle cx="88" cy="80" r="7"/><circle cx="123" cy="53" r="7"/></g>
+    <g fill="#facc15"><circle cx="140" cy="35" r="3"/><circle cx="201" cy="43" r="3"/><circle cx="224" cy="82" r="3"/><circle cx="274" cy="52" r="3"/><circle cx="294" cy="91" r="3"/></g>
+    <path d="M143 35 L197 35 M186 30 L197 35 L186 40" fill="none" stroke="#facc15" stroke-width="2"/>
+    <text x="86" y="105" text-anchor="middle" class="svg-muted">Larger particles retained</text>
+    <text x="251" y="105" text-anchor="middle" class="svg-muted">Small particles pass</text>
+  </svg></div>
+  <div class="formula">Hemodialysis = dialysis of blood using a kidney machine</div>
+  <div class="callout green">The central idea is selective passage through a membrane: smaller particles can pass, while colloidal-sized substances are retained.</div>
+</section>
+
+<section class="section" id="classification">
+  <div class="section-title"><div class="num">6</div><div><h2>Classification by Attraction to the Medium</h2><p class="muted">Lyophilic and lyophobic sols differ in their attraction to the medium.</p></div></div>
+  <div class="grid">
+    <div class="mini"><span class="tag">Lyophilic</span><h3>Solvent-loving</h3><p>The dispersed phase has a strong affinity for the medium. The particles attach themselves to solvent particles and can form complex ions or molecules.</p><p>If water is the medium, these sols are called <b>hydrophilic</b>.</p><p><b>Examples:</b> glue, gelatin, albumin.</p></div>
+    <div class="mini"><span class="tag">Lyophobic</span><h3>Solvent-fearing</h3><p>The dispersed particles do not form complex ions or molecules with the solvent particles.</p></div>
+  </div>
+  <div class="callout yellow"><b>Memory aid:</b> “Lyophilic” means solvent-loving, while “lyophobic” means solvent-fearing. Focus on the attraction between the dispersed particles and the medium.</div>
+</section>
+
+<section class="section" id="special">
+  <div class="section-title"><div class="num">7</div><div><h2>Gels, Emulsions, Foams, and Aerosols</h2><p class="muted">Special colloidal systems and what helps keep them stable.</p></div></div>
+  <div class="mini"><h3>Gels and syneresis</h3><p>Gels are semisolids with high viscosity. One explanation for their rigidity is that colloidal particles arrange as fibrils.</p><p><b>Syneresis</b> is the separation of liquid from a gel due to contraction. An example is serum oozing from a blood clot.</p></div>
+  <div class="mini"><h3>Emulsions</h3><p>An emulsion is a mixture of one liquid in another. Emulsions can be stabilized by a protective colloid, such as egg yolk in mayonnaise. An emulsion is stable if it does not separate on standing.</p></div>
+  <div class="mini"><h3>Foams</h3><p>Foams consist of gas dispersed in a very viscous liquid. Protein solutions can produce stable foams, such as meringue made with egg albumin and marshmallow. Hop helps stabilize beer foam.</p></div>
+  <div class="mini"><h3>Aerosols</h3><p>Aerosols are colloidal dispersions of liquid in a gas or solid in a gas. Examples include fog, mist, smoke, and dust in air.</p></div>
+</section>
+
+<section class="section" id="protective">
+  <div class="section-title"><div class="num">8</div><div><h2>Protective Colloids</h2><p class="muted">Colloids that help keep dispersed particles from separating.</p></div></div>
+  <p>A <b>protective colloid</b> is a lyophilic colloid added to a lyophobic sol to reduce its sensitivity to precipitation caused by an electrolyte. In simpler terms, protective colloids help prevent dispersed particles from separating in an unstable colloidal system.</p>
+  <div class="table-wrap"><table>
+    <tr><th>Protective colloid</th><th>Use</th></tr>
+    <tr><td>Gelatin</td><td>Added to ice cream to help prevent ice crystal formation and give it a smooth texture.</td></tr>
+    <tr><td>Glue</td><td>Added to foamite fire extinguisher to keep carbon dioxide bubbles in the colloidal state.</td></tr>
+    <tr><td>Gum arabic</td><td>Keeps carbon particles dispersed in water in India ink.</td></tr>
+    <tr><td>Tannin</td><td>Keeps graphite dispersed in oil or water for use as a lubricant.</td></tr>
+    <tr><td>Egg yolk</td><td>Stabilizes mayonnaise.</td></tr>
+  </table></div>
+  <div class="callout green"><b>Key idea:</b> Protective colloids improve stability by helping the dispersed particles remain distributed instead of separating out.</div>
+</section>
+
+<section class="section" id="practice">
+  <div class="section-title"><div class="num">9</div><div><h2>Quick Review and Practice</h2><p class="muted">Try to answer before revealing each explanation.</p></div></div>
+  <details><summary>1. What are the two components of a colloid?</summary><p class="answer">Answer: Dispersed particles and the dispersing medium.</p></details>
+  <details><summary>2. What particle-size range does the lesson give for colloids?</summary><p class="answer">Answer: 1 to 100 nm.</p></details>
+  <details><summary>3. What is the Tyndall effect?</summary><p class="answer">Answer: The scattering of light by colloidal particles, which makes the beam visible.</p></details>
+  <details><summary>4. What is Brownian movement?</summary><p class="answer">Answer: The rapid, random motion of dispersed particles through the dispersing medium.</p></details>
+  <details><summary>5. What is the difference between dispersion and condensation?</summary><p class="answer">Answer: Dispersion breaks larger particles down to colloidal size; condensation joins molecular-sized particles to form colloidal-sized particles.</p></details>
+  <details><summary>6. What type of colloid is liquid dispersed in gas?</summary><p class="answer">Answer: Liquid aerosol, such as fog or mist.</p></details>
+  <details><summary>7. What is syneresis?</summary><p class="answer">Answer: The separation of liquid from a gel caused by contraction.</p></details>
+  <details><summary>8. Define dialysis.</summary><p class="answer">Answer: Selective passage of small particles through a dialyzing membrane.</p></details>
+  <details><summary>9. What is the difference between lyophilic and lyophobic sols?</summary><p class="answer">Answer: Lyophilic sols have strong affinity between the dispersed phase and medium; lyophobic particles do not form complex ions or molecules with the solvent particles.</p></details>
+  <details><summary>10. Give two protective colloids and their uses.</summary><p class="answer">Answer: Examples include gelatin in ice cream and egg yolk in mayonnaise. Gum arabic also keeps carbon particles dispersed in India ink.</p></details>
+</section>
+
+<section class="section" id="summary">
+  <div class="section-title"><div class="num">✓</div><div><h2>Notes Sheet</h2><p class="muted">The key facts to remember before an assessment.</p></div></div>
+  <div class="table-wrap"><table>
+    <tr><th>Concept</th><th>Essential point</th></tr>
+    <tr><td>Colloid components</td><td>Dispersed particles + dispersing medium</td></tr>
+    <tr><td>Tyndall effect</td><td>Scattering of light makes a beam visible</td></tr>
+    <tr><td>Brownian movement</td><td>Rapid, random particle motion</td></tr>
+    <tr><td>Adsorption</td><td>A substance is held on another substance's surface</td></tr>
+    <tr><td>Dispersion</td><td>Break larger particles down to colloidal size</td></tr>
+    <tr><td>Condensation</td><td>Join molecular-sized particles to form colloidal-sized particles</td></tr>
+    <tr><td>Dialysis</td><td>Selective passage of small particles through a membrane</td></tr>
+    <tr><td>Lyophilic / lyophobic</td><td>Solvent-loving / solvent-fearing</td></tr>
+    <tr><td>Syneresis</td><td>Liquid separates from a gel due to contraction</td></tr>
+    <tr><td>Protective colloid</td><td>Helps stabilize a colloidal system</td></tr>
+  </table></div>
+</section>
+
+</main>
+<footer>STE Study Hub · ConChem Reviewer</footer>
+<script>
+const reviewerId = "conchem";
+const storageKey = "riasStudyHubProgress";
+const completeBtn = document.getElementById("completeBtn");
+const progressText = document.getElementById("progressText");
+const progressFill = document.getElementById("progressFill");
+
+function readProgress(){
+  try {
+    return JSON.parse(localStorage.getItem(storageKey)) || {};
+  } catch(error) {
+    return {};
+  }
+}
+
+function renderProgress(){
+  const progress = readProgress();
+  if(!progress.reviewers) progress.reviewers = {};
+  const completed = progress.reviewers[reviewerId] === true;
+
+  completeBtn.textContent = completed ? "Mark as Incomplete" : "Mark as Complete";
+  progressText.textContent = completed
+    ? "Reviewer completed. You can change this status anytime."
+    : "Mark this reviewer complete after studying the lesson.";
+  progressFill.style.width = completed ? "100%" : "0%";
+}
+
+completeBtn.addEventListener("click", function(){
+  const progress = readProgress();
+  if(!progress.reviewers) progress.reviewers = {};
+  progress.reviewers[reviewerId] = progress.reviewers[reviewerId] !== true;
+  localStorage.setItem(storageKey, JSON.stringify(progress));
+  renderProgress();
+});
+
+renderProgress();
+</script>
+</body>
+</html>
