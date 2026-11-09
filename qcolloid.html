@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ConChem Problem-Solving Quiz | STE Study Hub</title>
+<style>
+:root {
+  --background: #0f1117;
+  --surface: #171a21;
+  --hover: #1c2029;
+  --border: #282d38;
+  --text: #f1f3f5;
+  --muted: #969daa;
+  --blue: #4d9fff;
+  --blue-hover: #6aafff;
+  --green: #4ade80;
+  --red: #f87171;
+  --yellow: #facc15;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(15,17,23,.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav {
+  max-width: 1000px;
+  margin: auto;
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.logo {
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.logo span { color: var(--blue); }
+.nav a.back {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+}
+.nav a.back:hover { color: var(--blue); }
+.container {
+  max-width: 850px;
+  margin: 35px auto;
+  padding: 0 20px 60px;
+}
+.subject {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+h1 {
+  margin: 8px 0;
+  font-size: clamp(26px, 5vw, 38px);
+  line-height: 1.2;
+}
+.subtitle {
+  color: var(--muted);
+  margin: 8px 0 22px;
+}
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.pill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 12px;
+}
+.progress-card, .question-card, .result-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 22px;
+  margin-bottom: 18px;
+}
+.progress-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.progress-track {
+  height: 8px;
+  background: var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--blue);
+  transition: width .2s;
+}
+.question-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.question-number {
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 800;
+}
+.topic-tag {
+  color: var(--yellow);
+  background: rgba(250,204,21,.08);
+  border: 1px solid rgba(250,204,21,.2);
+  padding: 4px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+}
+.question {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.given {
+  background: #111722;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue);
+  border-radius: 8px;
+  padding: 13px 15px;
+  color: #d8e4f2;
+  font-size: 14px;
+  margin: 14px 0;
+}
+.formula {
+  color: var(--yellow);
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  margin: 12px 0;
+}
+.answer-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 18px;
+}
+.answer-row input {
+  min-width: 0;
+  flex: 1;
+  background: #10131a;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 13px;
+  font-size: 16px;
+  outline: none;
+}
+.answer-row input:focus {
+  border-color: var(--blue);
+}
+.unit {
+  color: var(--muted);
+  font-size: 13px;
+  min-width: 45px;
+}
+.feedback {
+  display: none;
+  margin-top: 13px;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+.feedback.correct {
+  display: block;
+  background: rgba(74,222,128,.08);
+  border: 1px solid rgba(74,222,128,.3);
+  color: var(--green);
+}
+.feedback.incorrect {
+  display: block;
+  background: rgba(248,113,113,.08);
+  border: 1px solid rgba(248,113,113,.3);
+  color: var(--red);
+}
+.feedback strong { display: block; margin-bottom: 5px; }
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0;
+}
+button {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 18px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+}
+.primary {
+  background: var(--blue);
+  color: #08111d;
+}
+.primary:hover { background: var(--blue-hover); }
+.secondary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.secondary:hover { background: var(--hover); }
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+.result-card { display: none; }
+.result-card h2 { margin-top: 0; }
+.score {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--blue);
+}
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+  margin: 18px 0;
+}
+.result-stat {
+  background: #111722;
+  padding: 14px;
+  border-radius: 9px;
+  text-align: center;
+}
+.result-stat strong {
+  display: block;
+  font-size: 22px;
+}
+.result-stat span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.review-item {
+  border-top: 1px solid var(--border);
+  padding: 14px 0;
+  font-size: 13px;
+}
+.review-item .right { color: var(--green); }
+.review-item .wrong { color: var(--red); }
+.small-note {
+  color: var(--muted);
+  font-size: 12px;
+}
+@media(max-width:600px) {
+  .container { margin-top: 24px; }
+  .progress-card, .question-card, .result-card { padding: 17px; }
+  .answer-row { flex-wrap: wrap; }
+  .answer-row input { flex-basis: 100%; }
+  .result-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a class="logo" href="../index.html">STE <span>Study Hub</span></a>
+    <a class="back" href="../quizzes.html">← Back to Quizzes</a>
+  </nav>
+</header>
+
+<main class="container">
+  <div class="subject">ConChem</div>
+  <h1>Problem-Solving Challenge</h1>
+  <p class="subtitle">Solve each problem. Enter the numerical value of your final answer. Use the requested units.</p>
+
+  <div class="meta">
+    <span class="pill">25 Questions</span>
+    <span class="pill">Problem-Solving Only</span>
+    <span class="pill">Advanced</span>
+    <span class="pill">Calculator Allowed</span>
+  </div>
+
+  <div class="progress-card">
+    <div class="progress-top">
+      <span>Quiz Progress</span>
+      <span id="progressText">0 / 25 answered</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <div id="questions"></div>
+
+  <div class="actions">
+    <button class="primary" id="submitBtn" onclick="submitQuiz()">Submit Answers</button>
+    <button class="secondary" onclick="clearAnswers()">Clear Answers</button>
+  </div>
+
+  <section class="result-card" id="resultCard">
+    <h2>Quiz Results</h2>
+    <div class="score" id="scoreDisplay">0 / 25</div>
+    <p id="resultMessage"></p>
+    <div class="result-grid">
+      <div class="result-stat">
+        <strong id="correctCount">0</strong>
+        <span>Correct</span>
+      </div>
+      <div class="result-stat">
+        <strong id="incorrectCount">0</strong>
+        <span>Incorrect</span>
+      </div>
+      <div class="result-stat">
+        <strong id="percentage">0%</strong>
+        <span>Percentage</span>
+      </div>
+    </div>
+    <h3>Answer Review</h3>
+    <div id="answerReview"></div>
+    <button class="primary" onclick="retakeQuiz()">Retake Quiz</button>
+  </section>
+</main>
+
+<script>
+const questions = [
+  {
+    topic: "Mole Fraction",
+    prompt: "A gaseous mixture contains 2.0 mol of nitrogen and 3.0 mol of oxygen. Determine the mole fraction of oxygen.",
+    given: "n(N₂) = 2.0 mol, n(O₂) = 3.0 mol",
+    formula: "Xcomponent = moles of component / total moles",
+    answer: 0.6,
+    unit: "",
+    tolerance: 0.005,
+    solution: "Total moles = 2.0 + 3.0 = 5.0 mol. X(O₂) = 3.0 / 5.0 = 0.600."
+  },
+  {
+    topic: "Mole Fraction",
+    prompt: "A solution contains 10.0 g of ethanol (molar mass = 46.0 g/mol) and 90.0 g of water (molar mass = 18.0 g/mol). Determine the mole fraction of ethanol.",
+    given: "Ethanol = 10.0 g, water = 90.0 g",
+    formula: "Xethanol = n(ethanol) / [n(ethanol) + n(water)]",
+    answer: 0.04167,
+    unit: "",
+    tolerance: 0.0005,
+    solution: "Moles ethanol = 10.0 / 46.0 = 0.2174 mol. Moles water = 90.0 / 18.0 = 5.00 mol. Xethanol = 0.2174 / 5.2174 = 0.04167."
+  },
+  {
+    topic: "Dalton's Law",
+    prompt: "A container holds 4.0 mol of helium and 1.0 mol of neon. If the total pressure is 2.50 atm, calculate the partial pressure of helium.",
+    given: "n(He) = 4.0 mol, n(Ne) = 1.0 mol, Ptotal = 2.50 atm",
+    formula: "PHe = XHe × Ptotal",
+    answer: 2,
+    unit: "atm",
+    tolerance: 0.01,
+    solution: "Total moles = 5.0 mol. XHe = 4.0 / 5.0 = 0.80. PHe = 0.80 × 2.50 = 2.00 atm."
+  },
+  {
+    topic: "Dalton's Law",
+    prompt: "A mixture contains 0.50 mol of carbon dioxide and 1.50 mol of argon. The total pressure is 800 mmHg. Calculate the partial pressure of carbon dioxide.",
+    given: "n(CO₂) = 0.50 mol, n(Ar) = 1.50 mol, Ptotal = 800 mmHg",
+    formula: "PCO₂ = XCO₂ × Ptotal",
+    answer: 200,
+    unit: "mmHg",
+    tolerance: 1,
+    solution: "Total moles = 2.00 mol. XCO₂ = 0.50 / 2.00 = 0.25. PCO₂ = 0.25 × 800 = 200 mmHg."
+  },
+  {
+    topic: "Mole Fraction and Dalton's Law",
+    prompt: "A gas mixture contains 2.0 mol of hydrogen, 3.0 mol of nitrogen, and 5.0 mol of carbon dioxide. If the total pressure is 1.20 atm, calculate the partial pressure of nitrogen.",
+    given: "H₂ = 2.0 mol, N₂ = 3.0 mol, CO₂ = 5.0 mol, Ptotal = 1.20 atm",
+    formula: "PN₂ = (nN₂ / ntotal) × Ptotal",
+    answer: 0.36,
+    unit: "atm",
+    tolerance: 0.005,
+    solution: "Total moles = 10.0 mol. XN₂ = 3.0 / 10.0 = 0.30. PN₂ = 0.30 × 1.20 = 0.360 atm."
+  },
+
+  {
+    topic: "Normality",
+    prompt: "A solution contains 0.25 mol of sulfuric acid (H₂SO₄) in 500 mL of solution. Calculate its normality for complete neutralization.",
+    given: "n(H₂SO₄) = 0.25 mol, volume = 500 mL, n-factor = 2",
+    formula: "N = M × n-factor",
+    answer: 1,
+    unit: "N",
+    tolerance: 0.01,
+    solution: "M = 0.25 / 0.500 = 0.50 M. H₂SO₄ provides 2 H⁺ per molecule for complete neutralization. N = 0.50 × 2 = 1.00 N."
+  },
+  {
+    topic: "Normality",
+    prompt: "A student dissolves 4.90 g of H₂SO₄ (molar mass = 98.0 g/mol) and prepares 250 mL of solution. Calculate the normality for complete neutralization.",
+    given: "Mass = 4.90 g, molar mass = 98.0 g/mol, volume = 250 mL, n-factor = 2",
+    formula: "N = (mass / equivalent mass) / volume in liters",
+    answer: 0.4,
+    unit: "N",
+    tolerance: 0.01,
+    solution: "Moles = 4.90 / 98.0 = 0.0500 mol. Molarity = 0.0500 / 0.250 = 0.200 M. N = 0.200 × 2 = 0.400 N."
+  },
+  {
+    topic: "Normality",
+    prompt: "Determine the normality of a 0.20 M Ca(OH)₂ solution during complete acid-base neutralization.",
+    given: "Molarity = 0.20 M, n-factor = 2",
+    formula: "N = M × n-factor",
+    answer: 0.4,
+    unit: "N",
+    tolerance: 0.005,
+    solution: "Each Ca(OH)₂ formula unit provides 2 OH⁻ ions. N = 0.20 × 2 = 0.40 N."
+  },
+  {
+    topic: "Normality",
+    prompt: "A solution contains 5.85 g of NaCl (molar mass = 58.5 g/mol) in 500 mL of solution. Using an n-factor of 1 for the stated reaction, calculate its normality.",
+    given: "Mass = 5.85 g, molar mass = 58.5 g/mol, volume = 500 mL, n-factor = 1",
+    formula: "N = M × n-factor",
+    answer: 0.2,
+    unit: "N",
+    tolerance: 0.005,
+    solution: "Moles = 5.85 / 58.5 = 0.100 mol. Molarity = 0.100 / 0.500 = 0.200 M. N = 0.200 × 1 = 0.200 N."
+  },
+  {
+    topic: "Normality",
+    prompt: "Calculate the normality of a 0.10 M H₃PO₄ solution for complete neutralization of all three acidic hydrogen ions.",
+    given: "Molarity = 0.10 M, n-factor = 3",
+    formula: "N = M × n-factor",
+    answer: 0.3,
+    unit: "N",
+    tolerance: 0.005,
+    solution: "H₃PO₄ provides 3 H⁺ ions per molecule during complete neutralization. N = 0.10 × 3 = 0.30 N."
+  },
+
+  {
+    topic: "Van't Hoff Factor",
+    prompt: "Determine the ideal Van't Hoff factor of HCl when it completely dissociates in water.",
+    given: "HCl → H⁺ + Cl⁻",
+    formula: "i = number of particles produced per formula unit",
+    answer: 2,
+    unit: "",
+    tolerance: 0,
+    solution: "HCl produces two ions, H⁺ and Cl⁻. Therefore, i = 2."
+  },
+  {
+    topic: "Van't Hoff Factor",
+    prompt: "Determine the ideal Van't Hoff factor of Ca(OH)₂ when it completely dissociates in water.",
+    given: "Ca(OH)₂ → Ca²⁺ + 2OH⁻",
+    formula: "i = total number of dissolved particles",
+    answer: 3,
+    unit: "",
+    tolerance: 0,
+    solution: "One formula unit produces one Ca²⁺ ion and two OH⁻ ions. Therefore, i = 3."
+  },
+  {
+    topic: "Van't Hoff Factor",
+    prompt: "Determine the ideal Van't Hoff factor of AlCl₃ when it completely dissociates in water.",
+    given: "AlCl₃ → Al³⁺ + 3Cl⁻",
+    formula: "i = total number of dissolved particles",
+    answer: 4,
+    unit: "",
+    tolerance: 0,
+    solution: "One formula unit produces one Al³⁺ ion and three Cl⁻ ions. Therefore, i = 4."
+  },
+  {
+    topic: "Van't Hoff Factor",
+    prompt: "Determine the ideal Van't Hoff factor of K₂SO₄ when it completely dissociates in water.",
+    given: "K₂SO₄ → 2K⁺ + SO₄²⁻",
+    formula: "i = total number of dissolved particles",
+    answer: 3,
+    unit: "",
+    tolerance: 0,
+    solution: "One formula unit produces two K⁺ ions and one SO₄²⁻ ion. Therefore, i = 3."
+  },
+  {
+    topic: "Van't Hoff Factor",
+    prompt: "Determine the ideal Van't Hoff factor of glucose (C₆H₁₂O₆) dissolved in water.",
+    given: "Glucose dissolves as intact molecules and does not ionize.",
+    formula: "i = number of particles in solution per formula unit",
+    answer: 1,
+    unit: "",
+    tolerance: 0,
+    solution: "Glucose is a nonelectrolyte. Each dissolved glucose molecule remains one particle. Therefore, i = 1."
+  },
+
+  {
+    topic: "Freezing-Point Depression",
+    prompt: "Calculate the freezing-point depression of a 0.50 m glucose solution in water. Use Kf = 1.86 °C/m.",
+    given: "m = 0.50 m, i = 1, Kf = 1.86 °C/m",
+    formula: "ΔTf = i × Kf × m",
+    answer: 0.93,
+    unit: "°C",
+    tolerance: 0.01,
+    solution: "ΔTf = 1 × 1.86 × 0.50 = 0.930 °C."
+  },
+  {
+    topic: "Freezing-Point Depression",
+    prompt: "Calculate the freezing-point depression of a 0.20 m CaCl₂ solution. Assume complete dissociation and use Kf = 1.86 °C/m.",
+    given: "m = 0.20 m, i = 3, Kf = 1.86 °C/m",
+    formula: "ΔTf = i × Kf × m",
+    answer: 1.116,
+    unit: "°C",
+    tolerance: 0.01,
+    solution: "CaCl₂ produces 3 ions, so i = 3. ΔTf = 3 × 1.86 × 0.20 = 1.116 °C."
+  },
+  {
+    topic: "Freezing-Point Depression",
+    prompt: "A solution contains 10.0 g of glucose (molar mass = 180 g/mol) dissolved in 200 g of water. Calculate the freezing-point depression. Use Kf = 1.86 °C/m.",
+    given: "Glucose = 10.0 g, molar mass = 180 g/mol, solvent = 200 g, i = 1",
+    formula: "ΔTf = i × Kf × molality",
+    answer: 0.517,
+    unit: "°C",
+    tolerance: 0.015,
+    solution: "Moles glucose = 10.0 / 180 = 0.05556 mol. Solvent = 0.200 kg. Molality = 0.05556 / 0.200 = 0.2778 m. ΔTf = 1 × 1.86 × 0.2778 = 0.517 °C."
+  },
+
+  {
+    topic: "Boiling-Point Elevation",
+    prompt: "Calculate the boiling-point elevation of a 0.75 m NaCl solution. Assume complete dissociation and use Kb = 0.512 °C/m.",
+    given: "m = 0.75 m, i = 2, Kb = 0.512 °C/m",
+    formula: "ΔTb = i × Kb × m",
+    answer: 0.768,
+    unit: "°C",
+    tolerance: 0.01,
+    solution: "NaCl produces 2 ions, so i = 2. ΔTb = 2 × 0.512 × 0.75 = 0.768 °C."
+  },
+  {
+    topic: "Boiling-Point Elevation",
+    prompt: "Calculate the boiling-point elevation of a 0.40 m glucose solution in water. Use Kb = 0.512 °C/m.",
+    given: "m = 0.40 m, i = 1, Kb = 0.512 °C/m",
+    formula: "ΔTb = i × Kb × m",
+    answer: 0.2048,
+    unit: "°C",
+    tolerance: 0.005,
+    solution: "Glucose does not ionize, so i = 1. ΔTb = 1 × 0.512 × 0.40 = 0.2048 °C."
+  },
+
+  {
+    topic: "Vapor-Pressure Lowering",
+    prompt: "A solution has a solute mole fraction of 0.10. If the vapor pressure of the pure solvent is 100 mmHg, calculate the vapor-pressure lowering.",
+    given: "Xsolute = 0.10, P°solvent = 100 mmHg",
+    formula: "ΔP = Xsolute × P°solvent",
+    answer: 10,
+    unit: "mmHg",
+    tolerance: 0.1,
+    solution: "ΔP = 0.10 × 100 = 10 mmHg."
+  },
+  {
+    topic: "Vapor-Pressure Lowering",
+    prompt: "A solution contains 2.0 mol of a nonvolatile solute and 8.0 mol of water. If the vapor pressure of pure water is 23.8 mmHg, calculate the vapor pressure of the solution.",
+    given: "nsolute = 2.0 mol, nwater = 8.0 mol, P°water = 23.8 mmHg",
+    formula: "Psolution = Xsolvent × P°solvent",
+    answer: 19.04,
+    unit: "mmHg",
+    tolerance: 0.05,
+    solution: "Total moles = 10.0 mol. Xwater = 8.0 / 10.0 = 0.80. Psolution = 0.80 × 23.8 = 19.04 mmHg."
+  },
+
+  {
+    topic: "Osmotic Pressure",
+    prompt: "Calculate the osmotic pressure of a 0.10 M glucose solution at 300 K. Use R = 0.0821 L·atm/(mol·K).",
+    given: "M = 0.10 M, i = 1, T = 300 K, R = 0.0821",
+    formula: "π = iMRT",
+    answer: 2.463,
+    unit: "atm",
+    tolerance: 0.03,
+    solution: "π = 1 × 0.10 × 0.0821 × 300 = 2.463 atm."
+  },
+  {
+    topic: "Osmotic Pressure",
+    prompt: "Calculate the osmotic pressure of a 0.050 M NaCl solution at 300 K. Assume complete dissociation. Use R = 0.0821 L·atm/(mol·K).",
+    given: "M = 0.050 M, i = 2, T = 300 K, R = 0.0821",
+    formula: "π = iMRT",
+    answer: 2.463,
+    unit: "atm",
+    tolerance: 0.03,
+    solution: "NaCl produces 2 ions, so i = 2. π = 2 × 0.050 × 0.0821 × 300 = 2.463 atm."
+  },
+
+  {
+    topic: "Colligative Properties",
+    prompt: "A solution has a molality of 0.30 m and contains a solute with an ideal Van't Hoff factor of 2. Calculate its freezing-point depression in water. Use Kf = 1.86 °C/m.",
+    given: "m = 0.30 m, i = 2, Kf = 1.86 °C/m",
+    formula: "ΔTf = i × Kf × m",
+    answer: 1.116,
+    unit: "°C",
+    tolerance: 0.01,
+    solution: "ΔTf = 2 × 1.86 × 0.30 = 1.116 °C."
+  },
+  {
+    topic: "Colligative Properties",
+    prompt: "A 0.25 m solution contains a solute with an ideal Van't Hoff factor of 3. Calculate its boiling-point elevation in water. Use Kb = 0.512 °C/m.",
+    given: "m = 0.25 m, i = 3, Kb = 0.512 °C/m",
+    formula: "ΔTb = i × Kb × m",
+    answer: 0.384,
+    unit: "°C",
+    tolerance: 0.01,
+    solution: "ΔTb = 3 × 0.512 × 0.25 = 0.384 °C."
+  },
+  {
+    topic: "Colligative Properties",
+    prompt: "A solution has a solute mole fraction of 0.15. The pure solvent has a vapor pressure of 40.0 kPa. Calculate the vapor pressure of the solution.",
+    given: "Xsolute = 0.15, P°solvent = 40.0 kPa",
+    formula: "Psolution = (1 − Xsolute) × P°solvent",
+    answer: 34,
+    unit: "kPa",
+    tolerance: 0.1,
+    solution: "Xsolvent = 1 − 0.15 = 0.85. Psolution = 0.85 × 40.0 = 34.0 kPa."
+  },
+  {
+    topic: "Colligative Properties",
+    prompt: "Calculate the osmotic pressure of a 0.20 M solution at 310 K. The solute has an ideal Van't Hoff factor of 2. Use R = 0.0821 L·atm/(mol·K).",
+    given: "M = 0.20 M, i = 2, T = 310 K, R = 0.0821",
+    formula: "π = iMRT",
+    answer: 10.1804,
+    unit: "atm",
+    tolerance: 0.05,
+    solution: "π = 2 × 0.20 × 0.0821 × 310 = 10.1804 atm."
+  }
+];
+
+const userAnswers = new Array(questions.length).fill("");
+let submitted = false;
+
+function renderQuestions() {
+  const container = document.getElementById("questions");
+
+  container.innerHTML = questions.map((q, index) => `
+    <section class="question-card" id="question-${index}">
+      <div class="question-top">
+        <span class="question-number">QUESTION ${index + 1} OF ${questions.length}</span>
+        <span class="topic-tag">${q.topic}</span>
+      </div>
+
+      <div class="question">${q.prompt}</div>
+
+      <div class="given">
+        <strong>Given:</strong><br>${q.given}
+      </div>
+
+      <div class="formula">${q.formula}</div>
+
+      <div class="answer-row">
+        <input
+          type="number"
+          step="any"
+          id="answer-${index}"
+          placeholder="Enter numerical answer"
+          aria-label="Answer to question ${index + 1}"
+          oninput="saveAnswer(${index})"
+        >
+        <span class="unit">${q.unit || "Value"}</span>
+      </div>
+
+      <div class="feedback" id="feedback-${index}"></div>
+    </section>
+  `).join("");
+}
+
+function saveAnswer(index) {
+  if (submitted) return;
+
+  const input = document.getElementById(`answer-${index}`);
+  userAnswers[index] = input.value;
+  updateProgress();
+}
+
+function updateProgress() {
+  const answered = userAnswers.filter(value => value.trim() !== "").length;
+  document.getElementById("progressText").textContent =
+    `${answered} / ${questions.length} answered`;
+
+  document.getElementById("progressFill").style.width =
+    `${(answered / questions.length) * 100}%`;
+}
+
+function submitQuiz() {
+  if (submitted) return;
+
+  const unanswered = userAnswers.filter(value => value.trim() === "").length;
+
+  if (unanswered > 0) {
+    const proceed = confirm(
+      `You still have ${unanswered} unanswered question(s). Submit anyway?`
+    );
+    if (!proceed) return;
+  }
+
+  submitted = true;
+
+  let correct = 0;
+  let reviewHTML = "";
+
+  questions.forEach((q, index) => {
+    const raw = userAnswers[index].trim();
+    const numericAnswer = raw === "" ? NaN : Number(raw);
+    const isCorrect =
+      Number.isFinite(numericAnswer) &&
+      Math.abs(numericAnswer - q.answer) <= q.tolerance;
+
+    if (isCorrect) correct++;
+
+    const feedback = document.getElementById(`feedback-${index}`);
+    feedback.className = `feedback ${isCorrect ? "correct" : "incorrect"}`;
+
+    feedback.innerHTML = `
+      <strong>${isCorrect ? "Correct" : "Incorrect"}</strong>
+      <div>Correct answer: ${q.answer} ${q.unit}</div>
+      <div>${q.solution}</div>
+    `;
+
+    document.getElementById(`answer-${index}`).disabled = true;
+
+    reviewHTML += `
+      <div class="review-item">
+        <strong>Question ${index + 1}. ${q.topic}</strong><br>
+        Your answer:
+        <span class="${isCorrect ? "right" : "wrong"}">
+          ${raw === "" ? "Not answered" : raw + (q.unit ? " " + q.unit : "")}
+        </span><br>
+        Correct answer: <strong>${q.answer} ${q.unit}</strong><br>
+        <span class="small-note">${q.solution}</span>
+      </div>
+    `;
+  });
+
+  const incorrect = questions.length - correct;
+  const percent = (correct / questions.length) * 100;
+
+  document.getElementById("scoreDisplay").textContent =
+    `${correct} / ${questions.length}`;
+  document.getElementById("correctCount").textContent = correct;
+  document.getElementById("incorrectCount").textContent = incorrect;
+  document.getElementById("percentage").textContent =
+    `${percent.toFixed(1)}%`;
+
+  document.getElementById("resultMessage").textContent =
+    percent >= 90 ? "Excellent performance." :
+    percent >= 75 ? "Good work. Review the missed problems." :
+    percent >= 60 ? "Keep practicing the formulas and solution steps." :
+    "Review the concepts and retry the problems.";
+
+  document.getElementById("answerReview").innerHTML = reviewHTML;
+  document.getElementById("resultCard").style.display = "block";
+  document.getElementById("submitBtn").disabled = true;
+
+  document.getElementById("resultCard").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+function clearAnswers() {
+  if (submitted) return;
+
+  if (!confirm("Clear all your answers?")) return;
+
+  userAnswers.fill("");
+
+  questions.forEach((q, index) => {
+    document.getElementById(`answer-${index}`).value = "";
+  });
+
+  updateProgress();
+}
+
+function retakeQuiz() {
+  userAnswers.fill("");
+  submitted = false;
+
+  document.getElementById("resultCard").style.display = "none";
+  document.getElementById("submitBtn").disabled = false;
+
+  renderQuestions();
+  updateProgress();
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+renderQuestions();
+updateProgress();
+</script>
+
+</body>
+</html>
